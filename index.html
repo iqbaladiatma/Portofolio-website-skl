@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./dist/img/logofull.jpg">
+    <title>Portofolio Web</title>
+    <link href="src/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/input.css" />
+    <!-- ion icons link -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <!-- Tailwind CSS CDN Link -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Daisy Ui Links -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./styles/style.css">
+  <!-- AOC -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  </head>
+  <body class="bg-gray-100">
+    <!-- Navbar -->
+    <header class="bg-white">
+      <nav class="flex justify-between items-center w-[92%] mx-auto">
+          <div>
+              <img class="w-16 cursor-pointer" src="/dist/img/logo.png" alt="...">
+          </div>
+          <div
+              class="nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center  px-5">
+              <ul class="flex md:flex-row flex-col md:items-center md:gap-8 gap-5">
+                  <li>
+                      <a class="hover:text-blue-500" href="#home">Home</a>
+                  </li>
+                  <li>
+                      <a class="hover:text-blue-500" href="#aboutme">About Me</a>
+                  </li>
+                  <li>
+                      <a class="hover:text-blue-500" href="#myskills">My Skills</a>
+                  </li>
+                  <li>
+                      <a class="hover:text-blue-500" href="#myprojects">My Projects</a>
+                  </li>
+                  <li>
+                      <a class="hover:text-blue-500" href="#contactme">Contact Me</a>
+                  </li>
+              </ul>
+          </div>
+          <div class="flex items-center gap-6 ml-auto">
+              <button class="bg-[#a6c1ee] text-white px-5 py-2 rounded-full  hover:bg-blue-500"><a href="login.html">Sign in</a></button>
+              <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden"></ion-icon>
+          </div>
+  </header>
+
+<!-- JavaScript -->
+  <script>
+      const navLinks = document.querySelector('.nav-links')
+      function onToggleMenu(e){
+          e.name = e.name === 'menu' ? 'close' : 'menu'
+          navLinks.classList.toggle('top-[9%]')
+      }
+  </script>    
+    <!-- End Navbar -->
+
+    <!-- Hero Section -->
+    <section
+    class="flex flex-col-reverse sm:flex-row sm:justify-between	 lg:min-h-screen  px-8 sm:px-16 py-4 max-w-screen-xl	mx-auto">
+    <!-- left side -->
+    <div class="sm:w-3/5" id="home">
+      <h2 class="text-4xl lg:text-5xl xl:text-6xl	font-bold text-black  mt-3 lg:mt-7" data-aos="fade-in" >Iqbal Adiatma.</h2>
+      <h2 class="text-3xl lg:text-4xl xl:text-5xl	font-bold text-blue-500 mt-3 lg:mt-7">Front-End Developer.</h2>
+      <p class="mt-6 lg:mt-10 max-w-md	text-neutral-500">
+        I Right now Student Active in IDN Boarding School - Solo, Majoring Software Developer and study about religion islam and
+         <br>
+        <span style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;" class="font-bold text-blue-500">Open for Work &
+          Collaboration.</span>
+      </p>
+      <div class="mt-12">
+        <a href="#aboutme" style="font-family: 'Roboto Mono', monospace;"
+          class="px-6 py-3 text-blue-500 border-2 border-blue-600 font-bold transition-all hover:bg-blue-900 rounded-md">About Me!</a>
+      </div>
+      <!-- social Links -->
+      <div class="mt-12">
+        <ul class="flex gap-4">
+          <li class="mr-2 flex justify-center items-center hover:scale-110 transition-transform duration-300">
+            <a href="www.linkedin.com/in/iqbaladiatma" target="_blank" class="w-[35px] h-[35px]">
+              <ion-icon name="logo-linkedin" class="w-[35px] h-[35px] transition-all hover:text-blue-700"></ion-icon>
+            </a>
+          </li>
+          <li class="mr-2 flex justify-center items-center hover:scale-110 transition-transform duration-300">
+            <a href="https://github.com/iqbaladiatma/" target="_blank" class="w-[35px] h-[35px]">
+              <ion-icon name="logo-github" class="w-[35px] h-[35px] transition-all hover:text-blue-700"></ion-icon>
+            </a>
+          </li>
+          <li class="mr-2 flex justify-center items-center hover:scale-110 transition-transform duration-300">
+            <a href="https://x.com/AdiatmaIqb32196" target="_blank" class="w-[35px] h-[35px]">
+              <ion-icon name="logo-twitter" class="w-[35px] h-[35px] transition-all hover:text-blue-700"></ion-icon>
+            </a>
+          </li>
+          <li class="mr-2 flex justify-center items-center hover:scale-110 transition-transform duration-300">
+            <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-[35px] h-[35px]">
+              <ion-icon name="logo-instagram" class="w-[35px] h-[35px] transition-all hover:text-blue-700"></ion-icon>
+            </a>
+          </li>
+          <li class="mr-2 flex justify-center items-center hover:scale-110 transition-transform duration-300">
+            <a href="mailto: computeritindonesia@gmail.com" target="_blank" class="w-[35px] h-[35px]">
+              <ion-icon name="mail" class="w-[35px] h-[35px] transition-all hover:text-blue-700"></ion-icon>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hidden sm:block sm:w-2/5 hover:scale-110 transition-transform duration-300" data-aos="zoom-out">
+      <img src="./dist/img/3.png" alt="hero-img" class="hover:scale-110 transition-transform duration-300">
+    </div>
+  </section>
+  
+    <!-- End Hero -->
+    <!-- About Me -->
+    <section class="bg-transparent text-black">
+      <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16" data-aos="fade-up"
+      data-aos-anchor-placement="top-bottom">
+        <div class="mx-auto max-w-lg text-center">
+          <h2 class="text-3xl font-bold sm:text-4xl text-blue-600" id="aboutme">About Me</h2>
+
+          <p class="mt-4 text-neutral-950">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur aliquam doloribus nesciunt eos fugiat. Vitae aperiam fugit consequuntur saepe laborum.</p>
+        </div>
+
+        <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3" data-aos="fade-right">
+          <a class=" block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-900/10" href="#">
+            <svg height="200" width="300" xmlns="http://www.w3.org/2000/svg">
+              <image height="200" width="300" href="./dist/img/Student Man.svg" />
+            </svg>
+
+            <h2 class="mt-4 text-xl font-bold text-black">Student</h2>
+
+            <p class="mt-1 text-sm text-neutral-950">At IDN Boarding School - Solo,Majoring Software Engineer</p>
+          </a>
+
+          <a class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10" href="#">
+            <svg height="200" width="300" xmlns="http://www.w3.org/2000/svg">
+              <image height="200" width="300" href="./dist/img/Programmer_svg.jpg" />
+            </svg>
+            <h2 class="mt-4 text-xl font-bold text-black">Programmer</h2>
+
+            <p class="mt-1 text-sm text-neutral-950">I Can Use HTML,CSS and little from JavaScript,and this website make with Tailwindcss</p>
+          </a>
+
+          <a class="block rounded-xl border border-transparant p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10" href="#">
+            <svg height="200" width="300" xmlns="http://www.w3.org/2000/svg">
+              <image height="200" width="300" href="./dist/img/Software_Engineer.svg" />
+            </svg>
+
+            <h2 class="mt-4 text-xl font-bold text-black">Software Engineer</h2>
+
+            <p class="mt-1 text-sm text-neutral-950">I am a Software Engineer Who will fix the website if there are bugs or other things that are not in accordance with the concept of the website.</p>
+          </a>
+
+          <a class="block rounded-xl border border-transparant p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10" href="#">
+            <svg height="200" width="300" xmlns="http://www.w3.org/2000/svg">
+              <image height="200" width="300" href="./dist/img/Al-Quran.png" />
+            </svg>
+
+            <h2 class="mt-4 text-xl font-bold text-black">Qur'an Memorisers</h2>
+
+            <p class="mt-1 text-sm text-neutral-950">I am a Memoriser of The Holy Qur'an Since childhood, in Junior High School I Memorised The Holy Qur'an and understood its Contents in depth and certainly carried out the commands and stayed away from the prohibitions that had been determined.</p>
+          </a>
+
+          <a class="block rounded-xl border border-transparant p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10" href="#">
+            <svg height="200" width="300" xmlns="http://www.w3.org/2000/svg">
+              <image height="200" width="300" href="./dist/img/Computer_svg.jpg" />
+            </svg>
+
+            <h2 class="mt-4 text-xl font-bold text-black">Computer Engineer</h2>
+
+            <p class="mt-1 text-sm text-neutral-950">I am a Computer Engineer where I often repair damaged and abnormal devices, if your device is damaged, come to me, God willing, I will fix it as much as possible..</p>
+          </a>
+          <a class="block rounded-xl border border-transparant p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10" href="#">
+            <svg height="200" width="300" xmlns="http://www.w3.org/2000/svg">
+              <image height="200" width="300" href="./dist/img/Computer_IT.jpg" />
+            </svg>
+
+            <h2 class="mt-4 text-xl font-bold text-black">IT Specialist</h2>
+
+            <p class="mt-1 text-sm text-neutral-950">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci distinctio alias voluptatum blanditiis laudantium.</p>
+          </a>
+        </div>
+    </section>
+    <!-- End About Me -->
+
+<!-- My Skills -->
+<section class=" px-8 sm:px-16 py-16 max-w-screen-xl mx-auto" id="skills">
+  <div class="">
+    <div class="flex justify-center items-center gap-12 pb-12">
+      <h2 class="text-4xl font-bold text-blue-700" id="myskills">My Skills</h2>
+    </div>
+    <div class="grid grid-cols-3  sm:grid-cols-5 gap-12" style="font-family: 'Roboto Mono', monospace;" data-aos="fade-down">
+
+      <!-- Skill 01 -->
+      <div class="flex flex-col items-center gap-2">
+        <img src="./dist/img/icons8-html-5-96.svg" alt="html icon" class="w-24 h-24 hover:scale-110 transition-transform duration-300">
+        <p class="font-semibold text-black"><a href="https://www.w3.org/html/" target="_blank">HTML</a></p>
+      </div>
+
+      <!-- Skill 02 -->
+      <div class="flex flex-col items-center gap-2">
+        <img src="./dist/img/icons8-css3-96.svg" alt="css icon" class="w-24 h-24 hover:scale-110 transition-transform duration-300">
+        <p class="font-semibold text-black"><a href="https://www.w3.org/Style/CSS/Overview.en.html" target="_blank">CSS</a></p>
+      </div>
+
+      <!-- Skill 03 -->
+
+      <div class="flex flex-col items-center gap-2 ">
+        <img src="./dist/img/tailwind-css.svg" alt="tailwind css icon" class="w-24 h-24 hover:scale-110 transition-transform duration-300">
+        <p class="font-semibold text-black text-center"><a href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a></p>
+      </div>
+
+
+      <!-- Skill 04 -->
+
+      <div class="flex flex-col items-center gap-2">
+        <img src="./dist/img/icons8-javascript-96.svg" alt="javascript icon" class="w-24 h-24 hover:scale-110 transition-transform duration-300">
+        <p class="font-semibold text-black"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a></p>
+      </div>
+      <!-- Skill 04 -->
+
+      <div class="flex flex-col items-center gap-2">
+        <img src="./dist/img/icons8-react-80.svg" alt="javascript icon" class="w-24 h-24 hover:scale-110 transition-transform duration-300">
+        <p class="font-semibold text-black"><a href="https://react.dev/">React</a></p>
+      </div>
+
+      <!-- Skill 05 -->
+
+      <div class="flex flex-col items-center gap-2">
+        <img src="./dist/img/icons8-git-96.svg" alt="git icon" class="w-24 h-24 hover:scale-110 transition-transform duration-300">
+        <p class="font-semibold text-black">Git</p>
+      </div>
+    </div>
+  </div>
+</section>
+ <!-- End My skills -->
+    <!-- Experiences -->
+     
+     <!-- End Experiences -->
+
+    <!-- My Project Start -->
+    <div class="mx-auto max-w-lg text-center"data-aos="flip-down">
+      <h1 class="text-blue-600 font-bold text-3xl sm:text-4xl" id="myprojects">My Projects</h1>
+      <p class="mt-4 text-gray-600 m-90">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta illo accusamus, inventore in quidem commodi sequi vel reprehenderit numquam natus placeat doloremque obcaecati molestias similique labore, modi sit autem id?
+      </p>
+    </div>
+    <!-- projects -->
+    <div class=" px-5 py-24" data-aos="zoom-in">
+      <div class="flex flex-wrap gap-y-4 -m-4">
+
+        <!-- project 1 -->
+        <div class=" lg:w-1/3 sm:w-1/2 p-4 ">
+          <div class="flex relative mentions-project rounded-md">
+            <img alt="e-library-web"
+              class="absolute inset-0 w-full h-full object-cover object-center rounded-md"
+              src="./dist/img/project6.png">
+            <div class="px-8 py-10 relative z-10 w-full bg-[#051830] transition-all opacity-0 hover:opacity-95">
+              <h2 class="tracking-widest text-sm title-font font-medium text-blue-500 mb-1">HTML CSS</h2>
+              <h1 class="title-font text-lg font-medium text-white mb-3">E- Library</h1>
+              <p class="leading-relaxed">
+                This is a assignment given in "HTML and CSS for Beginner" by IDN Boarding School - Solo, built using
+                HTML5 and CSS3.
+              </p>
+              <div class="flex gap-4 mt-2 justify-start">
+                <a href="https://github.com/iqbaladiatma/" target="_blank" class="w-9 h-9">
+                  <ion-icon name="logo-github" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
+                </a>
+                <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-9 h-9">
+                  <ion-icon name="logo-instagram" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- project 2 -->
+        <div class=" lg:w-1/3 sm:w-1/2 p-4 ">
+          <div class="flex relative mentions-project rounded-md">
+            <img alt="developer-landing-page"
+              class="absolute inset-0 w-full h-full object-cover object-center rounded-md"
+              src="./dist/img/project7.png">
+            <div class="px-8 py-10 relative z-10 w-full bg-[#051830] transition-all opacity-0 hover:opacity-95">
+              <h2 class="tracking-widest text-sm title-font font-medium text-blue-500 mb-1">HTML CSS Tailwindcss</h2>
+              <h1 class="title-font text-lg font-medium text-white mb-3">OLSHOP Web</h1>
+              <p class="leading-relaxed">
+                This is a assignment given in "HTML and CSS and Tailwindcss for Beginner" by Dea Afrizal, built using
+                HTML5 and CSS3 and Tailwindcss.
+              </p>
+              <div class="flex gap-4 mt-2 justify-start">
+                <a href="https://github.com/iqbaladiatma/" target="_blank" class="w-9 h-9">
+                  <ion-icon name="logo-github" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
+                </a>
+                <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-9 h-9">
+                  <ion-icon name="logo-instagram" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- project 3 -->
+        <div class=" lg:w-1/3 sm:w-1/2 p-4">
+          <div class="flex relative mentions-project rounded-md">
+            <img alt="web-hosting-landing-page"
+              class="absolute inset-0 w-full h-full object-cover object-center rounded-md"
+              src="./dist/img/project1.png">
+            <div class="px-8 py-10 relative z-10 w-full bg-[#051830] transition-all opacity-0 hover:opacity-95">
+              <h2 class="tracking-widest text-sm title-font font-medium text-blue-500 mb-1">HTML CSS TailwindCSS</h2>
+              <h1 class="title-font text-lg font-medium text-white mb-3">Portofolio Web</h1>
+              <p class="leading-relaxed">
+                This is a assignment given in "HTML and CSS and Tailwindcss for Beginner" by MySelf, built using
+                HTML5 and CSS3 and Tailwindcss.
+              </p>
+              <div class="flex gap-4 mt-2 justify-start">
+                <a href="https://github.com/iqbaladiatma/" target="_blank"
+                  class="w-9 h-9">
+                  <ion-icon name="logo-github" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
+                </a>
+                <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-9 h-9">
+                  <ion-icon name="logo-instagram" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- project 4 -->
+        <div class=" lg:w-1/3 sm:w-1/2 p-4">
+          <div class="flex relative mentions-project rounded-md">
+            <img alt="product-designer-landing-page"
+              class="absolute inset-0 w-full h-full object-cover object-center rounded-md"
+              src="./dist/img/project2.png">
+            <div class="px-8 py-10 relative z-10 w-full bg-[#051830] transition-all opacity-0 hover:opacity-95">
+              <h2 class="tracking-widest text-sm title-font font-bold text-blue-500 mb-1">HTML CSS Bootstrap</h2>
+              <h1 class="title-font text-lg font-medium text-white mb-3">Portofolio Website</h1>
+              <p class="leading-relaxed">
+                This is a assignment given in "HTML CSS and Bootstrap For Beginner" by Myself, built using
+                HTML5 CSS3 And Bootstrap.
+              </p>
+              <div class="flex gap-4 mt-2 justify-start">
+                <a href="https://github.com/iqbaladiatma/" target="_blank"
+                  class="w-9 h-9">
+                  <ion-icon name="logo-github" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
+                </a>
+                <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-9 h-9">
+                  <ion-icon name="logo-instagram" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- project 5 -->
+        <div class=" lg:w-1/3 sm:w-1/2 p-4">
+          <div class="flex relative mentions-project rounded-md">
+            <img alt="dance-home-landing-page"
+              class="absolute inset-0 w-full h-full object-cover object-center rounded-md"
+              src="./dist/img/project2.png">
+            <div class="px-8 py-10 relative z-10 w-full bg-[#051830] transition-all opacity-0 hover:opacity-95">
+              <h2 class="tracking-widest text-sm title-font font-bold text-blue-500 mb-1">HTML CSS Bootstrap</h2>
+              <h1 class="title-font text-lg font-medium text-white mb-3">Portofolio Website</h1>
+              <p class="leading-relaxed">
+                This is a assignment given in "HTML CSS and Bootstrap For Beginner" by Myself, built using
+                HTML5 CSS3 And Bootstrap.
+              </p>
+              <div class="flex gap-4 mt-2 justify-start">
+                <a href="https://github.com/iqbaladiatma/" target="_blank" class="w-9 h-9">
+                  <ion-icon name="logo-github" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
+                </a>
+                <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-9 h-9">
+                  <ion-icon name="logo-instagram" class="w-8 h-8 transition-all hover:text-blue-500">
+                  </ion-icon>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- project 6 -->
+        <div class=" lg:w-1/3 sm:w-1/2 p-4 ">
+          <div class="flex relative mentions-project rounded-md">
+            <img alt="saas-landing-page" class="absolute inset-0 w-full h-full object-cover object-center rounded-md"
+              src="/dist/img/project3.png">
+            <div class="px-8 py-10 relative z-10 w-full bg-[#051830] transition-all opacity-0 hover:opacity-95">
+              <h2 class="tracking-widest text-sm title-font font-bold text-blue-500 mb-1">HTML CSS Bootstrap</h2>
+              <h1 class="title-font text-lg font-medium text-white mb-3">Web Portofolio</h1>
+              <p class="leading-relaxed">
+                This is a assignment given in "HTML CSS and Bootstrap For Beginner" by Myself, built using
+                HTML5 CSS3 And Bootstrap.
+              </p>
+              <div class="flex gap-4 mt-2 justify-start">
+                <a href="https://github.com/iqbaladiatma/" target="_blank" class="w-9 h-9">
+                  <ion-icon name="logo-github" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
+                </a>
+                <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-9 h-9">
+                  <ion-icon name="logo-instagram" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- project 7 -->
+        <div class=" lg:w-1/3 sm:w-1/2 p-4">
+          <div class="flex relative mentions-project rounded-md">
+            <img alt="landing-page"
+              class="absolute inset-0 w-full h-full object-cover object-center rounded-md"
+              src="./dist/img/project5.png">
+            <div class="px-8 py-10 relative z-10 w-full bg-[#051830] transition-all opacity-0 hover:opacity-95">
+              <h2 class="tracking-widest text-sm title-font font-bold text-blue-500 mb-1">HTML CSS</h2>
+              <h1 class="title-font text-lg font-medium text-white mb-3">Landing Page</h1>
+              <p class="leading-relaxed">
+                This is a assignment given in "HTML CSS and For Beginner" by Aiden, built using
+                HTML5 and CSS3.
+              </p>
+              <div class="flex gap-4 mt-2 justify-start">
+                <a href="https://github.com/iqbaladiatma/" target="_blank" class="w-9 h-9">
+                  <ion-icon name="logo-github" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
+                </a>
+                <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-9 h-9">
+                  <ion-icon name="logo-instagram" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- project 7 -->
+        <div class=" lg:w-1/3 sm:w-1/2 p-4">
+          <div class="flex relative mentions-project rounded-md">
+            <img alt="developer-landing-page"
+              class="absolute inset-0 w-full h-full object-cover object-center rounded-md"
+              src="./dist/img/project1.png">
+            <div class="px-8 py-10 relative z-10 w-full bg-[#051830] transition-all opacity-0 hover:opacity-95">
+              <h2 class="tracking-widest text-sm title-font font-medium text-blue-500 mb-1">HTML CSS TailwindCSS</h2>
+              <h1 class="title-font text-lg font-medium text-white mb-3">IT Portofolio Web</h1>
+              <p class="leading-relaxed">
+                This is a assignment given in "HTML CSS and Tailwindcss For Beginner" by Myself, built using
+                HTML5 CSS3 And TailwindCSS.
+              </p>
+              <div class="flex gap-4 mt-2 justify-start">
+                <a href="https://github.com/iqbaladiatma/" target="_blank" class="w-9 h-9">
+                  <ion-icon name="logo-github" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
+                </a>
+                <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-9 h-9">
+                  <ion-icon name="logo-instagram" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+    <!-- ************* -->
+      <!-- End My Project -->
+       <!-- ********** -->
+
+    <!-- Contact -->
+    <div class="mx-auto max-w-lg text-center mt-20">
+        <h1 class="text-blue-600 font-bold text-3xl sm:text-4xl" id="contactme" data-aos="zoom-in-up">Contact Me</h1>
+      </div>
+     <!-- start -->
+    <section>
+      <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5" data-aos="zoom-in-up">
+          <div class="lg:col-span-2 lg:py-12">
+            <p class="max-w-xl text-lg">How To Use This Website For Beginner</p>
+
+            <div class="mt-8">
+              <a href="#" class="text-2xl font-bold text-blue-600"> 0895-4030-03558 </a>
+
+              <address class="mt-2 not-italic">Jl.Nasional Blora-Rembang Km.7 Blora,Jawa Tengah</address>
+            </div>
+          </div>
+
+          <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
+            <form action="#" class="space-y-4">
+              <div>
+                <label class="sr-only" for="name">Name</label>
+                <input class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Name" type="text" id="name" />
+              </div>
+
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div>
+                  <label class="sr-only" for="email">Email</label>
+                  <input class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Email address" type="email" id="email" />
+                </div>
+
+                <div>
+                  <label class="sr-only" for="phone">Phone</label>
+                  <input class="w-full rounded-lg border-blue-400 p-3 text-sm" placeholder="Phone Number" type="tel" id="phone" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
+                <div>
+                  <label for="Option1" class="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-blue-400 has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white" tabindex="0">
+                    <input class="sr-only" id="Option1" type="radio" tabindex="-1" name="option" />
+
+                    <span class="text-sm"> Option 1 </span>
+                  </label>
+                </div>
+
+                <div>
+                  <label for="Option2" class="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white" tabindex="0">
+                    <input class="sr-only" id="Option2" type="radio" tabindex="-1" name="option" />
+
+                    <span class="text-sm"> Option 2 </span>
+                  </label>
+                </div>
+
+                <div>
+                  <label for="Option3" class="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white" tabindex="0">
+                    <input class="sr-only" id="Option3" type="radio" tabindex="-1" name="option" />
+
+                    <span class="text-sm"> Option 3 </span>
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label class="sr-only" for="message">Message</label>
+
+                <textarea class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Message" rows="8" id="message"></textarea>
+              </div>
+
+              <div class="mt-4">
+                <button type="submit" class="inline-block w-full rounded-lg bg-blue-600 hover:to-blue-400  px-5 py-3 font-medium text-white sm:w-auto">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+   
+    </section>
+    <!-- End Contact -->
+    <!-- footer -->
+    <footer class="flex flex-col items-center bg-blue-400 text-center text-surface dark:bg-blue-600 dark:text-black">
+      <div class="container pt-10">
+        <!-- Social media icons container -->
+        <div class="flex justify-center">
+          <ul class="flex gap-1 mb-6">
+            <li class="mr-2 flex justify-center items-center">
+              <a href="mailto: computeritindonesia@gmail.com" target="_blank" class="w-[35px] h-[35px]">
+                <ion-icon name="mail" class="w-[35px] h-[35px] transition-all hover:text-blue-500"></ion-icon>
+              </a>
+            </li>
+            <li class="mr-2 flex justify-center items-center">
+              <a href="www.linkedin.com/in/iqbaladiatma" target="_blank" class="w-[35px] h-[35px]">
+                <ion-icon name="logo-linkedin" class="w-[35px] h-[35px] transition-all hover:text-blue-500"></ion-icon>
+              </a>
+            </li>
+            <li class="mr-2 flex justify-center items-center">
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="w-[35px] h-[35px]">
+                <ion-icon name="logo-github" class="w-[35px] h-[35px] transition-all hover:text-blue-500"></ion-icon>
+              </a>
+            </li>
+            <li class="mr-2 flex justify-center items-center">
+              <a href="https://x.com/AdiatmaIqb32196" target="_blank" class="w-[35px] h-[35px]">
+                <ion-icon name="logo-twitter" class="w-[35px] h-[35px] transition-all hover:text-blue-500"></ion-icon>
+              </a>
+            </li>
+            <li class="mr-2 flex justify-center items-center">
+              <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-[35px] h-[35px]">
+                <ion-icon name="logo-instagram" class="w-[35px] h-[35px] transition-all hover:text-blue-500"></ion-icon>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!--Copyright section-->
+      <div class="w-full bg-white/5 p-4 text-center">
+        © 2024 Copyright:
+        <a href="https://www.instagram.com/iq_html/"> By Iqbal Adiatma</a>
+      </div>
+    </footer>
+    <!-- end footer -->
+     <!-- AOS -->
+      <!-- AOS -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <!-- END AOS -->
+  </body>
+  </body>
+</html>
