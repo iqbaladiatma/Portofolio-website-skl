@@ -1,4 +1,4 @@
-## ⭐ Portfolio Website ⭐
+## ❤️ Portfolio Website ❤️
 
 This is My Portfolio Website where I describe everything about me on this website, this website is a project from IDN Boarding School - Solo. and this portfolio is built using **HTML5, CSS3 and Tailwind CSS**.
 

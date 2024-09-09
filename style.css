@@ -1,0 +1,37 @@
+.typing-text {
+    overflow: hidden;
+    border-right: 0.15em solid blue;
+    white-space: nowrap;
+    font-size: 1.6rem;
+    width: 0;
+    animation: typing 3s steps(30, end), deleting 2s steps(30, end) 3s forwards, typing2 3s steps(30, end) 5s forwards;
+    animation-iteration-count: infinite;
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 70%;
+    }
+  }
+  
+  @keyframes deleting {
+    from {
+      width: 70%;
+    }
+    to {
+      width: 0;
+    }
+  }
+  
+  @keyframes typing2 {
+    from {
+      width: 0;
+    }
+    to {
+      width: 70%;
+    }
+  }
+  
