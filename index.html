@@ -22,39 +22,39 @@
   
   <!-- AOC -->
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <meta name="description" content="Iqbal Adiatma - Front-End Developer Portfolio">
+  <meta name="keywords" content="frontend developer, web developer, portfolio, HTML, CSS, JavaScript">
+  <meta name="author" content="Iqbal Adiatma">
+  <meta property="og:title" content="Iqbal Adiatma - Portfolio">
+  <meta property="og:description" content="Front-End Developer Portfolio">
+  <meta property="og:image" content="./dist/img/logofull.jpg">
+  
   </head>
-  <body class="bg-gray-100">
-    <!-- Navbar -->
-    <header class="bg-white">
-      <nav class="flex justify-between items-center w-[98%] mx-auto">
-          <div>
-              <img class="w-16 cursor-pointer" src="./dist/img/logo.png" alt="...">
-          </div>
-          <div
-              class="nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center  px-10">
-              <ul class="flex md:flex-row flex-col md:items-center md:gap-8 gap-8">
-                  <li>
-                      <a class="hover:text-blue-500" href="#home">Home</a>
-                  </li>
-                  <li>
-                      <a class="hover:text-blue-500" href="#aboutme">About Me</a>
-                  </li>
-                  <li>
-                      <a class="hover:text-blue-500" href="#myskills">My Skills</a>
-                  </li>
-                  <li>
-                      <a class="hover:text-blue-500" href="#myprojects">My Projects</a>
-                  </li>
-                  <li>
-                      <a class="hover:text-blue-500" href="#contactme">Contact Me</a>
-                  </li>
-              </ul>
-          </div>
-          <div class="flex items-center gap-6 ml-auto">
-              <button class="bg-[#a6c1ee] text-white px-5 py-2 rounded-full  hover:bg-blue-500"><a href="login.html">Sign in</a></button>
-              <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden"></ion-icon>
-          </div>
-  </header>
+  <body class="bg-white">
+    <div id="loader" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
+        <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+    </div>
+    <header class="fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
+      <nav class="flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+        <div class="text-2xl font-bold text-white">
+          <a href="#home">
+            <img class="w-12 cursor-pointer" src="./dist/img/logo.png" alt="logo">
+          </a>
+        </div>
+        <div class="nav-links duration-300 md:static absolute md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto w-full flex items-center">
+          <ul class="flex md:flex-row flex-col md:items-center md:gap-6 gap-8">
+            <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#home">Home</a></li>
+            <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#portfolio">Portfolio</a></li>
+            <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#services">Services</a></li>
+            <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#about">About</a></li>
+            <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="flex items-center">
+          <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-xl text-white cursor-pointer md:hidden"></ion-icon>
+        </div>
+      </nav>
+    </header>
 
 <!-- JavaScript -->
   <script>
@@ -66,129 +66,76 @@
   </script>    
     <!-- End Navbar -->
 
-    <!-- Hero Section -->
-    <section
-    class="flex flex-col-reverse sm:flex-row sm:justify-between	 lg:min-h-screen  px-8 sm:px-16 py-4 max-w-screen-xl	mx-auto">
-    <!-- left side -->
-    <div class="sm:w-3/5" id="home">
-      <h2 class=" typing-text text-4xl lg:text-5xl xl:text-6xl	font-bold text-black  mt-3 lg:mt-7" >Iqbal Adiatma.</h2>
-      <h2 class="text-3xl lg:text-4xl xl:text-5xl	font-bold text-blue-500 mt-3 lg:mt-7">Front-End Developer.</h2>
-      <p class="mt-6 lg:mt-10 max-w-md	text-neutral-500">
-        I Right now Student Active in IDN Boarding School - Solo, Majoring Software Developer and study about religion islam and
-         <br>
-        <span style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;" class="font-bold text-blue-500">Open for Work &
-          Collaboration.</span>
-      </p>
-      <div class="mt-12">
-        <a href="#aboutme" style="font-family: 'Roboto Mono', monospace;"
-          class="px-6 py-3 text-blue-500 border-2 border-blue-600 font-bold transition-all hover:bg-blue-900 rounded-md">About Me!</a>
+    <!-- Hero Section dengan background -->
+    <section class="min-h-screen flex items-center justify-center bg-white relative">
+      <!-- Background Image dengan overlay -->
+      <div class="absolute inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=2029&auto=format&fit=crop"
+             class="w-full h-full object-cover opacity-10"
+             alt="background">
       </div>
-      <!-- social Links -->
-      <div class="mt-12">
-        <ul class="flex gap-4">
-          <li class="mr-2 flex justify-center items-center hover:scale-110 transition-transform duration-300">
-            <a href="www.linkedin.com/in/iqbaladiatma" target="_blank" class="w-[35px] h-[35px]">
-              <ion-icon name="logo-linkedin" class="w-[35px] h-[35px] transition-all hover:text-blue-700"></ion-icon>
+      
+      <!-- Content -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+        <div class="text-center">
+          <h1 class="text-5xl md:text-7xl font-bold mb-8 gradient-text">
+            We Speak Fluent Design
+          </h1>
+          <p class="text-xl text-gray-600 mb-12">
+            Love your digital look. We make it happen.
+          </p>
+          <div class="flex justify-center gap-6">
+            <a href="#contact" class="px-8 py-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">
+              Get In Touch
             </a>
-          </li>
-          <li class="mr-2 flex justify-center items-center hover:scale-110 transition-transform duration-300">
-            <a href="https://github.com/iqbaladiatma/" target="_blank" class="w-[35px] h-[35px]">
-              <ion-icon name="logo-github" class="w-[35px] h-[35px] transition-all hover:text-blue-700"></ion-icon>
+            <a href="#portfolio" class="px-8 py-4 border border-gray-300 rounded-full hover:border-blue-600 hover:text-blue-600 transition-colors">
+              Our Portfolio
             </a>
-          </li>
-          <li class="mr-2 flex justify-center items-center hover:scale-110 transition-transform duration-300">
-            <a href="https://x.com/AdiatmaIqb32196" target="_blank" class="w-[35px] h-[35px]">
-              <ion-icon name="logo-twitter" class="w-[35px] h-[35px] transition-all hover:text-blue-700"></ion-icon>
-            </a>
-          </li>
-          <li class="mr-2 flex justify-center items-center hover:scale-110 transition-transform duration-300">
-            <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-[35px] h-[35px]">
-              <ion-icon name="logo-instagram" class="w-[35px] h-[35px] transition-all hover:text-blue-700"></ion-icon>
-            </a>
-          </li>
-          <li class="mr-2 flex justify-center items-center hover:scale-110 transition-transform duration-300">
-            <a href="mailto: computeritindonesia@gmail.com" target="_blank" class="w-[35px] h-[35px]">
-              <ion-icon name="mail" class="w-[35px] h-[35px] transition-all hover:text-blue-700"></ion-icon>
-            </a>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="hidden sm:block sm:w-2/5 hover:scale-110 transition-transform duration-300" data-aos="zoom-out">
-      <img src="./dist/img/3.png" alt="hero-img" class="hover:scale-110 transition-transform duration-300">
-    </div>
-  </section>
-  
     <!-- End Hero -->
     <!-- About Me -->
-    <section class="bg-transparent text-black">
-      <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16" data-aos="fade-up"
-      data-aos-anchor-placement="top-bottom">
-        <div class="mx-auto max-w-lg text-center">
-          <h2 class="text-3xl font-bold sm:text-4xl text-blue-600" id="aboutme">About Me</h2>
+    <section id="about" class="section-container bg-gray-50">
+        <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+            <div class="mx-auto max-w-lg text-center">
+                <h2 class="text-3xl font-bold sm:text-4xl text-blue-600" id="aboutme">About Me</h2>
+                <p class="mt-4 text-neutral-950">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur aliquam doloribus nesciunt eos fugiat. Vitae aperiam fugit consequuntur saepe laborum.</p>
+            </div>
 
-          <p class="mt-4 text-neutral-950">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur aliquam doloribus nesciunt eos fugiat. Vitae aperiam fugit consequuntur saepe laborum.</p>
-        </div>
+            <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <a data-aos="fade-right" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-900/10" href="#">
+                    <h2 class="mt-4 text-xl font-bold text-black">Student</h2>
+                    <p class="mt-1 text-sm text-neutral-950">At IDN Boarding School - Solo, Majoring Software Engineer</p>
+                </a>
 
-        <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <a data-aos="fade-right" class=" block rounded-xl border border-transparent p-8 shadow-xl  hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-900/10"  href="#">
-            <svg height="200" width="300" xmlns="http://www.w3.org/2000/svg">
-              <image height="200" width="300" href="./dist/img/Student Man.svg" />
-            </svg>
+                <a class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10" data-aos="fade-left" href="#">
+                    <h2 class="mt-4 text-xl font-bold text-black">Programmer</h2>
+                    <p class="mt-1 text-sm text-neutral-950">I Can Use HTML, CSS and JavaScript, and this website made with Tailwindcss</p>
+                </a>
 
-            <h2 class="mt-4 text-xl font-bold text-black">Student</h2>
+                <a class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10" data-aos="fade-right" href="#">
+                    <h2 class="mt-4 text-xl font-bold text-black">Software Engineer</h2>
+                    <p class="mt-1 text-sm text-neutral-950">I am a Software Engineer Who will fix the website if there are bugs or other things that are not in accordance with the concept of the website.</p>
+                </a>
 
-            <p class="mt-1 text-sm text-neutral-950">At IDN Boarding School - Solo,Majoring Software Engineer</p>
-          </a>
+                <a class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10" data-aos="fade-left" href="#">
+                    <h2 class="mt-4 text-xl font-bold text-black">Qur'an Memoriser</h2>
+                    <p class="mt-1 text-sm text-neutral-950">I am a Memoriser of The Holy Qur'an Since childhood, understanding its Contents in depth and carrying out its commands.</p>
+                </a>
 
-          <a class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10"  data-aos="fade-left" href="#">
-            <svg height="200" width="300" xmlns="http://www.w3.org/2000/svg">
-              <image height="200" width="300" href="./dist/img/Programmer_svg.jpg" />
-            </svg>
-            <h2 class="mt-4 text-xl font-bold text-black">Programmer</h2>
+                <a class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10" data-aos="fade-right" href="#">
+                    <h2 class="mt-4 text-xl font-bold text-black">Computer Engineer</h2>
+                    <p class="mt-1 text-sm text-neutral-950">I am a Computer Engineer where I often repair damaged and abnormal devices, if your device is damaged, I will fix it as much as possible.</p>
+                </a>
 
-            <p class="mt-1 text-sm text-neutral-950">I Can Use HTML,CSS and little from JavaScript,and this website make with Tailwindcss</p>
-          </a>
-
-          <a class="block rounded-xl border border-transparant p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10"  data-aos="fade-right" href="#">
-            <svg height="200" width="300" xmlns="http://www.w3.org/2000/svg">
-              <image height="200" width="300" href="./dist/img/Software_Engineer.svg" />
-            </svg>
-
-            <h2 class="mt-4 text-xl font-bold text-black">Software Engineer</h2>
-
-            <p class="mt-1 text-sm text-neutral-950">I am a Software Engineer Who will fix the website if there are bugs or other things that are not in accordance with the concept of the website.</p>
-          </a>
-
-          <a class="block rounded-xl border border-transparant p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10"  data-aos="fade-left" href="#">
-            <svg height="200" width="300" xmlns="http://www.w3.org/2000/svg">
-              <image height="200" width="300" href="./dist/img/Al-Quran.png" />
-            </svg>
-
-            <h2 class="mt-4 text-xl font-bold text-black">Qur'an Memorisers</h2>
-
-            <p class="mt-1 text-sm text-neutral-950">I am a Memoriser of The Holy Qur'an Since childhood, in Junior High School I Memorised The Holy Qur'an and understood its Contents in depth and certainly carried out the commands and stayed away from the prohibitions that had been determined.</p>
-          </a>
-
-          <a class="block rounded-xl border border-transparant p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10"  data-aos="fade-right" href="#">
-            <svg height="200" width="300" xmlns="http://www.w3.org/2000/svg">
-              <image height="200" width="300" href="./dist/img/Computer_svg.jpg" />
-            </svg>
-
-            <h2 class="mt-4 text-xl font-bold text-black">Computer Engineer</h2>
-
-            <p class="mt-1 text-sm text-neutral-950">I am a Computer Engineer where I often repair damaged and abnormal devices, if your device is damaged, come to me, God willing, I will fix it as much as possible..</p>
-          </a>
-          <a class="block rounded-xl border border-transparant p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10"  data-aos="fade-left" href="#">
-            <svg height="200" width="300" xmlns="http://www.w3.org/2000/svg">
-              <image height="200" width="300" href="./dist/img/Computer_IT.jpg" />
-            </svg>
-
-            <h2 class="mt-4 text-xl font-bold text-black">IT Specialist</h2>
-
-            <p class="mt-1 text-sm text-neutral-950">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci distinctio alias voluptatum blanditiis laudantium.</p>
-          </a>
+                <a class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10" data-aos="fade-left" href="#">
+                    <h2 class="mt-4 text-xl font-bold text-black">IT Specialist</h2>
+                    <p class="mt-1 text-sm text-neutral-950">Experienced in providing IT solutions and technical support for various systems and applications.</p>
+                </a>
+            </div>
         </div>
     </section>
     <!-- End About Me -->
@@ -469,124 +416,139 @@
       <!-- End My Project -->
        <!-- ********** -->
 
-    <!-- Contact -->
-    <div class="mx-auto max-w-lg text-center mt-20">
+    <!-- Contact Me Section -->
+    <div class="mx-auto max-w-lg text-center mt-8">
         <h1 class="text-blue-600 font-bold text-3xl sm:text-4xl" id="contactme" data-aos="zoom-in-up">Contact Me</h1>
-      </div>
-     <!-- start -->
-    <section>
-      <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+    </div>
+
+    <section class="py-8">
+      <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5" data-aos="zoom-in-up">
-          <div class="lg:col-span-2 lg:py-12">
-            <p class="max-w-xl text-lg">How To Use This Website For Beginner</p>
+          <div class="lg:col-span-2 lg:py-8">
+            <p class="max-w-xl text-lg">
+              Saya siap membantu Anda dalam pengembangan website. Jika Anda tertarik untuk berkolaborasi atau memiliki pertanyaan, jangan ragu untuk menghubungi saya.
+            </p>
 
-            <div class="mt-8">
-              <a href="#" class="text-2xl font-bold text-blue-600"> 0895-4030-03558 </a>
+            <div class="mt-4">
+              <a href="tel:+6289540300355" class="text-2xl font-bold text-blue-600 hover:text-blue-700 transition-colors">
+                +62 895-4030-03558
+              </a>
 
-              <address class="mt-2 not-italic">Jl.Nasional Blora-Rembang Km.7 Blora,Jawa Tengah</address>
+              <address class="mt-4 not-italic text-gray-700">
+                <div class="flex items-center gap-2">
+                  <ion-icon name="location" class="text-blue-600 w-5 h-5"></ion-icon>
+                  Jl. Nasional Blora-Rembang Km.7
+                </div>
+                <div class="mt-2">Blora, Jawa Tengah, Indonesia</div>
+              </address>
+
+              <div class="mt-6 flex gap-4">
+                <a href="https://wa.me/+62895403003558" 
+                   class="flex items-center gap-2 text-green-600 hover:text-green-700 transition-colors">
+                  <ion-icon name="logo-whatsapp" class="w-5 h-5"></ion-icon>
+                  WhatsApp
+                </a>
+                <a href="mailto:computeritindonesia@gmail.com" 
+                   class="flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors">
+                  <ion-icon name="mail" class="w-5 h-5"></ion-icon>
+                  Email
+                </a>
+              </div>
             </div>
           </div>
 
           <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
-            <form action="#" class="space-y-4">
-              <div>
-                <label class="sr-only" for="name">Name</label>
-                <input class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Name" type="text" id="name" />
+            <form id="contactForm" onsubmit="handleSubmit(event)" class="space-y-8">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <input type="text" name="name" required placeholder="Name" class="w-full px-6 py-4 rounded-full border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none">
+                <input type="email" name="email" required placeholder="Email" class="w-full px-6 py-4 rounded-full border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none">
               </div>
-
-              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div>
-                  <label class="sr-only" for="email">Email</label>
-                  <input class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Email address" type="email" id="email" />
-                </div>
-
-                <div>
-                  <label class="sr-only" for="phone">Phone</label>
-                  <input class="w-full rounded-lg border-blue-400 p-3 text-sm" placeholder="Phone Number" type="tel" id="phone" />
-                </div>
-              </div>
-
-              <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
-                <div>
-                  <label for="Option1" class="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-blue-400 has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white" tabindex="0">
-                    <input class="sr-only" id="Option1" type="radio" tabindex="-1" name="option" />
-
-                    <span class="text-sm"> Option 1 </span>
-                  </label>
-                </div>
-
-                <div>
-                  <label for="Option2" class="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white" tabindex="0">
-                    <input class="sr-only" id="Option2" type="radio" tabindex="-1" name="option" />
-
-                    <span class="text-sm"> Option 2 </span>
-                  </label>
-                </div>
-
-                <div>
-                  <label for="Option3" class="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white" tabindex="0">
-                    <input class="sr-only" id="Option3" type="radio" tabindex="-1" name="option" />
-
-                    <span class="text-sm"> Option 3 </span>
-                  </label>
-                </div>
-              </div>
-
-              <div>
-                <label class="sr-only" for="message">Message</label>
-
-                <textarea class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Message" rows="8" id="message"></textarea>
-              </div>
-
-              <div class="mt-4">
-                <button type="submit" class="inline-block w-full rounded-lg bg-blue-600 hover:to-blue-400  px-5 py-3 font-medium text-white sm:w-auto">Submit</button>
-              </div>
+              <textarea name="message" required rows="6" placeholder="Message" class="w-full px-6 py-4 rounded-3xl border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none"></textarea>
+              <button type="submit" class="w-full px-8 py-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">Send Message</button>
             </form>
           </div>
         </div>
       </div>
-   
     </section>
-    <!-- End Contact -->
+    <!-- End Contact Me Section -->
+
     <!-- footer -->
-    <footer class="flex flex-col items-center bg-blue-400 text-center text-surface dark:bg-blue-600 dark:text-black">
-      <div class="container pt-10">
-        <!-- Social media icons container -->
-        <div class="flex justify-center">
-          <ul class="flex gap-1 mb-6">
-            <li class="mr-2 flex justify-center items-center">
-              <a href="mailto: computeritindonesia@gmail.com" target="_blank" class="w-[35px] h-[35px]">
-                <ion-icon name="mail" class="w-[35px] h-[35px] transition-all hover:text-blue-500"></ion-icon>
-              </a>
-            </li>
-            <li class="mr-2 flex justify-center items-center">
-              <a href="www.linkedin.com/in/iqbaladiatma" target="_blank" class="w-[35px] h-[35px]">
-                <ion-icon name="logo-linkedin" class="w-[35px] h-[35px] transition-all hover:text-blue-500"></ion-icon>
-              </a>
-            </li>
-            <li class="mr-2 flex justify-center items-center">
-              <a href="https://github.com/iqbaladiatma/" target="_blank" class="w-[35px] h-[35px]">
-                <ion-icon name="logo-github" class="w-[35px] h-[35px] transition-all hover:text-blue-500"></ion-icon>
-              </a>
-            </li>
-            <li class="mr-2 flex justify-center items-center">
-              <a href="https://x.com/AdiatmaIqb32196" target="_blank" class="w-[35px] h-[35px]">
-                <ion-icon name="logo-twitter" class="w-[35px] h-[35px] transition-all hover:text-blue-500"></ion-icon>
-              </a>
-            </li>
-            <li class="mr-2 flex justify-center items-center">
-              <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-[35px] h-[35px]">
-                <ion-icon name="logo-instagram" class="w-[35px] h-[35px] transition-all hover:text-blue-500"></ion-icon>
-              </a>
-            </li>
-          </ul>
+    <footer class="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+      <div class="container mx-auto pt-10 px-4">
+        <!-- Quick Links -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 pb-10">
+          <div>
+            <h3 class="font-bold mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li><a href="#home" class="hover:text-gray-200 transition-colors">Home</a></li>
+              <li><a href="#aboutme" class="hover:text-gray-200 transition-colors">About</a></li>
+              <li><a href="#myskills" class="hover:text-gray-200 transition-colors">Skills</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-bold mb-4">Projects</h3>
+            <ul class="space-y-2">
+              <li><a href="#myprojects" class="hover:text-gray-200 transition-colors">Web Development</a></li>
+              <li><a href="#myprojects" class="hover:text-gray-200 transition-colors">Mobile Apps</a></li>
+              <li><a href="#myprojects" class="hover:text-gray-200 transition-colors">UI/UX Design</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-bold mb-4">Contact</h3>
+            <ul class="space-y-2">
+              <li>Jl.Nasional Blora-Rembang</li>
+              <li>Km.7 Blora,Jawa Tengah</li>
+              <li>0895-4030-03558</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-bold mb-4">Follow Me</h3>
+            <ul class="space-y-2">
+              <li><a href="#" class="hover:text-gray-200 transition-colors">Instagram</a></li>
+              <li><a href="#" class="hover:text-gray-200 transition-colors">Twitter</a></li>
+              <li><a href="#" class="hover:text-gray-200 transition-colors">LinkedIn</a></li>
+            </ul>
+          </div>
         </div>
       </div>
 
       <!--Copyright section-->
-      <div class="w-full bg-white/5 p-4 text-center">
-        © 2024 Copyright:
-        <a href="https://www.instagram.com/iq_html/"> By Iqbal Adiatma</a>
+      <div class="w-full border-t border-white/10">
+        <div class="p-4 text-center">
+          © 2024 Copyright:
+          <a href="https://www.instagram.com/iq_html/" class="hover:text-gray-200 transition-colors"> By Iqbal Adiatma</a>
+        </div>
+        
+        <!-- Social media icons dibawah copyright -->
+        <div class="flex justify-center pb-6">
+          <ul class="flex gap-6">
+            <li class="hover:scale-110 transition-transform duration-300">
+              <a href="mailto: computeritindonesia@gmail.com" target="_blank" class="text-white hover:text-gray-200">
+                <ion-icon name="mail" class="w-[35px] h-[35px]"></ion-icon>
+              </a>
+            </li>
+            <li class="hover:scale-110 transition-transform duration-300">
+              <a href="www.linkedin.com/in/iqbaladiatma" target="_blank" class="text-white hover:text-gray-200">
+                <ion-icon name="logo-linkedin" class="w-[35px] h-[35px]"></ion-icon>
+              </a>
+            </li>
+            <li class="hover:scale-110 transition-transform duration-300">
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="text-white hover:text-gray-200">
+                <ion-icon name="logo-github" class="w-[35px] h-[35px]"></ion-icon>
+              </a>
+            </li>
+            <li class="hover:scale-110 transition-transform duration-300">
+              <a href="https://x.com/AdiatmaIqb32196" target="_blank" class="text-white hover:text-gray-200">
+                <ion-icon name="logo-twitter" class="w-[35px] h-[35px]"></ion-icon>
+              </a>
+            </li>
+            <li class="hover:scale-110 transition-transform duration-300">
+              <a href="https://www.instagram.com/iq_html/" target="_blank" class="text-white hover:text-gray-200">
+                <ion-icon name="logo-instagram" class="w-[35px] h-[35px]"></ion-icon>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </footer>
     <!-- end footer -->
@@ -594,9 +556,42 @@
       <!-- AOS -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-      AOS.init();
+      AOS.init({
+        // Tambahkan konfigurasi
+        duration: 1000, // nilai dalam ms
+        once: false, // animasi hanya sekali atau berulang
+        offset: 100, // offset (dalam px) dari titik trigger original
+        delay: 0, // nilai delay dalam ms
+        easing: 'ease-in-out', // fungsi easing
+      });
     </script>
     <!-- END AOS -->
+    <script src="main.js"></script>
+    <script>
+    let lastScroll = 0;
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        // Scroll ke bawah
+        if (currentScroll > lastScroll && currentScroll > 100) {
+            navbar.style.transform = 'translateY(-100%)';
+            navbar.classList.remove('bg-gradient-to-r', 'from-blue-600', 'to-blue-800');
+        } 
+        // Scroll ke atas
+        else {
+            navbar.style.transform = 'translateY(0)';
+            if (currentScroll > 50) {
+                navbar.classList.add('bg-gradient-to-r', 'from-blue-600', 'to-blue-800');
+            } else {
+                navbar.classList.remove('bg-gradient-to-r', 'from-blue-600', 'to-blue-800');
+            }
+        }
+        
+        lastScroll = currentScroll;
+    });
+    </script>
   </body>
   </body>
 </html>

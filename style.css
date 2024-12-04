@@ -1,37 +1,215 @@
 .typing-text {
-    overflow: hidden;
-    border-right: 0.15em solid blue;
-    white-space: nowrap;
-    font-size: 1.6rem;
+  overflow: hidden;
+  border-right: 0.15em solid transparent;
+  white-space: nowrap;
+  font-size: 1.6rem;
+  width: 0;
+  animation: typing 3s steps(30, end) infinite, blink-caret 0.75s step-end infinite;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-delay: 1s;
+}
+
+@keyframes typing {
+  from {
     width: 0;
-    animation: typing 3s steps(30, end), deleting 2s steps(30, end) 3s forwards, typing2 3s steps(30, end) 5s forwards;
-    animation-iteration-count: infinite;
   }
-  
-  @keyframes typing {
-    from {
-      width: 0;
-    }
-    to {
-      width: 70%;
-    }
+  to {
+    width: 70%;
   }
-  
-  @keyframes deleting {
-    from {
-      width: 70%;
-    }
-    to {
-      width: 0;
-    }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
   }
-  
-  @keyframes typing2 {
-    from {
-      width: 0;
-    }
-    to {
-      width: 70%;
-    }
+  50% {
+    border-color: blue;
   }
-  
+}
+
+#navbar {
+  transition: all 0.3s ease-in-out;
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+}
+
+#navbar nav {
+  height: 4rem;
+}
+
+#navbar.hidden {
+  transform: translateY(-100%);
+}
+
+#navbar.transparent {
+  background: transparent;
+}
+
+#navbar:not(.hidden):not(.transparent) {
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.2);
+}
+
+.nav-links a {
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #bfdbfe;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    background: linear-gradient(to right, #2563eb, #1d4ed8);
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.project-card {
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+}
+
+.service-card {
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  background: linear-gradient(to bottom right, #2563eb08, #1d4ed808);
+  border-color: #2563eb;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2563eb;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1d4ed8;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+.section-container {
+  min-height: 100vh;
+  padding: 100px 0;
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.project-card {
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+}
+
+.service-card {
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  background: linear-gradient(to bottom right, #2563eb08, #1d4ed808);
+  border-color: #2563eb;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2563eb;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1d4ed8;
+}
+
+/* Project card hover effects */
+.group:hover img {
+  transform: scale(1.1);
+}
+
+.group img {
+  transition: transform 0.5s ease;
+}
+
+.group .absolute {
+  transition: opacity 0.3s ease;
+}
+
+/* Fade in animation for project info */
+.group:hover .absolute {
+  opacity: 1;
+}
+
+/* Smooth transitions for all hover effects */
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+/* Ensure images cover their container properly */
+.object-cover {
+  object-fit: cover;
+}
+
+/* Ensure proper overflow handling */
+.overflow-hidden {
+  overflow: hidden;
+}
