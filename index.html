@@ -41,8 +41,8 @@
             <img class="w-12 cursor-pointer" src="./dist/img/logo.png" alt="logo">
           </a>
         </div>
-        <div class="nav-links duration-300 md:static absolute md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto w-full flex items-center">
-          <ul class="flex md:flex-row flex-col md:items-center md:gap-6 gap-8">
+        <div class="nav-links duration-300 md:static fixed bg-blue-600 md:bg-transparent md:min-h-fit min-h-[60vh] left-0 md:w-auto w-full flex items-center px-5 transition-all ease-in top-[-100%] md:top-0">
+          <ul class="flex md:flex-row flex-col md:items-center md:gap-6 gap-8 w-full md:w-auto">
             <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#home">Home</a></li>
             <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#portfolio">Portfolio</a></li>
             <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#services">Services</a></li>
@@ -51,7 +51,7 @@
           </ul>
         </div>
         <div class="flex items-center">
-          <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-xl text-white cursor-pointer md:hidden"></ion-icon>
+          <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl text-white cursor-pointer md:hidden"></ion-icon>
         </div>
       </nav>
     </header>
@@ -61,13 +61,30 @@
       const navLinks = document.querySelector('.nav-links')
       function onToggleMenu(e){
           e.name = e.name === 'menu' ? 'close' : 'menu'
-          navLinks.classList.toggle('top-[2%]')
+          if(e.name === 'close') {
+              navLinks.style.top = '60px'
+              navLinks.classList.remove('top-[-100%]')
+          } else {
+              navLinks.style.top = '-100%'
+              navLinks.classList.add('top-[-100%]')
+          }
       }
+
+      document.querySelectorAll('.nav-links a').forEach(link => {
+          link.addEventListener('click', () => {
+              const menuIcon = document.querySelector('ion-icon[name="close"]')
+              if(menuIcon) {
+                  menuIcon.name = 'menu'
+                  navLinks.style.top = '-100%'
+                  navLinks.classList.add('top-[-100%]')
+              }
+          })
+      })
   </script>    
     <!-- End Navbar -->
 
     <!-- Hero Section dengan background -->
-    <section class="min-h-screen flex items-center justify-center bg-white relative">
+    <section id="home" class="min-h-screen flex items-center justify-center bg-white relative">
       <!-- Background Image dengan overlay -->
       <div class="absolute inset-0 z-0">
         <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=2029&auto=format&fit=crop"
@@ -106,32 +123,32 @@
             </div>
 
             <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                <a data-aos="fade-right" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-900/10" href="#">
+                <a onclick="openModal('student-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-900/10 cursor-pointer" data-aos="fade-right">
                     <h2 class="mt-4 text-xl font-bold text-black">Student</h2>
                     <p class="mt-1 text-sm text-neutral-950">At IDN Boarding School - Solo, Majoring Software Engineer</p>
                 </a>
 
-                <a class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10" data-aos="fade-left" href="#">
+                <a onclick="openModal('programmer-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer" data-aos="fade-left">
                     <h2 class="mt-4 text-xl font-bold text-black">Programmer</h2>
                     <p class="mt-1 text-sm text-neutral-950">I Can Use HTML, CSS and JavaScript, and this website made with Tailwindcss</p>
                 </a>
 
-                <a class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10" data-aos="fade-right" href="#">
+                <a onclick="openModal('software-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer" data-aos="fade-right">
                     <h2 class="mt-4 text-xl font-bold text-black">Software Engineer</h2>
                     <p class="mt-1 text-sm text-neutral-950">I am a Software Engineer Who will fix the website if there are bugs or other things that are not in accordance with the concept of the website.</p>
                 </a>
 
-                <a class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10" data-aos="fade-left" href="#">
+                <a onclick="openModal('quran-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer" data-aos="fade-left">
                     <h2 class="mt-4 text-xl font-bold text-black">Qur'an Memoriser</h2>
                     <p class="mt-1 text-sm text-neutral-950">I am a Memoriser of The Holy Qur'an Since childhood, understanding its Contents in depth and carrying out its commands.</p>
                 </a>
 
-                <a class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10" data-aos="fade-right" href="#">
+                <a onclick="openModal('computer-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer" data-aos="fade-right">
                     <h2 class="mt-4 text-xl font-bold text-black">Computer Engineer</h2>
                     <p class="mt-1 text-sm text-neutral-950">I am a Computer Engineer where I often repair damaged and abnormal devices, if your device is damaged, I will fix it as much as possible.</p>
                 </a>
 
-                <a class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10" data-aos="fade-left" href="#">
+                <a onclick="openModal('it-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer" data-aos="fade-left">
                     <h2 class="mt-4 text-xl font-bold text-black">IT Specialist</h2>
                     <p class="mt-1 text-sm text-neutral-950">Experienced in providing IT solutions and technical support for various systems and applications.</p>
                 </a>
@@ -421,7 +438,7 @@
         <h1 class="text-blue-600 font-bold text-3xl sm:text-4xl" id="contactme" data-aos="zoom-in-up">Contact Me</h1>
     </div>
 
-    <section class="py-8">
+    <section id="contact" class="py-8">
       <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5" data-aos="zoom-in-up">
           <div class="lg:col-span-2 lg:py-8">
@@ -458,7 +475,7 @@
           </div>
 
           <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
-            <form id="contactForm" onsubmit="handleSubmit(event)" class="space-y-8">
+            <form id="contactForm" onsubmit="handleSubmit(event)" class="space-y-8" autocomplete="off">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <input type="text" name="name" required placeholder="Name" class="w-full px-6 py-4 rounded-full border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none">
                 <input type="email" name="email" required placeholder="Email" class="w-full px-6 py-4 rounded-full border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none">
@@ -592,6 +609,196 @@
         lastScroll = currentScroll;
     });
     </script>
+    <!-- Modals -->
+    <div id="student-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('student-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">Student Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Saya adalah siswa di IDN Boarding School - Solo yang berfokus pada pengembangan software. Beberapa pencapaian saya:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Juara 1 Kompetisi Web Development tingkat sekolah</li>
+                        <li>Aktif dalam klub programming sekolah</li>
+                        <li>Mengembangkan berbagai projek website</li>
+                        <li>Memiliki IPK 3.8</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('student-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="programmer-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('programmer-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">Programming Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Sebagai programmer, saya telah mencapai beberapa milestone:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Menguasai HTML5, CSS3, dan JavaScript</li>
+                        <li>Mengembangkan berbagai projek website responsif</li>
+                        <li>Berpartisipasi dalam hackathon dan coding challenge</li>
+                        <li>Berkontribusi dalam projek open source</li>
+                        <li>Mengikuti bootcamp dan pelatihan programming intensif</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('programmer-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="software-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('software-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">Software Engineering Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Pengalaman saya sebagai Software Engineer meliputi:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Mengembangkan dan memelihara aplikasi web skala besar</li>
+                        <li>Mengoptimasi performa dan keamanan website</li>
+                        <li>Menerapkan best practices dalam pengembangan software</li>
+                        <li>Kolaborasi dalam tim menggunakan metodologi Agile</li>
+                        <li>Mengelola version control dan deployment pipeline</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('software-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="quran-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('quran-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">Qur'an Memorisation Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Perjalanan saya dalam menghafal Al-Qur'an:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Menghafal Al-Qur'an sejak usia dini</li>
+                        <li>Memahami dan menerapkan ilmu tajwid dengan baik</li>
+                        <li>Berpartisipasi dalam berbagai kompetisi tahfidz</li>
+                        <li>Mengajar dan membimbing santri dalam menghafal</li>
+                        <li>Rutin melakukan muroja'ah dan tadabbur Al-Qur'an</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('quran-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="computer-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('computer-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">Computer Engineering Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Pengalaman saya dalam bidang Computer Engineering:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Mendiagnosis dan memperbaiki masalah hardware komputer</li>
+                        <li>Mengoptimalkan kinerja sistem dan perangkat</li>
+                        <li>Melakukan upgrade dan maintenance berkala</li>
+                        <li>Menangani recovery data dan backup sistem</li>
+                        <li>Memberikan solusi untuk masalah teknis kompleks</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('computer-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="it-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('it-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">IT Specialist Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Pencapaian saya sebagai IT Specialist:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Mengelola infrastruktur IT dan jaringan</li>
+                        <li>Mengimplementasi solusi keamanan sistem</li>
+                        <li>Memberikan training dan support teknis</li>
+                        <li>Mengoptimalkan proses bisnis dengan teknologi</li>
+                        <li>Menangani proyek IT dari planning hingga deployment</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('it-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this JavaScript before closing body tag -->
+    <script>
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        const overlay = modal.querySelector(':scope > div:first-child');
+        const container = modal.querySelector(':scope > div:nth-child(2)');
+        
+        // Show modal
+        modal.classList.remove('hidden');
+        
+        // Trigger animation in next frame
+        requestAnimationFrame(() => {
+            overlay.classList.add('opacity-100');
+            container.classList.add('opacity-100', 'scale-100');
+            container.classList.remove('scale-95');
+        });
+        
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        const overlay = modal.querySelector(':scope > div:first-child');
+        const container = modal.querySelector(':scope > div:nth-child(2)');
+        
+        // Start closing animation
+        overlay.classList.remove('opacity-100');
+        container.classList.remove('opacity-100', 'scale-100');
+        container.classList.add('scale-95');
+        
+        // Hide modal after animation
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }, 300);
+    }
+
+    // Close modal when clicking escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            const modals = document.querySelectorAll('[id$="-modal"]');
+            modals.forEach(modal => {
+                if (!modal.classList.contains('hidden')) {
+                    closeModal(modal.id);
+                }
+            });
+        }
+    });
+    </script>
+
+    <style>
+    /* Smooth transition for all transform and opacity changes */
+    .transform {
+        transition-property: transform, opacity;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 300ms;
+    }
+    </style>
   </body>
   </body>
 </html>

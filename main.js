@@ -1,49 +1,34 @@
-window.addEventListener("load", () => {
-  const loader = document.getElementById("loader");
-  setTimeout(() => {
-    loader.style.display = "none";
-  }, 1000);
-});
+// Tunggu sampai DOM sepenuhnya dimuat
+document.addEventListener("DOMContentLoaded", function () {
+  // Loader
+  window.addEventListener("load", function () {
+    const loader = document.getElementById("loader");
+    if (loader) {
+      setTimeout(function () {
+        loader.style.display = "none";
+      }, 2000);
+    }
+  });
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
+  // Form handling
+  const contactForm = document.getElementById("contactForm");
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      // Form submission logic here
+    });
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        target.scrollIntoView({
+          behavior: "smooth",
         });
+      }
     });
-});
-
-const backToTop = document.getElementById('backToTop');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTop.classList.remove('hidden');
-    } else {
-        backToTop.classList.add('hidden');
-    }
-});
-
-backToTop.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-
-const form = document.querySelector('form');
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-    
-    if (!name || !email || !message) {
-        alert('Please fill all required fields');
-        return;
-    }
-    
-    // Add your form submission logic here
-    console.log('Form submitted:', { name, email, message });
+  });
 });
