@@ -15,7 +15,7 @@
   <!-- Tailwind CSS CDN Link -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-<!--   Adsense   -->
+<!--   Adsensen   -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5629966093634048"
      crossorigin="anonymous"></script>
     
@@ -77,7 +77,8 @@
             <ul class="flex items-center gap-6">
               <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#home">Home</a></li>
               <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#portfolio">Portfolio</a></li>
-              <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#services">Services</a></li>
+              <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#myskill">My Skill</a></li>
+              <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#certificates">Certificates</a></li>
               <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#about">About</a></li>
               <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#contact">Contact</a></li>
             </ul>
@@ -114,379 +115,453 @@
     <!-- End Navbar -->
 
     <!-- Hero Section dengan background -->
-    <section id="home" class="min-h-screen flex items-center justify-center bg-white relative">
-      <!-- Background Image dengan overlay -->
-      <div class="absolute inset-0 z-0">
-        <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=2029&auto=format&fit=crop"
-             class="w-full h-full object-cover opacity-10"
-             alt="background">
-      </div>
-      
-      <!-- Content -->
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
-        <div class="text-center">
-          <h1 class="text-5xl md:text-7xl font-bold mb-8 gradient-text" data-aos="zoom-in">
-            Welcome to My Portfolio
-          </h1>
-          <p class="text-xl text-gray-600 mb-12">
-            I'm Iqbal Adiatma, a Full Stack Web Developer
-          </p>
-          <div class="flex justify-center gap-6">
-            <a href="#contact" class="px-8 py-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">
-              Get In Touch
-            </a>
-            <a href="#portfolio" class="px-8 py-4 border border-gray-300 rounded-full hover:border-blue-600 hover:text-blue-600 transition-colors">
-              Our Portfolio
-            </a>
-          </div>
+    <section id="home" class="min-h-screen flex items-center justify-center text-center px-4 relative bg-gray-900 text-gray-300">
+      <!-- Canvas untuk animasi partikel -->
+      <canvas id="particle-canvas" class="absolute inset-0 w-full h-full z-0 opacity-20"></canvas>
+      <div class="z-10 w-full">
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider flex items-center justify-center gap-3 md:gap-6">
+          <!-- Ikon Kiri: Blok -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 md:w-12 md:h-12 text-cyan-400 opacity-50 shrink-0"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" x2="12" y1="22.08" y2="12"></line></svg>
+          <span class="text-white">Iqbal Adiatma</span>
+          <!-- Ikon Kanan: Koin -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 md:w-12 md:h-12 text-blue-500 opacity-50 shrink-0"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v12"></path><path d="M16 8a4 4 0 0 0-8 0"></path></svg>
+        </h1>
+        <p class="text-xl md:text-2xl font-semibold mt-4 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+          Full Stack Web Developer & IT Enthusiast
+        </p>
+        <p class="max-w-2xl mx-auto mt-6 text-gray-400">
+          Membangun website modern, responsif, dan efisien. Saya merancang dan mengembangkan solusi web yang aman, scalable, dan mudah digunakan.
+        </p>
+        <div class="mt-10 flex justify-center gap-4">
+          <a href="#portfolio" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-transform transform hover:scale-105">
+            Lihat Portfolio
+          </a>
+          <a href="#contact" class="bg-transparent border-2 border-cyan-400 hover:bg-cyan-400/10 text-cyan-400 font-bold py-3 px-8 rounded-lg transition-all duration-300">
+            Kontak
+          </a>
         </div>
       </div>
     </section>
-
+    <script>
+      // --- Script untuk Animasi Partikel ---
+      const canvas = document.getElementById('particle-canvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resizeCanvas() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+        class Particle {
+          constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 1.5 + 1;
+            this.speedX = Math.random() * 2 - 1;
+            this.speedY = Math.random() * 2 - 1;
+            this.color = '#3b82f6';
+          }
+          update() {
+            if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+            if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+            this.x += this.speedX;
+            this.y += this.speedY;
+          }
+          draw() {
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+        function initParticles() {
+          const particleCount = Math.floor(canvas.width * canvas.height / 15000);
+          particles = [];
+          for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+          }
+        }
+        function connectParticles() {
+          let opacityValue = 1;
+          for (let a = 0; a < particles.length; a++) {
+            for (let b = a; b < particles.length; b++) {
+              let distance = Math.sqrt(
+                Math.pow(particles[a].x - particles[b].x, 2) +
+                Math.pow(particles[a].y - particles[b].y, 2)
+              );
+              if (distance < 120) {
+                opacityValue = 1 - (distance / 120);
+                ctx.strokeStyle = `rgba(59, 130, 246, ${opacityValue})`;
+                ctx.lineWidth = 0.5;
+                ctx.beginPath();
+                ctx.moveTo(particles[a].x, particles[a].y);
+                ctx.lineTo(particles[b].x, particles[b].y);
+                ctx.stroke();
+              }
+            }
+          }
+        }
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+          }
+          connectParticles();
+          requestAnimationFrame(animate);
+        }
+        window.addEventListener('resize', () => {
+          resizeCanvas();
+          initParticles();
+        });
+        resizeCanvas();
+        initParticles();
+        animate();
+      }
+    </script>
     <!-- End Hero -->
     <!-- About Me -->
-    <section id="about" class="section-container bg-gray-50">
-        <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8" data-aos="fade-up"
-        data-aos-anchor-placement="top-center">
-            <div class="mx-auto max-w-lg text-center">
-                <h2 class="text-3xl font-bold sm:text-4xl text-blue-600" id="aboutme">About Me</h2>
-                <p class="mt-4 text-neutral-950">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur aliquam doloribus nesciunt eos fugiat. Vitae aperiam fugit consequuntur saepe laborum.</p>
-            </div>
-
-            <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                <a onclick="openModal('student-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-900/10 cursor-pointer" data-aos="fade-right">
-                    <h2 class="mt-4 text-xl font-bold text-black">Student</h2>
-                    <p class="mt-1 text-sm text-neutral-950">At IDN Boarding School - Solo, Majoring Software Engineer</p>
-                </a>
-
-                <a onclick="openModal('programmer-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer" data-aos="fade-left">
-                    <h2 class="mt-4 text-xl font-bold text-black">Programmer</h2>
-                    <p class="mt-1 text-sm text-neutral-950">I Can Use HTML, CSS and JavaScript, and this website made with Tailwindcss</p>
-                </a>
-
-                <a onclick="openModal('software-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer" data-aos="fade-right">
-                    <h2 class="mt-4 text-xl font-bold text-black">Software Engineer</h2>
-                    <p class="mt-1 text-sm text-neutral-950">I am a Software Engineer Who will fix the website if there are bugs or other things that are not in accordance with the concept of the website.</p>
-                </a>
-
-                <a onclick="openModal('quran-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer" data-aos="fade-left">
-                    <h2 class="mt-4 text-xl font-bold text-black">Qur'an Memoriser</h2>
-                    <p class="mt-1 text-sm text-neutral-950">I am a Memoriser of The Holy Qur'an Since childhood, understanding its Contents in depth and carrying out its commands.</p>
-                </a>
-
-                <a onclick="openModal('computer-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer" data-aos="fade-right">
-                    <h2 class="mt-4 text-xl font-bold text-black">Computer Engineer</h2>
-                    <p class="mt-1 text-sm text-neutral-950">I am a Computer Engineer where I often repair damaged and abnormal devices, if your device is damaged, I will fix it as much as possible.</p>
-                </a>
-
-                <a onclick="openModal('it-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer" data-aos="fade-left">
-                    <h2 class="mt-4 text-xl font-bold text-black">IT Specialist</h2>
-                    <p class="mt-1 text-sm text-neutral-950">Experienced in providing IT solutions and technical support for various systems and applications.</p>
-                </a>
-            </div>
+    <section id="about" class="section-container bg-gray-50 py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-screen-xl">
+        <!-- Header About Me -->
+        <div class="text-center mb-12" data-aos="fade-down">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4 text-blue-600">About <span class="text-gray-900">Me</span></h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-300 mx-auto mb-6 rounded-full"></div>
+          <p class="text-gray-600 max-w-2xl mx-auto text-lg">Saya adalah seorang pelajar dan pengembang web yang berfokus pada pengembangan software, programming, dan teknologi. Berikut beberapa highlight tentang saya:</p>
         </div>
+        <!-- Grid Poin-poin Lama -->
+        <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <a onclick="openModal('student-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-900/10 cursor-pointer bg-white" data-aos="fade-right">
+            <h2 class="mt-4 text-xl font-bold text-black">Student</h2>
+            <p class="mt-1 text-sm text-neutral-950">At IDN Boarding School - Solo, Majoring Software Engineer</p>
+          </a>
+          <a onclick="openModal('programmer-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer bg-white" data-aos="fade-left">
+            <h2 class="mt-4 text-xl font-bold text-black">Programmer</h2>
+            <p class="mt-1 text-sm text-neutral-950">I Can Use HTML, CSS and JavaScript, and this website made with Tailwindcss</p>
+          </a>
+          <a onclick="openModal('software-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer bg-white" data-aos="fade-right">
+            <h2 class="mt-4 text-xl font-bold text-black">Software Engineer</h2>
+            <p class="mt-1 text-sm text-neutral-950">I am a Software Engineer Who will fix the website if there are bugs or other things that are not in accordance with the concept of the website.</p>
+          </a>
+          <a onclick="openModal('quran-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer bg-white" data-aos="fade-left">
+            <h2 class="mt-4 text-xl font-bold text-black">Qur'an Memoriser</h2>
+            <p class="mt-1 text-sm text-neutral-950">I am a Memoriser of The Holy Qur'an Since childhood, understanding its Contents in depth and carrying out its commands.</p>
+          </a>
+          <a onclick="openModal('computer-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer bg-white" data-aos="fade-right">
+            <h2 class="mt-4 text-xl font-bold text-black">Computer Engineer</h2>
+            <p class="mt-1 text-sm text-neutral-950">I am a Computer Engineer where I often repair damaged and abnormal devices, if your device is damaged, I will fix it as much as possible.</p>
+          </a>
+          <a onclick="openModal('it-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer bg-white" data-aos="fade-left">
+            <h2 class="mt-4 text-xl font-bold text-black">IT Specialist</h2>
+            <p class="mt-1 text-sm text-neutral-950">Experienced in providing IT solutions and technical support for various systems and applications.</p>
+          </a>
+        </div>
+      </div>
     </section>
     <!-- End About Me -->
 
-<!-- My Skills -->
-<section class=" px-8 sm:px-16 py-16 max-w-screen-xl mx-auto" id="skills" data-aos="zoom-in-down">
-  <div class="" >
-    <div class="flex justify-center items-center gap-12 pb-12">
-      <h2 class="text-4xl font-bold text-blue-700" id="myskills">My Skills</h2>
-    </div>
-    <div class="grid grid-cols-3  sm:grid-cols-5 gap-12" style="font-family: 'Roboto Mono', monospace;" >
-
-      <!-- Skill 01 -->
-      <div class="flex flex-col items-center gap-2" data-aos="flip-left">
-        <img src="./dist/img/icons8-html-5-96.svg" alt="html icon" class="w-24 h-24 hover:scale-110 transition-transform duration-300">
-        <p class="font-semibold text-black"><a href="https://www.w3.org/html/" target="_blank">HTML</a></p>
+    <!-- My Skills -->
+    <section id="myskill" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto ">
+      <div class="text-center mb-16" data-aos="fade-down">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 text-blue-700">My <span class="text-gray-900">Skills</span></h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-300 mx-auto mb-6 rounded-full"></div>
+        <p class="text-gray-600 max-w-2xl mx-auto text-lg">Berikut adalah beberapa keahlian teknis dan profesional yang saya miliki dalam pengembangan web dan teknologi.</p>
       </div>
-
-      <!-- Skill 02 -->
-      <div class="flex flex-col items-center gap-2" data-aos="flip-right">
-        <img src="./dist/img/icons8-css3-96.svg" alt="css icon" class="w-24 h-24 hover:scale-110 transition-transform duration-300">
-        <p class="font-semibold text-black"><a href="https://www.w3.org/Style/CSS/Overview.en.html" target="_blank">CSS</a></p>
-      </div>
-
-      <!-- Skill 03 -->
-
-      <div class="flex flex-col items-center gap-2 " data-aos="flip-left">
-        <img src="./dist/img/tailwind-css.svg" alt="tailwind css icon" class="w-24 h-24 hover:scale-110 transition-transform duration-300">
-        <p class="font-semibold text-black text-center"><a href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a></p>
-      </div>
-
-
-      <!-- Skill 04 -->
-
-      <div class="flex flex-col items-center gap-2" data-aos="flip-right">
-        <img src="./dist/img/icons8-javascript-96.svg" alt="javascript icon" class="w-24 h-24 hover:scale-110 transition-transform duration-300">
-        <p class="font-semibold text-black"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a></p>
-      </div>
-      <!-- Skill 04 -->
-
-      <div class="flex flex-col items-center gap-2" data-aos="flip-left">
-        <img src="./dist/img/icons8-react-80.svg" alt="javascript icon" class="w-24 h-24 hover:scale-110 transition-transform duration-300">
-        <p class="font-semibold text-black"><a href="https://react.dev/">React</a></p>
-      </div>
-
-      <!-- Skill 05 -->
-
-      <div class="flex flex-col items-center gap-2" data-aos="flip-right">
-        <img src="./dist/img/icons8-git-96.svg" alt="git icon" class="w-24 h-24 hover:scale-110 transition-transform duration-300">
-        <p class="font-semibold text-black">Git</p>
-      </div>
-    </div>
-  </div>
-</section>
- <!-- End My skills -->
-    <!-- Experiences -->
-     
-     <!-- End Experiences -->
-
-    <!-- My Project Start -->
-    <div class="mx-auto max-w-lg text-center"data-aos="flip-down">
-      <h1 class="text-blue-600 font-bold text-3xl sm:text-4xl" id="myprojects">My Projects</h1>
-      <p class="mt-4 text-gray-600 m-90">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta illo accusamus, inventore in quidem commodi sequi vel reprehenderit numquam natus placeat doloremque obcaecati molestias similique labore, modi sit autem id?
-      </p>
-    </div>
-    <!-- projects -->
-    <div class=" px-5 py-24" data-aos="zoom-in-down">
-      <div class="flex flex-wrap gap-y-4 -m-4">
-
-        <!-- project 1 -->
-        <div class="lg:w-1/3 sm:w-1/2 p-4">
-          <div class="flex relative rounded-md cursor-pointer" onclick="openModal('project1-modal')">
-            <img alt="e-library-web"
-              class="absolute inset-0 w-full h-full object-cover object-center rounded-md"
-              src="./dist/img/project6.png">
-            <div class="px-8 py-10 relative z-10 w-full bg-[#051830] transition-all opacity-0 hover:opacity-95">
-              <h2 class="tracking-widest text-sm title-font font-medium text-blue-500 mb-1">HTML CSS</h2>
-              <h1 class="title-font text-lg font-medium text-white mb-3">E- Library</h1>
-              <p class="leading-relaxed">
-                This is a assignment given in "HTML and CSS for Beginner" by IDN Boarding School - Solo, built using
-                HTML5 and CSS3.
-              </p>
-              <div class="flex gap-4 mt-2 justify-start">
-                <a href="https://github.com/iqbaladiatma/" target="_blank" class="w-9 h-9">
-                  <ion-icon name="logo-github" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
-                </a>
-                <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-9 h-9">
-                  <ion-icon name="logo-instagram" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
-                </a>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <!-- Technical Skills -->
+        <div data-aos="fade-right">
+          <h3 class="text-xl font-bold mb-6">Technical Skills</h3>
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">HTML/CSS</span>
+                <span class="text-gray-500">95%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-blue-600 to-blue-300 rounded-full transition-all duration-1000" style="width:95%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">JavaScript</span>
+                <span class="text-gray-500">90%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full transition-all duration-1000" style="width:90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Tailwind CSS</span>
+                <span class="text-gray-500">90%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full transition-all duration-1000" style="width:90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">React</span>
+                <span class="text-gray-500">80%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-blue-400 to-blue-700 rounded-full transition-all duration-1000" style="width:80%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Git</span>
+                <span class="text-gray-500">85%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-orange-400 to-orange-600 rounded-full transition-all duration-1000" style="width:85%"></div>
               </div>
             </div>
           </div>
         </div>
-
-
-
-        <!-- project 2 -->
-        <div class=" lg:w-1/3 sm:w-1/2 p-4 ">
-          <div class="flex relative mentions-project rounded-md">
-            <img alt="developer-landing-page"
-              class="absolute inset-0 w-full h-full object-cover object-center rounded-md"
-              src="./dist/img/project7.png">
-            <div class="px-8 py-10 relative z-10 w-full bg-[#051830] transition-all opacity-0 hover:opacity-95">
-              <h2 class="tracking-widest text-sm title-font font-medium text-blue-500 mb-1">HTML CSS Tailwindcss</h2>
-              <h1 class="title-font text-lg font-medium text-white mb-3">OLSHOP Web</h1>
-              <p class="leading-relaxed">
-                This is a assignment given in "HTML and CSS and Tailwindcss for Beginner" by Dea Afrizal, built using
-                HTML5 and CSS3 and Tailwindcss.
-              </p>
-              <div class="flex gap-4 mt-2 justify-start">
-                <a href="https://github.com/iqbaladiatma/" target="_blank" class="w-9 h-9">
-                  <ion-icon name="logo-github" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
-                </a>
-                <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-9 h-9">
-                  <ion-icon name="logo-instagram" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
-                </a>
+        <!-- Professional Skills -->
+        <div data-aos="fade-left">
+          <h3 class="text-xl font-bold mb-6">Professional Skills</h3>
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Communication</span>
+                <span class="text-gray-500">90%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-blue-400 to-blue-600 rounded-full transition-all duration-1000" style="width:90%"></div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- project 3 -->
-        <div class=" lg:w-1/3 sm:w-1/2 p-4">
-          <div class="flex relative mentions-project rounded-md">
-            <img alt="web-hosting-landing-page"
-              class="absolute inset-0 w-full h-full object-cover object-center rounded-md"
-              src="./dist/img/project1.png">
-            <div class="px-8 py-10 relative z-10 w-full bg-[#051830] transition-all opacity-0 hover:opacity-95">
-              <h2 class="tracking-widest text-sm title-font font-medium text-blue-500 mb-1">HTML CSS TailwindCSS</h2>
-              <h1 class="title-font text-lg font-medium text-white mb-3">Portofolio Web</h1>
-              <p class="leading-relaxed">
-                This is a assignment given in "HTML and CSS and Tailwindcss for Beginner" by MySelf, built using
-                HTML5 and CSS3 and Tailwindcss.
-              </p>
-              <div class="flex gap-4 mt-2 justify-start">
-                <a href="https://github.com/iqbaladiatma/" target="_blank"
-                  class="w-9 h-9">
-                  <ion-icon name="logo-github" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
-                </a>
-                <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-9 h-9">
-                  <ion-icon name="logo-instagram" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
-                </a>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Team Work</span>
+                <span class="text-gray-500">85%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-all duration-1000" style="width:85%"></div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- project 4 -->
-        <div class=" lg:w-1/3 sm:w-1/2 p-4">
-          <div class="flex relative mentions-project rounded-md">
-            <img alt="product-designer-landing-page"
-              class="absolute inset-0 w-full h-full object-cover object-center rounded-md"
-              src="./dist/img/project2.png">
-            <div class="px-8 py-10 relative z-10 w-full bg-[#051830] transition-all opacity-0 hover:opacity-95">
-              <h2 class="tracking-widest text-sm title-font font-bold text-blue-500 mb-1">HTML CSS Bootstrap</h2>
-              <h1 class="title-font text-lg font-medium text-white mb-3">Portofolio Website</h1>
-              <p class="leading-relaxed">
-                This is a assignment given in "HTML CSS and Bootstrap For Beginner" by Myself, built using
-                HTML5 CSS3 And Bootstrap.
-              </p>
-              <div class="flex gap-4 mt-2 justify-start">
-                <a href="https://github.com/iqbaladiatma/" target="_blank"
-                  class="w-9 h-9">
-                  <ion-icon name="logo-github" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
-                </a>
-                <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-9 h-9">
-                  <ion-icon name="logo-instagram" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
-                </a>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Project Management</span>
+                <span class="text-gray-500">80%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-purple-400 to-purple-600 rounded-full transition-all duration-1000" style="width:80%"></div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- project 5 -->
-        <div class=" lg:w-1/3 sm:w-1/2 p-4">
-          <div class="flex relative mentions-project rounded-md">
-            <img alt="dance-home-landing-page"
-              class="absolute inset-0 w-full h-full object-cover object-center rounded-md"
-              src="./dist/img/project2.png">
-            <div class="px-8 py-10 relative z-10 w-full bg-[#051830] transition-all opacity-0 hover:opacity-95">
-              <h2 class="tracking-widest text-sm title-font font-bold text-blue-500 mb-1">HTML CSS Bootstrap</h2>
-              <h1 class="title-font text-lg font-medium text-white mb-3">Portofolio Website</h1>
-              <p class="leading-relaxed">
-                This is a assignment given in "HTML CSS and Bootstrap For Beginner" by Myself, built using
-                HTML5 CSS3 And Bootstrap.
-              </p>
-              <div class="flex gap-4 mt-2 justify-start">
-                <a href="https://github.com/iqbaladiatma/" target="_blank" class="w-9 h-9">
-                  <ion-icon name="logo-github" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
-                </a>
-                <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-9 h-9">
-                  <ion-icon name="logo-instagram" class="w-8 h-8 transition-all hover:text-blue-500">
-                  </ion-icon>
-                </a>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Creativity</span>
+                <span class="text-gray-500">95%</span>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- project 6 -->
-        <div class=" lg:w-1/3 sm:w-1/2 p-4 ">
-          <div class="flex relative mentions-project rounded-md">
-            <img alt="Portofolio" class="absolute inset-0 w-full h-full object-cover object-center rounded-md"
-              src="./dist/img/project3.png">
-            <div class="px-8 py-10 relative z-10 w-full bg-[#051830] transition-all opacity-0 hover:opacity-95">
-              <h2 class="tracking-widest text-sm title-font font-bold text-blue-500 mb-1">HTML CSS Bootstrap</h2>
-              <h1 class="title-font text-lg font-medium text-white mb-3">Web Portofolio</h1>
-              <p class="leading-relaxed">
-                This is a assignment given in "HTML CSS and Bootstrap For Beginner" by Myself, built using
-                HTML5 CSS3 And Bootstrap.
-              </p>
-              <div class="flex gap-4 mt-2 justify-start">
-                <a href="https://github.com/iqbaladiatma/" target="_blank" class="w-9 h-9">
-                  <ion-icon name="logo-github" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
-                </a>
-                <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-9 h-9">
-                  <ion-icon name="logo-instagram" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- project 7 -->
-        <div class=" lg:w-1/3 sm:w-1/2 p-4">
-          <div class="flex relative mentions-project rounded-md">
-            <img alt="landing-page"
-              class="absolute inset-0 w-full h-full object-cover object-center rounded-md"
-              src="./dist/img/project5.png">
-            <div class="px-8 py-10 relative z-10 w-full bg-[#051830] transition-all opacity-0 hover:opacity-95">
-              <h2 class="tracking-widest text-sm title-font font-bold text-blue-500 mb-1">HTML CSS</h2>
-              <h1 class="title-font text-lg font-medium text-white mb-3">Landing Page</h1>
-              <p class="leading-relaxed">
-                This is a assignment given in "HTML CSS and For Beginner" by Aiden, built using
-                HTML5 and CSS3.
-              </p>
-              <div class="flex gap-4 mt-2 justify-start">
-                <a href="https://github.com/iqbaladiatma/" target="_blank" class="w-9 h-9">
-                  <ion-icon name="logo-github" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
-                </a>
-                <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-9 h-9">
-                  <ion-icon name="logo-instagram" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- project 8 -->
-        <div class=" lg:w-1/3 sm:w-1/2 p-4">
-          <div class="flex relative mentions-project rounded-md">
-            <img alt="developer-landing-page"
-              class="absolute inset-0 w-full h-full object-cover object-center rounded-md"
-              src="./dist/img/project1.png">
-            <div class="px-8 py-10 relative z-10 w-full bg-[#051830] transition-all opacity-0 hover:opacity-95">
-              <h2 class="tracking-widest text-sm title-font font-medium text-blue-500 mb-1">HTML CSS TailwindCSS</h2>
-              <h1 class="title-font text-lg font-medium text-white mb-3">IT Portofolio Web</h1>
-              <p class="leading-relaxed">
-                This is a assignment given in "HTML CSS and Tailwindcss For Beginner" by Myself, built using
-                HTML5 CSS3 And TailwindCSS.
-              </p>
-              <div class="flex gap-4 mt-2 justify-start">
-                <a href="https://github.com/iqbaladiatma/" target="_blank" class="w-9 h-9">
-                  <ion-icon name="logo-github" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
-                </a>
-                <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-9 h-9">
-                  <ion-icon name="logo-instagram" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- project 9 -->
-        <div class=" lg:w-1/3 sm:w-1/2 p-4">
-          <div class="flex relative mentions-project rounded-md">
-            <img alt="developer-landing-page"
-              class="absolute inset-0 w-full h-full object-cover object-center rounded-md"
-              src="./dist/img/project8.png">
-            <div class="px-8 py-10 relative z-10 w-full bg-[#051830] transition-all opacity-0 hover:opacity-95">
-              <h2 class="tracking-widest text-sm title-font font-medium text-blue-500 mb-1">HTML CSS TailwindCSS AOS</h2>
-              <h1 class="title-font text-lg font-medium text-white mb-3">AI Web</h1>
-              <p class="leading-relaxed">
-                This is a assignment given in "HTML CSS and Tailwindcss For Beginner" by Myself, built using
-                HTML5 CSS3 And TailwindCSS and AOS.
-              </p>
-              <div class="flex gap-4 mt-2 justify-start">
-                <a href="https://github.com/iqbaladiatma/" target="_blank" class="w-9 h-9">
-                  <ion-icon name="logo-github" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
-                </a>
-                <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-9 h-9">
-                  <ion-icon name="logo-instagram" class="w-8 h-8 transition-all hover:text-blue-500"></ion-icon>
-                </a>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-pink-400 to-pink-600 rounded-full transition-all duration-1000" style="width:95%"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <!-- Tools & Technologies -->
+      <div class="mt-16" data-aos="zoom-in-up">
+        <h3 class="text-xl font-bold mb-6 text-center">Tools & Technologies</h3>
+        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 justify-items-center">
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/icons8-html-5-96.svg" alt="HTML5" class="w-12 h-12 mb-2">
+            <span class="text-sm">HTML5</span>
+          </div>
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/icons8-css3-96.svg" alt="CSS3" class="w-12 h-12 mb-2">
+            <span class="text-sm">CSS3</span>
+          </div>
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/tailwind-css.svg" alt="Tailwind CSS" class="w-12 h-12 mb-2">
+            <span class="text-sm">Tailwind</span>
+          </div>
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/icons8-javascript-96.svg" alt="JavaScript" class="w-12 h-12 mb-2">
+            <span class="text-sm">JavaScript</span>
+          </div>
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/icons8-react-80.svg" alt="React" class="w-12 h-12 mb-2">
+            <span class="text-sm">React</span>
+          </div>
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/icons8-git-96.svg" alt="Git" class="w-12 h-12 mb-2">
+            <span class="text-sm">Git</span>
+          </div>
+        </div>
+      </div>
     </section>
-    <!-- ************* -->
-      <!-- End My Project -->
-       <!-- ********** -->
+    <!-- End My Skills -->
+
+    <!-- My Projects -->
+    <section id="myprojects" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-white">
+      <div class="text-center mb-16" data-aos="fade-down">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 text-blue-700">My <span class="text-gray-900">Projects</span></h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-300 mx-auto mb-6 rounded-full"></div>
+        <p class="text-gray-600 max-w-2xl mx-auto text-lg">Beberapa project yang telah saya kerjakan, mulai dari web sederhana hingga aplikasi modern.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Project 1 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project6.png" alt="e-library-web" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">E-Library</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML and CSS for Beginner" by IDN Boarding School - Solo, built using HTML5 and CSS3.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 2 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project7.png" alt="developer-landing-page" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">OLSHOP Web</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML and CSS and TailwindCSS for Beginner" by Dea Afrizal, built using HTML5, CSS3, and TailwindCSS.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+              <span class="px-3 py-1 bg-cyan-50 text-cyan-700 border border-cyan-200 text-xs rounded-full font-semibold">TailwindCSS</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 3 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project1.png" alt="web-hosting-landing-page" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">Portfolio Web</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML and CSS and TailwindCSS for Beginner" by Myself, built using HTML5, CSS3, and TailwindCSS.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+              <span class="px-3 py-1 bg-cyan-50 text-cyan-700 border border-cyan-200 text-xs rounded-full font-semibold">TailwindCSS</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 4 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project2.png" alt="product-designer-landing-page" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">Portfolio Website</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML CSS and Bootstrap For Beginner" by Myself, built using HTML5, CSS3, and Bootstrap.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+              <span class="px-3 py-1 bg-purple-50 text-purple-700 border border-purple-200 text-xs rounded-full font-semibold">Bootstrap</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 5 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project2.png" alt="dance-home-landing-page" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">Portfolio Website</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML CSS and Bootstrap For Beginner" by Myself, built using HTML5, CSS3, and Bootstrap.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+              <span class="px-3 py-1 bg-purple-50 text-purple-700 border border-purple-200 text-xs rounded-full font-semibold">Bootstrap</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 6 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project3.png" alt="Portofolio" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">Web Portfolio</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML CSS and Bootstrap For Beginner" by Myself, built using HTML5, CSS3, and Bootstrap.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+              <span class="px-3 py-1 bg-purple-50 text-purple-700 border border-purple-200 text-xs rounded-full font-semibold">Bootstrap</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 7 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project5.png" alt="landing-page" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">Landing Page</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML CSS For Beginner" by Aiden, built using HTML5 and CSS3.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 8 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project1.png" alt="developer-landing-page" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">IT Portfolio Web</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML CSS and TailwindCSS For Beginner" by Myself, built using HTML5, CSS3, and TailwindCSS.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+              <span class="px-3 py-1 bg-cyan-50 text-cyan-700 border border-cyan-200 text-xs rounded-full font-semibold">TailwindCSS</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 9 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project8.png" alt="developer-landing-page" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">AI Web</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML CSS and TailwindCSS For Beginner" by Myself, built using HTML5, CSS3, TailwindCSS, and AOS.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+              <span class="px-3 py-1 bg-cyan-50 text-cyan-700 border border-cyan-200 text-xs rounded-full font-semibold">TailwindCSS</span>
+              <span class="px-3 py-1 bg-gray-50 text-gray-700 border border-gray-200 text-xs rounded-full font-semibold">AOS</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-12" data-aos="fade-up">
+        <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-6 py-3 border border-blue-600 text-blue-600 rounded-lg font-medium hover:bg-blue-50 transition duration-300 inline-flex items-center"><i class="fas fa-eye mr-2"></i> View All Projects</a>
+      </div>
+    </section>
+    <!-- End My Projects -->
+
 
     <!-- Contact Me Section -->
     <div class="mx-auto max-w-lg text-center mt-8">
@@ -545,73 +620,70 @@
     <!-- End Contact Me Section -->
 
     <!-- footer -->
-    <footer class="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-      <div class="container mx-auto pt-10 px-4">
-        <!-- Quick Links -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 pb-10">
+    <footer class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-12" data-aos="fade-up">
+      <div class="container mx-auto px-4">
+        <!-- Grid untuk konten utama -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <!-- Quick Links -->
           <div>
-            <h3 class="font-bold mb-4">Quick Links</h3>
+            <h3 class="font-bold text-lg mb-4">Quick Links</h3>
             <ul class="space-y-2">
               <li><a href="#home" class="hover:text-gray-200 transition-colors">Home</a></li>
-              <li><a href="#aboutme" class="hover:text-gray-200 transition-colors">About</a></li>
-              <li><a href="#myskills" class="hover:text-gray-200 transition-colors">Skills</a></li>
+              <li><a href="#about" class="hover:text-gray-200 transition-colors">About</a></li>
+              <li><a href="#skills" class="hover:text-gray-200 transition-colors">Skills</a></li>
+              <li><a href="#portfolio" class="hover:text-gray-200 transition-colors">Portfolio</a></li>
+              <li><a href="#contact" class="hover:text-gray-200 transition-colors">Contact</a></li>
             </ul>
           </div>
+          <!-- Projects -->
           <div>
-            <h3 class="font-bold mb-4">Projects</h3>
+            <h3 class="font-bold text-lg mb-4">Projects</h3>
             <ul class="space-y-2">
               <li><a href="#myprojects" class="hover:text-gray-200 transition-colors">Web Development</a></li>
               <li><a href="#myprojects" class="hover:text-gray-200 transition-colors">Mobile Apps</a></li>
               <li><a href="#myprojects" class="hover:text-gray-200 transition-colors">UI/UX Design</a></li>
             </ul>
           </div>
+          <!-- Contact -->
           <div>
-            <h3 class="font-bold mb-4">Contact</h3>
+            <h3 class="font-bold text-lg mb-4">Contact</h3>
             <ul class="space-y-2">
-              <li>Jl.Nasional Blora-Rembang</li>
-              <li>Km.7 Blora,Jawa Tengah</li>
-              <li>0895-4030-03558</li>
+              <li class="flex items-center">
+                <ion-icon name="location" class="mr-2"></ion-icon>
+                Jl. Nasional Blora-Rembang Km.7, Blora, Jawa Tengah
+              </li>
+              <li class="flex items-center">
+                <ion-icon name="call" class="mr-2"></ion-icon>
+                0895-4030-03558
+              </li>
+              <li class="flex items-center">
+                <ion-icon name="mail" class="mr-2"></ion-icon>
+                computeritindonesia@gmail.com
+              </li>
             </ul>
           </div>
         </div>
-      </div>
-
-      <!--Copyright section-->
-      <div class="w-full border-t border-white/10">
-        <div class="p-4 text-center">
-          © 2024 Copyright:
-          <a href="https://www.instagram.com/iq_html/" class="hover:text-gray-200 transition-colors"> By Iqbal Adiatma</a>
+        <!-- Ikon Media Sosial -->
+        <div class="flex justify-center space-x-6 mb-8">
+          <a href="mailto:computeritindonesia@gmail.com" target="_blank" class="text-white hover:text-gray-200 transform hover:scale-110 transition-all duration-300">
+            <ion-icon name="mail" class="w-8 h-8"></ion-icon>
+          </a>
+          <a href="https://www.linkedin.com/in/iqbaladiatma" target="_blank" class="text-white hover:text-gray-200 transform hover:scale-110 transition-all duration-300">
+            <ion-icon name="logo-linkedin" class="w-8 h-8"></ion-icon>
+          </a>
+          <a href="https://github.com/iqbaladiatma/" target="_blank" class="text-white hover:text-gray-200 transform hover:scale-110 transition-all duration-300">
+            <ion-icon name="logo-github" class="w-8 h-8"></ion-icon>
+          </a>
+          <a href="https://x.com/AdiatmaIqb32196" target="_blank" class="text-white hover:text-gray-200 transform hover:scale-110 transition-all duration-300">
+            <ion-icon name="logo-twitter" class="w-8 h-8"></ion-icon>
+          </a>
+          <a href="https://www.instagram.com/iq_html/" target="_blank" class="text-white hover:text-gray-200 transform hover:scale-110 transition-all duration-300">
+            <ion-icon name="logo-instagram" class="w-8 h-8"></ion-icon>
+          </a>
         </div>
-        
-        <!-- Social media icons dibawah copyright -->
-        <div class="flex justify-center pb-6">
-          <ul class="flex gap-6">
-            <li class="hover:scale-110 transition-transform duration-300">
-              <a href="mailto: computeritindonesia@gmail.com" target="_blank" class="text-white hover:text-gray-200">
-                <ion-icon name="mail" class="w-[35px] h-[35px]"></ion-icon>
-              </a>
-            </li>
-            <li class="hover:scale-110 transition-transform duration-300">
-              <a href="www.linkedin.com/in/iqbaladiatma" target="_blank" class="text-white hover:text-gray-200">
-                <ion-icon name="logo-linkedin" class="w-[35px] h-[35px]"></ion-icon>
-              </a>
-            </li>
-            <li class="hover:scale-110 transition-transform duration-300">
-              <a href="https://github.com/iqbaladiatma/" target="_blank" class="text-white hover:text-gray-200">
-                <ion-icon name="logo-github" class="w-[35px] h-[35px]"></ion-icon>
-              </a>
-            </li>
-            <li class="hover:scale-110 transition-transform duration-300">
-              <a href="https://x.com/AdiatmaIqb32196" target="_blank" class="text-white hover:text-gray-200">
-                <ion-icon name="logo-twitter" class="w-[35px] h-[35px]"></ion-icon>
-              </a>
-            </li>
-            <li class="hover:scale-110 transition-transform duration-300">
-              <a href="https://www.instagram.com/iq_html/" target="_blank" class="text-white hover:text-gray-200">
-                <ion-icon name="logo-instagram" class="w-[35px] h-[35px]"></ion-icon>
-              </a>
-            </li>
-          </ul>
+        <!-- Copyright -->
+        <div class="border-t border-white/20 pt-6 text-center">
+          <p>© 2024 Copyright: <a href="https://www.instagram.com/iq_html/" class="hover:text-gray-200 transition-colors">By Iqbal Adiatma</a></p>
         </div>
       </div>
     </footer>
@@ -891,7 +963,8 @@
     </div>
 
     <script src="main.js"></script>
-
-  </body>
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-8 right-8 bg-blue-500 text-white p-4 rounded-full hover:bg-blue-600 transition-colors z-50">
+      <ion-icon name="arrow-up" class="w-6 h-6"></ion-icon>
+    </button>
   </body>
 </html>
