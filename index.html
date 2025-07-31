@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./dist/img/logofull.jpg">
+    <title>Portofolio Web</title>
+    <link href="src/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/input.css" />
+    <link rel="stylesheet" href="style.css">
+    <!-- ion icons link -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <!-- Tailwind CSS CDN Link -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- AOC -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  
+  </head>
+  <body class="bg-white">
+    <div id="loader" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
+        <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+    </div>
+    <header class="fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
+      <nav>
+        <!-- Mobile Navbar -->
+        <div class="z-20 fixed md:hidden flex w-full justify-between">
+          <div class="nav-links translate-y-[-100%] transition-transform duration-300 absolute bg-blue-600 z-[21] w-full">
+            <div class="flex justify-center pt-5 pb-5">
+              <div class="flex flex-col w-full items-center px-5 gap-5">
+                <ul class="flex items-center flex-col gap-5">
+                  <li><a class="text-white hover:text-blue-200 transition-all duration-300" href="#home">Home</a></li>
+                  <li><a class="text-white hover:text-blue-200 transition-all duration-300" href="#portfolio">Portfolio</a></li>
+                  <li><a class="text-white hover:text-blue-200 transition-all duration-300" href="#myskill">My Skills</a></li>
+                  <li><a class="text-white hover:text-blue-200 transition-all duration-300" href="#certificates">Certificates</a></li>
+                  <li><a class="text-white hover:text-blue-200 transition-all duration-300" href="#about">About</a></li>
+                  <li><a class="text-white hover:text-blue-200 transition-all duration-300" href="#contact">Contact</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Logo Mobile -->
+          <div class="ml-4 mt-2">
+            <a href="#home">
+              <img class="w-12 cursor-pointer" src="./dist/img/logo.png" alt="logo">
+            </a>
+          </div>
+
+          <!-- Burger Menu -->
+          <div id="burger" class="mr-4 z-30 mt-2 cursor-pointer flex flex-col gap-1.5 justify-center items-center w-[50px] h-[50px]">
+            <div id="line1" class="w-[30px] h-[2px] bg-white transform transition-transform duration-300"></div>
+            <div id="line2" class="w-[30px] h-[2px] bg-white transform transition-opacity duration-300"></div>
+            <div id="line3" class="w-[30px] h-[2px] bg-white transform transition-transform duration-300"></div>
+          </div>
+        </div>
+
+        <!-- Desktop Navbar -->
+        <div class="hidden md:flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+          <div class="text-2xl font-bold text-white">
+            <a href="#home">
+              <img class="w-12 cursor-pointer" src="./dist/img/logo.png" alt="logo">
+            </a>
+          </div>
+          <div class="flex items-center">
+            <ul class="flex items-center gap-6">
+              <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#home">Home</a></li>
+              <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#portfolio">Portfolio</a></li>
+              <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#myskill">My Skill</a></li>
+              <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#certificates">Certificates</a></li>
+              <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#about">About</a></li>
+              <li><a class="text-base text-white hover:text-blue-200 transition-all duration-300" href="#contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+<!-- JavaScript -->
+  <script>
+      const navLinks = document.querySelector('.nav-links')
+      function onToggleMenu(e){
+          e.name = e.name === 'menu' ? 'close' : 'menu'
+          if(e.name === 'close') {
+              navLinks.style.top = '60px'
+              navLinks.classList.remove('top-[-100%]')
+          } else {
+              navLinks.style.top = '-100%'
+              navLinks.classList.add('top-[-100%]')
+          }
+      }
+
+      document.querySelectorAll('.nav-links a').forEach(link => {
+          link.addEventListener('click', () => {
+              const menuIcon = document.querySelector('ion-icon[name="close"]')
+              if(menuIcon) {
+                  menuIcon.name = 'menu'
+                  navLinks.style.top = '-100%'
+                  navLinks.classList.add('top-[-100%]')
+              }
+          })
+      })
+  </script>    
+    <!-- End Navbar -->
+
+    <!-- Hero Section dengan background -->
+    <section id="home" class="min-h-screen flex items-center justify-center text-center px-4 relative bg-gray-900 text-gray-300">
+      <!-- Canvas untuk animasi partikel -->
+      <canvas id="particle-canvas" class="absolute inset-0 w-full h-full z-0 opacity-20"></canvas>
+      <div class="z-10 w-full">
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider flex items-center justify-center gap-3 md:gap-6">
+          <!-- Ikon Kiri: Blok -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 md:w-12 md:h-12 text-cyan-400 opacity-50 shrink-0"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" x2="12" y1="22.08" y2="12"></line></svg>
+          <span class="text-white">Iqbal Adiatma</span>
+          <!-- Ikon Kanan: Koin -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 md:w-12 md:h-12 text-blue-500 opacity-50 shrink-0"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v12"></path><path d="M16 8a4 4 0 0 0-8 0"></path></svg>
+        </h1>
+        <p class="text-xl md:text-2xl font-semibold mt-4 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+          Full Stack Web Developer & IT Enthusiast
+        </p>
+        <p class="max-w-2xl mx-auto mt-6 text-gray-400">
+          Membangun website modern, responsif, dan efisien. Saya merancang dan mengembangkan solusi web yang aman, scalable, dan mudah digunakan.
+        </p>
+        <div class="mt-10 flex justify-center gap-4">
+          <a href="#portfolio" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-transform transform hover:scale-105">
+            Lihat Portfolio
+          </a>
+          <a href="#contact" class="bg-transparent border-2 border-cyan-400 hover:bg-cyan-400/10 text-cyan-400 font-bold py-3 px-8 rounded-lg transition-all duration-300">
+            Kontak
+          </a>
+        </div>
+      </div>
+    </section>
+    <script>
+      // --- Script untuk Animasi Partikel ---
+      const canvas = document.getElementById('particle-canvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resizeCanvas() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+        class Particle {
+          constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 1.5 + 1;
+            this.speedX = Math.random() * 2 - 1;
+            this.speedY = Math.random() * 2 - 1;
+            this.color = '#3b82f6';
+          }
+          update() {
+            if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+            if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+            this.x += this.speedX;
+            this.y += this.speedY;
+          }
+          draw() {
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+        function initParticles() {
+          const particleCount = Math.floor(canvas.width * canvas.height / 15000);
+          particles = [];
+          for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+          }
+        }
+        function connectParticles() {
+          let opacityValue = 1;
+          for (let a = 0; a < particles.length; a++) {
+            for (let b = a; b < particles.length; b++) {
+              let distance = Math.sqrt(
+                Math.pow(particles[a].x - particles[b].x, 2) +
+                Math.pow(particles[a].y - particles[b].y, 2)
+              );
+              if (distance < 120) {
+                opacityValue = 1 - (distance / 120);
+                ctx.strokeStyle = `rgba(59, 130, 246, ${opacityValue})`;
+                ctx.lineWidth = 0.5;
+                ctx.beginPath();
+                ctx.moveTo(particles[a].x, particles[a].y);
+                ctx.lineTo(particles[b].x, particles[b].y);
+                ctx.stroke();
+              }
+            }
+          }
+        }
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+          }
+          connectParticles();
+          requestAnimationFrame(animate);
+        }
+        window.addEventListener('resize', () => {
+          resizeCanvas();
+          initParticles();
+        });
+        resizeCanvas();
+        initParticles();
+        animate();
+      }
+    </script>
+    <!-- End Hero -->
+    <!-- About Me -->
+    <section id="about" class="section-container bg-gray-50 py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-screen-xl">
+        <!-- Header About Me -->
+        <div class="text-center mb-12" data-aos="fade-down">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4 text-blue-600">About <span class="text-gray-900">Me</span></h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-300 mx-auto mb-6 rounded-full"></div>
+          <p class="text-gray-600 max-w-2xl mx-auto text-lg">Saya adalah seorang pelajar dan pengembang web yang berfokus pada pengembangan software, programming, dan teknologi. Berikut beberapa highlight tentang saya:</p>
+        </div>
+        <!-- Grid Poin-poin Lama -->
+        <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <a onclick="openModal('student-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-900/10 cursor-pointer bg-white" data-aos="fade-right">
+            <h2 class="mt-4 text-xl font-bold text-black">Student</h2>
+            <p class="mt-1 text-sm text-neutral-950">At IDN Boarding School - Solo, Majoring Software Engineer</p>
+          </a>
+          <a onclick="openModal('programmer-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer bg-white" data-aos="fade-left">
+            <h2 class="mt-4 text-xl font-bold text-black">Programmer</h2>
+            <p class="mt-1 text-sm text-neutral-950">I Can Use HTML, CSS and JavaScript, and this website made with Tailwindcss</p>
+          </a>
+          <a onclick="openModal('software-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer bg-white" data-aos="fade-right">
+            <h2 class="mt-4 text-xl font-bold text-black">Software Engineer</h2>
+            <p class="mt-1 text-sm text-neutral-950">I am a Software Engineer Who will fix the website if there are bugs or other things that are not in accordance with the concept of the website.</p>
+          </a>
+          <a onclick="openModal('quran-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer bg-white" data-aos="fade-left">
+            <h2 class="mt-4 text-xl font-bold text-black">Qur'an Memoriser</h2>
+            <p class="mt-1 text-sm text-neutral-950">I am a Memoriser of The Holy Qur'an Since childhood, understanding its Contents in depth and carrying out its commands.</p>
+          </a>
+          <a onclick="openModal('computer-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer bg-white" data-aos="fade-right">
+            <h2 class="mt-4 text-xl font-bold text-black">Computer Engineer</h2>
+            <p class="mt-1 text-sm text-neutral-950">I am a Computer Engineer where I often repair damaged and abnormal devices, if your device is damaged, I will fix it as much as possible.</p>
+          </a>
+          <a onclick="openModal('it-modal')" class="block rounded-xl border border-transparent p-8 shadow-xl hover:scale-110 transition-transform duration-300 hover:border-blue-500 hover:shadow-blue-500/10 cursor-pointer bg-white" data-aos="fade-left">
+            <h2 class="mt-4 text-xl font-bold text-black">IT Specialist</h2>
+            <p class="mt-1 text-sm text-neutral-950">Experienced in providing IT solutions and technical support for various systems and applications.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- End About Me -->
+
+    <!-- My Skills -->
+    <section id="myskill" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto ">
+      <div class="text-center mb-16" data-aos="fade-down">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 text-blue-700">My <span class="text-gray-900">Skills</span></h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-300 mx-auto mb-6 rounded-full"></div>
+        <p class="text-gray-600 max-w-2xl mx-auto text-lg">Berikut adalah beberapa keahlian teknis dan profesional yang saya miliki dalam pengembangan web dan teknologi.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <!-- Technical Skills -->
+        <div data-aos="fade-right">
+          <h3 class="text-xl font-bold mb-6">Technical Skills</h3>
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">HTML/CSS</span>
+                <span class="text-gray-500">95%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-blue-600 to-blue-300 rounded-full transition-all duration-1000" style="width:95%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">JavaScript</span>
+                <span class="text-gray-500">90%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full transition-all duration-1000" style="width:90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Tailwind CSS</span>
+                <span class="text-gray-500">90%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full transition-all duration-1000" style="width:90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">React</span>
+                <span class="text-gray-500">80%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-blue-400 to-blue-700 rounded-full transition-all duration-1000" style="width:80%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Git</span>
+                <span class="text-gray-500">85%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-orange-400 to-orange-600 rounded-full transition-all duration-1000" style="width:85%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Professional Skills -->
+        <div data-aos="fade-left">
+          <h3 class="text-xl font-bold mb-6">Professional Skills</h3>
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Communication</span>
+                <span class="text-gray-500">90%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-blue-400 to-blue-600 rounded-full transition-all duration-1000" style="width:90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Team Work</span>
+                <span class="text-gray-500">85%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-all duration-1000" style="width:85%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Project Management</span>
+                <span class="text-gray-500">80%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-purple-400 to-purple-600 rounded-full transition-all duration-1000" style="width:80%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Creativity</span>
+                <span class="text-gray-500">95%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-pink-400 to-pink-600 rounded-full transition-all duration-1000" style="width:95%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Tools & Technologies -->
+      <div class="mt-16" data-aos="zoom-in-up">
+        <h3 class="text-xl font-bold mb-6 text-center">Tools & Technologies</h3>
+        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 justify-items-center">
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/icons8-html-5-96.svg" alt="HTML5" class="w-12 h-12 mb-2">
+            <span class="text-sm">HTML5</span>
+          </div>
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/icons8-css3-96.svg" alt="CSS3" class="w-12 h-12 mb-2">
+            <span class="text-sm">CSS3</span>
+          </div>
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/tailwind-css.svg" alt="Tailwind CSS" class="w-12 h-12 mb-2">
+            <span class="text-sm">Tailwind</span>
+          </div>
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/icons8-javascript-96.svg" alt="JavaScript" class="w-12 h-12 mb-2">
+            <span class="text-sm">JavaScript</span>
+          </div>
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/icons8-react-80.svg" alt="React" class="w-12 h-12 mb-2">
+            <span class="text-sm">React</span>
+          </div>
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/icons8-git-96.svg" alt="Git" class="w-12 h-12 mb-2">
+            <span class="text-sm">Git</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End My Skills -->
+
+    <!-- My Projects -->
+    <section id="myprojects" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-white">
+      <div class="text-center mb-16" data-aos="fade-down">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 text-blue-700">My <span class="text-gray-900">Projects</span></h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-300 mx-auto mb-6 rounded-full"></div>
+        <p class="text-gray-600 max-w-2xl mx-auto text-lg">Beberapa project yang telah saya kerjakan, mulai dari web sederhana hingga aplikasi modern.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Project 1 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project6.png" alt="e-library-web" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">E-Library</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML and CSS for Beginner" by IDN Boarding School - Solo, built using HTML5 and CSS3.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 2 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project7.png" alt="developer-landing-page" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">OLSHOP Web</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML and CSS and TailwindCSS for Beginner" by Dea Afrizal, built using HTML5, CSS3, and TailwindCSS.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+              <span class="px-3 py-1 bg-cyan-50 text-cyan-700 border border-cyan-200 text-xs rounded-full font-semibold">TailwindCSS</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 3 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project1.png" alt="web-hosting-landing-page" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">Portfolio Web</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML and CSS and TailwindCSS for Beginner" by Myself, built using HTML5, CSS3, and TailwindCSS.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+              <span class="px-3 py-1 bg-cyan-50 text-cyan-700 border border-cyan-200 text-xs rounded-full font-semibold">TailwindCSS</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 4 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project2.png" alt="product-designer-landing-page" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">Portfolio Website</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML CSS and Bootstrap For Beginner" by Myself, built using HTML5, CSS3, and Bootstrap.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+              <span class="px-3 py-1 bg-purple-50 text-purple-700 border border-purple-200 text-xs rounded-full font-semibold">Bootstrap</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 5 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project2.png" alt="dance-home-landing-page" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">Portfolio Website</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML CSS and Bootstrap For Beginner" by Myself, built using HTML5, CSS3, and Bootstrap.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+              <span class="px-3 py-1 bg-purple-50 text-purple-700 border border-purple-200 text-xs rounded-full font-semibold">Bootstrap</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 6 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project3.png" alt="Portofolio" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">Web Portfolio</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML CSS and Bootstrap For Beginner" by Myself, built using HTML5, CSS3, and Bootstrap.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+              <span class="px-3 py-1 bg-purple-50 text-purple-700 border border-purple-200 text-xs rounded-full font-semibold">Bootstrap</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 7 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project5.png" alt="landing-page" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">Landing Page</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML CSS For Beginner" by Aiden, built using HTML5 and CSS3.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 8 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project1.png" alt="developer-landing-page" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">IT Portfolio Web</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML CSS and TailwindCSS For Beginner" by Myself, built using HTML5, CSS3, and TailwindCSS.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+              <span class="px-3 py-1 bg-cyan-50 text-cyan-700 border border-cyan-200 text-xs rounded-full font-semibold">TailwindCSS</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 9 -->
+        <div class="card bg-gray-100 rounded-xl shadow-md transition-transform duration-300 group min-h-[420px] flex flex-col hover:scale-105" data-aos="fade-up">
+          <img src="./dist/img/project8.png" alt="developer-landing-page" class="w-full h-36 object-cover rounded-t-xl">
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="text-xl font-bold mb-2 text-blue-700">AI Web</h3>
+            <p class="text-gray-600 mb-4 flex-1">This is an assignment given in "HTML CSS and TailwindCSS For Beginner" by Myself, built using HTML5, CSS3, TailwindCSS, and AOS.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">HTML</span>
+              <span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs rounded-full font-semibold">CSS</span>
+              <span class="px-3 py-1 bg-cyan-50 text-cyan-700 border border-cyan-200 text-xs rounded-full font-semibold">TailwindCSS</span>
+              <span class="px-3 py-1 bg-gray-50 text-gray-700 border border-gray-200 text-xs rounded-full font-semibold">AOS</span>
+            </div>
+            <div class="flex gap-3 mt-auto">
+              <a href="#" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+              <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-900 transition flex items-center gap-2"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-12" data-aos="fade-up">
+        <a href="https://github.com/iqbaladiatma/" target="_blank" class="px-6 py-3 border border-blue-600 text-blue-600 rounded-lg font-medium hover:bg-blue-50 transition duration-300 inline-flex items-center"><i class="fas fa-eye mr-2"></i> View All Projects</a>
+      </div>
+    </section>
+    <!-- End My Projects -->
+
+
+    <!-- Contact Me Section -->
+    <div class="mx-auto max-w-lg text-center mt-8">
+        <h1 class="text-blue-600 font-bold text-3xl sm:text-4xl" id="contactme" data-aos="zoom-in-up">Contact Me</h1>
+    </div>
+
+    <section id="contact" class="py-8">
+      <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5" data-aos="zoom-in-up">
+          <div class="lg:col-span-2 lg:py-8">
+            <p class="max-w-xl text-lg">
+              Saya siap membantu Anda dalam pengembangan website. Jika Anda tertarik untuk berkolaborasi atau memiliki pertanyaan, jangan ragu untuk menghubungi saya.
+            </p>
+
+            <div class="mt-4">
+              <a href="tel:+6289540300355" class="text-2xl font-bold text-blue-600 hover:text-blue-700 transition-colors">
+                +62 895-4030-03558
+              </a>
+
+              <address class="mt-4 not-italic text-gray-700">
+                <div class="flex items-center gap-2">
+                  <ion-icon name="location" class="text-blue-600 w-5 h-5"></ion-icon>
+                  Jl. Nasional Blora-Rembang Km.7
+                </div>
+                <div class="mt-2">Blora, Jawa Tengah, Indonesia</div>
+              </address>
+
+              <div class="mt-6 flex gap-4">
+                <a href="https://wa.me/+62895403003558" 
+                   class="flex items-center gap-2 text-green-600 hover:text-green-700 transition-colors">
+                  <ion-icon name="logo-whatsapp" class="w-5 h-5"></ion-icon>
+                  WhatsApp
+                </a>
+                <a href="mailto:computeritindonesia@gmail.com" 
+                   class="flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors">
+                  <ion-icon name="mail" class="w-5 h-5"></ion-icon>
+                  Email
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
+            <form id="contactForm" onsubmit="handleSubmit(event)" class="space-y-8" autocomplete="off">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <input type="text" name="name" required placeholder="Name" class="w-full px-6 py-4 rounded-full border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none">
+                <input type="email" name="email" required placeholder="Email" class="w-full px-6 py-4 rounded-full border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none">
+              </div>
+              <textarea name="message" required rows="6" placeholder="Message" class="w-full px-6 py-4 rounded-3xl border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none"></textarea>
+              <button type="submit" class="w-full px-8 py-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Contact Me Section -->
+
+    <!-- footer -->
+    <footer class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-12" data-aos="fade-up">
+      <div class="container mx-auto px-4">
+        <!-- Grid untuk konten utama -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <!-- Quick Links -->
+          <div>
+            <h3 class="font-bold text-lg mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li><a href="#home" class="hover:text-gray-200 transition-colors">Home</a></li>
+              <li><a href="#about" class="hover:text-gray-200 transition-colors">About</a></li>
+              <li><a href="#skills" class="hover:text-gray-200 transition-colors">Skills</a></li>
+              <li><a href="#portfolio" class="hover:text-gray-200 transition-colors">Portfolio</a></li>
+              <li><a href="#contact" class="hover:text-gray-200 transition-colors">Contact</a></li>
+            </ul>
+          </div>
+          <!-- Projects -->
+          <div>
+            <h3 class="font-bold text-lg mb-4">Projects</h3>
+            <ul class="space-y-2">
+              <li><a href="#myprojects" class="hover:text-gray-200 transition-colors">Web Development</a></li>
+              <li><a href="#myprojects" class="hover:text-gray-200 transition-colors">Mobile Apps</a></li>
+              <li><a href="#myprojects" class="hover:text-gray-200 transition-colors">UI/UX Design</a></li>
+            </ul>
+          </div>
+          <!-- Contact -->
+          <div>
+            <h3 class="font-bold text-lg mb-4">Contact</h3>
+            <ul class="space-y-2">
+              <li class="flex items-center">
+                <ion-icon name="location" class="mr-2"></ion-icon>
+                Jl. Nasional Blora-Rembang Km.7, Blora, Jawa Tengah
+              </li>
+              <li class="flex items-center">
+                <ion-icon name="call" class="mr-2"></ion-icon>
+                0895-4030-03558
+              </li>
+              <li class="flex items-center">
+                <ion-icon name="mail" class="mr-2"></ion-icon>
+                computeritindonesia@gmail.com
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Ikon Media Sosial -->
+        <div class="flex justify-center space-x-6 mb-8">
+          <a href="mailto:computeritindonesia@gmail.com" target="_blank" class="text-white hover:text-gray-200 transform hover:scale-110 transition-all duration-300">
+            <ion-icon name="mail" class="w-8 h-8"></ion-icon>
+          </a>
+          <a href="https://www.linkedin.com/in/iqbaladiatma" target="_blank" class="text-white hover:text-gray-200 transform hover:scale-110 transition-all duration-300">
+            <ion-icon name="logo-linkedin" class="w-8 h-8"></ion-icon>
+          </a>
+          <a href="https://github.com/iqbaladiatma/" target="_blank" class="text-white hover:text-gray-200 transform hover:scale-110 transition-all duration-300">
+            <ion-icon name="logo-github" class="w-8 h-8"></ion-icon>
+          </a>
+          <a href="https://x.com/AdiatmaIqb32196" target="_blank" class="text-white hover:text-gray-200 transform hover:scale-110 transition-all duration-300">
+            <ion-icon name="logo-twitter" class="w-8 h-8"></ion-icon>
+          </a>
+          <a href="https://www.instagram.com/iq_html/" target="_blank" class="text-white hover:text-gray-200 transform hover:scale-110 transition-all duration-300">
+            <ion-icon name="logo-instagram" class="w-8 h-8"></ion-icon>
+          </a>
+        </div>
+        <!-- Copyright -->
+        <div class="border-t border-white/20 pt-6 text-center">
+          <p>© 2024 Copyright: <a href="https://www.instagram.com/iq_html/" class="hover:text-gray-200 transition-colors">By Iqbal Adiatma</a></p>
+        </div>
+      </div>
+    </footer>
+    <!-- end footer -->
+     <!-- AOS -->
+      <!-- AOS -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        // Tambahkan konfigurasi
+        duration: 1000, // nilai dalam ms
+        once: false, // animasi hanya sekali atau berulang
+        offset: 100, // offset (dalam px) dari titik trigger original
+        delay: 0, // nilai delay dalam ms
+        easing: 'ease-in-out', // fungsi easing
+      });
+    </script>
+    <!-- END AOS -->
+    <script src="main.js"></script>
+    <script>
+    let lastScroll = 0;
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        // Scroll ke bawah
+        if (currentScroll > lastScroll && currentScroll > 100) {
+            navbar.style.transform = 'translateY(-100%)';
+            navbar.classList.remove('bg-gradient-to-r', 'from-blue-600', 'to-blue-800');
+        } 
+        // Scroll ke atas
+        else {
+            navbar.style.transform = 'translateY(0)';
+            if (currentScroll > 50) {
+                navbar.classList.add('bg-gradient-to-r', 'from-blue-600', 'to-blue-800');
+            } else {
+                navbar.classList.remove('bg-gradient-to-r', 'from-blue-600', 'to-blue-800');
+            }
+        }
+        
+        lastScroll = currentScroll;
+    });
+    </script>
+    <!-- Modals -->
+    <div id="student-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('student-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">Student Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Saya adalah siswa di IDN Boarding School - Solo yang berfokus pada pengembangan software. Beberapa pencapaian saya:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Juara 1 Kompetisi Web Development tingkat sekolah</li>
+                        <li>Aktif dalam klub programming sekolah</li>
+                        <li>Mengembangkan berbagai projek website</li>
+                        <li>Memiliki IPK 3.8</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('student-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6 mr-3"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="programmer-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('programmer-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">Programming Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Sebagai programmer, saya telah mencapai beberapa milestone:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Menguasai HTML5, CSS3, dan JavaScript</li>
+                        <li>Mengembangkan berbagai projek website responsif</li>
+                        <li>Berpartisipasi dalam hackathon dan coding challenge</li>
+                        <li>Berkontribusi dalam projek open source</li>
+                        <li>Mengikuti bootcamp dan pelatihan programming intensif</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('programmer-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6 mr-3"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="software-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('software-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">Software Engineering Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Pengalaman saya sebagai Software Engineer meliputi:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Mengembangkan dan memelihara aplikasi web skala besar</li>
+                        <li>Mengoptimasi performa dan keamanan website</li>
+                        <li>Menerapkan best practices dalam pengembangan software</li>
+                        <li>Kolaborasi dalam tim menggunakan metodologi Agile</li>
+                        <li>Mengelola version control dan deployment pipeline</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('software-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6 mr-3"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="quran-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('quran-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">Qur'an Memorisation Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Perjalanan saya dalam menghafal Al-Qur'an:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Menghafal Al-Qur'an sejak usia dini</li>
+                        <li>Memahami dan menerapkan ilmu tajwid dengan baik</li>
+                        <li>Berpartisipasi dalam berbagai kompetisi tahfidz</li>
+                        <li>Mengajar dan membimbing santri dalam menghafal</li>
+                        <li>Rutin melakukan muroja'ah dan tadabbur Al-Qur'an</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('quran-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6 mr-3"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="computer-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('computer-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">Computer Engineering Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Pengalaman saya dalam bidang Computer Engineering:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Mendiagnosis dan memperbaiki masalah hardware komputer</li>
+                        <li>Mengoptimalkan kinerja sistem dan perangkat</li>
+                        <li>Melakukan upgrade dan maintenance berkala</li>
+                        <li>Menangani recovery data dan backup sistem</li>
+                        <li>Memberikan solusi untuk masalah teknis kompleks</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('computer-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6 mr-3"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="it-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('it-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">IT Specialist Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Pencapaian saya sebagai IT Specialist:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Mengelola infrastruktur IT dan jaringan</li>
+                        <li>Mengimplementasi solusi keamanan sistem</li>
+                        <li>Memberikan training dan support teknis</li>
+                        <li>Mengoptimalkan proses bisnis dengan teknologi</li>
+                        <li>Menangani proyek IT dari planning hingga deployment</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('it-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6 mr-3"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this JavaScript before closing body tag -->
+    <script>
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        const overlay = modal.querySelector(':scope > div:first-child');
+        const container = modal.querySelector(':scope > div:nth-child(2)');
+        
+        // Show modal
+        modal.classList.remove('hidden');
+        
+        // Trigger animation in next frame
+        requestAnimationFrame(() => {
+            overlay.classList.add('opacity-100');
+            container.classList.add('opacity-100', 'scale-100');
+            container.classList.remove('scale-95');
+        });
+        
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        const overlay = modal.querySelector(':scope > div:first-child');
+        const container = modal.querySelector(':scope > div:nth-child(2)');
+        
+        // Start closing animation
+        overlay.classList.remove('opacity-100');
+        container.classList.remove('opacity-100', 'scale-100');
+        container.classList.add('scale-95');
+        
+        // Hide modal after animation
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }, 300);
+    }
+
+    // Close modal when clicking escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            const modals = document.querySelectorAll('[id$="-modal"]');
+            modals.forEach(modal => {
+                if (!modal.classList.contains('hidden')) {
+                    closeModal(modal.id);
+                }
+            });
+        }
+    });
+    </script>
+
+    <style>
+    /* Smooth transition for all transform and opacity changes */
+    .transform {
+        transition-property: transform, opacity;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 300ms;
+    }
+    </style>
+
+    <!-- Add this before closing body tag -->
+    <div id="project1-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('project1-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-12 mx-4">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-3/5">
+                        <img src="./dist/img/project6.png" alt="E-Library Project" class="w-full h-auto rounded-lg shadow-lg">
+                    </div>
+                    <div class="md:w-2/5">
+                        <h2 class="text-3xl font-bold text-blue-600 mb-6">E-Library Project</h2>
+                        <p class="text-gray-700 mb-6 text-lg">
+                            Sebuah platform perpustakaan digital yang memungkinkan pengguna untuk:
+                            <ul class="list-disc ml-6 mt-4 space-y-2">
+                                <li>Mencari dan meminjam buku secara online</li>
+                                <li>Membaca preview buku</li>
+                                <li>Mengelola peminjaman</li>
+                                <li>Melihat riwayat peminjaman</li>
+                                <li>Fitur bookmark dan rating buku</li>
+                                <li>Sistem rekomendasi berdasarkan minat</li>
+                            </ul>
+                        </p>
+                        <div class="flex gap-6 mt-8">
+                            <a href="https://github.com/iqbaladiatma" target="_blank" 
+                               class="flex items-center gap-2 text-gray-700 hover:text-blue-600 transition-colors text-lg">
+                                <ion-icon name="logo-github" class="w-8 h-8"></ion-icon>
+                                GitHub
+                            </a>
+                            <a href="https://www.instagram.com/iq_html/" target="_blank" 
+                               class="flex items-center gap-2 text-gray-700 hover:text-blue-600 transition-colors text-lg">
+                                <ion-icon name="logo-instagram" class="w-8 h-8"></ion-icon>
+                                Instagram
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="closeModal('project1-modal')" class="absolute top-6 right-6 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-8 h-8 mr-3"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-8 right-8 bg-blue-500 text-white p-4 rounded-full hover:bg-blue-600 transition-colors z-50">
+      <ion-icon name="arrow-up" class="w-6 h-6"></ion-icon>
+    </button>
+  </body>
+</html>
