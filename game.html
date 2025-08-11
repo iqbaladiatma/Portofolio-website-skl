@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Game LadangUang999</title>
+    <!-- Memuat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Memuat Font Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #111827; /* Dark Blue-Gray */
+        }
+        .hidden { display: none; }
+        .sidebar-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            stroke-width: 2;
+        }
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s;
+            font-weight: 600;
+            color: #d1d5db; /* Gray 300 */
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            background-color: #374151; /* Gray 700 */
+            color: #ffffff;
+        }
+        .main-content-card {
+            background-color: #1f2937; /* Gray 800 */
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid #374151; /* Gray 700 */
+        }
+        .pro-button {
+            background: linear-gradient(to right, #3b82f6, #6366f1);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+        }
+        .pro-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+        }
+        .pro-button:active {
+            transform: translateY(-1px) scale(0.98);
+            box-shadow: 0 2px 10px rgba(99, 102, 241, 0.2);
+        }
+        .pro-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: translateY(0);
+            box-shadow: none;
+        }
+        /* Animasi Game & UI Keren */
+        @keyframes spinReel {
+            from { transform: translateY(-50%); }
+            to { transform: translateY(50%); }
+        }
+        .reel-spinning {
+            filter: blur(2px);
+            animation: spinReel 0.05s linear infinite;
+        }
+        #coin.flipping {
+            animation: flip 1s ease-out forwards;
+        }
+        @keyframes flip {
+            from { transform: rotateY(0deg) scale(1); }
+            50% { transform: rotateY(900deg) scale(1.2); }
+            to { transform: rotateY(1800deg) scale(1); }
+        }
+        .card {
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #4f46e5; /* Indigo 600 */
+        }
+        .game-title-flare {
+            background: -webkit-linear-gradient(#818cf8, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Loading Spinner */
+        @keyframes spinner-rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #374151;
+            border-bottom-color: #6366f1; /* Indigo */
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: spinner-rotation 1s linear infinite;
+        }
+        /* Global Chat */
+        #chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        #chat-window {
+            width: 350px;
+            height: 450px;
+            background-color: #1f2937;
+            border-radius: 1rem;
+            border: 1px solid #374151;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            transition: height 0.3s ease;
+        }
+        #chat-window.minimized {
+            height: 60px; /* Only show header */
+        }
+        #chat-window.minimized #chat-messages,
+        #chat-window.minimized #chat-input-area {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <!-- 1. Halaman Login -->
+    <div id="login-section" class="flex items-center justify-center min-h-screen">
+        <div class="bg-gray-800 p-8 rounded-xl shadow-2xl w-full max-w-sm border border-gray-700">
+            <h1 class="text-3xl font-bold text-center mb-2 text-white">Selamat Datang</h1>
+            <p class="text-gray-400 text-center mb-6">Masukkan nama atau kode akses Anda.</p>
+            <input type="text" id="login-input" placeholder="Nama atau Kode Akses" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 mb-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <button id="login-button" class="w-full pro-button">MASUK</button>
+        </div>
+    </div>
+
+    <!-- 2. Layout Dasbor Utama (Awalnya Tersembunyi) -->
+    <div id="dashboard-layout" class="hidden">
+        <div class="flex h-screen bg-gray-900">
+            <!-- Sidebar -->
+            <aside class="w-64 bg-gray-800 p-4 border-r border-gray-700 flex flex-col">
+                <h2 class="text-2xl font-bold text-indigo-400 mb-8 px-2">LadangUang999</h2>
+                <nav id="sidebar-nav" class="flex flex-col gap-2">
+                    <!-- Link Navigasi akan di-generate oleh JS -->
+                </nav>
+                
+                <!-- ADVERTISEMENT SPACE START -->
+                <div id="advertisement-space" class="mt-8 p-2 bg-gray-700 rounded-lg text-center">
+                    <span class="text-xs text-gray-400">IKLAN</span>
+                    <!-- Taruh kode JavaScript iklan di sini -->
+                    <div class="w-full h-32 bg-gray-600 rounded mt-1 flex items-center justify-center">
+                        <p class="text-gray-500 text-sm">Space Iklan</p>
+                    </div>
+                </div>
+                <!-- ADVERTISEMENT SPACE END -->
+
+                <div class="mt-auto">
+                    <button id="logout-button" class="sidebar-link w-full">
+                        <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="flex-1 flex flex-col overflow-hidden">
+                <header class="bg-gray-800 p-4 border-b border-gray-700 flex justify-end items-center">
+                    <div class="text-right">
+                        <p id="header-username" class="font-semibold text-white"></p>
+                        <p id="header-balance" class="text-sm text-green-400"></p>
+                    </div>
+                </header>
+                <main id="main-content" class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-900 p-6">
+                    <!-- Konten Halaman akan di-render di sini -->
+                </main>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 3. Global Chat -->
+    <div id="chat-container" class="hidden">
+        <div id="chat-window">
+            <div class="p-4 border-b border-gray-700 flex justify-between items-center cursor-pointer" id="chat-header">
+                <h3 class="font-bold text-white">Global Chat</h3>
+                <div class="flex items-center gap-2">
+                    <button id="minimize-chat-button" class="text-gray-400 hover:text-white">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
+                    </button>
+                    <button id="close-chat-button" class="text-gray-400 hover:text-white">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <div id="chat-messages" class="flex-1 p-4 space-y-4 overflow-y-auto">
+                <!-- Pesan chat akan dimuat di sini -->
+            </div>
+            <div id="chat-input-area" class="p-4 border-t border-gray-700">
+                <div class="flex gap-2">
+                    <input type="text" id="chat-input" placeholder="Ketik pesan..." class="w-full bg-gray-900 border border-gray-600 rounded-lg px-3 py-2 text-white">
+                    <button id="send-chat-button" class="pro-button px-4">Kirim</button>
+                </div>
+            </div>
+        </div>
+        <button id="open-chat-button" class="pro-button p-4 rounded-full shadow-lg hidden">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+        </button>
+    </div>
+
+
+    <script>
+        // --- State & Konfigurasi Aplikasi ---
+        const DEV_CODE = '2009';
+        const ADMIN_CODE = '202009';
+        let players = {};
+        let currentUser = null;
+        let attemptCountPola = 0;
+        let chatMessages = [];
+        const quizQuestions = [
+            { question: "Apa ibukota Indonesia?", options: ["Jakarta", "Bandung", "Surabaya"], answer: "Jakarta" },
+            { question: "Siapa presiden pertama Indonesia?", options: ["Soeharto", "Soekarno", "Habibie"], answer: "Soekarno" },
+            { question: "Gunung tertinggi di Indonesia adalah...", options: ["Gunung Semeru", "Gunung Rinjani", "Puncak Jaya"], answer: "Puncak Jaya" }
+        ];
+
+        // --- Seleksi Elemen DOM ---
+        const loginSection = document.getElementById('login-section');
+        const dashboardLayout = document.getElementById('dashboard-layout');
+        const loginInput = document.getElementById('login-input');
+        const loginButton = document.getElementById('login-button');
+        const mainContent = document.getElementById('main-content');
+        const sidebarNav = document.getElementById('sidebar-nav');
+        const headerUsername = document.getElementById('header-username');
+        const headerBalance = document.getElementById('header-balance');
+        const logoutButton = document.getElementById('logout-button');
+        // Chat elements
+        const chatContainer = document.getElementById('chat-container');
+        const chatWindow = document.getElementById('chat-window');
+        const openChatButton = document.getElementById('open-chat-button');
+        const closeChatButton = document.getElementById('close-chat-button');
+        const minimizeChatButton = document.getElementById('minimize-chat-button');
+        const chatHeader = document.getElementById('chat-header');
+        const chatMessagesEl = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const sendChatButton = document.getElementById('send-chat-button');
+
+
+        // --- Logika Navigasi & Render ---
+        function navigateTo(page) {
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.toggle('active', link.dataset.page === page);
+            });
+            mainContent.innerHTML = '';
+            switch (page) {
+                case 'dashboard': mainContent.innerHTML = renderDashboard(); break;
+                case 'games': mainContent.innerHTML = renderGameMenu(); break;
+                case 'wallet': mainContent.innerHTML = renderWallet(); break;
+                case 'profile': mainContent.innerHTML = renderProfile(); break;
+                case 'admin_panel': 
+                    mainContent.innerHTML = renderAdminPanel();
+                    renderAdminPlayerList();
+                    break;
+                case 'dev_console':
+                    mainContent.innerHTML = renderDevConsole();
+                    renderDevDataView();
+                    break;
+            }
+        }
+        
+        // --- Fungsi Render Tampilan (Views) ---
+        function renderDashboard() {
+            const player = players[currentUser.name];
+            return `
+                <h1 class="text-3xl font-bold mb-6 text-white">Dasbor</h1>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="main-content-card">
+                        <h2 class="text-xl font-semibold mb-2 text-indigo-400">Selamat Datang, ${currentUser.name}!</h2>
+                        <p class="text-gray-400">Ini adalah ringkasan akun Anda. Siap untuk menang besar hari ini?</p>
+                    </div>
+                    <div class="main-content-card text-center">
+                        <p class="text-gray-400 text-sm uppercase">Total Saldo</p>
+                        <p class="text-4xl font-bold text-green-400 mt-2">Rp ${player.balance.toLocaleString('id-ID')}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderGameMenu() {
+            return `
+                <h1 class="text-3xl font-bold mb-6 text-white">Pilih Permainan</h1>
+                <div id="game-selection" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    ${createGameCard('pola-keberuntungan', 'Ujian Petir', 'Pola takdir dari Zeus.', 2.5)}
+                    ${createGameCard('slot-machine', 'Slot Dewa', 'Raih artefak kembar.', 10)}
+                    ${createGameCard('high-low', 'Kartu Tinggi-Rendah', 'Tebak kartu berikutnya.', 1.8)}
+                    ${createGameCard('coin-flip', 'Lempar Koin', 'Pilih sisi keberuntunganmu.', 1.9)}
+                    ${createGameCard('survey', 'Survei Berhadiah', 'Jawab survei & dapatkan hadiah.', 1.5)}
+                    ${createGameCard('quiz', 'Kuis Umum', 'Uji wawasanmu & menangkan.', 3)}
+                </div>
+                <div id="game-play-area" class="mt-8"></div>
+            `;
+        }
+        
+        function renderWallet() {
+            const player = players[currentUser.name];
+            return `
+                <h1 class="text-3xl font-bold mb-6 text-white">Dompet Digital</h1>
+                <div class="main-content-card max-w-lg mx-auto">
+                    <div class="text-center mb-6">
+                        <p class="text-gray-400 text-sm uppercase">Saldo Saat Ini</p>
+                        <p class="text-4xl font-bold text-green-400 mt-2">Rp ${player.balance.toLocaleString('id-ID')}</p>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2 text-white">Setor Dana</h3>
+                            <input type="number" id="deposit-amount" placeholder="Jumlah setor" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 mb-3 text-white">
+                            <button onclick="handleDeposit()" class="w-full pro-button">Setor</button>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2 text-white">Tarik Dana (Bank)</h3>
+                            <input type="number" id="withdraw-amount" placeholder="Jumlah tarik" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 mb-3 text-white">
+                            <button onclick="handleWithdraw()" class="w-full bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2.5 rounded-lg">Tarik</button>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2 text-white">Tarik Dana (GoPay)</h3>
+                            <input type="tel" id="gopay-phone" placeholder="No. HP GoPay (08...)" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 mb-3 text-white">
+                            <input type="number" id="gopay-amount" placeholder="Jumlah tarik" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 mb-3 text-white">
+                            <button onclick="handleGopayWithdraw()" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2.5 rounded-lg">Tarik ke GoPay</button>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-6 text-center">Ini adalah simulasi. Tidak ada transaksi uang nyata yang terjadi.</p>
+                </div>
+            `;
+        }
+
+        function renderProfile() {
+             return `
+                <h1 class="text-3xl font-bold mb-6 text-white">Profil Saya</h1>
+                <div class="main-content-card max-w-md mx-auto">
+                    <h3 class="text-lg font-semibold mb-2 text-white">Ubah Nama Tampilan</h3>
+                    <p class="text-sm text-gray-400 mb-4">Nama Anda saat ini: <span class="font-bold text-indigo-400">${currentUser.name}</span></p>
+                    <input type="text" id="new-name-input" placeholder="Masukkan nama baru" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 mb-3 text-white">
+                    <button onclick="handleProfileUpdate()" class="w-full pro-button">Simpan Perubahan</button>
+                </div>
+            `;
+        }
+        
+        function renderAdminPanel() { 
+            return `
+                <h1 class="text-3xl font-bold mb-6 text-red-500">Panel Kontrol Admin</h1>
+                <div class="main-content-card mb-6">
+                    <h2 class="text-xl font-semibold mb-4 text-white">Aksi Global</h2>
+                    <div class="flex items-end gap-4">
+                        <div class="flex-1">
+                            <label for="broadcast-amount" class="text-sm text-gray-400">Jumlah Saldo</label>
+                            <input type="number" id="broadcast-amount" placeholder="e.g., 50000" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 mt-1 text-white">
+                        </div>
+                        <button onclick="handleBroadcastBalance()" class="pro-button">Bagi Saldo</button>
+                    </div>
+                </div>
+                <div id="player-list-container" class="space-y-4"></div>
+            `; 
+        }
+        function renderDevConsole() { return `<h1 class="text-3xl font-bold mb-6 text-cyan-400">Developer Console</h1><div class="main-content-card"><h2 class="text-lg font-bold text-gray-300 mb-2">Live Player Data State:</h2><pre id="dev-data-view" class="text-sm text-green-400 whitespace-pre-wrap overflow-x-auto h-96"></pre></div>`; }
+
+        // --- Logika Login & Logout & Setup ---
+        loginButton.addEventListener('click', () => {
+            const input = loginInput.value.trim();
+            if (input === '') { alert('Nama atau Kode tidak boleh kosong!'); return; }
+            let role = 'user';
+            let name = input.toLowerCase();
+            if (input === DEV_CODE) { role = 'dev'; name = 'Developer'; }
+            else if (input === ADMIN_CODE) { role = 'admin'; name = 'Admin'; }
+            currentUser = { name, role };
+            if (role === 'user') {
+                if (players[name]) {
+                    if (players[name].banned) { alert('Akun Anda telah diban oleh Admin!'); currentUser = null; return; }
+                } else {
+                    players[name] = { balance: 100000, banned: false };
+                }
+            }
+            setupDashboard();
+        });
+
+        logoutButton.addEventListener('click', () => {
+            currentUser = null;
+            dashboardLayout.classList.add('hidden');
+            loginSection.classList.remove('hidden');
+            loginInput.value = '';
+            chatContainer.classList.add('hidden');
+        });
+
+        function setupDashboard() {
+            headerUsername.textContent = currentUser.name;
+            if (currentUser.role === 'user') {
+                headerBalance.textContent = `Rp ${players[currentUser.name].balance.toLocaleString('id-ID')}`;
+            } else {
+                headerBalance.textContent = `Peran: ${currentUser.role}`;
+            }
+            let navLinks = `<a href="#" class="sidebar-link" data-page="dashboard" onclick="navigateTo('dashboard')"><svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg><span>Dasbor</span></a>`;
+            if (currentUser.role === 'user') {
+                navLinks += `
+                    <a href="#" class="sidebar-link" data-page="games" onclick="navigateTo('games')"><svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Permainan</span></a>
+                    <a href="#" class="sidebar-link" data-page="wallet" onclick="navigateTo('wallet')"><svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg><span>Dompet</span></a>
+                    <a href="#" class="sidebar-link" data-page="profile" onclick="navigateTo('profile')"><svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg><span>Profil</span></a>`;
+            }
+            if (currentUser.role === 'admin') { navLinks += `<a href="#" class="sidebar-link" data-page="admin_panel" onclick="navigateTo('admin_panel')"><svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21a6 6 0 00-9-5.197M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg><span>Admin Panel</span></a>`; }
+            if (currentUser.role === 'dev') { navLinks += `<a href="#" class="sidebar-link" data-page="dev_console" onclick="navigateTo('dev_console')"><svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg><span>Dev Console</span></a>`; }
+            sidebarNav.innerHTML = navLinks;
+            loginSection.classList.add('hidden');
+            dashboardLayout.classList.remove('hidden');
+            chatContainer.classList.remove('hidden');
+            openChatButton.classList.add('hidden');
+            chatWindow.classList.remove('hidden', 'minimized');
+            navigateTo('dashboard');
+        }
+        
+        // --- Logika Fitur (Dompet, Profil, Admin, Dev) ---
+        window.handleDeposit = function() { const amount = parseInt(document.getElementById('deposit-amount').value); if(isNaN(amount) || amount <= 0) { alert('Jumlah tidak valid.'); return; } players[currentUser.name].balance += amount; navigateTo('wallet'); updateHeaderBalance(); }
+        window.handleWithdraw = function() { const amount = parseInt(document.getElementById('withdraw-amount').value); if(isNaN(amount) || amount <= 0) { alert('Jumlah tidak valid.'); return; } if(amount > players[currentUser.name].balance) { alert('Saldo tidak mencukupi.'); return; } players[currentUser.name].balance -= amount; navigateTo('wallet'); updateHeaderBalance(); }
+        window.handleGopayWithdraw = function() {
+            const phone = document.getElementById('gopay-phone').value;
+            const amount = parseInt(document.getElementById('gopay-amount').value);
+            if (!phone || !/^[0-9]{10,13}$/.test(phone)) { alert('Nomor GoPay tidak valid.'); return; }
+            if (isNaN(amount) || amount <= 0) { alert('Jumlah tidak valid.'); return; }
+            if (amount > players[currentUser.name].balance) { alert('Saldo tidak mencukupi.'); return; }
+            players[currentUser.name].balance -= amount;
+            alert(`Sukses! Sejumlah Rp ${amount.toLocaleString('id-ID')} telah dikirim ke GoPay nomor ${phone}.`);
+            navigateTo('wallet');
+            updateHeaderBalance();
+        }
+        window.handleProfileUpdate = function() { const newName = document.getElementById('new-name-input').value.trim().toLowerCase(); if(newName === '' || newName === currentUser.name) { alert('Nama tidak valid atau sama dengan nama saat ini.'); return; } if(players[newName]) { alert('Nama sudah digunakan oleh pemain lain.'); return; } players[newName] = players[currentUser.name]; delete players[currentUser.name]; currentUser.name = newName; headerUsername.textContent = newName; navigateTo('profile'); }
+        function updateHeaderBalance() { if (currentUser.role === 'user') { headerBalance.textContent = `Rp ${players[currentUser.name].balance.toLocaleString('id-ID')}`; } }
+        
+        function renderAdminPlayerList() { /* ... logika admin ... */ }
+        window.handleBroadcastBalance = function() {
+            const amount = parseInt(document.getElementById('broadcast-amount').value);
+            if (isNaN(amount) || amount <= 0) { alert('Jumlah tidak valid.'); return; }
+            Object.keys(players).forEach(playerName => {
+                players[playerName].balance += amount;
+            });
+            alert(`Sukses! Saldo sebesar Rp ${amount.toLocaleString('id-ID')} telah dibagikan ke semua pemain.`);
+            renderAdminPlayerList();
+        }
+        function renderDevDataView() { document.getElementById('dev-data-view').textContent = JSON.stringify({ players, currentUser, chatMessages }, null, 2); }
+
+        // --- Logika Game ---
+        function createGameCard(id, title, description, multiplier) {
+            const betInputId = `bet-input-${id}`;
+            const potentialWinId = `potential-win-${id}`;
+            const playButtonId = `play-button-${id}`;
+            return `
+                <div class="main-content-card card flex flex-col">
+                    <h3 class="text-xl font-bold text-indigo-400">${title}</h3>
+                    <p class="text-gray-400 text-sm mb-4">${description}</p>
+                    <div class="mt-auto space-y-3">
+                        <div>
+                            <label for="${betInputId}" class="text-xs text-gray-400">Jumlah Taruhan</label>
+                            <input type="number" id="${betInputId}" value="1000" min="1000" step="1000" oninput="validateBet(this, '${playButtonId}', '${potentialWinId}', ${multiplier})" class="w-full bg-gray-900 border border-gray-600 rounded-lg px-3 py-1 text-white focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        <p id="${potentialWinId}" class="text-xs text-green-400 h-4">Potensi Menang: Rp ${(1000 * multiplier).toLocaleString('id-ID')}</p>
+                        <button id="${playButtonId}" onclick="playGame('${id}', '${betInputId}')" class="w-full pro-button">MAIN</button>
+                    </div>
+                </div>`;
+        }
+
+        window.validateBet = function(betInput, playButtonId, potentialWinId, multiplier) {
+            const betAmount = parseInt(betInput.value) || 0;
+            const playerBalance = players[currentUser.name].balance;
+            const playButton = document.getElementById(playButtonId);
+            const potentialWinEl = document.getElementById(potentialWinId);
+
+            if (betAmount > playerBalance || betAmount <= 0) {
+                betInput.classList.add('border-red-500');
+                betInput.classList.remove('border-gray-600');
+                playButton.disabled = true;
+                potentialWinEl.textContent = betAmount <= 0 ? 'Taruhan tidak valid' : 'Saldo tidak cukup!';
+                potentialWinEl.className = 'text-xs text-red-500 h-4';
+            } else {
+                betInput.classList.remove('border-red-500');
+                betInput.classList.add('border-gray-600');
+                playButton.disabled = false;
+                const potentialWin = betAmount * multiplier;
+                potentialWinEl.textContent = `Potensi Menang: Rp ${potentialWin.toLocaleString('id-ID')}`;
+                potentialWinEl.className = 'text-xs text-green-400 h-4';
+            }
+        }
+
+        function playGame(gameId, betInputId) {
+            const gameArea = document.getElementById('game-play-area');
+            const gameSelection = document.getElementById('game-selection');
+            const betAmount = parseInt(document.getElementById(betInputId).value);
+
+            if(isNaN(betAmount) || betAmount <= 0) { alert('Jumlah taruhan tidak valid.'); return; }
+            if (players[currentUser.name].balance < betAmount) { alert('Saldo tidak cukup untuk bermain!'); return; }
+            
+            gameSelection.classList.add('hidden');
+            gameArea.innerHTML = `<div class="main-content-card text-center flex justify-center items-center h-64"><span class="loader"></span></div>`;
+            
+            players[currentUser.name].balance -= betAmount;
+            updateHeaderBalance();
+            setTimeout(() => {
+                switch(gameId) {
+                    case 'pola-keberuntungan': renderPolaKeberuntungan(gameArea, betAmount); break;
+                    case 'slot-machine': renderSlotMachine(gameArea, betAmount); break;
+                    case 'high-low': renderHighLow(gameArea, betAmount); break;
+                    case 'coin-flip': renderCoinFlip(gameArea, betAmount); break;
+                    case 'survey': renderSurveyGame(gameArea, betAmount); break;
+                    case 'quiz': renderQuizGame(gameArea, betAmount); break;
+                }
+            }, 500);
+        }
+        
+        function renderGameResult(container, message, isWin, showBackButton = false) {
+            const resultEl = document.createElement('div');
+            resultEl.className = `text-center text-2xl font-bold my-4 ${isWin ? 'text-green-400' : 'text-red-500'}`;
+            resultEl.textContent = message;
+            container.prepend(resultEl);
+            if (showBackButton) {
+                const backButton = document.createElement('button');
+                backButton.textContent = 'Kembali ke Menu';
+                backButton.className = 'mt-6 bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg';
+                backButton.onclick = () => navigateTo('games');
+                container.appendChild(backButton);
+            }
+        }
+
+        function renderSurveyGame(container, betAmount) {
+            container.innerHTML = `
+                <div class="main-content-card text-center">
+                    <h2 class="text-2xl font-bold mb-6 game-title-flare">Survei Berhadiah</h2>
+                    <p class="text-lg text-gray-300 mb-4">Game apa yang ingin Anda lihat selanjutnya?</p>
+                    <div class="space-y-2 text-left max-w-xs mx-auto">
+                        <label class="flex items-center p-3 bg-gray-700 rounded-lg hover:bg-gray-600"><input type="radio" name="survey" class="mr-3"> Tembak Ikan</label>
+                        <label class="flex items-center p-3 bg-gray-700 rounded-lg hover:bg-gray-600"><input type="radio" name="survey" class="mr-3"> Poker</label>
+                        <label class="flex items-center p-3 bg-gray-700 rounded-lg hover:bg-gray-600"><input type="radio" name="survey" class="mr-3"> Lainnya</label>
+                    </div>
+                    <button onclick="handleSurveySubmit(${betAmount})" class="mt-6 pro-button">Kirim Jawaban</button>
+                </div>`;
+        }
+
+        window.handleSurveySubmit = function(betAmount) {
+            const winAmount = betAmount * 1.5;
+            players[currentUser.name].balance += winAmount;
+            updateHeaderBalance();
+            const container = document.getElementById('game-play-area');
+            container.innerHTML = `
+                <div class="main-content-card text-center">
+                    <h2 class="text-2xl font-bold mb-4 game-title-flare">Terima Kasih!</h2>
+                    <p class="text-3xl font-bold text-green-400">Anda mendapat hadiah Rp ${winAmount.toLocaleString('id-ID')}!</p>
+                    <button onclick="navigateTo('games')" class="mt-6 bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg">Kembali</button>
+                </div>`;
+        }
+
+        function renderQuizGame(container, betAmount) {
+            const question = quizQuestions[Math.floor(Math.random() * quizQuestions.length)];
+            let optionsHtml = question.options.map(option => 
+                `<button onclick="handleQuizAnswer(this, '${option}', '${question.answer}', ${betAmount})" class="w-full bg-gray-700 hover:bg-gray-600 text-white font-semibold p-3 rounded-lg transition-colors">${option}</button>`
+            ).join('');
+
+            container.innerHTML = `
+                <div class="main-content-card text-center">
+                    <h2 class="text-2xl font-bold mb-6 game-title-flare">Kuis Umum</h2>
+                    <p class="text-lg text-gray-300 mb-6">${question.question}</p>
+                    <div id="quiz-options" class="space-y-3 max-w-md mx-auto">${optionsHtml}</div>
+                    <div id="quiz-result" class="h-12 mt-4"></div>
+                </div>`;
+        }
+        
+        window.handleQuizAnswer = function(buttonEl, selected, correct, betAmount) {
+            const optionsContainer = document.getElementById('quiz-options');
+            Array.from(optionsContainer.children).forEach(button => button.disabled = true);
+            
+            const resultContainer = document.getElementById('quiz-result');
+            let winAmount = 0;
+            if (selected === correct) {
+                winAmount = betAmount * 3;
+                buttonEl.classList.remove('bg-gray-700');
+                buttonEl.classList.add('bg-green-500');
+                renderGameResult(resultContainer, `BENAR! Menang Rp ${winAmount.toLocaleString('id-ID')}`, true, true);
+            } else {
+                buttonEl.classList.remove('bg-gray-700');
+                buttonEl.classList.add('bg-red-500');
+                renderGameResult(resultContainer, `SALAH! Jawaban yang benar adalah ${correct}`, false, true);
+            }
+            players[currentUser.name].balance += winAmount;
+            updateHeaderBalance();
+        }
+
+        // --- Logika Chat ---
+        openChatButton.addEventListener('click', () => {
+            chatWindow.classList.remove('hidden');
+            openChatButton.classList.add('hidden');
+        });
+        closeChatButton.addEventListener('click', () => {
+            chatWindow.classList.add('hidden');
+            openChatButton.classList.remove('hidden');
+        });
+        minimizeChatButton.addEventListener('click', () => {
+            chatWindow.classList.toggle('minimized');
+        });
+        chatHeader.addEventListener('click', (e) => {
+            // Allow clicking header to maximize if minimized, but not if clicking buttons
+            if (e.target === chatHeader || e.target === chatHeader.querySelector('h3')) {
+                if (chatWindow.classList.contains('minimized')) {
+                    chatWindow.classList.remove('minimized');
+                }
+            }
+        });
+        sendChatButton.addEventListener('click', handleSendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSendMessage();
+        });
+
+        function handleSendMessage() {
+            const messageText = chatInput.value.trim();
+            if (messageText === '') return;
+            
+            const message = {
+                sender: currentUser.name,
+                role: currentUser.role,
+                text: messageText,
+                timestamp: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+            };
+            chatMessages.push(message);
+            chatInput.value = '';
+            renderChatMessages();
+        }
+
+        function renderChatMessages() {
+            chatMessagesEl.innerHTML = '';
+            chatMessages.forEach(msg => {
+                const isAdmin = msg.role === 'admin';
+                const isDev = msg.role === 'dev';
+                const isCurrentUser = msg.sender === currentUser.name;
+                
+                let senderClass = 'font-bold text-white';
+                if (isAdmin) senderClass = 'font-bold text-red-500';
+                if (isDev) senderClass = 'font-bold text-cyan-400';
+
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `flex flex-col ${isCurrentUser ? 'items-end' : 'items-start'}`;
+                
+                msgDiv.innerHTML = `
+                    <div class="text-xs text-gray-400 ${isCurrentUser ? 'text-right' : 'text-left'}">
+                        <span class="${senderClass}">${msg.sender}</span>
+                        <span class="ml-2">${msg.timestamp}</span>
+                    </div>
+                    <div class="mt-1 px-4 py-2 rounded-lg max-w-xs ${isCurrentUser ? 'bg-indigo-600 text-white' : 'bg-gray-700'}">
+                        ${msg.text}
+                    </div>
+                `;
+                chatMessagesEl.appendChild(msgDiv);
+            });
+            chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+        }
+
+
+    </script>
+</body>
+</html>

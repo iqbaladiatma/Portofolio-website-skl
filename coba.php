@@ -1,6 +1,6 @@
 <?php
 $nama1 = "Rizky";
-$nama2 = "Rizky";“Program Interaktif Perkenalan Diri”.
+$nama2 = "Rizky";
 
 
 if ($nama1 == $nama2) {
