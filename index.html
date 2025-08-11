@@ -847,14 +847,37 @@
 
           <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
             <form id="contactForm" onsubmit="handleSubmit(event)" class="space-y-8" autocomplete="off">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <input type="text" name="name" required placeholder="Name" class="w-full px-6 py-4 rounded-full border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none">
-                <input type="email" name="email" required placeholder="Email" class="w-full px-6 py-4 rounded-full border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none">
-              </div>
-              <textarea name="message" required rows="6" placeholder="Message" class="w-full px-6 py-4 rounded-3xl border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none"></textarea>
-              <button type="submit" class="w-full px-8 py-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">Send Message</button>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <input type="text" name="name" required placeholder="Name" class="w-full px-6 py-4 rounded-full border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none">
+                    <input type="email" name="email" required placeholder="Email" class="w-full px-6 py-4 rounded-full border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none">
+                </div>
+                <textarea name="message" required rows="6" placeholder="Message" class="w-full px-6 py-4 rounded-3xl border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none"></textarea>
+                <button type="submit" class="w-full px-8 py-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">Send Message</button>
             </form>
-          </div>
+        </div>
+    
+        <script>
+            function handleSubmit(event) {
+                event.preventDefault(); // Mencegah form submit default
+                const form = document.getElementById('contactForm');
+                const formData = new FormData(form);
+                const name = formData.get('name');
+                const email = formData.get('email');
+                const message = formData.get('message');
+    
+                // Membuat pesan WhatsApp dengan data form
+                const waMessage = `Halo, saya ${name}. Email: ${email}. Pesan: ${message}`;
+                const encodedMessage = encodeURIComponent(waMessage);
+                const phoneNumber = '6281234567890'; // Ganti dengan nomor WhatsApp Anda
+                const waLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+    
+                // Mengarahkan ke WhatsApp
+                window.open(waLink, '_blank');
+    
+                // Opsional: Reset form setelah submit
+                form.reset();
+            }
+        </script>
         </div>
       </div>
     </section>
