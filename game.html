@@ -915,6 +915,15 @@
         screens.languageSelection.style.display = "flex";
       }
 
+      // Tampilkan pilihan mode (SP/MP) untuk kuis
+      function showQuizModeModal(type, title) {
+        currentQuizType = type;
+        currentQuizInfo = { title };
+        const modal = document.getElementById("quiz-mode-modal");
+        document.getElementById("quiz-mode-title").textContent = `${title} - Pilih Mode`;
+        modal.style.display = "flex";
+      }
+
       document.querySelectorAll(".level-btn").forEach((btn) => {
         btn.addEventListener("click", async (e) => {
           const level = e.target.dataset.level;
@@ -938,6 +947,38 @@
       document.getElementById("back-from-level").addEventListener("click", () => {
         screens.levelSelection.style.display = "none";
       });
+
+      // Handler tombol mode kuis (SP/MP)
+      (function wireQuizModeButtons() {
+        const sp = document.getElementById("quiz-mode-sp");
+        const mp = document.getElementById("quiz-mode-mp");
+        const back = document.getElementById("back-from-quiz-mode");
+        if (sp && mp && back) {
+          sp.addEventListener("click", () => {
+            document.getElementById("quiz-mode-modal").style.display = "none";
+            // Untuk kuis kustom, tampilkan daftar kuis, bukan level
+            if (currentQuizType === "custom") {
+              showScreen("customQuizLobby");
+              loadCustomQuizList();
+            } else {
+              showLevelSelectionModal("quiz-sp");
+            }
+          });
+          mp.addEventListener("click", () => {
+            document.getElementById("quiz-mode-modal").style.display = "none";
+            if (currentQuizType === "custom") {
+              // MP untuk kustom: pilih kuis terlebih dahulu lalu buat room
+              showScreen("customQuizLobby");
+              loadCustomQuizList(true); // true => kembali ke MP
+            } else {
+              showLevelSelectionModal("quiz-mp");
+            }
+          });
+          back.addEventListener("click", () => {
+            document.getElementById("quiz-mode-modal").style.display = "none";
+          });
+        }
+      })();
 
       document.querySelectorAll(".lang-btn").forEach((btn) => {
         btn.addEventListener("click", (e) => {
@@ -1104,14 +1145,207 @@
 
       // --- BERKARYA SENDIRI LOGIC ---
       function startBerkarya() {
-        // ... (Fungsi ini tetap sama seperti versi sebelumnya)
+        showScreen("gameContainer");
+        gameContent.innerHTML = `
+          <div class="card non-interactive rounded-lg p-6 w-full max-w-3xl mx-auto font-body">
+            <h2 class="text-3xl text-shadow text-white mb-4">Berkarya</h2>
+            <p class="mb-4">Tulis karya singkat (puisi/cerita) dan dapatkan masukan.</p>
+            <textarea id="berkarya-input" rows="8" class="w-full text-black border-4 border-black rounded-lg p-3" placeholder="Tulis karya kamu di sini..."></textarea>
+            <div class="flex gap-3 mt-4">
+              <button id="submit-berkarya" class="btn btn-primary">Kirim</button>
+              <button class="back-to-menu-btn btn btn-secondary">Menu</button>
+            </div>
+            <div id="berkarya-feedback" class="mt-4"></div>
+          </div>
+        `;
+        gameContent.querySelector(".back-to-menu-btn").addEventListener("click", exitToMainMenu);
+        document.getElementById("submit-berkarya").addEventListener("click", async () => {
+          const text = document.getElementById("berkarya-input").value.trim();
+          if (!text) return alert("Teks tidak boleh kosong.");
+          await saveBerkaryaResult(text);
+          document.getElementById("berkarya-feedback").innerHTML = `<p class="text-green-200">Karya tersimpan! Terus berkarya ✨</p>`;
+        });
       }
 
       // --- PERANG SASTRA LOGIC (BOTH SP & MP) ---
-      // ... (Semua fungsi Perang Sastra tetap sama seperti versi sebelumnya)
+      async function startPerangSastraSP(level) {
+        // Level hanya mempengaruhi panjang minimal
+        const minLen = level === "sulit" ? 80 : level === "sedang" ? 50 : 30;
+        const prompt = sastraPrompts[Math.floor(Math.random() * sastraPrompts.length)];
+        showScreen("gameContainer");
+        gameContent.innerHTML = `
+          <div class="card non-interactive rounded-lg p-6 w-full max-w-3xl mx-auto font-body">
+            <h2 class="text-3xl text-shadow text-white mb-4">Perang Sastra - Lawan AI</h2>
+            <p class="mb-2"><span class="font-semibold">Tema:</span> ${prompt}</p>
+            <p class="mb-4 text-sm opacity-90">Tulis karya minimal ${minLen} karakter.</p>
+            <textarea id="sastra-input" rows="8" class="w-full text-black border-4 border-black rounded-lg p-3" placeholder="Tulis karya kamu..."></textarea>
+            <div class="flex gap-3 mt-4">
+              <button id="submit-sastra" class="btn btn-primary">Kirim</button>
+              <button class="back-to-menu-btn btn btn-secondary">Menu</button>
+            </div>
+            <div id="sastra-result" class="mt-4"></div>
+          </div>
+        `;
+        gameContent.querySelector(".back-to-menu-btn").addEventListener("click", exitToMainMenu);
+        document.getElementById("submit-sastra").addEventListener("click", () => {
+          const text = document.getElementById("sastra-input").value.trim();
+          if (text.length < minLen) return alert("Masih terlalu singkat.");
+          // Penilaian sederhana: panjang + penggunaan tanda baca
+          const score = Math.min(100, Math.round(text.length / 2) + (text.match(/[,.!?]/g) || []).length * 3);
+          document.getElementById("sastra-result").innerHTML = `
+            <div class="bg-black/30 p-4 rounded-lg">
+              <p class="mb-2">Skor kreativitas: <span class="font-bold">${score}</span>/100</p>
+              <p class="text-yellow-200">AI: Karya yang emosional dengan diksi yang cukup kuat. Coba eksplorasi metafora yang lebih berani ✨</p>
+            </div>`;
+        });
+      }
 
       // --- Fix The Code ---
-      // ... (Semua fungsi Fix the Code tetap sama seperti versi sebelumnya)
+      function startFixTheCode(language, level) {
+        const tasks = {
+          JavaScript: {
+            mudah: {
+              desc: "Fungsi seharusnya mengembalikan penjumlahan a + b, namun tidak bekerja.",
+              code: "function add(a,b){\n  // TODO: perbaiki\n}"
+            },
+            sedang: {
+              desc: "Perbaiki bug loop yang tidak pernah berhenti.",
+              code: "let i=0;\nwhile(i<5){\n  console.log(i)\n  // TODO: increment i\n}"
+            },
+            sulit: {
+              desc: "Perbaiki error asynchronous fetch (hint: await).",
+              code: "async function load(){\n  const res = fetch('https://example.com');\n  const data = res.json();\n  return data\n}"
+            }
+          },
+          Python: {
+            mudah: { desc: "Fungsi balik string.", code: "def rev(s):\n    # TODO\n    pass" },
+            sedang: { desc: "Perbaiki pembagian integer.", code: "print(5/2)  # harus 2" },
+            sulit: { desc: "Perbaiki exception handling.", code: "try:\n    x=int('a')\nexcept:\n    print('ok')" }
+          },
+          Java: {
+            mudah: { desc: "Return jumlah.", code: "int add(int a,int b){ /* TODO */ }" },
+            sedang: { desc: "Perbaiki NPE.", code: "String s=null; System.out.println(s.length());" },
+            sulit: { desc: "Sinkronisasi thread.", code: "// TODO" }
+          },
+          "C++": {
+            mudah: { desc: "Perbaiki segfault akses array.", code: "int a[3]; a[3]=10;" },
+            sedang: { desc: "Memory leak.", code: "int* p=new int[10]; /* TODO: delete */" },
+            sulit: { desc: "Race condition.", code: "// TODO" }
+          }
+        };
+        const task = tasks[language]?.[level] || tasks.JavaScript.mudah;
+        showScreen("gameContainer");
+        gameContent.innerHTML = `
+          <div class=\"card non-interactive rounded-lg p-6 w-full max-w-4xl mx-auto font-body\">
+            <h2 class=\"text-3xl text-shadow text-white mb-2\">Fix The Code - ${language} (${level})</h2>
+            <p class=\"mb-4\">${task.desc}</p>
+            <pre class=\"bg-black/40 p-4 rounded-lg overflow-auto\"><code id=\"buggy-code\">${task.code.replace(/</g, "&lt;")}</code></pre>
+            <textarea id=\"solution\" rows=\"8\" class=\"w-full text-black border-4 border-black rounded-lg p-3 mt-4\" placeholder=\"Tulis solusi / jelaskan perbaikan yang kamu lakukan...\"></textarea>
+            <div class=\"flex gap-3 mt-4\">
+              <button id=\"submit-fix\" class=\"btn btn-primary\">Tandai Selesai</button>
+              <button class=\"back-to-menu-btn btn btn-secondary\">Menu</button>
+            </div>
+            <div id=\"fix-result\" class=\"mt-4\"></div>
+          </div>`;
+        gameContent.querySelector(".back-to-menu-btn").addEventListener("click", exitToMainMenu);
+        document.getElementById("submit-fix").addEventListener("click", async () => {
+          const sol = document.getElementById("solution").value.trim();
+          if (!sol) return alert("Tulis solusi atau perubahan yang kamu lakukan.");
+          const points = level === "sulit" ? 30 : level === "sedang" ? 20 : 10;
+          await saveFixCodeResult(level, points);
+          document.getElementById("fix-result").innerHTML = `<p class=\"text-green-200\">Bagus! +${points} poin ditambahkan.</p>`;
+        });
+      }
+
+      // --- Custom Quiz Lobby Loader ---
+      async function loadCustomQuizList(forMultiplayer = false) {
+        const container = document.getElementById("custom-quiz-list");
+        if (!container) return;
+        container.innerHTML = '<p class="text-center">Memuat daftar kuis...</p>';
+        try {
+          const qs = await getDocs(collection(db, "customQuizzes"));
+          if (qs.empty) {
+            container.innerHTML = '<p class="text-center font-body">Belum ada kuis kustom.</p>';
+            return;
+          }
+          container.innerHTML = "";
+          qs.forEach((d) => {
+            const q = d.data();
+            const item = document.createElement("div");
+            item.className = "p-4 rounded-lg bg-blue-800 flex items-center justify-between";
+            item.innerHTML = `<div><p class=\"font-bold\">${q.title}</p><p class=\"text-sm\">${q.id}</p></div><button class=\"btn btn-secondary text-sm\">Main</button>`;
+            item.querySelector("button").addEventListener("click", async () => {
+              if (forMultiplayer) {
+                // Buat room MP langsung dari kuis kustom
+                createQuizRoom(q.questions, q.title);
+              } else {
+                startQuiz("custom", q.id);
+              }
+            });
+            container.appendChild(item);
+          });
+        } catch (e) {
+          container.innerHTML = '<p class="text-center text-red-400 font-body">Gagal memuat daftar kuis.</p>';
+        }
+      }
+
+      // --- Quiz Multiplayer: Create/Join Room (sederhana) ---
+      async function createQuizRoom(questions, title) {
+        try {
+          const roomRef = await addDoc(collection(db, "quizRooms"), {
+            title,
+            host: currentUser.uid,
+            players: [currentUser.uid],
+            questions,
+            createdAt: serverTimestamp(),
+            started: false,
+          });
+          showQuizRoomLobby(roomRef.id, title, true);
+        } catch (e) {
+          alert("Gagal membuat room.");
+        }
+      }
+
+      function showQuizRoomLobby(roomId, title, isHost = false) {
+        showScreen("quizMpLobby");
+        document.getElementById("quiz-lobby-title").textContent = `Lobi Kuis - ${title}`;
+        const err = document.getElementById("quiz-lobby-error");
+        err.textContent = `Kode Room: ${roomId}`;
+        // Listener tombol di lobby
+        const createBtn = document.getElementById("create-quiz-room-btn");
+        const joinBtn = document.getElementById("join-quiz-room-btn");
+        const joinInput = document.getElementById("join-quiz-code-input");
+        if (createBtn) createBtn.disabled = true; // sudah di room
+        if (joinBtn) joinBtn.disabled = true;
+      }
+
+      // Wire tombol create/join ketika user membuka lobby tanpa room
+      (function wireQuizLobbyButtons() {
+        const createBtn = document.getElementById("create-quiz-room-btn");
+        const joinBtn = document.getElementById("join-quiz-room-btn");
+        const joinInput = document.getElementById("join-quiz-code-input");
+        if (createBtn && joinBtn && joinInput) {
+          createBtn.addEventListener("click", async () => {
+            // Default: generate soal literasi mudah ketika host langsung dari lobby
+            const qs = await generateQuizQuestions("literasi", "mudah");
+            if (qs) createQuizRoom(qs, "Kuis Literasi");
+          });
+          joinBtn.addEventListener("click", async () => {
+            const code = joinInput.value.trim();
+            if (!code) return;
+            try {
+              const snap = await getDoc(doc(db, "quizRooms", code));
+              if (!snap.exists()) return alert("Room tidak ditemukan");
+              // Tambah player
+              await updateDoc(doc(db, "quizRooms", code), { players: arrayUnion(currentUser.uid) });
+              const data = snap.data();
+              showQuizRoomLobby(code, data.title, false);
+            } catch (e) {
+              alert("Gagal gabung room.");
+            }
+          });
+        }
+      })();
 
       // --- UNIVERSAL EXIT BUTTON LOGIC ---
       function exitToMainMenu() {
