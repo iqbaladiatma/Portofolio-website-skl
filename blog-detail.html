@@ -136,14 +136,19 @@
             <span id="article-date" class="text-gray-500">15 Januari 2024</span>
           </div>
           
-          <h1 id="article-title" class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
+          <h1 id="article-title" class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-6 leading-tight">
             Memulai Perjalanan Sebagai Developer
           </h1>
           
-          <div id="article-tags" class="flex flex-wrap gap-2">
+          <div id="article-tags" class="flex flex-wrap gap-2 mb-8">
             <span class="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#programming</span>
             <span class="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#journey</span>
             <span class="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#learning</span>
+          </div>
+
+          <!-- Article Image -->
+          <div id="article-image-container" class="mb-8 rounded-2xl overflow-hidden shadow-lg">
+            <img id="article-image" src="" alt="" class="w-full h-64 md:h-80 lg:h-96 object-cover">
           </div>
         </div>
 
@@ -209,6 +214,115 @@
           <h3 class="text-2xl font-bold text-gray-800 mb-8">Artikel Terkait</h3>
           <div id="related-articles" class="grid md:grid-cols-2 gap-6">
             <!-- Related articles will be loaded here -->
+          </div>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="mt-16 border-t border-gray-200 pt-16" data-aos="fade-up" data-aos-delay="600">
+          <h3 class="text-2xl font-bold text-gray-800 mb-8">Komentar</h3>
+          
+          <!-- Comment Form -->
+          <div class="bg-gray-50 rounded-2xl p-6 mb-8">
+            <h4 class="text-lg font-semibold text-gray-800 mb-4">Tinggalkan Komentar</h4>
+            <form id="comment-form" class="space-y-4">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Nama</label>
+                  <input type="text" id="comment-name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Nama Anda" required>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                  <input type="email" id="comment-email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="email@example.com" required>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Komentar</label>
+                <textarea id="comment-message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" placeholder="Tulis komentar Anda di sini..." required></textarea>
+              </div>
+              <button type="submit" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                Kirim Komentar
+              </button>
+            </form>
+          </div>
+
+          <!-- Comments List -->
+          <div id="comments-list" class="space-y-6">
+            <!-- Sample Comments -->
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                  <span class="text-white font-bold text-lg">JD</span>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2 mb-2">
+                    <h5 class="font-semibold text-gray-800">John Doe</h5>
+                    <span class="text-sm text-gray-500">2 hari yang lalu</span>
+                  </div>
+                  <p class="text-gray-700 leading-relaxed">Artikel yang sangat inspiratif! Terima kasih sudah berbagi pengalaman dalam perjalanan menjadi developer. Sangat membantu untuk yang baru memulai seperti saya.</p>
+                  <div class="flex items-center space-x-4 mt-3">
+                    <button class="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors duration-300">
+                      👍 Suka (5)
+                    </button>
+                    <button class="text-gray-600 hover:text-gray-800 text-sm font-medium transition-colors duration-300">
+                      💬 Balas
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center">
+                  <span class="text-white font-bold text-lg">AS</span>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2 mb-2">
+                    <h5 class="font-semibold text-gray-800">Andi Setiawan</h5>
+                    <span class="text-sm text-gray-500">1 minggu yang lalu</span>
+                  </div>
+                  <p class="text-gray-700 leading-relaxed">Saya juga sedang dalam perjalanan yang sama. Artikel ini memberikan motivasi dan insight yang berharga. Keep sharing!</p>
+                  <div class="flex items-center space-x-4 mt-3">
+                    <button class="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors duration-300">
+                      👍 Suka (3)
+                    </button>
+                    <button class="text-gray-600 hover:text-gray-800 text-sm font-medium transition-colors duration-300">
+                      💬 Balas
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-red-500 rounded-full flex items-center justify-center">
+                  <span class="text-white font-bold text-lg">SR</span>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2 mb-2">
+                    <h5 class="font-semibold text-gray-800">Sari Rahayu</h5>
+                    <span class="text-sm text-gray-500">2 minggu yang lalu</span>
+                  </div>
+                  <p class="text-gray-700 leading-relaxed">Bagus sekali artikelnya! Bisa sharing lebih detail tentang resources yang digunakan untuk belajar programming?</p>
+                  <div class="flex items-center space-x-4 mt-3">
+                    <button class="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors duration-300">
+                      👍 Suka (7)
+                    </button>
+                    <button class="text-gray-600 hover:text-gray-800 text-sm font-medium transition-colors duration-300">
+                      💬 Balas
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Load More Comments -->
+          <div class="text-center mt-8">
+            <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all duration-300">
+              Muat Komentar Lainnya
+            </button>
           </div>
         </div>
       </div>

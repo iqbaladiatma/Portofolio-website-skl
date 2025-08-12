@@ -18,7 +18,8 @@ class BlogManager {
                 content: "Hari ini saya memutuskan untuk serius mendalami dunia programming. Perjalanan yang panjang dimulai dari langkah pertama ini. Saya mulai dengan mempelajari HTML, CSS, dan JavaScript. Setiap baris kode yang saya tulis adalah investasi untuk masa depan yang lebih baik.",
                 tags: ["programming", "journey", "learning"],
                 date: "2024-01-15",
-                excerpt: "Perjalanan seribu mil dimulai dari langkah pertama..."
+                excerpt: "Perjalanan seribu mil dimulai dari langkah pertama...",
+                image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 2,
@@ -27,7 +28,8 @@ class BlogManager {
                 content: "Memasuki usia 25 tahun, banyak hal yang berubah dalam hidup saya. Perspektif tentang kehidupan, karir, dan hubungan mulai berbeda. Saya belajar bahwa hidup bukan tentang mencapai tujuan secepat mungkin, tetapi tentang menikmati prosesnya.",
                 tags: ["reflection", "life", "growth"],
                 date: "2024-02-10",
-                excerpt: "Hidup adalah tentang perjalanan, bukan tujuan..."
+                excerpt: "Hidup adalah tentang perjalanan, bukan tujuan...",
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 3,
@@ -36,7 +38,8 @@ class BlogManager {
                 content: "Liburan ke Yogyakarta memberikan saya banyak inspirasi. Dari Malioboro yang ramai hingga ketenangan Candi Borobudur, setiap sudut kota ini menyimpan cerita. Saya belajar bahwa traveling bukan hanya tentang mengunjungi tempat baru, tetapi juga tentang menemukan diri sendiri.",
                 tags: ["travel", "yogyakarta", "culture"],
                 date: "2024-03-05",
-                excerpt: "Setiap perjalanan adalah kesempatan untuk tumbuh..."
+                excerpt: "Setiap perjalanan adalah kesempatan untuk tumbuh...",
+                image: "https://images.unsplash.com/photo-1539650116574-75c0c6d73c6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 4,
@@ -45,7 +48,8 @@ class BlogManager {
                 content: "Proyek pertama saya gagal total. Aplikasi yang saya buat tidak sesuai ekspektasi klien dan saya harus memulai dari awal. Namun, dari kegagalan ini saya belajar pentingnya komunikasi yang baik dan memahami kebutuhan pengguna dengan benar.",
                 tags: ["failure", "learning", "growth"],
                 date: "2024-03-20",
-                excerpt: "Kegagalan adalah guru terbaik dalam hidup..."
+                excerpt: "Kegagalan adalah guru terbaik dalam hidup...",
+                image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             },
             {
                 id: 5,
@@ -54,7 +58,8 @@ class BlogManager {
                 content: "Setelah berbulan-bulan belajar, akhirnya saya mulai nyaman dengan React.js. Library ini benar-benar mengubah cara saya membangun aplikasi web. Konsep component-based development membuat kode lebih terorganisir dan mudah di-maintain.",
                 tags: ["react", "javascript", "frontend"],
                 date: "2024-04-12",
-                excerpt: "React.js membuka dunia baru dalam pengembangan web..."
+                excerpt: "React.js membuka dunia baru dalam pengembangan web...",
+                image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
             }
         ];
         
@@ -355,44 +360,78 @@ class BlogManager {
         };
         
         const entryDiv = document.createElement('div');
-        entryDiv.className = 'journal-entry bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 border border-gray-100';
+        entryDiv.className = 'journal-entry bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 group cursor-pointer';
         entryDiv.dataset.entryId = entry.id;
         entryDiv.setAttribute('data-aos', 'fade-up');
         entryDiv.setAttribute('data-aos-delay', (index * 100).toString());
         
+        // Add click handler to entire card
+        entryDiv.addEventListener('click', () => {
+            this.readMore(entry.id);
+        });
+        
         entryDiv.innerHTML = `
-            <div class="flex items-start justify-between mb-4">
-                <div class="flex items-center space-x-3">
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${categoryColors[entry.category]}">
+            <!-- Article Image -->
+            <div class="relative h-64 overflow-hidden">
+                <img src="${entry.image || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'}" 
+                     alt="${entry.title}" 
+                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                     onerror="this.src='https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'">
+                
+                <!-- Category Badge -->
+                <div class="absolute top-4 left-4">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${categoryColors[entry.category]} backdrop-blur-sm bg-white/90">
                         ${categoryIcons[entry.category]} ${entry.category.charAt(0).toUpperCase() + entry.category.slice(1)}
                     </span>
-                    <span class="text-gray-500 text-sm">${this.formatDate(entry.date)}</span>
                 </div>
+                
+                <!-- Date Badge -->
+                <div class="absolute top-4 right-4">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-black/50 text-white backdrop-blur-sm">
+                        ${this.formatDate(entry.date)}
+                    </span>
+                </div>
+                
+                <!-- Gradient Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             
-            <h3 class="text-2xl font-bold text-gray-800 mb-4 hover:text-blue-600 transition-colors duration-300 cursor-pointer">
-                ${entry.title}
-            </h3>
-            
-            <p class="text-gray-600 leading-relaxed mb-6">
-                ${entry.excerpt}
-            </p>
-            
-            <div class="flex items-center justify-between">
-                <div class="flex flex-wrap gap-2">
-                    ${entry.tags.map(tag => `
-                        <span class="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
+            <!-- Article Content -->
+            <div class="p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-blue-600 transition-colors duration-300 line-clamp-2">
+                    ${entry.title}
+                </h3>
+                
+                <p class="text-gray-600 leading-relaxed mb-4 line-clamp-3">
+                    ${entry.excerpt}
+                </p>
+                
+                <!-- Tags -->
+                <div class="flex flex-wrap gap-2 mb-4">
+                    ${entry.tags.slice(0, 3).map(tag => `
+                        <span class="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs">
                             #${tag}
                         </span>
                     `).join('')}
+                    ${entry.tags.length > 3 ? `<span class="text-gray-500 text-xs">+${entry.tags.length - 3} lainnya</span>` : ''}
                 </div>
                 
-                <button onclick="blogManager.readMore(${entry.id})" class="text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-300 flex items-center space-x-1">
-                    <span>Baca Selengkapnya</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                </button>
+                <!-- Read More Button -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2 text-sm text-gray-500">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span>${this.getReadingTime(entry.content)} min baca</span>
+                    </div>
+                    
+                    <button onclick="event.stopPropagation(); blogManager.readMore(${entry.id})" class="text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-300 flex items-center space-x-1 group-hover:translate-x-1">
+                        <span>Baca</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
         `;
         
@@ -413,9 +452,17 @@ class BlogManager {
         const options = { 
             year: 'numeric', 
             month: 'long', 
-            day: 'numeric' 
+            day: 'numeric',
+            timeZone: 'Asia/Jakarta'
         };
         return new Date(dateString).toLocaleDateString('id-ID', options);
+    }
+    
+    getReadingTime(content) {
+        const wordsPerMinute = 200;
+        const words = content.trim().split(/\s+/).length;
+        const readingTime = Math.ceil(words / wordsPerMinute);
+        return readingTime;
     }
     
     scrollToSection(sectionId) {

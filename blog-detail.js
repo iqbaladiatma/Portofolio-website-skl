@@ -153,37 +153,34 @@ class BlogDetailManager {
         const article = this.entries.find(entry => entry.id === this.currentArticleId);
         
         if (!article) {
-            this.showNotification('Artikel tidak ditemukan!', 'error');
-            setTimeout(() => {
-                window.location.href = 'blog.html';
-            }, 2000);
+            document.getElementById('article-title').textContent = 'Artikel tidak ditemukan';
+            document.getElementById('article-content').textContent = 'Artikel yang Anda cari tidak dapat ditemukan.';
             return;
         }
         
         // Update page title
         document.getElementById('page-title').textContent = `${article.title} - Iqbal Adiatma`;
-        document.title = `${article.title} - Iqbal Adiatma`;
         
-        // Update meta description
-        const metaDesc = document.querySelector('meta[name="description"]');
-        if (metaDesc) {
-            metaDesc.content = article.excerpt;
+        // Update article content
+        document.getElementById('article-title').textContent = article.title;
+        document.getElementById('article-content').textContent = article.content;
+        document.getElementById('article-date').textContent = this.formatDate(article.date);
+        
+        // Update article image
+        const articleImage = document.getElementById('article-image');
+        const articleImageContainer = document.getElementById('article-image-container');
+        if (article.image) {
+            articleImage.src = article.image;
+            articleImage.alt = article.title;
+            articleImageContainer.style.display = 'block';
+        } else {
+            // Use default image if no image is provided
+            articleImage.src = 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
+            articleImage.alt = article.title;
+            articleImageContainer.style.display = 'block';
         }
         
-        // Load article content
-        this.displayArticle(article);
-        this.loadRelatedArticles(article);
-        this.setupNavigation(article);
-    }
-    
-    displayArticle(article) {
-        const categoryIcons = {
-            pemikiran: '💭',
-            perjalanan: '✈️',
-            teknologi: '💻',
-            kehidupan: '🌱'
-        };
-        
+        // Update category
         const categoryColors = {
             pemikiran: 'bg-blue-100 text-blue-800',
             perjalanan: 'bg-green-100 text-green-800',
@@ -191,16 +188,16 @@ class BlogDetailManager {
             kehidupan: 'bg-pink-100 text-pink-800'
         };
         
-        // Update category
+        const categoryIcons = {
+            pemikiran: '💭',
+            perjalanan: '✈️',
+            teknologi: '💻',
+            kehidupan: '🌱'
+        };
+        
         const categoryElement = document.getElementById('article-category');
-        categoryElement.textContent = `${categoryIcons[article.category]} ${article.category.charAt(0).toUpperCase() + article.category.slice(1)}`;
         categoryElement.className = `inline-flex items-center px-4 py-2 rounded-full text-sm font-medium ${categoryColors[article.category]}`;
-        
-        // Update date
-        document.getElementById('article-date').textContent = this.formatDate(article.date);
-        
-        // Update title
-        document.getElementById('article-title').textContent = article.title;
+        categoryElement.textContent = `${categoryIcons[article.category]} ${article.category.charAt(0).toUpperCase() + article.category.slice(1)}`;
         
         // Update tags
         const tagsContainer = document.getElementById('article-tags');
@@ -208,8 +205,8 @@ class BlogDetailManager {
             `<span class="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#${tag}</span>`
         ).join('');
         
-        // Update content
-        document.getElementById('article-content').textContent = article.content;
+        this.loadRelatedArticles(article);
+        this.initializeComments();
     }
     
     loadRelatedArticles(currentArticle) {
@@ -348,29 +345,115 @@ class BlogDetailManager {
             }, 1500);
         }
     }
-    
+
     formatDate(dateString) {
         const options = { 
             year: 'numeric', 
             month: 'long', 
-            day: 'numeric' 
+            day: 'numeric',
+            timeZone: 'Asia/Jakarta'
         };
         return new Date(dateString).toLocaleDateString('id-ID', options);
     }
-    
-    showNotification(message, type = 'info') {
-        const notification = document.createElement('div');
-        notification.className = `fixed top-4 right-4 z-50 px-6 py-4 rounded-lg shadow-lg transform transition-all duration-300 translate-x-full`;
-        
-        const colors = {
-            success: 'bg-green-500 text-white',
-            error: 'bg-red-500 text-white',
-            info: 'bg-blue-500 text-white'
+
+    initializeComments() {
+        const commentForm = document.getElementById('comment-form');
+        if (commentForm) {
+            commentForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.submitComment();
+            });
+        }
+    }
+
+    submitComment() {
+        const name = document.getElementById('comment-name').value;
+        const email = document.getElementById('comment-email').value;
+        const message = document.getElementById('comment-message').value;
+
+        if (!name || !email || !message) {
+            alert('Mohon lengkapi semua field!');
+            return;
+        }
+
+        // Create new comment object
+        const newComment = {
+            id: Date.now(),
+            articleId: this.currentArticleId,
+            name: name,
+            email: email,
+            message: message,
+            date: new Date().toISOString(),
+            likes: 0
         };
+
+        // Save comment to localStorage
+        this.saveComment(newComment);
+
+        // Add comment to UI
+        this.addCommentToUI(newComment);
+
+        // Clear form
+        document.getElementById('comment-form').reset();
+
+        // Show success message
+        this.showNotification('Komentar berhasil ditambahkan!', 'success');
+    }
+
+    saveComment(comment) {
+        let comments = JSON.parse(localStorage.getItem('blog_comments') || '[]');
+        comments.unshift(comment); // Add to beginning of array
+        localStorage.setItem('blog_comments', JSON.stringify(comments));
+    }
+
+    addCommentToUI(comment) {
+        const commentsList = document.getElementById('comments-list');
+        const initials = comment.name.split(' ').map(n => n[0]).join('').toUpperCase();
+        const colors = ['from-blue-500 to-purple-500', 'from-green-500 to-teal-500', 'from-pink-500 to-red-500', 'from-orange-500 to-yellow-500'];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+        const commentElement = document.createElement('div');
+        commentElement.className = 'bg-white rounded-xl p-6 shadow-sm border border-gray-100';
+        commentElement.innerHTML = `
+            <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-r ${randomColor} rounded-full flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">${initials}</span>
+                </div>
+                <div class="flex-1">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <h5 class="font-semibold text-gray-800">${comment.name}</h5>
+                        <span class="text-sm text-gray-500">Baru saja</span>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">${comment.message}</p>
+                    <div class="flex items-center space-x-4 mt-3">
+                        <button class="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors duration-300">
+                            👍 Suka (${comment.likes})
+                        </button>
+                        <button class="text-gray-600 hover:text-gray-800 text-sm font-medium transition-colors duration-300">
+                            💬 Balas
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        commentsList.insertBefore(commentElement, commentsList.firstChild);
+    }
+
+    showNotification(message, type = 'info') {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = `fixed top-4 right-4 z-50 px-6 py-4 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full`;
         
-        notification.classList.add(...colors[type].split(' '));
+        if (type === 'success') {
+            notification.className += ' bg-green-500 text-white';
+        } else if (type === 'error') {
+            notification.className += ' bg-red-500 text-white';
+        } else {
+            notification.className += ' bg-blue-500 text-white';
+        }
+        
         notification.textContent = message;
-        
         document.body.appendChild(notification);
         
         // Animate in
@@ -378,7 +461,7 @@ class BlogDetailManager {
             notification.classList.remove('translate-x-full');
         }, 100);
         
-        // Remove after 3 seconds
+        // Animate out and remove
         setTimeout(() => {
             notification.classList.add('translate-x-full');
             setTimeout(() => {
