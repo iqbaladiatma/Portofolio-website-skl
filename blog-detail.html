@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="icon" href="./dist/img/logofull.jpg">
+    <title id="page-title">Detail Artikel - Iqbal Adiatma</title>
+    <link href="src/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/input.css" />
+    <link rel="stylesheet" href="style.css">
+    <!-- ion icons link -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- Tailwind CSS CDN Link -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOC -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <meta name="description" content="Detail artikel jurnal pribadi Iqbal Adiatma">
+    <meta name="keywords" content="jurnal pribadi, blog, artikel, detail">
+    <meta name="author" content="Iqbal Adiatma">
+    <meta property="og:title" content="Detail Artikel - Iqbal Adiatma">
+    <meta property="og:description" content="Baca artikel lengkap dari jurnal pribadi">
+    <meta property="og:image" content="./dist/img/logofull.jpg">
+</head>
+<body class="bg-white">
+    <!-- Loader -->
+    <div id="loader" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
+        <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+    </div>
+
+    <!-- Navbar -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-500 backdrop-blur-md bg-white/10" id="navbar">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Mobile Navbar -->
+        <div class="md:hidden">
+          <div class="flex justify-between items-center py-4">
+            <!-- Logo Mobile -->
+            <div class="flex items-center">
+              <a href="index.html#home" class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                  <span class="text-white font-bold text-lg">IA</span>
+                </div>
+                <span class="text-white font-bold text-xl">Iqbal</span>
+              </a>
+            </div>
+
+            <!-- Burger Menu -->
+            <div id="burger" class="cursor-pointer p-2 rounded-lg hover:bg-white/10 transition-colors">
+              <div class="w-6 h-6 flex flex-col justify-center items-center space-y-1">
+                <div id="line1" class="w-6 h-0.5 bg-white transform transition-all duration-300"></div>
+                <div id="line2" class="w-6 h-0.5 bg-white transform transition-all duration-300"></div>
+                <div id="line3" class="w-6 h-0.5 bg-white transform transition-all duration-300"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile Menu -->
+          <div class="nav-links fixed inset-x-0 top-full bg-white/95 backdrop-blur-lg border-t border-white/20 transform -translate-y-full opacity-0 transition-all duration-300 z-40">
+            <div class="px-4 py-6 space-y-4">
+              <a href="index.html#home" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">🏠 Beranda</a>
+              <a href="index.html#about" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">👤 Tentang</a>
+              <a href="index.html#skills" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">⚡ Keahlian</a>
+              <a href="index.html#journey" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">🚀 Perjalanan</a>
+              <a href="index.html#portfolio" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">💼 Proyek</a>
+              <a href="blog.html" class="block py-3 px-4 text-blue-600 bg-blue-50 rounded-lg transition-all duration-300 font-medium">📝 Jurnal</a>
+              <a href="index.html#contact" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">📧 Kontak</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop Navbar -->
+        <div class="hidden md:flex justify-between items-center py-4">
+          <div class="flex items-center">
+            <a href="index.html#home" class="flex items-center space-x-3 group">
+              <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <span class="text-white font-bold text-xl">IA</span>
+              </div>
+              <div>
+                <span class="text-white font-bold text-xl">Iqbal Adiatma</span>
+                <p class="text-blue-200 text-sm">Full Stack Developer</p>
+              </div>
+            </a>
+          </div>
+          
+          <div class="flex items-center space-x-8">
+            <a href="index.html#home" class="text-white hover:text-blue-300 transition-all duration-300 font-medium relative group">
+              Beranda
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="index.html#about" class="text-white hover:text-blue-300 transition-all duration-300 font-medium relative group">
+              Tentang
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="index.html#skills" class="text-white hover:text-blue-300 transition-all duration-300 font-medium relative group">
+              Keahlian
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="index.html#journey" class="text-white hover:text-blue-300 transition-all duration-300 font-medium relative group">
+              Perjalanan
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="index.html#portfolio" class="text-white hover:text-blue-300 transition-all duration-300 font-medium relative group">
+              Proyek
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="blog.html" class="text-blue-300 border-b-2 border-blue-400 transition-all duration-300 font-medium relative group">
+              Jurnal
+            </a>
+            <a href="index.html#contact" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-lg">
+              Kontak
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Article Detail Section -->
+    <section class="pt-32 pb-20 bg-white min-h-screen">
+      <div class="max-w-4xl mx-auto px-4">
+        <!-- Back Button -->
+        <div class="mb-8" data-aos="fade-up">
+          <a href="blog.html" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors duration-300">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            Kembali ke Jurnal
+          </a>
+        </div>
+
+        <!-- Article Header -->
+        <div class="mb-12" data-aos="fade-up" data-aos-delay="100">
+          <div class="flex items-center space-x-4 mb-6">
+            <span id="article-category" class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+              💻 Teknologi
+            </span>
+            <span id="article-date" class="text-gray-500">15 Januari 2024</span>
+          </div>
+          
+          <h1 id="article-title" class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
+            Memulai Perjalanan Sebagai Developer
+          </h1>
+          
+          <div id="article-tags" class="flex flex-wrap gap-2">
+            <span class="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#programming</span>
+            <span class="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#journey</span>
+            <span class="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#learning</span>
+          </div>
+        </div>
+
+        <!-- Admin Controls -->
+        <div id="admin-controls" class="hidden mb-8" data-aos="fade-up" data-aos-delay="200">
+          <div class="bg-gray-50 rounded-lg p-4 flex items-center justify-between">
+            <span class="text-gray-600 font-medium">Panel Admin</span>
+            <div class="flex gap-3">
+              <button id="edit-article-btn" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center space-x-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                </svg>
+                <span>Edit Artikel</span>
+              </button>
+              <button id="delete-article-btn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center space-x-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                </svg>
+                <span>Hapus Artikel</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Article Content -->
+        <div class="prose prose-lg max-w-none" data-aos="fade-up" data-aos-delay="300">
+          <div id="article-content" class="text-gray-700 leading-relaxed whitespace-pre-line">
+            Loading article content...
+          </div>
+        </div>
+
+        <!-- Article Navigation -->
+        <div class="mt-16 pt-8 border-t border-gray-200" data-aos="fade-up" data-aos-delay="400">
+          <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <div id="prev-article" class="hidden">
+              <a href="#" class="group flex items-center space-x-3 text-gray-600 hover:text-blue-600 transition-colors duration-300">
+                <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                <div>
+                  <p class="text-sm text-gray-500">Artikel Sebelumnya</p>
+                  <p class="font-medium">Judul Artikel Sebelumnya</p>
+                </div>
+              </a>
+            </div>
+            
+            <div id="next-article" class="hidden">
+              <a href="#" class="group flex items-center space-x-3 text-gray-600 hover:text-blue-600 transition-colors duration-300">
+                <div class="text-right">
+                  <p class="text-sm text-gray-500">Artikel Selanjutnya</p>
+                  <p class="font-medium">Judul Artikel Selanjutnya</p>
+                </div>
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Related Articles -->
+        <div class="mt-16" data-aos="fade-up" data-aos-delay="500">
+          <h3 class="text-2xl font-bold text-gray-800 mb-8">Artikel Terkait</h3>
+          <div id="related-articles" class="grid md:grid-cols-2 gap-6">
+            <!-- Related articles will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 transform transition-all duration-300">
+          <div class="text-center mb-6">
+            <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Admin Login</h3>
+            <p class="text-gray-600">Masukkan password untuk mengakses panel admin</p>
+          </div>
+          
+          <form id="admin-login-form">
+            <div class="mb-6">
+              <input type="password" id="admin-password" placeholder="Password Admin" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+            </div>
+            <div class="flex gap-3">
+              <button type="button" id="close-admin-modal" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold transition-all duration-300">
+                Batal
+              </button>
+              <button type="submit" class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 rounded-lg font-semibold transition-all duration-300">
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Entry Modal -->
+    <div id="entry-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div class="p-8">
+            <div class="flex justify-between items-center mb-6">
+              <h3 id="entry-modal-title" class="text-2xl font-bold text-gray-800">Edit Artikel</h3>
+              <button id="close-entry-modal" class="text-gray-400 hover:text-gray-600 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+            </div>
+            
+            <form id="entry-form">
+              <div class="mb-4">
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Judul</label>
+                <input type="text" id="entry-title" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+              </div>
+              
+              <div class="mb-4">
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Kategori</label>
+                <select id="entry-category" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                  <option value="">Pilih Kategori</option>
+                  <option value="pemikiran">💭 Pemikiran</option>
+                  <option value="perjalanan">✈️ Perjalanan</option>
+                  <option value="teknologi">💻 Teknologi</option>
+                  <option value="kehidupan">🌱 Kehidupan</option>
+                </select>
+              </div>
+              
+              <div class="mb-4">
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Konten</label>
+                <textarea id="entry-content" rows="8" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" placeholder="Tulis isi jurnal di sini..." required></textarea>
+              </div>
+              
+              <div class="mb-6">
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Tags (opsional)</label>
+                <input type="text" id="entry-tags" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Pisahkan dengan koma, contoh: coding, javascript, web">
+              </div>
+              
+              <div class="flex gap-3">
+                <button type="button" id="cancel-entry" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold transition-all duration-300">
+                  Batal
+                </button>
+                <button type="submit" class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 rounded-lg font-semibold transition-all duration-300">
+                  Simpan
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="grid md:grid-cols-3 gap-8">
+          <div data-aos="fade-up" data-aos-duration="1000">
+            <div class="flex items-center space-x-3 mb-6">
+              <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+                <span class="text-white font-bold text-xl">IA</span>
+              </div>
+              <div>
+                <span class="text-white font-bold text-xl">Iqbal Adiatma</span>
+                <p class="text-blue-200 text-sm">Full Stack Developer</p>
+              </div>
+            </div>
+            <p class="text-gray-300 leading-relaxed">
+              Jurnal pribadi tempat saya berbagi pemikiran, pengalaman, dan pembelajaran dalam perjalanan sebagai developer dan manusia.
+            </p>
+          </div>
+
+          <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+            <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+            <ul class="space-y-3">
+              <li><a href="index.html#home" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
+                <span class="w-1 h-1 bg-blue-400 rounded-full mr-3 group-hover:w-2 transition-all duration-300"></span>
+                Beranda
+              </a></li>
+              <li><a href="index.html#about" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
+                <span class="w-1 h-1 bg-blue-400 rounded-full mr-3 group-hover:w-2 transition-all duration-300"></span>
+                Tentang
+              </a></li>
+              <li><a href="index.html#portfolio" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
+                <span class="w-1 h-1 bg-blue-400 rounded-full mr-3 group-hover:w-2 transition-all duration-300"></span>
+                Proyek
+              </a></li>
+            </ul>
+          </div>
+
+          <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+            <h4 class="text-lg font-semibold mb-6">Contact Info</h4>
+            <ul class="space-y-3">
+              <li class="flex items-center text-gray-300">
+                <svg class="w-5 h-5 mr-3 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                Blora, Jawa Tengah
+              </li>
+              <li class="flex items-center text-gray-300">
+                <svg class="w-5 h-5 mr-3 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                iqbaladiatma@example.com
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+          <p class="text-gray-400 text-sm mb-4 md:mb-0">
+            © 2024 Iqbal Adiatma. All rights reserved. Made with ❤️ using modern web technologies.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-110 z-50 flex items-center justify-center group" data-aos="zoom-in" data-aos-delay="1000">
+      <svg class="w-6 h-6 group-hover:-translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+      </svg>
+    </button>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="blog-detail.js"></script>
+</body>
+</html>
