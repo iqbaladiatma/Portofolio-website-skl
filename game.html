@@ -103,7 +103,70 @@
     </style>
   </head>
   <body class="antialiased">
-    <div id="app" class="container mx-auto min-h-screen flex flex-col items-center justify-center">
+    <!-- Site Navbar (simplified from index.html) -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-500 backdrop-blur-md bg-white/10" id="navbar">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Mobile Navbar -->
+        <div class="md:hidden">
+          <div class="flex justify-between items-center py-4">
+            <!-- Logo Mobile -->
+            <div class="flex items-center">
+              <a href="index.html#home" class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                  <span class="text-white font-bold text-lg">IA</span>
+                </div>
+                <span class="text-white font-bold text-xl">EduGame</span>
+              </a>
+            </div>
+
+            <!-- Burger Menu -->
+            <div id="burger" class="cursor-pointer p-2 rounded-lg hover:bg-white/10 transition-colors">
+              <div class="w-6 h-6 flex flex-col justify-center items-center space-y-1">
+                <div id="line1" class="w-6 h-0.5 bg-white transform transition-all duration-300"></div>
+                <div id="line2" class="w-6 h-0.5 bg-white transform transition-all duration-300"></div>
+                <div id="line3" class="w-6 h-0.5 bg-white transform transition-all duration-300"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile Menu -->
+          <div class="nav-links fixed inset-x-0 top-full bg-white/95 backdrop-blur-lg border-t border-white/20 transform -translate-y-full opacity-0 transition-all duration-300 z-40">
+            <div class="px-4 py-6 space-y-4">
+              <a href="index.html#home" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">🏠 Beranda</a>
+              <a href="index.html#about" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">👤 Tentang</a>
+              <a href="index.html#portfolio" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">💼 Portfolio</a>
+              <a href="jurnal.html" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">📝 Jurnal</a>
+              <a href="index.html#contact" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">📧 Kontak</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop Navbar -->
+        <div class="hidden md:flex justify-between items-center py-4">
+          <div class="flex items-center">
+            <a href="index.html#home" class="flex items-center space-x-3 group">
+              <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <span class="text-white font-bold text-xl">IA</span>
+              </div>
+              <div>
+                <span class="text-white font-bold text-xl">Iqbal Adiatma</span>
+                <p class="text-blue-200 text-sm">Full Stack Developer</p>
+              </div>
+            </a>
+          </div>
+          <div class="flex items-center space-x-6">
+            <a href="index.html#home" class="text-white hover:text-blue-300 transition-all duration-300 font-medium">Beranda</a>
+            <a href="index.html#about" class="text-white hover:text-blue-300 transition-all duration-300 font-medium">Tentang</a>
+            <a href="index.html#portfolio" class="text-white hover:text-blue-300 transition-all duration-300 font-medium">Portfolio</a>
+            <a href="jurnal.html" class="text-white hover:text-blue-300 transition-all duration-300 font-medium">Jurnal</a>
+            <a href="index.html#contact" class="text-white hover:text-blue-300 transition-all duration-300 font-medium">Kontak</a>
+            <button id="open-login" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-full font-medium transition-all duration-300">Masuk</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div id="app" class="container mx-auto min-h-screen flex flex-col items-center justify-center pt-24">
       <!-- Universal Loading Screen -->
       <div id="loading-screen" class="fixed inset-0 z-50 flex-col items-center justify-center modal-backdrop hidden">
         <div id="loading-spinner"></div>
@@ -134,25 +197,23 @@
         </div>
       </div>
 
-      <!-- Auth Screen (Login/Register) -->
+      <!-- Auth Screen (Simple Login) -->
       <div id="auth-screen" class="screen w-full max-w-md text-center">
         <h1 class="text-5xl text-shadow text-white mb-4">EduGame</h1>
         <div class="card non-interactive rounded-lg p-6 w-full font-body">
-          <div class="flex border-b-4 border-black mb-4">
-            <button id="show-login-tab" class="flex-1 font-bold py-2 border-b-8 border-yellow-400">Login</button>
-            <button id="show-register-tab" class="flex-1 font-bold py-2 text-gray-300">Register</button>
-          </div>
+          <h2 class="text-2xl font-bold mb-6 text-white">Masuk ke Game</h2>
           <form id="login-form" class="space-y-4">
-            <input type="text" id="login-username" placeholder="Username" required class="w-full text-black border-4 border-black rounded-lg p-3 text-center" />
-            <input type="password" id="login-password" placeholder="Password" required class="w-full text-black border-4 border-black rounded-lg p-3 text-center" />
-            <button type="submit" class="w-full btn btn-primary">Login</button>
+            <input type="text" id="login-username" placeholder="Masukkan Username" required class="w-full text-black border-4 border-black rounded-lg p-3 text-center font-body" />
+            <input type="password" id="login-password" placeholder="Masukkan Password" required class="w-full text-black border-4 border-black rounded-lg p-3 text-center font-body" />
+            <button type="submit" class="w-full btn btn-primary">Masuk</button>
           </form>
-          <form id="register-form" class="space-y-4 hidden">
-            <input type="text" id="register-username" placeholder="Username (tanpa spasi)" required class="w-full text-black border-4 border-black rounded-lg p-3 text-center" />
-            <input type="email" id="register-email" placeholder="Email" required class="w-full text-black border-4 border-black rounded-lg p-3 text-center" />
-            <input type="password" id="register-password" placeholder="Password (min. 6 karakter)" required class="w-full text-black border-4 border-black rounded-lg p-3 text-center" />
-            <button type="submit" class="w-full btn btn-primary">Register</button>
-          </form>
+          <div class="mt-4 p-3 bg-blue-100 rounded-lg border-2 border-blue-300">
+            <p class="text-sm text-blue-800 font-body">
+              <strong>Demo Account:</strong><br>
+              Username: <code>demo</code><br>
+              Password: <code>demo123</code>
+            </p>
+          </div>
           <p id="auth-error" class="text-yellow-300 font-bold mt-4 h-5"></p>
         </div>
       </div>
@@ -353,7 +414,7 @@
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-      import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+      // Auth Firebase dihapus: kita pakai login sederhana username/password
       import {
         getFirestore,
         doc,
@@ -391,10 +452,9 @@
       const appId = "edugame-ai-local";
 
       const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
       const db = getFirestore(app);
 
-      let currentUser = null;
+      let currentUser = null; // { username: string, displayName?: string }
       let userData = null;
       let unsubscribeGameListener = null;
       let unsubscribeChat = null;
@@ -419,6 +479,58 @@
         quizMpLobby: document.getElementById("quiz-mp-lobby-screen"),
         customQuizLobby: document.getElementById("custom-quiz-lobby-screen"),
       };
+
+      // --- SIMPLE AUTH (USERNAME/PASSWORD LOCAL) ---
+      function showLoginModal(show = true) {
+        const modal = document.getElementById("simple-login-modal");
+        if (!modal) return;
+        modal.style.display = show ? "flex" : "none";
+      }
+
+      function initSimpleAuth() {
+        // load from localStorage
+        const saved = localStorage.getItem("edugameUser");
+        if (saved) {
+          currentUser = JSON.parse(saved);
+        }
+        const openBtn = document.getElementById("open-login");
+        if (openBtn) {
+          openBtn.addEventListener("click", () => {
+            if (currentUser) {
+              // logout
+              localStorage.removeItem("edugameUser");
+              currentUser = null;
+              updateHeaderUser();
+              alert("Berhasil keluar.");
+            } else {
+              showLoginModal(true);
+            }
+          });
+        }
+
+        const submitBtn = document.getElementById("login-submit");
+        const cancelBtn = document.getElementById("login-cancel");
+        submitBtn?.addEventListener("click", () => {
+          const u = document.getElementById("login-username").value.trim();
+          const p = document.getElementById("login-password").value.trim();
+          if (!u || !p) return alert("Isi username dan password.");
+          currentUser = { username: u };
+          localStorage.setItem("edugameUser", JSON.stringify(currentUser));
+          updateHeaderUser();
+          showLoginModal(false);
+        });
+        cancelBtn?.addEventListener("click", () => showLoginModal(false));
+
+        updateHeaderUser();
+      }
+
+      function updateHeaderUser() {
+        const btn = document.getElementById("open-login");
+        if (!btn) return;
+        btn.textContent = currentUser ? `Keluar (${currentUser.username})` : "Masuk";
+        const profileUid = document.getElementById("profile-uid");
+        if (profileUid && currentUser) profileUid.textContent = currentUser.username;
+      }
 
       const loginForm = document.getElementById("login-form");
       const registerForm = document.getElementById("register-form");
@@ -1294,8 +1406,8 @@
         try {
           const roomRef = await addDoc(collection(db, "quizRooms"), {
             title,
-            host: currentUser.uid,
-            players: [currentUser.uid],
+            host: currentUser?.username || "anon",
+            players: [currentUser?.username || "anon"],
             questions,
             createdAt: serverTimestamp(),
             started: false,
@@ -1337,7 +1449,7 @@
               const snap = await getDoc(doc(db, "quizRooms", code));
               if (!snap.exists()) return alert("Room tidak ditemukan");
               // Tambah player
-              await updateDoc(doc(db, "quizRooms", code), { players: arrayUnion(currentUser.uid) });
+              await updateDoc(doc(db, "quizRooms", code), { players: arrayUnion(currentUser?.username || "anon") });
               const data = snap.data();
               showQuizRoomLobby(code, data.title, false);
             } catch (e) {
@@ -1370,6 +1482,101 @@
       document.querySelectorAll(".back-to-menu-btn").forEach((btn) => {
         btn.addEventListener("click", exitToMainMenu);
       });
+
+      // Mobile Navigation Toggle
+      const navLinks = document.querySelector('.nav-links');
+      const burger = document.getElementById('burger');
+      const line1 = document.getElementById('line1');
+      const line2 = document.getElementById('line2');
+      const line3 = document.getElementById('line3');
+
+      function onToggleMenu(e) {
+        navLinks.classList.toggle('top-[100%]');
+        navLinks.classList.toggle('opacity-100');
+        navLinks.classList.toggle('-translate-y-full');
+        
+        line1.classList.toggle('rotate-45');
+        line1.classList.toggle('translate-y-2');
+        line2.classList.toggle('opacity-0');
+        line3.classList.toggle('-rotate-45');
+        line3.classList.toggle('-translate-y-2');
+      }
+
+      if (burger) {
+        burger.addEventListener('click', onToggleMenu);
+      }
+
+      // Close mobile menu when clicking on links
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.add('-translate-y-full');
+          navLinks.classList.remove('opacity-100');
+          navLinks.classList.remove('top-[100%]');
+          
+          line1.classList.remove('rotate-45', 'translate-y-2');
+          line2.classList.remove('opacity-0');
+          line3.classList.remove('-rotate-45', '-translate-y-2');
+        });
+      });
     </script>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-blue-900 to-purple-900 text-white py-8 mt-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- About Section -->
+          <div>
+            <div class="flex items-center space-x-3 mb-4">
+              <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-lg">IA</span>
+              </div>
+              <h3 class="text-xl font-bold">EduGame</h3>
+            </div>
+            <p class="text-blue-200 font-body leading-relaxed">
+              Platform game edukasi berbasis AI untuk pembelajaran yang menyenangkan dan interaktif.
+            </p>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+            <ul class="space-y-2 font-body">
+              <li><a href="index.html#home" class="text-blue-200 hover:text-white transition-colors">🏠 Beranda</a></li>
+              <li><a href="index.html#portfolio" class="text-blue-200 hover:text-white transition-colors">💼 Portfolio</a></li>
+              <li><a href="jurnal.html" class="text-blue-200 hover:text-white transition-colors">📝 Jurnal</a></li>
+              <li><a href="index.html#contact" class="text-blue-200 hover:text-white transition-colors">📧 Kontak</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h3 class="text-lg font-bold mb-4">Kontak</h3>
+            <div class="space-y-2 font-body text-blue-200">
+              <p>📧 iqbaladiatma@example.com</p>
+              <p>🌐 www.iqbaladiatma.com</p>
+              <div class="flex space-x-4 mt-4">
+                <a href="#" class="text-blue-200 hover:text-white transition-colors">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                  </svg>
+                </a>
+                <a href="#" class="text-blue-200 hover:text-white transition-colors">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="border-t border-blue-800 mt-8 pt-6 text-center">
+          <p class="text-blue-200 font-body">
+            © 2024 Iqbal Adiatma. All rights reserved. | Built with ❤️ for education
+          </p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

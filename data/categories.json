@@ -1,0 +1,34 @@
+[
+  {
+    "id": "pemikiran",
+    "name": "Pemikiran",
+    "description": "Refleksi mendalam tentang kehidupan, filosofi, dan ide-ide",
+    "icon": "🧠",
+    "color": "blue",
+    "count": 0
+  },
+  {
+    "id": "perjalanan",
+    "name": "Perjalanan",
+    "description": "Cerita petualangan, wisata, dan pengalaman di berbagai tempat",
+    "icon": "🌍",
+    "color": "green",
+    "count": 0
+  },
+  {
+    "id": "teknologi",
+    "name": "Teknologi",
+    "description": "Tutorial, tips, dan insight tentang dunia programming",
+    "icon": "💻",
+    "color": "purple",
+    "count": 0
+  },
+  {
+    "id": "kehidupan",
+    "name": "Kehidupan",
+    "description": "Cerita sehari-hari, pembelajaran hidup, dan motivasi",
+    "icon": "🌱",
+    "color": "orange",
+    "count": 0
+  }
+]

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurnal Pribadi - Iqbal Adiatma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+    <style>
+        .font-display { font-family: 'Playfair Display', serif; }
+        .font-body { font-family: 'Inter', sans-serif; }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .entry-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .entry-card:hover {
+            background: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
+            border-color: #cbd5e1;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+
+<body class="font-body bg-gray-50">
+    <!-- Navbar -->
+    <nav class="fixed w-full top-0 z-50 glass-effect">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Mobile Navbar -->
+            <div class="md:hidden">
+                <div class="flex justify-between items-center py-4">
+                    <div class="flex items-center">
+                        <a href="index.html#home" class="flex items-center space-x-2">
+                            <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
+                                <span class="text-white font-bold text-lg">IA</span>
+                            </div>
+                            <span class="text-white font-bold text-xl font-display">Jurnal</span>
+                        </a>
+                    </div>
+                    
+                    <div id="burger" class="cursor-pointer p-2 rounded-lg hover:bg-white/10 transition-colors">
+                        <div class="w-6 h-6 flex flex-col justify-center items-center space-y-1">
+                            <div id="line1" class="w-6 h-0.5 bg-white transform transition-all duration-300"></div>
+                            <div id="line2" class="w-6 h-0.5 bg-white transform transition-all duration-300"></div>
+                            <div id="line3" class="w-6 h-0.5 bg-white transform transition-all duration-300"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="nav-links fixed inset-x-0 top-full bg-white/95 backdrop-blur-lg border-t border-white/20 transform -translate-y-full opacity-0 transition-all duration-300 z-40">
+                    <div class="px-4 py-6 space-y-4">
+                        <a href="index.html#home" class="block py-3 px-4 text-gray-800 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all duration-300 font-medium">🏠 Beranda</a>
+                        <a href="index.html#about" class="block py-3 px-4 text-gray-800 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all duration-300 font-medium">👤 Tentang</a>
+                        <a href="index.html#portfolio" class="block py-3 px-4 text-gray-800 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all duration-300 font-medium">💼 Portfolio</a>
+                        <a href="game.html" class="block py-3 px-4 text-gray-800 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all duration-300 font-medium">🎮 Game</a>
+                        <a href="index.html#contact" class="block py-3 px-4 text-gray-800 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all duration-300 font-medium">📧 Kontak</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Desktop Navbar -->
+            <div class="hidden md:flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="index.html#home" class="flex items-center space-x-3 group">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <span class="text-white font-bold text-xl">IA</span>
+                        </div>
+                        <div>
+                            <span class="text-white font-bold text-xl font-display">Jurnal Pribadi</span>
+                            <p class="text-purple-200 text-sm">Catatan Perjalanan Hidup</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="flex items-center space-x-8">
+                    <a href="index.html#home" class="text-white hover:text-purple-300 transition-all duration-300 font-medium relative group">
+                        Beranda
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="index.html#about" class="text-white hover:text-purple-300 transition-all duration-300 font-medium relative group">
+                        Tentang
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="index.html#portfolio" class="text-white hover:text-purple-300 transition-all duration-300 font-medium relative group">
+                        Portfolio
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="game.html" class="text-white hover:text-purple-300 transition-all duration-300 font-medium relative group">
+                        Game
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="index.html#contact" class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        Kontak
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/20"></div>
+        
+        <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto" data-aos="fade-up">
+            <h1 class="text-6xl md:text-8xl font-display font-bold mb-6 leading-tight">
+                Jurnal <span class="gradient-text">Pribadi</span>
+            </h1>
+            <p class="text-xl md:text-2xl font-light mb-8 leading-relaxed opacity-90">
+                Catatan perjalanan hidup, pemikiran, dan refleksi dari seorang developer yang terus belajar
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <button onclick="scrollToEntries()" class="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    Mulai Membaca
+                </button>
+                <button id="admin-login-btn" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-purple-600 transition-all duration-300">
+                    Login Admin
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-20 bg-white" id="categories">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-display font-bold text-gray-800 mb-4">
+                    Kategori <span class="gradient-text">Jurnal</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Jelajahi berbagai aspek kehidupan melalui tulisan-tulisan yang terbagi dalam kategori berikut
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="category-card bg-gradient-to-br from-blue-500 to-blue-600 text-white p-8 rounded-2xl card-hover cursor-pointer" data-category="pemikiran" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl mb-4">🧠</div>
+                    <h3 class="text-2xl font-display font-bold mb-2">Pemikiran</h3>
+                    <p class="opacity-90">Refleksi mendalam tentang kehidupan, filosofi, dan ide-ide</p>
+                    <div class="mt-4 text-sm opacity-75" id="count-pemikiran">0 artikel</div>
+                </div>
+                
+                <div class="category-card bg-gradient-to-br from-green-500 to-green-600 text-white p-8 rounded-2xl card-hover cursor-pointer" data-category="perjalanan" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl mb-4">🌍</div>
+                    <h3 class="text-2xl font-display font-bold mb-2">Perjalanan</h3>
+                    <p class="opacity-90">Cerita petualangan, wisata, dan pengalaman di berbagai tempat</p>
+                    <div class="mt-4 text-sm opacity-75" id="count-perjalanan">0 artikel</div>
+                </div>
+                
+                <div class="category-card bg-gradient-to-br from-purple-500 to-purple-600 text-white p-8 rounded-2xl card-hover cursor-pointer" data-category="teknologi" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl mb-4">💻</div>
+                    <h3 class="text-2xl font-display font-bold mb-2">Teknologi</h3>
+                    <p class="opacity-90">Tutorial, tips, dan insight tentang dunia programming</p>
+                    <div class="mt-4 text-sm opacity-75" id="count-teknologi">0 artikel</div>
+                </div>
+                
+                <div class="category-card bg-gradient-to-br from-orange-500 to-orange-600 text-white p-8 rounded-2xl card-hover cursor-pointer" data-category="kehidupan" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-4xl mb-4">🌱</div>
+                    <h3 class="text-2xl font-display font-bold mb-2">Kehidupan</h3>
+                    <p class="opacity-90">Cerita sehari-hari, pembelajaran hidup, dan motivasi</p>
+                    <div class="mt-4 text-sm opacity-75" id="count-kehidupan">0 artikel</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Entries Section -->
+    <section class="py-20 bg-white" id="entries">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-display font-bold text-gray-900 mb-4">
+                    Catatan Terbaru
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Kumpulan pemikiran, perjalanan, dan pengalaman yang ingin saya bagikan
+                </p>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading-entries" class="text-center py-12">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+                <p class="mt-4 text-gray-600">Memuat artikel...</p>
+            </div>
+
+            <!-- Articles Grid -->
+            <div id="recent-articles" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Articles will be loaded here -->
+            </div>
+
+            <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="400">
+                <a href="all-jurnal.html" class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-lg inline-block">
+                    Lihat Semua Artikel
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-gray-900 to-purple-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">IA</span>
+                        </div>
+                        <h3 class="text-2xl font-display font-bold">Jurnal Pribadi</h3>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed">
+                        Tempat saya berbagi pemikiran, pengalaman, dan pembelajaran dalam perjalanan hidup sebagai seorang developer.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#home" class="text-gray-300 hover:text-white transition-colors">🏠 Beranda</a></li>
+                        <li><a href="index.html#about" class="text-gray-300 hover:text-white transition-colors">👤 Tentang</a></li>
+                        <li><a href="index.html#portfolio" class="text-gray-300 hover:text-white transition-colors">💼 Portfolio</a></li>
+                        <li><a href="game.html" class="text-gray-300 hover:text-white transition-colors">🎮 Game</a></li>
+                        <li><a href="index.html#contact" class="text-gray-300 hover:text-white transition-colors">📧 Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Kontak</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <p>📧 iqbaladiatma@example.com</p>
+                        <p>🌐 www.iqbaladiatma.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2024 Iqbal Adiatma. All rights reserved. | Built with ❤️ for sharing knowledge
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Mobile Navigation Toggle
+        const navLinks = document.querySelector('.nav-links');
+        const burger = document.getElementById('burger');
+        const line1 = document.getElementById('line1');
+        const line2 = document.getElementById('line2');
+        const line3 = document.getElementById('line3');
+
+        function onToggleMenu(e) {
+            navLinks.classList.toggle('top-[100%]');
+            navLinks.classList.toggle('opacity-100');
+            navLinks.classList.toggle('-translate-y-full');
+            
+            line1.classList.toggle('rotate-45');
+            line1.classList.toggle('translate-y-2');
+            line2.classList.toggle('opacity-0');
+            line3.classList.toggle('-rotate-45');
+            line3.classList.toggle('-translate-y-2');
+        }
+
+        if (burger) {
+            burger.addEventListener('click', onToggleMenu);
+        }
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.add('-translate-y-full');
+                navLinks.classList.remove('opacity-100');
+                navLinks.classList.remove('top-[100%]');
+                
+                line1.classList.remove('rotate-45', 'translate-y-2');
+                line2.classList.remove('opacity-0');
+                line3.classList.remove('-rotate-45', '-translate-y-2');
+            });
+        });
+
+        // Smooth scroll to entries
+        function scrollToEntries() {
+            document.getElementById('entries').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Admin functionality (simplified)
+        const adminLoginBtn = document.getElementById('admin-login-btn');
+        let isAdmin = false;
+
+        adminLoginBtn.addEventListener('click', () => {
+            const password = prompt('Masukkan password admin:');
+            if (password === 'admin123') {
+                isAdmin = true;
+                alert('Login berhasil! Anda sekarang dapat mengelola jurnal.');
+                adminLoginBtn.textContent = 'Admin Mode';
+                adminLoginBtn.style.backgroundColor = '#10b981';
+            } else if (password) {
+                alert('Password salah!');
+            }
+        });
+
+        // Load recent articles
+        async function loadRecentArticles() {
+            try {
+                // Try to load from JSON file first
+                let articles = [];
+                
+                try {
+                    const response = await fetch('./data/articles.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    articles = await response.json();
+                } catch (fetchError) {
+                    console.log('Fetching from JSON failed, trying localStorage:', fetchError);
+                    // Fallback to localStorage
+                    const savedArticles = localStorage.getItem('articles');
+                    if (savedArticles) {
+                        articles = JSON.parse(savedArticles);
+                    } else {
+                        // Create sample articles if no data exists
+                        articles = createSampleArticles();
+                        localStorage.setItem('articles', JSON.stringify(articles));
+                    }
+                }
+                
+                // Filter published articles and get latest 6
+                const publishedArticles = articles
+                    .filter(article => article.published)
+                    .sort((a, b) => new Date(b.date) - new Date(a.date))
+                    .slice(0, 6);
+                
+                renderRecentArticles(publishedArticles);
+                document.getElementById('loading-entries').style.display = 'none';
+            } catch (error) {
+                console.error('Error loading articles:', error);
+                document.getElementById('loading-entries').innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="text-red-600 mb-4">
+                            <p class="text-lg font-semibold">Error memuat artikel</p>
+                            <p class="text-sm">Silakan refresh halaman atau coba lagi nanti</p>
+                        </div>
+                        <button onclick="loadRecentArticles()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
+                            Coba Lagi
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Create sample articles for demo
+        function createSampleArticles() {
+            return [
+                {
+                    "id": "refleksi-perjalanan-programming",
+                    "title": "Refleksi Tentang Perjalanan Belajar Programming",
+                    "slug": "refleksi-perjalanan-programming",
+                    "excerpt": "Sudah hampir 3 tahun saya menekuni dunia programming. Banyak hal yang telah saya pelajari, tidak hanya tentang kode, tetapi juga tentang diri sendiri dan cara pandang terhadap problem solving.",
+                    "category": "pemikiran",
+                    "author": "Iqbal Adiatma",
+                    "date": "2024-08-13",
+                    "readTime": "8 min",
+                    "views": 1247,
+                    "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                    "tags": ["programming", "learning", "reflection", "developer"],
+                    "featured": true,
+                    "published": true,
+                    "content": "Perjalanan belajar programming adalah sebuah marathon, bukan sprint. Dalam 3 tahun terakhir, saya telah mengalami berbagai tantangan dan pencapaian yang membentuk cara saya memandang teknologi dan problem solving.\n\nSalah satu hal terpenting yang saya pelajari adalah bahwa programming bukan hanya tentang menulis kode, tetapi tentang memahami masalah dan mencari solusi yang efektif. Setiap bug yang saya temui, setiap error yang saya debug, telah mengajarkan saya untuk berpikir lebih sistematis dan sabar.\n\nKomunitas developer juga memainkan peran penting dalam perjalanan ini. Berbagi pengetahuan, bertanya, dan membantu sesama developer telah memperkaya pengalaman belajar saya."
+                },
+                {
+                    "id": "eksplorasi-kota-tua-jakarta",
+                    "title": "Eksplorasi Kota Tua Jakarta",
+                    "slug": "eksplorasi-kota-tua-jakarta",
+                    "excerpt": "Weekend kemarin saya menyempatkan diri untuk mengunjungi Kota Tua Jakarta. Tempat yang sarat dengan sejarah dan cerita masa lalu Indonesia.",
+                    "category": "perjalanan",
+                    "author": "Iqbal Adiatma",
+                    "date": "2024-08-10",
+                    "readTime": "5 min",
+                    "views": 892,
+                    "image": "https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                    "tags": ["jakarta", "sejarah", "wisata", "budaya"],
+                    "featured": false,
+                    "published": true,
+                    "content": "Kota Tua Jakarta menyimpan begitu banyak cerita sejarah yang menarik. Berjalan-jalan di area ini seperti melakukan perjalanan waktu ke masa kolonial Belanda.\n\nMuseum-museum yang ada di sini menyajikan koleksi yang sangat beragam, mulai dari artefak sejarah hingga karya seni tradisional. Arsitektur bangunan-bangunannya pun masih mempertahankan gaya kolonial yang khas.\n\nYang paling berkesan adalah suasana di alun-alun Fatahillah, di mana banyak seniman jalanan yang memamerkan karyanya dan wisatawan yang menikmati suasana nostalgia."
+                },
+                {
+                    "id": "tips-optimasi-website",
+                    "title": "Tips Optimasi Performance Website",
+                    "slug": "tips-optimasi-website",
+                    "excerpt": "Performance website adalah salah satu faktor terpenting dalam pengalaman pengguna. Berikut beberapa tips yang saya gunakan untuk mengoptimalkan website.",
+                    "category": "teknologi",
+                    "author": "Iqbal Adiatma",
+                    "date": "2024-08-07",
+                    "readTime": "6 min",
+                    "views": 1456,
+                    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                    "tags": ["web-development", "performance", "optimization", "tips"],
+                    "featured": true,
+                    "published": true,
+                    "content": "Optimasi performance website adalah kunci untuk memberikan pengalaman pengguna yang baik. Berikut beberapa teknik yang terbukti efektif:\n\n1. **Optimasi Gambar**: Gunakan format yang tepat (WebP untuk web modern) dan kompres gambar tanpa mengurangi kualitas visual.\n\n2. **Minifikasi CSS dan JavaScript**: Hapus whitespace dan karakter yang tidak perlu untuk mengurangi ukuran file.\n\n3. **Lazy Loading**: Muat konten hanya ketika diperlukan, terutama untuk gambar dan konten di bawah fold.\n\n4. **Caching**: Implementasikan caching yang efektif baik di sisi client maupun server.\n\nDengan menerapkan teknik-teknik ini, loading time website bisa berkurang hingga 50%."
+                }
+            ];
+        }
+
+        function renderRecentArticles(articles) {
+            const container = document.getElementById('recent-articles');
+            
+            container.innerHTML = articles.map((article, index) => `
+                <article class="entry-card rounded-2xl p-6 shadow-lg" data-aos="fade-up" data-aos-delay="${(index + 1) * 100}">
+                    <div class="mb-4">
+                        <img src="${article.image}" alt="${article.title}" class="w-full h-48 object-cover rounded-xl mb-4">
+                        <span class="inline-block px-3 py-1 ${getCategoryStyle(article.category)} text-sm font-medium rounded-full">
+                            ${getCategoryIcon(article.category)} ${getCategoryName(article.category)}
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-display font-semibold text-gray-900 mb-3">
+                        ${article.title}
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        ${article.excerpt.substring(0, 100)}...
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <span>📅 ${formatDate(article.date)}</span>
+                            <span class="mx-2">•</span>
+                            <span>⏱️ ${article.readTime}</span>
+                        </div>
+                        <a href="jurnal-detail.html?id=${article.id}" class="${getCategoryButtonStyle(article.category)} text-white px-4 py-2 rounded-lg font-medium transition-all duration-300">
+                            Baca
+                        </a>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function getCategoryStyle(category) {
+            const styles = {
+                'pemikiran': 'bg-blue-100 text-blue-800',
+                'perjalanan': 'bg-green-100 text-green-800',
+                'teknologi': 'bg-purple-100 text-purple-800',
+                'kehidupan': 'bg-orange-100 text-orange-800'
+            };
+            return styles[category] || 'bg-gray-100 text-gray-800';
+        }
+
+        function getCategoryButtonStyle(category) {
+            const styles = {
+                'pemikiran': 'bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700',
+                'perjalanan': 'bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700',
+                'teknologi': 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700',
+                'kehidupan': 'bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700'
+            };
+            return styles[category] || 'bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800';
+        }
+
+        function getCategoryIcon(category) {
+            const icons = {
+                'pemikiran': '🧠',
+                'perjalanan': '🌍',
+                'teknologi': '💻',
+                'kehidupan': '🌱'
+            };
+            return icons[category] || '📄';
+        }
+
+        function getCategoryName(category) {
+            const names = {
+                'pemikiran': 'Pemikiran',
+                'perjalanan': 'Perjalanan',
+                'teknologi': 'Teknologi',
+                'kehidupan': 'Kehidupan'
+            };
+            return names[category] || category;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('id-ID', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // Load articles on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadRecentArticles();
+        });
+
+        // Category interaction
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const category = card.dataset.category;
+                window.location.href = `all-jurnal.html?category=${category}`;
+            });
+        });
+    </script>
+</body>
+</html>

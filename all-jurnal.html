@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semua Artikel - Jurnal Iqbal Adiatma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .font-display { font-family: 'Playfair Display', serif; }
+        .font-body { font-family: 'Inter', sans-serif; }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .article-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e1;
+        }
+        
+        .category-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+
+<body class="font-body bg-gray-50">
+    <!-- Navbar -->
+    <nav class="fixed w-full top-0 z-50 glass-effect">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">IA</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-800 font-bold text-xl font-display">Semua Artikel</span>
+                        <p class="text-gray-500 text-sm">Jurnal Pribadi</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="jurnal.html" class="text-gray-700 hover:text-purple-600 font-medium">🏠 Beranda</a>
+                    <a href="index.html" class="text-gray-700 hover:text-purple-600 font-medium">🌐 Portfolio</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-4">
+                    Semua Artikel
+                </h1>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Koleksi lengkap catatan perjalanan, pemikiran, dan pengalaman hidup
+                </p>
+            </div>
+
+            <!-- Filter & Search -->
+            <div class="mb-8 flex flex-col md:flex-row gap-4 justify-between items-center">
+                <div class="flex flex-wrap gap-2">
+                    <button class="filter-btn active px-4 py-2 rounded-full text-sm font-medium transition-all" data-category="all">
+                        Semua
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all" data-category="pemikiran">
+                        🧠 Pemikiran
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all" data-category="perjalanan">
+                        🌍 Perjalanan
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all" data-category="teknologi">
+                        💻 Teknologi
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all" data-category="kehidupan">
+                        🌱 Kehidupan
+                    </button>
+                </div>
+                
+                <div class="relative">
+                    <input type="text" id="search-input" placeholder="Cari artikel..." 
+                           class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <div class="absolute left-3 top-2.5 text-gray-400">🔍</div>
+                </div>
+            </div>
+
+            <!-- Articles Grid -->
+            <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Articles will be loaded here -->
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading" class="text-center py-12">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+                <p class="mt-4 text-gray-600">Memuat artikel...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="text-center py-12 hidden">
+                <div class="text-6xl mb-4">📝</div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Tidak ada artikel ditemukan</h3>
+                <p class="text-gray-600">Coba ubah filter atau kata kunci pencarian</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span class="text-white font-bold text-2xl">IA</span>
+                </div>
+                <h3 class="text-xl font-display font-semibold mb-2">Iqbal Adiatma</h3>
+                <p class="text-gray-400 mb-6">Berbagi cerita dan pengalaman melalui tulisan</p>
+                
+                <div class="flex justify-center space-x-6">
+                    <a href="index.html" class="text-gray-300 hover:text-white transition-colors">Portfolio</a>
+                    <a href="jurnal.html" class="text-gray-300 hover:text-white transition-colors">Jurnal</a>
+                    <a href="game.html" class="text-gray-300 hover:text-white transition-colors">Game</a>
+                </div>
+                
+                <div class="border-t border-gray-700 mt-8 pt-8">
+                    <p class="text-gray-400">© 2024 Iqbal Adiatma. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let allArticles = [];
+        let filteredArticles = [];
+
+        // Load articles from JSON
+        async function loadArticles() {
+            try {
+                // Try to load from JSON file first
+                try {
+                    const response = await fetch('./data/articles.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    allArticles = await response.json();
+                } catch (fetchError) {
+                    console.log('Fetching from JSON failed, trying localStorage:', fetchError);
+                    // Fallback to localStorage
+                    const savedArticles = localStorage.getItem('articles');
+                    if (savedArticles) {
+                        allArticles = JSON.parse(savedArticles);
+                    } else {
+                        // Create sample articles if no data exists
+                        allArticles = createSampleArticles();
+                        localStorage.setItem('articles', JSON.stringify(allArticles));
+                    }
+                }
+                
+                // Sort by date (newest first)
+                allArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                // Filter only published articles
+                allArticles = allArticles.filter(article => article.published);
+                
+                filteredArticles = [...allArticles];
+                renderArticles();
+                
+                document.getElementById('loading').style.display = 'none';
+            } catch (error) {
+                console.error('Error loading articles:', error);
+                document.getElementById('loading').innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="text-red-600 mb-4">
+                            <p class="text-lg font-semibold">Error memuat artikel</p>
+                            <p class="text-sm">Silakan refresh halaman atau coba lagi nanti</p>
+                        </div>
+                        <button onclick="loadArticles()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
+                            Coba Lagi
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Create sample articles for demo
+        function createSampleArticles() {
+            return [
+                {
+                    "id": "refleksi-perjalanan-programming",
+                    "title": "Refleksi Tentang Perjalanan Belajar Programming",
+                    "slug": "refleksi-perjalanan-programming",
+                    "excerpt": "Sudah hampir 3 tahun saya menekuni dunia programming. Banyak hal yang telah saya pelajari, tidak hanya tentang kode, tetapi juga tentang diri sendiri dan cara pandang terhadap problem solving.",
+                    "category": "pemikiran",
+                    "author": "Iqbal Adiatma",
+                    "date": "2024-08-13",
+                    "readTime": "8 min",
+                    "views": 1247,
+                    "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                    "tags": ["programming", "learning", "reflection", "developer"],
+                    "featured": true,
+                    "published": true,
+                    "content": "Perjalanan belajar programming adalah sebuah marathon, bukan sprint. Dalam 3 tahun terakhir, saya telah mengalami berbagai tantangan dan pencapaian yang membentuk cara saya memandang teknologi dan problem solving."
+                },
+                {
+                    "id": "eksplorasi-kota-tua-jakarta",
+                    "title": "Eksplorasi Kota Tua Jakarta",
+                    "slug": "eksplorasi-kota-tua-jakarta",
+                    "excerpt": "Weekend kemarin saya menyempatkan diri untuk mengunjungi Kota Tua Jakarta. Tempat yang sarat dengan sejarah dan cerita masa lalu Indonesia.",
+                    "category": "perjalanan",
+                    "author": "Iqbal Adiatma",
+                    "date": "2024-08-10",
+                    "readTime": "5 min",
+                    "views": 892,
+                    "image": "https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                    "tags": ["jakarta", "sejarah", "wisata", "budaya"],
+                    "featured": false,
+                    "published": true,
+                    "content": "Kota Tua Jakarta menyimpan begitu banyak cerita sejarah yang menarik. Berjalan-jalan di area ini seperti melakukan perjalanan waktu ke masa kolonial Belanda."
+                },
+                {
+                    "id": "tips-optimasi-website",
+                    "title": "Tips Optimasi Performance Website",
+                    "slug": "tips-optimasi-website",
+                    "excerpt": "Performance website adalah salah satu faktor terpenting dalam pengalaman pengguna. Berikut beberapa tips yang saya gunakan untuk mengoptimalkan website.",
+                    "category": "teknologi",
+                    "author": "Iqbal Adiatma",
+                    "date": "2024-08-07",
+                    "readTime": "6 min",
+                    "views": 1456,
+                    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                    "tags": ["web-development", "performance", "optimization", "tips"],
+                    "featured": true,
+                    "published": true,
+                    "content": "Optimasi performance website adalah kunci untuk memberikan pengalaman pengguna yang baik. Berikut beberapa teknik yang terbukti efektif."
+                }
+            ];
+        }
+
+        // Render articles
+        function renderArticles() {
+            const grid = document.getElementById('articles-grid');
+            const emptyState = document.getElementById('empty-state');
+            
+            if (filteredArticles.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            
+            emptyState.classList.add('hidden');
+            
+            grid.innerHTML = filteredArticles.map(article => `
+                <article class="article-card">
+                    <div class="relative">
+                        <img src="${article.image}" alt="${article.title}" 
+                             class="w-full h-48 object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="category-badge ${getCategoryStyle(article.category)}">
+                                ${getCategoryIcon(article.category)} ${getCategoryName(article.category)}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span>📅 ${formatDate(article.date)}</span>
+                            <span class="mx-2">•</span>
+                            <span>⏱️ ${article.readTime}</span>
+                            <span class="mx-2">•</span>
+                            <span>👁️ ${article.views || 0}</span>
+                        </div>
+                        
+                        <h2 class="text-xl font-display font-semibold text-gray-900 mb-3 line-clamp-2">
+                            ${article.title}
+                        </h2>
+                        
+                        <p class="text-gray-600 mb-4 line-clamp-3">
+                            ${article.excerpt}
+                        </p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex flex-wrap gap-1">
+                                ${article.tags ? article.tags.slice(0, 2).map(tag => 
+                                    `<span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded">${tag}</span>`
+                                ).join('') : ''}
+                            </div>
+                            
+                            <a href="jurnal-detail.html?id=${article.id}" class="btn-primary text-sm">
+                                Baca Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // Filter functions
+        function filterArticles(category) {
+            if (category === 'all') {
+                filteredArticles = [...allArticles];
+            } else {
+                filteredArticles = allArticles.filter(article => article.category === category);
+            }
+            
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            if (searchTerm) {
+                filteredArticles = filteredArticles.filter(article => 
+                    article.title.toLowerCase().includes(searchTerm) ||
+                    article.excerpt.toLowerCase().includes(searchTerm) ||
+                    article.tags?.some(tag => tag.toLowerCase().includes(searchTerm))
+                );
+            }
+            
+            renderArticles();
+        }
+
+        function searchArticles() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const activeCategory = document.querySelector('.filter-btn.active').dataset.category;
+            
+            if (activeCategory === 'all') {
+                filteredArticles = [...allArticles];
+            } else {
+                filteredArticles = allArticles.filter(article => article.category === activeCategory);
+            }
+            
+            if (searchTerm) {
+                filteredArticles = filteredArticles.filter(article => 
+                    article.title.toLowerCase().includes(searchTerm) ||
+                    article.excerpt.toLowerCase().includes(searchTerm) ||
+                    article.tags?.some(tag => tag.toLowerCase().includes(searchTerm))
+                );
+            }
+            
+            renderArticles();
+        }
+
+        // Helper functions
+        function getCategoryStyle(category) {
+            const styles = {
+                'pemikiran': 'bg-blue-100 text-blue-800',
+                'perjalanan': 'bg-green-100 text-green-800',
+                'teknologi': 'bg-purple-100 text-purple-800',
+                'kehidupan': 'bg-orange-100 text-orange-800'
+            };
+            return styles[category] || 'bg-gray-100 text-gray-800';
+        }
+
+        function getCategoryIcon(category) {
+            const icons = {
+                'pemikiran': '🧠',
+                'perjalanan': '🌍',
+                'teknologi': '💻',
+                'kehidupan': '🌱'
+            };
+            return icons[category] || '📄';
+        }
+
+        function getCategoryName(category) {
+            const names = {
+                'pemikiran': 'Pemikiran',
+                'perjalanan': 'Perjalanan',
+                'teknologi': 'Teknologi',
+                'kehidupan': 'Kehidupan'
+            };
+            return names[category] || category;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('id-ID', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            loadArticles();
+            
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.remove('active', 'bg-purple-600', 'text-white');
+                        b.classList.add('bg-gray-200', 'text-gray-700');
+                    });
+                    
+                    this.classList.add('active', 'bg-purple-600', 'text-white');
+                    this.classList.remove('bg-gray-200', 'text-gray-700');
+                    
+                    filterArticles(this.dataset.category);
+                });
+            });
+            
+            // Search input
+            document.getElementById('search-input').addEventListener('input', searchArticles);
+            
+            // Initialize filter button styles
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.classList.contains('active')) {
+                    btn.classList.add('bg-purple-600', 'text-white');
+                } else {
+                    btn.classList.add('bg-gray-200', 'text-gray-700');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

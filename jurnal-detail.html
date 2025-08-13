@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refleksi Tentang Perjalanan Belajar Programming - Jurnal Pribadi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .font-display { font-family: 'Playfair Display', serif; }
+        .font-body { font-family: 'Inter', sans-serif; }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .article-content {
+            line-height: 1.8;
+            color: #374151;
+        }
+        
+        .article-content h1, .article-content h2, .article-content h3 {
+            font-family: 'Playfair Display', serif;
+            color: #1f2937;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .article-content h1 { font-size: 2.25rem; font-weight: 700; }
+        .article-content h2 { font-size: 1.875rem; font-weight: 600; }
+        .article-content h3 { font-size: 1.5rem; font-weight: 600; }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+            line-height: 1.8;
+        }
+        
+        .article-content blockquote {
+            border-left: 4px solid #667eea;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #6b7280;
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+            line-height: 1.7;
+        }
+        
+        .article-content code {
+            background: #f3f4f6;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9rem;
+            color: #dc2626;
+        }
+        
+        .article-content a {
+            color: #667eea;
+            text-decoration: underline;
+            text-decoration-color: rgba(102, 126, 234, 0.3);
+            text-underline-offset: 3px;
+        }
+        
+        .article-content a:hover {
+            text-decoration-color: #667eea;
+            color: #5a67d8;
+        }
+        
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+        
+        .article-content {
+            line-height: 1.8;
+            font-size: 1.125rem;
+        }
+        
+        .article-content h2 {
+            font-size: 1.875rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            color: #1f2937;
+        }
+        
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem 0;
+            color: #374151;
+        }
+        
+        .article-content p {
+            margin: 1.25rem 0;
+            color: #4b5563;
+        }
+        
+        .article-content blockquote {
+            border-left: 4px solid #667eea;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #6b7280;
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin: 1.25rem 0;
+            padding-left: 2rem;
+        }
+        
+        .article-content li {
+            margin: 0.5rem 0;
+            color: #4b5563;
+        }
+        
+        .toc-link {
+            transition: all 0.2s ease;
+        }
+        
+        .toc-link:hover {
+            color: #667eea;
+            transform: translateX(4px);
+        }
+        
+        .share-button {
+            transition: all 0.2s ease;
+        }
+        
+        .share-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .toc {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .author-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 3rem 0;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .related-article {
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .related-article:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e1;
+        }
+    </style>
+</head>
+
+<body class="font-body bg-white">
+    <div class="reading-progress"></div>
+    
+    <!-- Navbar -->
+    <nav class="fixed w-full top-0 z-50 glass-effect">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="hidden md:flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="jurnal.html" class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">IA</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-800 font-bold text-xl font-display">Jurnal Pribadi</span>
+                            <p class="text-gray-500 text-sm">Catatan Perjalanan Hidup</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="flex items-center space-x-8">
+                    <a href="index.html#home" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">Beranda</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">Tentang</a>
+                    <a href="index.html#portfolio" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">Portfolio</a>
+                    <span class="current-page text-purple-600 font-medium">Loading...</span>
+                    <a href="game.html" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">Game</a>
+                    <a href="jurnal.html" class="text-purple-600 font-medium">Jurnal</a>
+                    <a href="index.html#contact" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full font-medium transition-all duration-300">Kontak</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="pt-24 pb-12 bg-gradient-to-br from-gray-50 to-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="breadcrumb mb-8">
+                <ol class="flex items-center space-x-2 text-sm text-gray-500">
+                    <li><a href="jurnal.html" class="hover:text-purple-600">Jurnal</a></li>
+                    <li><span class="mx-2">/</span></li>
+                    <li><a href="jurnal.html?category=pemikiran" class="hover:text-purple-600">Pemikiran</a></li>
+                    <li><span class="mx-2">/</span></li>
+                    <li class="current-page text-gray-800">Loading...</li>
+                </ol>
+            </nav>
+            
+            <div class="article-header">
+                <div class="mb-6">
+                    <span class="category-badge inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
+                        📄 Loading...
+                    </span>
+                </div>
+                
+                <h1 class="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-6 leading-tight">
+                    Loading Article...
+                </h1>
+            </div>
+            
+            <p class="text-xl text-gray-600 leading-relaxed mb-8">
+                Sudah hampir 3 tahun saya menekuni dunia programming. Banyak hal yang telah saya pelajari, tidak hanya tentang kode, tetapi juga tentang diri sendiri dan cara pandang terhadap problem solving.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between py-6 border-t border-b border-gray-200">
+                <div class="flex items-center space-x-4 mb-4 sm:mb-0">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" 
+                         alt="Iqbal Adiatma" 
+                         class="w-12 h-12 rounded-full object-cover">
+                    <div>
+                        <p class="font-semibold text-gray-900">Iqbal Adiatma</p>
+                        <p class="text-sm text-gray-500">Full Stack Developer</p>
+                    </div>
+                </div>
+                
+                <div class="article-meta flex items-center space-x-6 text-sm text-gray-500">
+                    <span class="date">Loading...</span>
+                    <span class="read-time">Loading...</span>
+                    <span class="views">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
+            <article class="lg:col-span-3">
+                <div class="featured-image mb-8">
+                    <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="Loading..." 
+                         class="w-full h-64 md:h-80 object-cover rounded-lg shadow-lg">
+                    <p class="text-sm text-gray-500 mt-2 text-center italic">Loading...</p>
+                </div>
+                
+                <div class="toc">
+                    <h4 class="font-display text-lg font-semibold text-gray-800 mb-4">Daftar Isi</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#awal-perjalanan" class="text-gray-600 hover:text-purple-600">1. Awal Perjalanan</a></li>
+                        <li><a href="#tantangan-pertama" class="text-gray-600 hover:text-purple-600">2. Tantangan Pertama</a></li>
+                        <li><a href="#breakthrough-moment" class="text-gray-600 hover:text-purple-600">3. Breakthrough Moment</a></li>
+                        <li><a href="#pembelajaran-berkelanjutan" class="text-gray-600 hover:text-purple-600">4. Pembelajaran Berkelanjutan</a></li>
+                        <li><a href="#refleksi-masa-depan" class="text-gray-600 hover:text-purple-600">5. Refleksi dan Masa Depan</a></li>
+                    </ul>
+                </div>
+                
+                <div class="article-content">
+                    <p>Loading article content...</p>
+                </div>
+                
+                <div class="article-tags flex flex-wrap gap-2 mb-8">
+                    <span class="tag bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Loading...</span>
+                </div>
+                    
+                    <p>
+                        Keputusan untuk belajar programming dimulai dari rasa penasaran sederhana: "Bagaimana cara membuat website seperti ini?" Pertanyaan sederhana itu membawa saya ke rabbit hole yang sangat dalam dan menarik.
+                    </p>
+                    
+                    <blockquote>
+                        "The best time to plant a tree was 20 years ago. The second best time is now." - Chinese Proverb
+                    </blockquote>
+                    
+                    <p>
+                        Saya memulai dengan HTML dan CSS, dua bahasa yang terlihat sederhana di permukaan tetapi memiliki kedalaman yang luar biasa. Membuat layout pertama yang responsive terasa seperti magic. Melihat kode yang saya tulis berubah menjadi tampilan visual yang indah di browser memberikan kepuasan yang sulit dijelaskan.
+                    </p>
+                    
+                    <h2 id="tantangan-pertama">Tantangan Pertama</h2>
+                    
+                    <p>
+                        Setelah merasa nyaman dengan HTML dan CSS, saya memutuskan untuk belajar JavaScript. Di sinilah tantangan sebenarnya dimulai. Konsep seperti variables, functions, loops, dan objects yang terlihat sederhana di tutorial, ternyata sangat sulit untuk diterapkan dalam project nyata.
+                    </p>
+                    
+                    <ul>
+                        <li><strong>Debugging Hell:</strong> Menghabiskan berjam-jam untuk mencari satu semicolon yang hilang</li>
+                        <li><strong>Impostor Syndrome:</strong> Merasa tidak pantas berada di komunitas developer</li>
+                        <li><strong>Information Overload:</strong> Terlalu banyak framework dan library yang harus dipelajari</li>
+                        <li><strong>Tutorial Hell:</strong> Terjebak dalam siklus menonton tutorial tanpa praktik nyata</li>
+                    </ul>
+                    
+                    <h2 id="breakthrough-moment">Breakthrough Moment</h2>
+                    
+                    <p>
+                        Breakthrough moment saya terjadi ketika saya berhasil membuat project pertama yang benar-benar functional: sebuah todo app sederhana dengan fitur CRUD (Create, Read, Update, Delete). Project ini mungkin terlihat sepele bagi developer berpengalaman, tetapi bagi saya saat itu, ini adalah pencapaian yang luar biasa.
+                    </p>
+                    
+                    <h2 id="pembelajaran-berkelanjutan">Pembelajaran Berkelanjutan</h2>
+                    
+                    <p>
+                        Setelah breakthrough moment tersebut, saya menyadari bahwa programming adalah journey yang tidak pernah berakhir. Teknologi terus berkembang, framework baru bermunculan, dan best practices terus berevolusi.
+                    </p>
+                    
+                    <h2 id="refleksi-masa-depan">Refleksi dan Masa Depan</h2>
+                    
+                    <p>
+                        Melihat ke belakang, perjalanan 3 tahun ini telah mengubah saya secara fundamental. Programming tidak hanya memberikan saya skill teknis, tetapi juga mengajarkan saya patience, logical thinking, dan continuous learning mindset.
+                    </p>
+                </div>
+                
+                <!-- Author Card -->
+                <div class="author-card">
+                    <div class="flex items-center space-x-4">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" 
+                             alt="Iqbal Adiatma" 
+                             class="w-16 h-16 rounded-full object-cover">
+                        <div>
+                            <h3 class="font-display text-xl font-bold text-gray-900">Iqbal Adiatma</h3>
+                            <p class="text-gray-600 mb-2">Full Stack Developer</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Passionate developer yang suka berbagi pengalaman dan pembelajaran melalui tulisan. 
+                                Fokus pada web development dan selalu excited untuk belajar teknologi baru.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Share Section -->
+                <div class="border-t border-gray-200 pt-8">
+                    <h3 class="font-display text-lg font-semibold text-gray-900 mb-4">Bagikan Artikel</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                            📘 Facebook
+                        </a>
+                        <a href="#" class="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition-colors">
+                            🐦 Twitter
+                        </a>
+                        <a href="#" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
+                            📱 WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Sidebar -->
+            <aside class="lg:col-span-1">
+                <div class="sticky top-24 space-y-8">
+                    <!-- Related Articles -->
+                    <div>
+                        <h3 class="font-display text-lg font-semibold text-gray-900 mb-4">Artikel Terkait</h3>
+                        <div class="space-y-4">
+                            <article class="related-article rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2 leading-tight">
+                                    <a href="#" class="hover:text-purple-600">Tips Optimasi Performance Website</a>
+                                </h4>
+                                <p class="text-sm text-gray-600 mb-2">Performance website adalah salah satu faktor terpenting...</p>
+                                <span class="text-xs text-gray-500">7 Agustus 2024</span>
+                            </article>
+                            
+                            <article class="related-article rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2 leading-tight">
+                                    <a href="#" class="hover:text-purple-600">Eksplorasi Kota Tua Jakarta</a>
+                                </h4>
+                                <p class="text-sm text-gray-600 mb-2">Weekend kemarin saya menyempatkan diri untuk mengunjungi...</p>
+                                <span class="text-xs text-gray-500">10 Agustus 2024</span>
+                            </article>
+                        </div>
+                    </div>
+                    
+                    <!-- Categories -->
+                    <div>
+                        <h3 class="font-display text-lg font-semibold text-gray-900 mb-4">Kategori</h3>
+                        <div class="space-y-2">
+                            <a href="jurnal.html?category=pemikiran" class="block text-gray-600 hover:text-purple-600 transition-colors">🧠 Pemikiran (5)</a>
+                            <a href="jurnal.html?category=teknologi" class="block text-gray-600 hover:text-purple-600 transition-colors">💻 Teknologi (8)</a>
+                            <a href="jurnal.html?category=perjalanan" class="block text-gray-600 hover:text-purple-600 transition-colors">🌍 Perjalanan (3)</a>
+                            <a href="jurnal.html?category=kehidupan" class="block text-gray-600 hover:text-purple-600 transition-colors">🌱 Kehidupan (6)</a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Related Articles Section -->
+    <section class="related-articles py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-display font-bold text-gray-900 mb-8 text-center">Artikel Terkait</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Related articles will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-gray-900 to-purple-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">IA</span>
+                        </div>
+                        <h3 class="text-2xl font-display font-bold">Jurnal Pribadi</h3>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed">
+                        Tempat saya berbagi pemikiran, pengalaman, dan pembelajaran dalam perjalanan hidup sebagai seorang developer.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#home" class="text-gray-300 hover:text-white transition-colors">🏠 Beranda</a></li>
+                        <li><a href="index.html#about" class="text-gray-300 hover:text-white transition-colors">👤 Tentang</a></li>
+                        <li><a href="index.html#portfolio" class="text-gray-300 hover:text-white transition-colors">💼 Portfolio</a></li>
+                        <li><a href="game.html" class="text-gray-300 hover:text-white transition-colors">🎮 Game</a></li>
+                        <li><a href="jurnal.html" class="text-gray-300 hover:text-white transition-colors">📝 Jurnal</a></li>
+                        <li><a href="all-jurnal.html" class="text-gray-300 hover:text-white transition-colors">📚 Semua Artikel</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Kontak</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <p>📧 iqbaladiatma@example.com</p>
+                        <p>🌐 www.iqbaladiatma.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+                <p class="text-gray-400">
+                    &copy; 2024 Iqbal Adiatma. All rights reserved. | Built with &hearts; for sharing knowledge
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        let currentArticle = null;
+        let allArticles = [];
+
+        // Load article from JSON based on URL parameter
+        async function loadArticle() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = urlParams.get('id');
+            
+            if (!articleId) {
+                document.body.innerHTML = '<div class="min-h-screen flex items-center justify-center"><div class="text-center"><h1 class="text-2xl font-bold text-red-600 mb-4">Artikel tidak ditemukan</h1><a href="jurnal.html" class="text-purple-600 hover:underline">Kembali ke Jurnal</a></div></div>';
+                return;
+            }
+
+            try {
+                // Try to load from JSON file first
+                try {
+                    const response = await fetch('./data/articles.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    allArticles = await response.json();
+                } catch (fetchError) {
+                    console.log('Fetching from JSON failed, trying localStorage:', fetchError);
+                    // Fallback to localStorage
+                    const savedArticles = localStorage.getItem('articles');
+                    if (savedArticles) {
+                        allArticles = JSON.parse(savedArticles);
+                    } else {
+                        // Create sample articles if no data exists
+                        allArticles = createSampleArticles();
+                        localStorage.setItem('articles', JSON.stringify(allArticles));
+                    }
+                }
+                
+                currentArticle = allArticles.find(article => article.id === articleId);
+                
+                if (!currentArticle || !currentArticle.published) {
+                    document.body.innerHTML = '<div class="min-h-screen flex items-center justify-center"><div class="text-center"><h1 class="text-2xl font-bold text-red-600 mb-4">Artikel tidak ditemukan</h1><a href="jurnal.html" class="text-purple-600 hover:underline">Kembali ke Jurnal</a></div></div>';
+                    return;
+                }
+                
+                renderArticle(currentArticle);
+                updateViewCount(articleId);
+                loadRelatedArticles();
+            } catch (error) {
+                console.error('Error loading article:', error);
+                document.body.innerHTML = '<div class="min-h-screen flex items-center justify-center"><div class="text-center"><h1 class="text-2xl font-bold text-red-600 mb-4">Error memuat artikel</h1><a href="jurnal.html" class="text-purple-600 hover:underline">Kembali ke Jurnal</a></div></div>';
+            }
+        }
+
+        function renderArticle(article) {
+            try {
+                // Update page title
+                document.title = `${article.title} - Jurnal Iqbal Adiatma`;
+                
+                // Update breadcrumb
+                const breadcrumbElement = document.querySelector('.breadcrumb .current-page');
+                if (breadcrumbElement) {
+                    breadcrumbElement.textContent = article.title;
+                }
+                
+                // Update article header
+                const titleElement = document.querySelector('.article-header h1');
+                if (titleElement) {
+                    titleElement.textContent = article.title;
+                }
+                
+                const dateElement = document.querySelector('.article-meta .date');
+                if (dateElement) {
+                    dateElement.textContent = formatDate(article.date);
+                }
+                
+                const readTimeElement = document.querySelector('.article-meta .read-time');
+                if (readTimeElement) {
+                    readTimeElement.textContent = article.readTime;
+                }
+                
+                const viewsElement = document.querySelector('.article-meta .views');
+                if (viewsElement) {
+                    viewsElement.textContent = `${article.views || 0} views`;
+                }
+                
+                // Update category badge
+                const categoryBadge = document.querySelector('.category-badge');
+                if (categoryBadge) {
+                    categoryBadge.textContent = `${getCategoryIcon(article.category)} ${getCategoryName(article.category)}`;
+                    categoryBadge.className = `category-badge inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getCategoryStyle(article.category)}`;
+                }
+                
+                // Update featured image
+                const featuredImage = document.querySelector('.featured-image img');
+                if (featuredImage) {
+                    featuredImage.src = article.image;
+                    featuredImage.alt = article.title;
+                }
+                
+                // Update article content
+                const contentElement = document.querySelector('.article-content');
+                if (contentElement) {
+                    contentElement.innerHTML = formatContent(article.content || article.excerpt);
+                }
+                
+                // Update tags
+                const tagsContainer = document.querySelector('.article-tags');
+                if (tagsContainer) {
+                    if (article.tags && article.tags.length > 0) {
+                        tagsContainer.innerHTML = article.tags.map(tag => 
+                            `<span class="tag bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">${tag}</span>`
+                        ).join('');
+                    } else {
+                        tagsContainer.innerHTML = '<span class="tag bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">artikel</span>';
+                    }
+                }
+            } catch (error) {
+                console.error('Error rendering article:', error);
+            }
+        }
+
+        function formatContent(content) {
+            // Simple content formatting
+            return content
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/\n/g, '<br>')
+                .replace(/^/, '<p>')
+                .replace(/$/, '</p>');
+        }
+
+        function updateViewCount(articleId) {
+            // Update view count in localStorage (for demo purposes)
+            const articles = JSON.parse(localStorage.getItem('articles') || '[]');
+            const articleIndex = articles.findIndex(a => a.id === articleId);
+            
+            if (articleIndex !== -1) {
+                articles[articleIndex].views = (articles[articleIndex].views || 0) + 1;
+                localStorage.setItem('articles', JSON.stringify(articles));
+            }
+        }
+
+        function loadRelatedArticles() {
+            const relatedArticles = allArticles
+                .filter(article => 
+                    article.published && 
+                    article.id !== currentArticle.id && 
+                    (article.category === currentArticle.category || 
+                     article.tags?.some(tag => currentArticle.tags?.includes(tag)))
+                )
+                .slice(0, 3);
+            
+            const relatedContainer = document.querySelector('.related-articles .grid');
+            
+            if (relatedArticles.length > 0 && relatedContainer) {
+                relatedContainer.innerHTML = relatedArticles.map(article => `
+                    <a href="jurnal-detail.html?id=${article.id}" class="related-article block bg-white rounded-lg p-6 hover:shadow-lg transition-all">
+                        <img src="${article.image}" alt="${article.title}" class="w-full h-32 object-cover rounded-lg mb-4">
+                        <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2">${article.title}</h3>
+                        <p class="text-gray-600 text-sm mb-3 line-clamp-2">${article.excerpt}</p>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>${formatDate(article.date)}</span>
+                            <span class="mx-2">•</span>
+                            <span>${article.readTime}</span>
+                        </div>
+                    </a>
+                `).join('');
+            } else {
+                const relatedArticlesElement = document.querySelector('.related-articles');
+                if (relatedArticlesElement) {
+                    relatedArticlesElement.style.display = 'none';
+                }
+            }
+        }
+
+        function getCategoryStyle(category) {
+            const styles = {
+                'pemikiran': 'bg-blue-100 text-blue-800',
+                'perjalanan': 'bg-green-100 text-green-800',
+                'teknologi': 'bg-purple-100 text-purple-800',
+                'kehidupan': 'bg-orange-100 text-orange-800'
+            };
+            return styles[category] || 'bg-gray-100 text-gray-800';
+        }
+
+        function getCategoryIcon(category) {
+            const icons = {
+                'pemikiran': '🧠',
+                'perjalanan': '🌍',
+                'teknologi': '💻',
+                'kehidupan': '🌱'
+            };
+            return icons[category] || '📄';
+        }
+
+        function getCategoryName(category) {
+            const names = {
+                'pemikiran': 'Pemikiran',
+                'perjalanan': 'Perjalanan',
+                'teknologi': 'Teknologi',
+                'kehidupan': 'Kehidupan'
+            };
+            return names[category] || category;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('id-ID', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // Create sample articles for demo
+        function createSampleArticles() {
+            return [
+                {
+                    "id": "refleksi-perjalanan-programming",
+                    "title": "Refleksi Tentang Perjalanan Belajar Programming",
+                    "slug": "refleksi-perjalanan-programming",
+                    "excerpt": "Sudah hampir 3 tahun saya menekuni dunia programming. Banyak hal yang telah saya pelajari, tidak hanya tentang kode, tetapi juga tentang diri sendiri dan cara pandang terhadap problem solving.",
+                    "category": "pemikiran",
+                    "author": "Iqbal Adiatma",
+                    "date": "2024-08-13",
+                    "readTime": "8 min",
+                    "views": 1247,
+                    "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                    "tags": ["programming", "learning", "reflection", "developer"],
+                    "featured": true,
+                    "published": true,
+                    "content": "Perjalanan belajar programming adalah sebuah marathon, bukan sprint. Dalam 3 tahun terakhir, saya telah mengalami berbagai tantangan dan pencapaian yang membentuk cara saya memandang teknologi dan problem solving.\n\nSalah satu hal terpenting yang saya pelajari adalah bahwa programming bukan hanya tentang menulis kode, tetapi tentang memahami masalah dan mencari solusi yang efektif. Setiap bug yang saya temui, setiap error yang saya debug, telah mengajarkan saya untuk berpikir lebih sistematis dan sabar.\n\nKomunitas developer juga memainkan peran penting dalam perjalanan ini. Berbagi pengetahuan, bertanya, dan membantu sesama developer telah memperkaya pengalaman belajar saya."
+                },
+                {
+                    "id": "eksplorasi-kota-tua-jakarta",
+                    "title": "Eksplorasi Kota Tua Jakarta",
+                    "slug": "eksplorasi-kota-tua-jakarta",
+                    "excerpt": "Weekend kemarin saya menyempatkan diri untuk mengunjungi Kota Tua Jakarta. Tempat yang sarat dengan sejarah dan cerita masa lalu Indonesia.",
+                    "category": "perjalanan",
+                    "author": "Iqbal Adiatma",
+                    "date": "2024-08-10",
+                    "readTime": "5 min",
+                    "views": 892,
+                    "image": "https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                    "tags": ["jakarta", "sejarah", "wisata", "budaya"],
+                    "featured": false,
+                    "published": true,
+                    "content": "Kota Tua Jakarta menyimpan begitu banyak cerita sejarah yang menarik. Berjalan-jalan di area ini seperti melakukan perjalanan waktu ke masa kolonial Belanda.\n\nMuseum-museum yang ada di sini menyajikan koleksi yang sangat beragam, mulai dari artefak sejarah hingga karya seni tradisional. Arsitektur bangunan-bangunannya pun masih mempertahankan gaya kolonial yang khas.\n\nYang paling berkesan adalah suasana di alun-alun Fatahillah, di mana banyak seniman jalanan yang memamerkan karyanya dan wisatawan yang menikmati suasana nostalgia."
+                },
+                {
+                    "id": "tips-optimasi-website",
+                    "title": "Tips Optimasi Performance Website",
+                    "slug": "tips-optimasi-website",
+                    "excerpt": "Performance website adalah salah satu faktor terpenting dalam pengalaman pengguna. Berikut beberapa tips yang saya gunakan untuk mengoptimalkan website.",
+                    "category": "teknologi",
+                    "author": "Iqbal Adiatma",
+                    "date": "2024-08-07",
+                    "readTime": "6 min",
+                    "views": 1456,
+                    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                    "tags": ["web-development", "performance", "optimization", "tips"],
+                    "featured": true,
+                    "published": true,
+                    "content": "Optimasi performance website adalah kunci untuk memberikan pengalaman pengguna yang baik. Berikut beberapa teknik yang terbukti efektif:\n\n1. **Optimasi Gambar**: Gunakan format yang tepat (WebP untuk web modern) dan kompres gambar tanpa mengurangi kualitas visual.\n\n2. **Minifikasi CSS dan JavaScript**: Hapus whitespace dan karakter yang tidak perlu untuk mengurangi ukuran file.\n\n3. **Lazy Loading**: Muat konten hanya ketika diperlukan, terutama untuk gambar dan konten di bawah fold.\n\n4. **Caching**: Implementasikan caching yang efektif baik di sisi client maupun server.\n\nDengan menerapkan teknik-teknik ini, loading time website bisa berkurang hingga 50%."
+                }
+            ];
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', loadArticle);
+
+        // Reading progress bar
+        window.addEventListener('scroll', () => {
+            const article = document.querySelector('article');
+            if (article) {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled / (article.offsetHeight - window.innerHeight);
+                const progress = Math.min(Math.max(rate, 0), 1) * 100;
+                document.querySelector('.reading-progress').style.width = progress + '%';
+            }
+        });
+
+        // Smooth scroll for TOC links
+        document.querySelectorAll('.toc a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Share functionality (with null checks)
+        const shareTwitter = document.getElementById('share-twitter');
+        if (shareTwitter) {
+            shareTwitter.addEventListener('click', () => {
+                const url = encodeURIComponent(window.location.href);
+                const text = encodeURIComponent(document.title);
+                window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+            });
+        }
+
+        const shareFacebook = document.getElementById('share-facebook');
+        if (shareFacebook) {
+            shareFacebook.addEventListener('click', () => {
+                const url = encodeURIComponent(window.location.href);
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+            });
+        }
+
+        const shareLinkedin = document.getElementById('share-linkedin');
+        if (shareLinkedin) {
+            shareLinkedin.addEventListener('click', () => {
+                const url = encodeURIComponent(window.location.href);
+                const title = encodeURIComponent(document.title);
+                window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}`, '_blank');
+            });
+        }
+
+        const copyLink = document.getElementById('copy-link');
+        if (copyLink) {
+            copyLink.addEventListener('click', () => {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('Link berhasil disalin!');
+                });
+            });
+        }
+    </script>
+</body>
+</html>

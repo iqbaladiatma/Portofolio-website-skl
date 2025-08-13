@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Jurnal - Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .font-display { font-family: 'Playfair Display', serif; }
+        .font-body { font-family: 'Inter', sans-serif; }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+
+<body class="font-body bg-gray-50">
+    <!-- Navbar -->
+    <nav class="fixed w-full top-0 z-50 glass-effect">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">IA</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-800 font-bold text-xl font-display">Admin Panel</span>
+                        <p class="text-gray-500 text-sm">Kelola Jurnal</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="jurnal.html" class="text-gray-700 hover:text-purple-600 font-medium">👁️ Lihat Jurnal</a>
+                    <button id="logout-btn" class="text-red-600 hover:text-red-700 font-medium">🚪 Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="mb-8">
+                <h1 class="text-3xl font-display font-bold text-gray-900 mb-2">Kelola Jurnal</h1>
+                <p class="text-gray-600">Tambah, edit, dan kelola artikel jurnal Anda</p>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="card p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-blue-100 text-blue-600 mr-4">📄</div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Total Artikel</p>
+                            <p class="text-2xl font-bold text-gray-900" id="total-articles">0</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-green-100 text-green-600 mr-4">✅</div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Published</p>
+                            <p class="text-2xl font-bold text-gray-900" id="published-articles">0</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-yellow-100 text-yellow-600 mr-4">📝</div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Draft</p>
+                            <p class="text-2xl font-bold text-gray-900" id="draft-articles">0</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-purple-100 text-purple-600 mr-4">👁️</div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Total Views</p>
+                            <p class="text-2xl font-bold text-gray-900" id="total-views">0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex justify-between items-center mb-6">
+                <button id="add-article-btn" class="btn-primary">➕ Tambah Artikel</button>
+                <button id="refresh-btn" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">🔄 Refresh</button>
+            </div>
+
+            <!-- Articles Table -->
+            <div class="card overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Artikel</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Kategori</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Views</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tanggal</th>
+                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="articles-table-body" class="bg-white divide-y divide-gray-200">
+                            <!-- Articles loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit Modal -->
+    <div id="article-modal" class="modal">
+        <div class="bg-white rounded-lg p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h2 id="modal-title" class="text-2xl font-display font-bold">Tambah Artikel</h2>
+                <button id="close-modal" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+            </div>
+            
+            <form id="article-form" class="space-y-6">
+                <input type="hidden" id="article-id">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Judul Artikel</label>
+                        <input type="text" id="article-title" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Kategori</label>
+                        <select id="article-category" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                            <option value="">Pilih Kategori</option>
+                            <option value="pemikiran">🧠 Pemikiran</option>
+                            <option value="perjalanan">🌍 Perjalanan</option>
+                            <option value="teknologi">💻 Teknologi</option>
+                            <option value="kehidupan">🌱 Kehidupan</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Ringkasan</label>
+                    <textarea id="article-excerpt" class="w-full p-3 border border-gray-300 rounded-lg h-24" required></textarea>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">URL Gambar</label>
+                    <input type="url" id="article-image" class="w-full p-3 border border-gray-300 rounded-lg">
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Waktu Baca</label>
+                        <input type="text" id="article-read-time" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="5 min" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tags</label>
+                        <input type="text" id="article-tags" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="tag1, tag2">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                        <select id="article-status" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                            <option value="draft">Draft</option>
+                            <option value="published">Published</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Konten Artikel</label>
+                    <textarea id="article-content" class="w-full p-3 border border-gray-300 rounded-lg h-64" required></textarea>
+                </div>
+                
+                <div class="flex justify-end space-x-4 pt-6 border-t">
+                    <button type="button" id="cancel-btn" class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Batal</button>
+                    <button type="submit" class="btn-primary">Simpan Artikel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal active">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span class="text-white font-bold text-2xl">IA</span>
+                </div>
+                <h2 class="text-2xl font-display font-bold">Admin Login</h2>
+            </div>
+            
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Password Admin</label>
+                    <input type="password" id="admin-password" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                </div>
+                
+                <button type="submit" class="btn-primary w-full">Masuk</button>
+                
+                <div class="text-center text-sm text-gray-500 mt-4">
+                    <p>Demo password: <code class="bg-gray-100 px-2 py-1 rounded">admin123</code></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let articles = [];
+        let isLoggedIn = false;
+        let editingArticleId = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            checkLogin();
+            loadData();
+            setupEventListeners();
+        });
+
+        function checkLogin() {
+            isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+            if (isLoggedIn) {
+                document.getElementById('login-modal').classList.remove('active');
+            }
+        }
+
+        function setupEventListeners() {
+            document.getElementById('login-form').addEventListener('submit', handleLogin);
+            document.getElementById('logout-btn').addEventListener('click', handleLogout);
+            document.getElementById('add-article-btn').addEventListener('click', openAddModal);
+            document.getElementById('refresh-btn').addEventListener('click', loadData);
+            document.getElementById('close-modal').addEventListener('click', closeModal);
+            document.getElementById('cancel-btn').addEventListener('click', closeModal);
+            document.getElementById('article-form').addEventListener('submit', handleSaveArticle);
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const password = document.getElementById('admin-password').value;
+            
+            if (password === 'admin123') {
+                localStorage.setItem('adminLoggedIn', 'true');
+                isLoggedIn = true;
+                document.getElementById('login-modal').classList.remove('active');
+                loadData();
+            } else {
+                alert('Password salah!');
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('adminLoggedIn');
+            isLoggedIn = false;
+            document.getElementById('login-modal').classList.add('active');
+        }
+
+        async function loadData() {
+            if (!isLoggedIn) return;
+            
+            try {
+                const response = await fetch('./data/articles.json');
+                articles = await response.json();
+            } catch (error) {
+                const saved = localStorage.getItem('articles');
+                articles = saved ? JSON.parse(saved) : [];
+            }
+            
+            updateStats();
+            renderArticlesTable();
+        }
+
+        function updateStats() {
+            const total = articles.length;
+            const published = articles.filter(a => a.published).length;
+            const draft = articles.filter(a => !a.published).length;
+            const views = articles.reduce((sum, a) => sum + (a.views || 0), 0);
+            
+            document.getElementById('total-articles').textContent = total;
+            document.getElementById('published-articles').textContent = published;
+            document.getElementById('draft-articles').textContent = draft;
+            document.getElementById('total-views').textContent = views.toLocaleString();
+        }
+
+        function renderArticlesTable() {
+            const tbody = document.getElementById('articles-table-body');
+            
+            if (articles.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-12 text-center text-gray-500">Belum ada artikel</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = articles.map(article => `
+                <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            <img src="${article.image}" alt="${article.title}" class="w-12 h-8 object-cover rounded mr-4">
+                            <div>
+                                <div class="text-sm font-medium text-gray-900">${article.title}</div>
+                                <div class="text-sm text-gray-500">${article.excerpt.substring(0, 50)}...</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
+                            ${getCategoryName(article.category)}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-1 text-xs font-medium rounded-full ${article.published ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
+                            ${article.published ? 'Published' : 'Draft'}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-900">${(article.views || 0).toLocaleString()}</td>
+                    <td class="px-6 py-4 text-sm text-gray-900">${formatDate(article.date)}</td>
+                    <td class="px-6 py-4 text-right text-sm font-medium">
+                        <button onclick="editArticle('${article.id}')" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</button>
+                        <button onclick="deleteArticle('${article.id}')" class="text-red-600 hover:text-red-900">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function getCategoryName(category) {
+            const names = { 'pemikiran': 'Pemikiran', 'perjalanan': 'Perjalanan', 'teknologi': 'Teknologi', 'kehidupan': 'Kehidupan' };
+            return names[category] || category;
+        }
+
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('id-ID');
+        }
+
+        function openAddModal() {
+            editingArticleId = null;
+            document.getElementById('modal-title').textContent = 'Tambah Artikel';
+            document.getElementById('article-form').reset();
+            document.getElementById('article-modal').classList.add('active');
+        }
+
+        function editArticle(id) {
+            const article = articles.find(a => a.id === id);
+            if (!article) return;
+            
+            editingArticleId = id;
+            document.getElementById('modal-title').textContent = 'Edit Artikel';
+            document.getElementById('article-title').value = article.title;
+            document.getElementById('article-category').value = article.category;
+            document.getElementById('article-excerpt').value = article.excerpt;
+            document.getElementById('article-image').value = article.image || '';
+            document.getElementById('article-read-time').value = article.readTime;
+            document.getElementById('article-tags').value = article.tags ? article.tags.join(', ') : '';
+            document.getElementById('article-status').value = article.published ? 'published' : 'draft';
+            document.getElementById('article-content').value = article.content || '';
+            
+            document.getElementById('article-modal').classList.add('active');
+        }
+
+        function deleteArticle(id) {
+            if (confirm('Yakin ingin menghapus artikel ini?')) {
+                articles = articles.filter(a => a.id !== id);
+                localStorage.setItem('articles', JSON.stringify(articles));
+                updateStats();
+                renderArticlesTable();
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('article-modal').classList.remove('active');
+            editingArticleId = null;
+        }
+
+        function handleSaveArticle(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('article-title').value;
+            const slug = title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-');
+            
+            const article = {
+                id: editingArticleId || slug,
+                title,
+                slug,
+                excerpt: document.getElementById('article-excerpt').value,
+                category: document.getElementById('article-category').value,
+                author: 'Iqbal Adiatma',
+                date: editingArticleId ? articles.find(a => a.id === editingArticleId).date : new Date().toISOString().split('T')[0],
+                readTime: document.getElementById('article-read-time').value,
+                views: editingArticleId ? articles.find(a => a.id === editingArticleId).views : 0,
+                image: document.getElementById('article-image').value || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                tags: document.getElementById('article-tags').value.split(',').map(t => t.trim()).filter(t => t),
+                featured: false,
+                published: document.getElementById('article-status').value === 'published',
+                content: document.getElementById('article-content').value
+            };
+            
+            if (editingArticleId) {
+                const index = articles.findIndex(a => a.id === editingArticleId);
+                articles[index] = article;
+            } else {
+                articles.unshift(article);
+            }
+            
+            localStorage.setItem('articles', JSON.stringify(articles));
+            closeModal();
+            updateStats();
+            renderArticlesTable();
+            alert(editingArticleId ? 'Artikel berhasil diupdate!' : 'Artikel berhasil ditambahkan!');
+        }
+    </script>
+</body>
+</html>
