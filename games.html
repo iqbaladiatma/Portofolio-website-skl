@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Collection - Iqbal Adiatma</title>
+    <link rel="icon" href="./dist/img/logofull.jpg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Poppins', sans-serif; 
+        }
+        
+        body { 
+            background: var(--bg); 
+            color: var(--text); 
+            min-height: 100vh;
+        }
+        
+        .container { 
+            max-width: 1280px; 
+            margin: 0 auto; 
+            padding: 0 1.5rem;
+            padding-top: 6rem;
+            padding-bottom: 4rem;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            background: rgba(37, 99, 235, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+        }
+        
+        .back-btn:hover {
+            background: rgba(37, 99, 235, 0.2);
+            transform: translateX(-4px);
+        }
+        
+        header { 
+            text-align: center; 
+            margin-bottom: 3.5rem;
+        }
+        
+        h1 { 
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #2563eb, #4f46e5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .games-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+        
+        .game-card { 
+            background: var(--card-bg);
+            border-radius: 1rem; 
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(203, 213, 225, 0.3);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .game-card:hover { 
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .game-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 180px;
+        }
+        
+        .game-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .game-card:hover .game-image {
+            transform: scale(1.05);
+        }
+        
+        .game-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+        }
+        
+        .game-content { 
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        
+        .game-title { 
+            font-size: 1.25rem; 
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+        
+        .game-description { 
+            color: var(--text-secondary); 
+            font-size: 0.9375rem; 
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+        
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(203, 213, 225, 0.5);
+        }
+        
+        .game-category {
+            font-size: 0.8125rem;
+            color: var(--primary);
+            background: rgba(37, 99, 235, 0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+        
+        .play-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-size: 0.9375rem;
+        }
+        
+        .play-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+        }
+        
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding-top: 5rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            h1 {
+                font-size: 2.25rem;
+            }
+            
+            .games-grid { 
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .game-card {
+                max-width: 400px;
+                margin: 0 auto;
+                width: 100%;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            <span>Kembali ke Beranda</span>
+        </a>
+        
+        <header data-aos="fade-up">
+            <h1>Koleksi Game</h1>
+            <p class="subtitle">Temukan berbagai game seru dan mendidik yang siap dimainkan</p>
+        </header>
+
+        <div class="games-grid">
+            <!-- Game 1 -->
+            <div class="game-card fade-in" data-aos="fade-up" data-aos-delay="100">
+                <div class="game-image-container">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200&auto=format&fit=crop" alt="Cyber Code" class="game-image">
+                    <span class="game-badge">Baru</span>
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Cyber Code</h3>
+                    <p class="game-description">Petualangan coding dengan tema cyberpunk. Pecahkan teka-teki dan kendalikan karakter dengan menulis kode.</p>
+                    <div class="game-meta">
+                        <span class="game-category">Pemrograman</span>
+                        <a href="game/cybercode.html" class="play-btn">
+                            <span>Mainkan</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game 2 -->
+            <div class="game-card fade-in" data-aos="fade-up" data-aos-delay="200">
+                <div class="game-image-container">
+                    <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=1200&auto=format&fit=crop" alt="Quiz Game" class="game-image">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Quiz Interaktif</h3>
+                    <p class="game-description">Uji pengetahuan Anda dengan berbagai pertanyaan menarik dari berbagai topik.</p>
+                    <div class="game-meta">
+                        <span class="game-category">Pendidikan</span>
+                        <a href="game/quiz.html" class="play-btn">
+                            <span>Mainkan</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coming Soon -->
+            <div class="game-card fade-in" data-aos="fade-up" data-aos-delay="300">
+                <div class="game-image-container">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop" alt="Coming Soon" class="game-image" style="filter: grayscale(80%) brightness(0.7);">
+                    <span class="game-badge">Segera Hadir</span>
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Game Baru</h3>
+                    <p class="game-description">Game seru lainnya sedang dalam pengembangan. Nantikan rilisnya segera!</p>
+                    <div class="game-meta">
+                        <span class="game-category">Coming Soon</span>
+                        <button class="play-btn" style="opacity: 0.7; cursor: not-allowed;" disabled>
+                            <span>Segera Hadir</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+        });
+        
+        // Add fade-in class to game cards with delay
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.game-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Code - Tebak Kode Angka</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0A0A0F;
+            --bg-secondary: #111118;
+            --bg-card: linear-gradient(145deg, rgba(26, 26, 46, 0.8), rgba(22, 33, 62, 0.8));
+            --accent-cyan: #00F5FF;
+            --accent-purple: #8A2BE2;
+            --accent-pink: #FF1493;
+            --accent-gold: #FFD700;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B8BCC8;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow: hidden;
+        }
+
+        .bg-animated {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+            background: linear-gradient(45deg, #0A0A0F, #111118, #1A1A2E);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        @keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+        .geometric-pattern {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            opacity: 0.05;
+            background-image: linear-gradient(30deg, var(--accent-cyan) 12%, transparent 12.5%, transparent 87%, var(--accent-cyan) 87.5%, var(--accent-cyan)),
+                              linear-gradient(150deg, var(--accent-cyan) 12%, transparent 12.5%, transparent 87%, var(--accent-cyan) 87.5%, var(--accent-cyan)),
+                              linear-gradient(30deg, var(--accent-cyan) 12%, transparent 12.5%, transparent 87%, var(--accent-cyan) 87.5%, var(--accent-cyan)),
+                              linear-gradient(150deg, var(--accent-cyan) 12%, transparent 12.5%, transparent 87%, var(--accent-cyan) 87.5%, var(--accent-cyan)),
+                              linear-gradient(60deg, var(--accent-purple) 25%, transparent 25.5%, transparent 75%, var(--accent-purple) 75%, var(--accent-purple)),
+                              linear-gradient(60deg, var(--accent-purple) 25%, transparent 25.5%, transparent 75%, var(--accent-purple) 75%, var(--accent-purple));
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+            animation: patternMove 20s linear infinite;
+        }
+        @keyframes patternMove { 100% { background-position: 0 0, 0 0, -40px -70px, -40px -70px, 40px -70px, 0 0; } }
+
+        .screen {
+            transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem;
+        }
+        .hidden-screen {
+            opacity: 0; transform: scale(0.9) rotateY(10deg); pointer-events: none; position: absolute; top: 0; left: 0; right: 0;
+        }
+
+        .cyber-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-radius: 25px; padding: 2rem;
+            position: relative; backdrop-filter: blur(20px);
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        .cyber-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 25px; z-index: -1;
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            animation: borderGlow 4s ease-in-out infinite alternate;
+        }
+        @keyframes borderGlow { 0% { opacity: 0.3; } 100% { opacity: 1; } }
+
+        .holo-title {
+            font-family: 'Orbitron', monospace; font-weight: 900;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-pink));
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; text-align: center;
+            animation: holoGlow 3s ease-in-out infinite alternate;
+        }
+        @keyframes holoGlow {
+            0% { text-shadow: 0 0 10px var(--accent-cyan), 0 0 20px var(--accent-purple); }
+            100% { text-shadow: 0 0 20px var(--accent-pink), 0 0 30px var(--accent-cyan); }
+        }
+
+        .cyber-btn {
+            position: relative; padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple));
+            border: none; border-radius: 15px; color: white;
+            font-weight: 600; font-size: 1.1rem; cursor: pointer;
+            transition: all 0.3s ease; text-transform: uppercase;
+            letter-spacing: 1px; overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 245, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        .cyber-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        .cyber-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 245, 255, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        .cyber-btn:hover::before { left: 100%; }
+        .cyber-btn:active { transform: translateY(-1px) scale(1.02); }
+
+        .cyber-btn-secondary {
+            background: linear-gradient(45deg, #2A2A3E, #3A3A5E);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        .cyber-btn-secondary:hover { box-shadow: 0 15px 35px rgba(138, 43, 226, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2); }
+
+        .cyber-toggle {
+            display: flex; background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px; padding: 5px; position: relative;
+            backdrop-filter: blur(10px); border: 1px solid rgba(0, 245, 255, 0.3);
+        }
+        .cyber-toggle button {
+            padding: 0.75rem 1.5rem; background: transparent; border: none;
+            border-radius: 15px; color: var(--text-secondary); cursor: pointer;
+            transition: all 0.3s ease; position: relative; z-index: 1;
+        }
+        .cyber-toggle button.active {
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple));
+            color: white; box-shadow: 0 5px 15px rgba(0, 245, 255, 0.4);
+        }
+
+        .difficulty-card {
+            background: var(--bg-card); border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 20px; padding: 1.5rem; cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative; overflow: hidden;
+        }
+        .difficulty-card::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        .difficulty-card:hover {
+            transform: translateY(-8px) scale(1.03); border-color: var(--accent-cyan);
+            box-shadow: 0 15px 30px rgba(0, 245, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        .difficulty-card:hover::before { left: 100%; }
+        .difficulty-icon {
+            width: 3rem; height: 3rem; border-radius: 15px; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple));
+            margin-bottom: 1rem; box-shadow: 0 5px 15px rgba(0, 245, 255, 0.4);
+        }
+        .difficulty-progress { width: 100%; height: 4px; background: rgba(0, 0, 0, 0.3); border-radius: 2px; overflow: hidden; margin-top: 8px; }
+        .difficulty-progress .fill { height: 100%; border-radius: 2px; transition: width 0.8s ease; }
+        .difficulty-progress .fill.easy { width: 25%; background: linear-gradient(90deg, #10B981, #34D399); }
+        .difficulty-progress .fill.medium { width: 50%; background: linear-gradient(90deg, #F59E0B, #FCD34D); }
+        .difficulty-progress .fill.hard { width: 75%; background: linear-gradient(90deg, #EF4444, #F87171); }
+        .difficulty-progress .fill.pro { width: 100%; background: linear-gradient(90deg, #8B5CF6, #A78BFA); }
+
+        .holo-tile {
+            width: 3.5rem; height: 4.5rem; border: 2px solid rgba(0, 245, 255, 0.5);
+            border-radius: 15px; display: flex; align-items: center; justify-content: center;
+            font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 700;
+            background: linear-gradient(145deg, rgba(26, 26, 46, 0.8), rgba(22, 33, 62, 0.8));
+            backdrop-filter: blur(10px); transition: all 0.3s ease;
+        }
+        .holo-tile.filled {
+            color: var(--accent-cyan); border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        .cyber-keypad { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem; max-width: 20rem; margin: 0 auto; }
+        .keypad-btn {
+            width: 3.5rem; height: 3.5rem; border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 12px; background: linear-gradient(145deg, rgba(26, 26, 46, 0.8), rgba(22, 33, 62, 0.8));
+            color: var(--text-primary); font-family: 'Orbitron', monospace;
+            font-size: 1.25rem; font-weight: 600; cursor: pointer;
+            transition: all 0.2s ease; backdrop-filter: blur(10px);
+        }
+        .keypad-btn:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); box-shadow: 0 0 15px rgba(0, 245, 255, 0.4); }
+        .keypad-btn:active { transform: scale(0.95); background: var(--accent-cyan); color: var(--bg-primary); }
+        .keypad-btn.delete { color: var(--accent-pink); border-color: rgba(255, 20, 147, 0.3); }
+        .keypad-btn.delete:hover { border-color: var(--accent-pink); box-shadow: 0 0 15px rgba(255, 20, 147, 0.4); }
+
+        .guess-row {
+            background: linear-gradient(145deg, rgba(26, 26, 46, 0.6), rgba(22, 33, 62, 0.6));
+            border: 1px solid rgba(0, 245, 255, 0.2); border-radius: 15px; padding: 1rem;
+            margin-bottom: 0.75rem; backdrop-filter: blur(10px);
+            animation: slideInRight 0.5s ease-out; position: relative;
+        }
+        .guess-row::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+            background: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple));
+        }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        .score-display { font-family: 'Orbitron', monospace; font-weight: 700; }
+        .score-bulls { color: var(--accent-gold); text-shadow: 0 0 10px var(--accent-gold); }
+        .score-cows { color: var(--text-primary); }
+
+        .modal-backdrop { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
+        .modal-content {
+            background: var(--bg-card); border-radius: 25px; padding: 2rem; max-width: 400px;
+            width: 100%; text-align: center; border: 2px solid var(--accent-cyan);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 245, 255, 0.3);
+            animation: modalAppear 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes modalAppear { from { opacity: 0; transform: scale(0.5) rotate(10deg); } to { opacity: 1; transform: scale(1) rotate(0deg); } }
+
+        .ai-thinking { text-align: center; padding: 2rem; }
+        .sound-wave { display: inline-flex; align-items: center; gap: 2px; margin-left: 8px; }
+        .wave-bar { width: 3px; background: var(--accent-cyan); border-radius: 3px; animation: waveAnimation 1.2s ease-in-out infinite; }
+        .wave-bar:nth-child(1) { height: 10px; animation-delay: 0s; } .wave-bar:nth-child(2) { height: 16px; animation-delay: 0.2s; } .wave-bar:nth-child(3) { height: 12px; animation-delay: 0.4s; } .wave-bar:nth-child(4) { height: 18px; animation-delay: 0.6s; } .wave-bar:nth-child(5) { height: 8px; animation-delay: 0.8s; }
+        @keyframes waveAnimation { 0%, 100% { transform: scaleY(0.5); opacity: 0.5; } 50% { transform: scaleY(1); opacity: 1; } }
+
+        .shake { animation: cyberShake 0.6s ease-in-out; }
+        @keyframes cyberShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px) rotate(-2deg); } 75% { transform: translateX(8px) rotate(2deg); } }
+        .hidden { display: none !important; }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .score-input-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; max-width: 15rem; margin: 0 auto; }
+    </style>
+</head>
+<body>
+    <div class="bg-animated"></div>
+    <div class="geometric-pattern"></div>
+    
+    <!-- Menu Screen -->
+    <div id="menu-screen" class="screen">
+        <div class="cyber-card max-w-md w-full text-center">
+            <h1 class="holo-title mb-6" data-text="CYBER CODE">CYBER CODE</h1>
+            <p class="text-lg mb-8 text-gray-300">Pecahkan sandi 5 digit. Tantang logikamu.</p>
+            <div class="cyber-toggle mb-8 max-w-xs mx-auto">
+                <button id="vs-ai-btn" class="active">vs AI</button>
+                <button id="vs-player-btn">vs Player</button>
+            </div>
+            <button id="start-game-btn" class="cyber-btn w-full max-w-xs mx-auto block">Inisialisasi</button>
+            <p class="text-xs text-gray-500 mt-8 opacity-60">v5.3 - Penilaian Klasik</p>
+        </div>
+    </div>
+
+    <!-- Difficulty Screen -->
+    <div id="difficulty-screen" class="screen hidden-screen">
+        <div class="cyber-card max-w-lg w-full">
+            <h2 class="text-3xl font-bold mb-8 text-center font-orbitron">Pilih Level AI</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="difficulty-card difficulty-btn" data-level="easy"><div class="difficulty-icon"><svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><div class="flex-1"><h3 class="font-bold text-lg text-green-400">ROOKIE</h3><p class="text-sm text-gray-400 mb-2">Protokol tebakan acak.</p><div class="difficulty-progress"><div class="fill easy"></div></div></div></div>
+                <div class="difficulty-card difficulty-btn" data-level="medium"><div class="difficulty-icon"><svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6V3m0 18v-3"/></svg></div><div class="flex-1"><h3 class="font-bold text-lg text-yellow-400">ADVANCED</h3><p class="text-sm text-gray-400 mb-2">Logika eliminasi dasar.</p><div class="difficulty-progress"><div class="fill medium"></div></div></div></div>
+                <div class="difficulty-card difficulty-btn" data-level="hard"><div class="difficulty-icon"><svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9V3m0 18a9 9 0 009-9m-9 9a9 9 0 00-9-9"/></svg></div><div class="flex-1"><h3 class="font-bold text-lg text-red-400">EXPERT</h3><p class="text-sm text-gray-400 mb-2">Algoritma strategi optimal.</p><div class="difficulty-progress"><div class="fill hard"></div></div></div></div>
+                <div class="difficulty-card difficulty-btn" data-level="pro"><div class="difficulty-icon"><svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg></div><div class="flex-1"><h3 class="font-bold text-lg text-purple-400">QUANTUM</h3><p class="text-sm text-gray-400 mb-2">Protokol efisiensi maksimum.</p><div class="difficulty-progress"><div class="fill pro"></div></div></div></div>
+            </div>
+            <button id="back-to-menu-from-diff" class="cyber-btn-secondary cyber-btn w-full mt-8">Kembali</button>
+        </div>
+    </div>
+    
+    <!-- Code Input Screen -->
+    <div id="code-input-screen" class="screen hidden-screen">
+        <div class="cyber-card max-w-md w-full text-center">
+            <h2 id="code-input-title" class="text-3xl font-bold mb-4 font-orbitron">Pemain 1, Atur Kode</h2>
+            <p class="text-gray-400 mb-8">Pemain 2, jangan mengintip!</p>
+            <div id="pvp-input-tiles" class="flex space-x-3 mb-8 justify-center">
+                <div class="holo-tile"></div><div class="holo-tile"></div><div class="holo-tile"></div><div class="holo-tile"></div><div class="holo-tile"></div>
+            </div>
+            <div id="pvp-keypad" class="cyber-keypad mb-8"></div>
+            <button id="start-pvp-btn" class="cyber-btn w-full max-w-xs mx-auto block mb-4" disabled style="opacity: 0.5;">Mulai</button>
+            <button id="back-to-menu-from-pvp" class="cyber-btn-secondary cyber-btn w-full max-w-xs mx-auto block">Kembali</button>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen hidden-screen">
+        <div class="cyber-card max-w-md w-full h-[95vh] flex flex-col">
+            <div class="flex justify-between items-center pb-4 border-b border-cyan-500/30 mb-4">
+                <div>
+                    <h2 id="turn-indicator" class="text-xl font-bold text-cyan-400 font-orbitron">Giliranmu</h2>
+                    <p id="guess-counter" class="text-sm text-gray-400">Percobaan: 0</p>
+                </div>
+                <button id="quit-game-btn" class="cyber-btn-secondary cyber-btn !py-2 !px-4 !text-sm">Keluar</button>
+            </div>
+            <div id="guess-history" class="flex-grow overflow-y-auto pr-2 -mr-2 mb-4 no-scrollbar"></div>
+            <div id="ai-thinking-indicator" class="ai-thinking hidden">
+                <div class="flex items-center justify-center">
+                    <p class="text-cyan-400 font-orbitron">AI Memproses</p>
+                    <div class="sound-wave"><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div></div>
+                </div>
+            </div>
+            <div id="player-input-area" class="pt-4 border-t border-cyan-500/30">
+                <div id="player-input-tiles" class="flex space-x-3 mb-6 justify-center">
+                    <div class="holo-tile"></div><div class="holo-tile"></div><div class="holo-tile"></div><div class="holo-tile"></div><div class="holo-tile"></div>
+                </div>
+                <div id="player-keypad" class="cyber-keypad"></div>
+            </div>
+            <div id="score-input-area" class="pt-4 border-t border-cyan-500/30 hidden">
+                <h3 id="score-input-title" class="text-center font-orbitron text-lg mb-4 text-amber-400">Beri Nilai Tebakan Lawan</h3>
+                <div id="score-input-keypad" class="score-input-keypad"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="game-over-modal" class="modal-backdrop hidden">
+        <div class="modal-content">
+            <h2 id="game-over-title" class="text-4xl font-bold mb-6 font-orbitron text-cyan-400">Kemenangan Tercapai!</h2>
+            <p class="text-gray-400 mb-4">Sandi rahasianya adalah:</p>
+            <div id="revealed-code" class="flex justify-center space-x-3 mb-8"></div>
+            <div class="space-y-4">
+                <button id="play-again-btn" class="cyber-btn w-full">Main Lagi</button>
+                <button id="back-to-menu-from-modal" class="cyber-btn-secondary cyber-btn w-full">Menu Utama</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="correction-mode-modal" class="modal-backdrop hidden">
+        <div class="modal-content">
+            <h2 class="text-3xl font-bold mb-6 font-orbitron text-cyan-400">Mode Koreksi</h2>
+            <p class="text-gray-400 mb-8">Siapa yang akan menilai tebakan?</p>
+            <div class="space-y-4">
+                <button id="correction-auto-btn" class="cyber-btn w-full">Otomatis (Sistem)</button>
+                <button id="correction-manual-btn" class="cyber-btn-secondary cyber-btn w-full">Manual (Pemain)</button>
+            </div>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // --- DOM Elements ---
+    const screens = { menu: document.getElementById('menu-screen'), difficulty: document.getElementById('difficulty-screen'), codeInput: document.getElementById('code-input-screen'), game: document.getElementById('game-screen') };
+    const buttons = { vsAi: document.getElementById('vs-ai-btn'), vsPlayer: document.getElementById('vs-player-btn'), startGame: document.getElementById('start-game-btn'), difficulty: document.querySelectorAll('.difficulty-btn'), startPvp: document.getElementById('start-pvp-btn'), playAgain: document.getElementById('play-again-btn'), quitGame: document.getElementById('quit-game-btn'), backToMenu: document.querySelectorAll('#back-to-menu-from-diff, #back-to-menu-from-pvp, #back-to-menu-from-modal'), correctionAuto: document.getElementById('correction-auto-btn'), correctionManual: document.getElementById('correction-manual-btn') };
+    const gameElements = { turnIndicator: document.getElementById('turn-indicator'), guessCounter: document.getElementById('guess-counter'), guessHistory: document.getElementById('guess-history'), playerInputArea: document.getElementById('player-input-area'), playerInputTilesContainer: document.getElementById('player-input-tiles'), playerInputTiles: document.getElementById('player-input-tiles').children, playerKeypad: document.getElementById('player-keypad'), pvpInputTiles: document.getElementById('pvp-input-tiles').children, pvpKeypad: document.getElementById('pvp-keypad'), codeInputTitle: document.getElementById('code-input-title'), aiThinking: document.getElementById('ai-thinking-indicator'), scoreInputArea: document.getElementById('score-input-area'), scoreInputTitle: document.getElementById('score-input-title'), scoreInputKeypad: document.getElementById('score-input-keypad') };
+    const modal = { container: document.getElementById('game-over-modal'), title: document.getElementById('game-over-title'), revealedCode: document.getElementById('revealed-code'), correction: document.getElementById('correction-mode-modal') };
+
+    // --- Game State ---
+    let state = {};
+    let allPossibleCodes = [];
+    const initialState = { mode: 'ai', correctionMode: 'auto', difficulty: null, secretCode: [], player1Code: [], player2Code: [], currentPlayer: 1, lastGuess: [], currentGuess: [], gameOver: false, guessCount: 0, aiCandidates: [], manualScore: {} };
+
+    // --- Helper Functions ---
+    function showScreen(screenId) { Object.values(screens).forEach(s => s.classList.add('hidden-screen')); screens[screenId].classList.remove('hidden-screen'); }
+    function resetGame() { state = { ...initialState, mode: state.mode }; state.currentGuess = []; gameElements.guessHistory.innerHTML = ''; updateInputTiles(gameElements.playerInputTiles, []); modal.container.classList.add('hidden'); modal.correction.classList.add('hidden'); }
+    function generateSecretCode() { const d = ['1', '2', '3', '4', '5', '6', '7', '8', '9']; const c = []; for (let i = 0; i < 5; i++) { const r = Math.floor(Math.random() * d.length); c.push(d.splice(r, 1)[0]); } return c; }
+    
+    function checkGuess(guess, code) {
+        let bulls = 0; let cows = 0; const codeCopy = [...code]; const guessCopy = [...guess];
+        for (let i = guessCopy.length - 1; i >= 0; i--) {
+            if (guessCopy[i] === codeCopy[i]) {
+                bulls++; codeCopy.splice(i, 1); guessCopy.splice(i, 1);
+            }
+        }
+        for (let i = 0; i < guessCopy.length; i++) {
+            const foundIndex = codeCopy.indexOf(guessCopy[i]);
+            if (foundIndex > -1) { cows++; codeCopy.splice(foundIndex, 1); }
+        }
+        return { bulls, cows };
+    }
+
+    function updateInputTiles(tiles, guess) { for (let i = 0; i < 5; i++) { const t = tiles[i]; if (guess[i]) { t.textContent = guess[i]; t.classList.add('filled'); } else { t.textContent = ''; t.classList.remove('filled'); } } }
+    function updateGuessCounter() { gameElements.guessCounter.textContent = `Percobaan: ${state.guessCount}`; }
+    function generateAllPossibleCodes() { if (allPossibleCodes.length > 0) return; const d = ['1', '2', '3', '4', '5', '6', '7', '8', '9']; const r = []; function p(a, m = []) { if (m.length === 5) { r.push(m); return; } for (let i = 0; i < a.length; i++) { const c = a.slice(); const n = c.splice(i, 1); p(c, m.concat(n)); } } p(d); allPossibleCodes = r; }
+
+    // --- Event Listeners ---
+    buttons.vsAi.addEventListener('click', () => { state.mode = 'ai'; buttons.vsAi.classList.add('active'); buttons.vsPlayer.classList.remove('active'); });
+    buttons.vsPlayer.addEventListener('click', () => { state.mode = 'pvp'; buttons.vsPlayer.classList.add('active'); buttons.vsAi.classList.remove('active'); });
+    buttons.startGame.addEventListener('click', () => modal.correction.classList.remove('hidden'));
+    buttons.correctionAuto.addEventListener('click', () => setCorrectionMode('auto'));
+    buttons.correctionManual.addEventListener('click', () => setCorrectionMode('manual'));
+    buttons.backToMenu.forEach(btn => btn.addEventListener('click', () => { resetGame(); showScreen('menu'); }));
+    buttons.difficulty.forEach(btn => btn.addEventListener('click', () => startGame('ai', btn.dataset.level)));
+    buttons.startPvp.addEventListener('click', () => { if (state.currentPlayer === 1) { state.player1Code = [...state.currentGuess]; setupPvpInput(2); } else { state.player2Code = [...state.currentGuess]; startGame('pvp'); } });
+    buttons.playAgain.addEventListener('click', () => { modal.container.classList.add('hidden'); startGame(state.mode, state.difficulty); });
+    buttons.quitGame.addEventListener('click', () => { resetGame(); showScreen('menu'); });
+
+    // --- Game Logic ---
+    function setCorrectionMode(mode) {
+        state.correctionMode = mode;
+        modal.correction.classList.add('hidden');
+        if (state.mode === 'ai') showScreen('difficulty');
+        else { setupPvpInput(1); showScreen('codeInput'); }
+    }
+    function startGame(mode, difficulty = null) {
+        resetGame(); state.mode = mode; state.difficulty = difficulty; state.guessCount = 0; updateGuessCounter();
+        if (mode === 'ai') {
+            state.secretCode = generateSecretCode(); state.aiCandidates = [...allPossibleCodes]; state.currentPlayer = 1;
+            gameElements.turnIndicator.textContent = "Giliranmu"; showScreen('game');
+        } else {
+            state.secretCode = state.player1Code; state.currentPlayer = 2;
+            gameElements.turnIndicator.textContent = "Giliran Pemain 2"; showScreen('game');
+        }
+    }
+    function setupPvpInput(playerNum) {
+        state.currentPlayer = playerNum; state.currentGuess = []; updateInputTiles(gameElements.pvpInputTiles, []);
+        gameElements.codeInputTitle.textContent = `Pemain ${playerNum}, Atur Kode`;
+        buttons.startPvp.textContent = playerNum === 1 ? 'Pemain Berikutnya' : 'Mulai';
+        buttons.startPvp.disabled = true; buttons.startPvp.style.opacity = '0.5';
+    }
+    function handlePlayerInput(key) {
+        if (state.gameOver || (state.mode === 'ai' && state.currentPlayer !== 1) || state.correctionMode === 'manual' && gameElements.scoreInputArea.classList.contains('hidden') === false) return;
+        if (key === 'DEL') state.currentGuess.pop();
+        else if (state.currentGuess.length < 5 && !state.currentGuess.includes(key)) state.currentGuess.push(key);
+        updateInputTiles(gameElements.playerInputTiles, state.currentGuess);
+        if (state.currentGuess.length === 5) setTimeout(() => submitGuess(), 300);
+    }
+    function handlePvpInput(key) {
+        if (key === 'DEL') state.currentGuess.pop();
+        else if (state.currentGuess.length < 5 && !state.currentGuess.includes(key)) state.currentGuess.push(key);
+        updateInputTiles(gameElements.pvpInputTiles, state.currentGuess);
+        const canStart = state.currentGuess.length === 5;
+        buttons.startPvp.disabled = !canStart; buttons.startPvp.style.opacity = canStart ? '1' : '0.5';
+    }
+    function submitGuess() {
+        if (state.currentGuess.length !== 5) return;
+        state.lastGuess = [...state.currentGuess];
+        state.currentGuess = [];
+        updateInputTiles(gameElements.playerInputTiles, []);
+        state.guessCount++; 
+        updateGuessCounter();
+
+        if (state.correctionMode === 'auto') {
+            const score = checkGuess(state.lastGuess, state.secretCode);
+            addGuessToHistory(state.lastGuess, score, state.currentPlayer);
+            if (score.bulls < 5) { gameElements.playerInputTilesContainer.classList.add('shake'); setTimeout(() => gameElements.playerInputTilesContainer.classList.remove('shake'), 600); }
+            if (score.bulls === 5) { endGame(state.currentPlayer); return; }
+            if (state.mode === 'ai') aiTurn(); else switchPvpTurn();
+        } else {
+            addGuessToHistory(state.lastGuess, {bulls: '?', cows: '?'}, state.currentPlayer);
+            promptForManualScore();
+        }
+    }
+    function promptForManualScore() {
+        gameElements.playerInputArea.classList.add('hidden');
+        gameElements.scoreInputArea.classList.remove('hidden');
+        state.manualScore = {};
+        const opponent = (state.mode === 'pvp') ? (state.currentPlayer === 1 ? 'Pemain 2' : 'Pemain 1') : 'Anda';
+        gameElements.scoreInputTitle.innerHTML = `${opponent}, masukkan <span class="score-bulls">Posisi Benar</span>`;
+    }
+    function handleManualScoreInput(value) {
+        if (state.manualScore.bulls === undefined) {
+            state.manualScore.bulls = value;
+            gameElements.scoreInputTitle.innerHTML = `Masukkan <span class="score-cows">Angka Benar</span> (posisi salah)`;
+        } else {
+            state.manualScore.cows = value;
+            processManualScore(state.manualScore);
+        }
+    }
+    function processManualScore(score) {
+        gameElements.scoreInputArea.classList.add('hidden');
+        
+        const lastHistoryRow = gameElements.guessHistory.lastElementChild;
+        if (lastHistoryRow) {
+            const scoreDisplay = lastHistoryRow.querySelector('.score-display');
+            if (scoreDisplay) scoreDisplay.innerHTML = `<span class="score-bulls">${score.bulls}</span> / <span class="score-cows">${score.cows}</span>`;
+        }
+
+        if (state.mode === 'ai' && state.currentPlayer === 2 && state.difficulty !== 'easy') {
+            state.aiCandidates = state.aiCandidates.filter(c => {
+                const tempScore = checkGuess(state.lastGuess, c);
+                return tempScore.bulls === score.bulls && tempScore.cows === score.cows;
+            });
+        }
+
+        if (score.bulls === 5) { endGame(state.currentPlayer); return; }
+
+        if (score.bulls < 5 && state.currentPlayer === 1) { gameElements.playerInputTilesContainer.classList.add('shake'); setTimeout(() => gameElements.playerInputTilesContainer.classList.remove('shake'), 600); }
+
+        if (state.mode === 'ai') {
+            if (state.currentPlayer === 1) aiTurn();
+            else {
+                state.currentPlayer = 1;
+                gameElements.turnIndicator.textContent = "Giliranmu";
+                gameElements.playerInputArea.classList.remove('hidden');
+            }
+        } else {
+            switchPvpTurn();
+            gameElements.playerInputArea.classList.remove('hidden');
+        }
+    }
+    
+    function switchPvpTurn() {
+        state.currentPlayer = state.currentPlayer === 1 ? 2 : 1;
+        state.secretCode = state.currentPlayer === 1 ? state.player2Code : state.player1Code;
+        gameElements.turnIndicator.textContent = `Giliran Pemain ${state.currentPlayer}`;
+        state.guessCount = 0; updateGuessCounter();
+    }
+    function addGuessToHistory(guess, score, player) {
+        const row = document.createElement('div'); row.className = 'guess-row flex items-center justify-between';
+        let playerLabel = (state.mode === 'pvp') ? `<span class="font-bold text-xs ${player === 1 ? 'text-cyan-400' : 'text-purple-400'}">P${player}</span>` : `<span class="font-bold text-xs ${player === 1 ? 'text-cyan-400' : 'text-red-400'}">${player === 1 ? 'KAMU' : 'AI'}</span>`;
+        const guessDisplay = guess.map(digit => `<span class="w-8 text-center font-orbitron">${digit}</span>`).join('');
+        row.innerHTML = `<div class="flex items-center space-x-3">${playerLabel}<div class="flex space-x-1 text-lg">${guessDisplay}</div></div><div class="score-display text-xl"><span class="score-bulls">${score.bulls}</span> / <span class="score-cows">${score.cows}</span></div>`;
+        gameElements.guessHistory.appendChild(row); gameElements.guessHistory.scrollTop = gameElements.guessHistory.scrollHeight;
+    }
+    function aiTurn() {
+        gameElements.turnIndicator.textContent = "AI Memproses"; gameElements.aiThinking.classList.remove('hidden'); gameElements.playerInputArea.style.display = 'none';
+        setTimeout(() => {
+            let aiGuess;
+            switch (state.difficulty) {
+                case 'easy': aiGuess = generateSecretCode(); break;
+                case 'medium': if (state.aiCandidates.length === 0) state.aiCandidates = [...allPossibleCodes]; aiGuess = state.aiCandidates[Math.floor(Math.random() * state.aiCandidates.length)]; break;
+                case 'hard': case 'pro':
+                    if (state.aiCandidates.length === 0) state.aiCandidates = [...allPossibleCodes];
+                    if (state.aiCandidates.length <= 2) { aiGuess = state.aiCandidates[0]; break; }
+                    let bestGuess = null, minMaxSize = Infinity; const testSet = state.aiCandidates.length > 250 ? allPossibleCodes.slice(0, 250) : state.aiCandidates;
+                    for (const guess of testSet) { const p = {}; for (const c of state.aiCandidates) { const s = checkGuess(guess, c); const key = `${s.bulls}-${s.cows}`; p[key] = (p[key] || 0) + 1; } const m = Math.max(...Object.values(p)); if (m < minMaxSize) { minMaxSize = m; bestGuess = guess; } }
+                    aiGuess = bestGuess || state.aiCandidates[0]; break;
+            }
+            state.lastGuess = aiGuess;
+            state.currentPlayer = 2;
+            state.guessCount++;
+            updateGuessCounter();
+
+            if (state.correctionMode === 'auto') {
+                const score = checkGuess(aiGuess, state.secretCode);
+                addGuessToHistory(aiGuess, score, 2);
+                if (score.bulls === 5) { endGame(2); return; }
+                if (state.difficulty !== 'easy') {
+                    state.aiCandidates = state.aiCandidates.filter(c => {
+                        const tempScore = checkGuess(aiGuess, c);
+                        return tempScore.bulls === score.bulls && tempScore.cows === score.cows;
+                    });
+                }
+                state.currentPlayer = 1;
+                gameElements.turnIndicator.textContent = "Giliranmu";
+                gameElements.aiThinking.classList.add('hidden');
+                gameElements.playerInputArea.style.display = 'block';
+            } else {
+                addGuessToHistory(aiGuess, {bulls: '?', cows: '?'}, 2);
+                gameElements.aiThinking.classList.add('hidden');
+                promptForManualScore();
+            }
+        }, 2000);
+    }
+    function endGame(winner) {
+        state.gameOver = true;
+        if (state.mode === 'ai') { modal.title.textContent = winner === 1 ? "Kemenangan Tercapai!" : "AI Mendominasi!"; } 
+        else { modal.title.textContent = `Pemain ${winner} Menang!`; }
+        modal.revealedCode.innerHTML = '';
+        const codeToReveal = (state.mode === 'pvp' && winner === 2) ? state.player1Code : state.secretCode;
+        codeToReveal.forEach((digit, index) => {
+            const tile = document.createElement('div'); tile.className = 'holo-tile !border-green-400 !text-green-400';
+            tile.textContent = digit; tile.style.animation = `slideInRight 0.5s ease-out ${index * 100}ms forwards`; tile.style.opacity = 0;
+            tile.style.boxShadow = '0 0 20px rgba(34, 197, 94, 0.5)'; modal.revealedCode.appendChild(tile);
+        });
+        modal.container.classList.remove('hidden');
+    }
+
+    // --- Keypad Creation ---
+    function createKeypad(container, onKeyPress, layout) {
+        container.innerHTML = '';
+        layout.forEach(key => {
+            const keyElement = document.createElement('button');
+            keyElement.textContent = key === 'DEL' ? '⌫' : key;
+            keyElement.className = `keypad-btn ${key === 'DEL' ? 'delete' : ''}`;
+            keyElement.addEventListener('click', () => onKeyPress(key));
+            container.appendChild(keyElement);
+        });
+    }
+
+    // --- Initialization ---
+    function init() {
+        createKeypad(gameElements.playerKeypad, handlePlayerInput, ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'DEL']);
+        createKeypad(gameElements.pvpKeypad, handlePvpInput, ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'DEL']);
+        createKeypad(gameElements.scoreInputKeypad, (score) => handleManualScoreInput(parseInt(score)), ['0', '1', '2', '3', '4', '5']);
+        generateAllPossibleCodes();
+        showScreen('menu');
+        resetGame();
+    }
+    init();
+});
+</script>
+</body>
+</html>

@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const line2 = document.getElementById('line2');
     const line3 = document.getElementById('line3');
     const navbar = document.getElementById('navbar');
+    const backToTopBtn = document.querySelector('[onclick*="scrollTo"]');
     let isOpen = false;
 
     // Loader
@@ -17,9 +18,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Navbar scroll effect
+    // Navbar scroll effect and back-to-top button visibility
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
+        const heroSection = document.querySelector('#home');
+        const heroSectionHeight = heroSection ? heroSection.offsetHeight : 0;
+        const scrollPosition = window.scrollY;
+        const heroSectionBottom = heroSectionHeight - 100; // 100px before the end of hero
+
+        // Navbar background effect
+        if (scrollPosition > 50) {
             navbar.style.background = 'rgba(37, 99, 235, 0.95)';
             navbar.style.backdropFilter = 'blur(10px)';
             navbar.style.boxShadow = '0 2px 20px rgba(37, 99, 235, 0.3)';
@@ -27,6 +34,22 @@ document.addEventListener('DOMContentLoaded', function() {
             navbar.style.background = 'linear-gradient(to right, #2563eb, #1d4ed8)';
             navbar.style.backdropFilter = 'none';
             navbar.style.boxShadow = 'none';
+        }
+
+        // Show/hide back-to-top button
+        if (backToTopBtn) {
+            if (scrollPosition > heroSectionBottom) {
+                backToTopBtn.style.display = 'flex';
+                backToTopBtn.style.opacity = '1';
+                backToTopBtn.style.visibility = 'visible';
+            } else {
+                backToTopBtn.style.opacity = '0';
+                backToTopBtn.style.visibility = 'hidden';
+                // Add transition after initial hide to prevent flash on page load
+                setTimeout(() => {
+                    backToTopBtn.style.transition = 'opacity 0.3s ease, visibility 0.3s ease';
+                }, 300);
+            }
         }
     });
 
