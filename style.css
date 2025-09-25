@@ -255,6 +255,238 @@ body {
   animation: gradient-shift 2s ease infinite;
 }
 
+/* Work Experience Section */
+.work-experience-section {
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0;
+}
+
+/* Horizontal Scroll Container */
+.variants-sticky {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 2rem 0;
+}
+
+.variants-track {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Card Styles */
+.variant-panel {
+  flex: 0 0 auto;
+  width: 80vw;
+  max-width: 400px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.variant-content {
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.variant-visual {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+}
+
+.variant-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.variant-info {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.variant-info h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.variant-info h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.variant-info p {
+  color: #4b5563;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+  .variant-panel {
+    width: 40vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .variants-track {
+    gap: 2.5rem;
+    padding: 2rem;
+  }
+  
+  .variant-panel {
+    width: 30vw;
+  }
+}
+
+/* Animation Classes */
+.variant-panel.is-active {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.variant-panel:hover .variant-visual img {
+  transform: scale(1.1);
+}
+
+.variant-panel:hover .variant-content {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.work-experience-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  padding: 0 1rem;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.work-card {
+  position: relative;
+  margin-right: 2rem;
+  flex: 0 0 auto;
+  transition: all 0.3s ease;
+  will-change: transform;
+  cursor: grab;
+}
+
+.work-card:active {
+  cursor: grabbing;
+}
+
+/* Hide scrollbar but keep functionality */
+.work-experience-container::-webkit-scrollbar {
+  display: none;
+}
+
+.work-experience-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Navigation Buttons */
+#prevBtn, #nextBtn {
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+#prevBtn:hover, #nextBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+#prevBtn:active, #nextBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .work-card {
+    margin-right: 1.5rem;
+    width: 280px;
+  }
+  
+  .work-experience-track {
+    padding: 0 0.5rem;
+  }
+}
+
+/* Animation for work cards */
+.work-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.work-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Gradient overlay for scroll indication */
+.work-experience-container::before,
+.work-experience-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.work-experience-container::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(236, 253, 255, 0.8) 0%, rgba(236, 253, 255, 0) 100%);
+  opacity: 0;
+}
+
+.work-experience-container::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(236, 253, 255, 0.8) 0%, rgba(236, 253, 255, 0) 100%);
+  opacity: 1;
+}
+
+.work-experience-container.scroll-start::before {
+  opacity: 0;
+}
+
+.work-experience-container.scroll-start::after {
+  opacity: 1;
+}
+
+.work-experience-container.scroll-end::before {
+  opacity: 1;
+}
+
+.work-experience-container.scroll-end::after {
+  opacity: 0;
+}
+
+.work-experience-container.scroll-middle::before,
+.work-experience-container.scroll-middle::after {
+  opacity: 1;
+}
+
 /* Responsive Design Helpers */
 @media (max-width: 768px) {
   .hero-title {
@@ -492,4 +724,196 @@ html {
 /* Ensure proper overflow handling */
 .overflow-hidden {
   overflow: hidden;
+}
+
+/* Work Experience Section - Milk Variants Style */
+.work-experience-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.variants-sticky {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.variants-track {
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 400%;
+  will-change: transform;
+}
+
+.variant-panel {
+  position: relative;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.variant-content {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  height: 80vh;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.variant-visual {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.variant-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.variant-info {
+  flex: 1;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: white;
+  position: relative;
+  z-index: 2;
+}
+
+.variant-tag {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 2px solid;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.variant-name {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+
+.company-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.company-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.company-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.25rem 0;
+}
+
+.company-location {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.variant-description {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #4b5563;
+  margin-bottom: 2.5rem;
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+.skill-tag {
+  padding: 0.4rem 0.9rem;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .variant-content {
+    height: auto;
+    max-height: 80vh;
+    overflow-y: auto;
+    flex-direction: column;
+  }
+  
+  .variant-visual {
+    height: 40vh;
+    min-height: 300px;
+  }
+  
+  .variant-info {
+    padding: 2rem;
+  }
+  
+  .variant-name {
+    font-size: 2.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .variant-panel {
+    padding: 1rem;
+  }
+  
+  .variant-info {
+    padding: 1.5rem;
+  }
+  
+  .variant-name {
+    font-size: 1.875rem;
+  }
+  
+  .variant-description {
+    font-size: 1rem;
+  }
+  
+  .variant-tag {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
+  }
 }
