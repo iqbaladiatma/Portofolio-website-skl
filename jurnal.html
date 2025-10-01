@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
     <style>
         .font-display { font-family: 'Playfair Display', serif; }
@@ -76,71 +77,54 @@
                                 <span class="text-white font-bold text-lg">IA</span>
                             </div>
                             <span class="text-white font-bold text-xl font-display">Jurnal</span>
-                        </a>
-                    </div>
-                    
-                    <div id="burger" class="cursor-pointer p-2 rounded-lg hover:bg-white/10 transition-colors">
-                        <div class="w-6 h-6 flex flex-col justify-center items-center space-y-1">
-                            <div id="line1" class="w-6 h-0.5 bg-white transform transition-all duration-300"></div>
-                            <div id="line2" class="w-6 h-0.5 bg-white transform transition-all duration-300"></div>
-                            <div id="line3" class="w-6 h-0.5 bg-white transform transition-all duration-300"></div>
                         </div>
-                    </div>
+                        <span class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Jurnal</span>
+                    </a>
                 </div>
-                
-                <div class="nav-links fixed inset-x-0 top-full bg-white/95 backdrop-blur-lg border-t border-white/20 transform -translate-y-full opacity-0 transition-all duration-300 z-40">
-                    <div class="px-4 py-6 space-y-4">
-                        <a href="index.html#home" class="block py-3 px-4 text-gray-800 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all duration-300 font-medium">🏠 Beranda</a>
-                        <a href="index.html#about" class="block py-3 px-4 text-gray-800 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all duration-300 font-medium">👤 Tentang</a>
-                        <a href="index.html#portfolio" class="block py-3 px-4 text-gray-800 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all duration-300 font-medium">💼 Portfolio</a>
-                        <a href="game.html" class="block py-3 px-4 text-gray-800 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all duration-300 font-medium">🎮 Game</a>
-                        <a href="index.html#contact" class="block py-3 px-4 text-gray-800 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all duration-300 font-medium">📧 Kontak</a>
-                    </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">Beranda</a>
+                    <a href="#entries" class="text-blue-600 font-medium px-3 py-2 text-sm">Artikel</a>
+                    <a href="#categories" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">Kategori</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">Tentang</a>
+                    <a href="index.html#contact" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">Kontak</a>
+                    <button id="admin-login-btn" class="ml-4 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium rounded-full hover:opacity-90 transition-opacity">
+                        Masuk Admin
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
-            
-            <!-- Desktop Navbar -->
-            <div class="hidden md:flex justify-between items-center py-4">
-                <div class="flex items-center">
-                    <a href="index.html#home" class="flex items-center space-x-3 group">
-                        <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                            <span class="text-white font-bold text-xl">IA</span>
-                        </div>
-                        <div>
-                            <span class="text-white font-bold text-xl font-display">Jurnal Pribadi</span>
-                            <p class="text-purple-200 text-sm">Catatan Perjalanan Hidup</p>
-                        </div>
-                    </a>
-                </div>
-                
-                <div class="flex items-center space-x-8">
-                    <a href="index.html#home" class="text-white hover:text-purple-300 transition-all duration-300 font-medium relative group">
-                        Beranda
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="index.html#about" class="text-white hover:text-purple-300 transition-all duration-300 font-medium relative group">
-                        Tentang
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="index.html#portfolio" class="text-white hover:text-purple-300 transition-all duration-300 font-medium relative group">
-                        Portfolio
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="game.html" class="text-white hover:text-purple-300 transition-all duration-300 font-medium relative group">
-                        Game
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="index.html#contact" class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-lg">
-                        Kontak
-                    </a>
-                </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg rounded-b-lg">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Beranda</a>
+                <a href="#entries" class="block px-3 py-2 rounded-md text-base font-medium text-blue-600 bg-blue-50">Artikel</a>
+                <a href="#categories" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Kategori</a>
+                <a href="index.html#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Tentang</a>
+                <a href="index.html#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Kontak</a>
+                <button id="admin-login-btn-mobile" class="w-full mt-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium rounded-md hover:opacity-90 transition-opacity">
+                    Masuk Admin
+                </button>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-black/20"></div>
+    <section class="hero-bg min-h-[60vh] md:min-h-[80vh] flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/30 to-black/60"></div>
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80')] bg-cover bg-center opacity-20"></div>
         
         <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto" data-aos="fade-up">
             <h1 class="text-6xl md:text-8xl font-display font-bold mb-6 leading-tight">
@@ -273,7 +257,7 @@
 
             <div class="border-t border-gray-700 mt-12 pt-8 text-center">
                 <p class="text-gray-400">
-                    © 2024 Iqbal Adiatma. All rights reserved. | Built with ❤️ for sharing knowledge
+                    &copy; 2024 Iqbal Adiatma. All rights reserved. | Built with &hearts; for sharing knowledge
                 </p>
             </div>
         </div>
@@ -282,47 +266,22 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
-
-        // Mobile Navigation Toggle
-        const navLinks = document.querySelector('.nav-links');
-        const burger = document.getElementById('burger');
-        const line1 = document.getElementById('line1');
-        const line2 = document.getElementById('line2');
-        const line3 = document.getElementById('line3');
-
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
         function onToggleMenu(e) {
-            navLinks.classList.toggle('top-[100%]');
-            navLinks.classList.toggle('opacity-100');
-            navLinks.classList.toggle('-translate-y-full');
+            if (e) e.preventDefault();
+            mobileMenu.classList.toggle('hidden');
             
-            line1.classList.toggle('rotate-45');
-            line1.classList.toggle('translate-y-2');
-            line2.classList.toggle('opacity-0');
-            line3.classList.toggle('-rotate-45');
-            line3.classList.toggle('-translate-y-2');
+            // Toggle icon between menu and close
+            const icon = mobileMenuButton.querySelector('svg');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>';
+            } else {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+            }
         }
-
-        if (burger) {
-            burger.addEventListener('click', onToggleMenu);
-        }
-
-        // Close mobile menu when clicking on links
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.add('-translate-y-full');
-                navLinks.classList.remove('opacity-100');
-                navLinks.classList.remove('top-[100%]');
-                
-                line1.classList.remove('rotate-45', 'translate-y-2');
-                line2.classList.remove('opacity-0');
-                line3.classList.remove('-rotate-45', '-translate-y-2');
-            });
-        });
 
         // Smooth scroll to entries
         function scrollToEntries() {

@@ -6,37 +6,51 @@
     <link rel="icon" href="./dist/img/logofull.jpg">
     <title>Portofolio - Iqbal Muhammad Adiatma</title>
     <link href="src/output.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/src/input.css" />
     <link rel="stylesheet" href="style.css">
     <!-- ion icons link -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.2.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.2.2/dist/ionicons/ionicons.js"></script>
 
   <!-- Tailwind CSS CDN Link -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-<!--   Adsensen   -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5629966093634048"
-     crossorigin="anonymous"></script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5629966093634048" crossorigin="anonymous"></script>
     
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  
-  <!-- AOC -->
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <meta name="description" content="Iqbal Muhammad Adiatma - Iqbal Muhammad Adiatma Portfolio">
-  <meta name="keywords" content="Iqbal, Iqbal Adiatma, Iqbal Muhammad Adiatma,frontend developer, web developer, portfolio, HTML, CSS, JavaScript">
-  <meta name="author" content="Iqbal Muhammad Adiatma">
-  <meta property="og:title" content="Iqbal Muhammad Adiatma - Portfolio">
-  <meta property="og:description" content="Product Architect Portfolio">
-  <meta property="og:image" content="./dist/img/logofull.jpg">
+    <!-- Google Fonts: Exo 2 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <!-- Three.js and Vanta.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.globe.min.js"></script>
+  <script>
+    // Ensure THREE is available globally
+    window.THREE = THREE;
+  </script>
+    
+    <!-- AOS (Animate On Scroll) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="Iqbal Muhammad Adiatma - Professional Portfolio">
+    <meta name="keywords" content="Iqbal, Iqbal Adiatma, Iqbal Muhammad Adiatma, frontend developer, web developer, portfolio, HTML, CSS, JavaScript">
+    <meta name="author" content="Iqbal Muhammad Adiatma">
+    <meta property="og:title" content="Iqbal Muhammad Adiatma - Portfolio">
+    <meta property="og:description" content="Product Architect Portfolio">
+    <meta property="og:image" content="./dist/img/logofull.jpg">
   
   </head>
   <body class="bg-white">
     <div id="loader" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
         <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
     </div>
+    <!-- Navbar -->
     <header class="fixed w-full top-0 z-50 transition-all duration-500 backdrop-blur-md bg-white/10" id="navbar">
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Mobile Navbar -->
@@ -124,103 +138,295 @@
       </nav>
     </header>
 
-<!-- JavaScript -->
+<!-- JavaScript for Hamburger Menu -->
   <script>
-      const navLinks = document.querySelector('.nav-links')
-      function onToggleMenu(e){
-          e.name = e.name === 'menu' ? 'close' : 'menu'
-          if(e.name === 'close') {
-              navLinks.style.top = '60px'
-              navLinks.classList.remove('top-[-100%]')
-          } else {
-              navLinks.style.top = '-100%'
-              navLinks.classList.add('top-[-100%]')
+      // Simple hamburger menu functionality
+      document.addEventListener('DOMContentLoaded', function() {
+          console.log('DOM fully loaded');
+          
+          const burger = document.getElementById('burger');
+          const navLinks = document.querySelector('.nav-links');
+          
+          if (!burger || !navLinks) {
+              console.error('Burger menu elements not found!');
+              return;
           }
-      }
-
-      document.querySelectorAll('.nav-links a').forEach(link => {
-          link.addEventListener('click', () => {
-              const menuIcon = document.querySelector('ion-icon[name="close"]')
-              if(menuIcon) {
-                  menuIcon.name = 'menu'
-                  navLinks.style.top = '-100%'
-                  navLinks.classList.add('top-[-100%]')
+          
+          console.log('Menu elements found, adding event listeners');
+          
+          // Toggle menu function
+          function toggleMenu() {
+              console.log('Toggle menu called');
+              
+              // Toggle menu visibility
+              navLinks.classList.toggle('opacity-0');
+              navLinks.classList.toggle('opacity-100');
+              navLinks.classList.toggle('translate-y-0');
+              navLinks.classList.toggle('-translate-y-full');
+              
+              // Toggle burger animation
+              const line1 = document.getElementById('line1');
+              const line2 = document.getElementById('line2');
+              const line3 = document.getElementById('line3');
+              
+              if (line1 && line2 && line3) {
+                  line1.classList.toggle('rotate-45');
+                  line1.classList.toggle('translate-y-1.5');
+                  line2.classList.toggle('opacity-0');
+                  line3.classList.toggle('-rotate-45');
+                  line3.classList.toggle('-translate-y-1');
               }
-          })
-      })
+              
+              // Toggle body scroll
+              document.body.classList.toggle('overflow-hidden');
+          }
+          
+          // Add click event to burger button
+          burger.addEventListener('click', function(e) {
+              console.log('Burger clicked');
+              e.preventDefault();
+              e.stopPropagation();
+              toggleMenu();
+          });
+          
+          // Close menu when clicking outside
+          document.addEventListener('click', function(e) {
+              if (!navLinks.contains(e.target) && !burger.contains(e.target)) {
+                  if (navLinks.classList.contains('opacity-100')) {
+                      toggleMenu();
+                  }
+              }
+          });
+          
+          // Close menu when clicking on a link
+          const menuLinks = navLinks.querySelectorAll('a');
+          menuLinks.forEach(link => {
+              link.addEventListener('click', function() {
+                  if (navLinks.classList.contains('opacity-100')) {
+                      toggleMenu();
+                  }
+              });
+          });
+      });
   </script>    
     <!-- End Navbar -->
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900 pt-20">
-      <!-- Animated Background -->
-      <div class="absolute inset-0 w-full h-full">
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-40"></div>
-        <canvas id="particle-canvas" class="absolute inset-0 w-full h-full z-0"></canvas>
-      </div>
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-900 pt-20">
+      <!-- Tech-themed Background (Vanta.js) -->
+      <div id="vanta-bg"></div>
 
-      <!-- Floating Elements -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="floating-element absolute top-20 left-10 w-20 h-20 bg-blue-500/10 rounded-full blur-xl animate-pulse"></div>
-        <div class="floating-element absolute top-40 right-20 w-32 h-32 bg-purple-500/10 rounded-full blur-xl animate-pulse delay-1000"></div>
-        <div class="floating-element absolute bottom-40 left-20 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl animate-pulse delay-2000"></div>
-      </div>
+      <!-- Semi-transparent overlay to ensure text readability -->
+      <div class="absolute inset-0 bg-black/40 z-5"></div>
 
-      <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <!-- Profile Image -->
-        <div class="mb-8" data-aos="zoom-in" data-aos-duration="1000">
-          <div class="w-32 h-32 md:w-40 md:h-40 mx-auto relative">
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full animate-spin-slow"></div>
-            <div class="absolute inset-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center">
-              <span class="text-white font-bold text-4xl md:text-5xl">IA</span>
+      <!-- Content Container -->
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+        
+        <!-- Profile Logo with enhanced effects -->
+        <div class="mb-8 hero-profile">
+            <div class="w-36 h-36 md:w-44 md:h-44 mx-auto relative group">
+                <!-- Spinning gradient ring -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full animate-spin-slow"></div>
+                <!-- Inner shadow and glow -->
+                <div class="absolute inset-0 rounded-full shadow-2xl shadow-purple-500/40 group-hover:shadow-purple-400/50 transition-shadow duration-500"></div>
+                <!-- Main logo container -->
+                <div class="absolute inset-2 bg-slate-800/80 backdrop-blur-sm rounded-full flex items-center justify-center overflow-hidden">
+                    <img src="https://placehold.co/150x150/a855f7/ffffff?text=IA" 
+                         alt="Foto Profil Iqbal Adiatma" 
+                         class="w-full h-full object-cover">
+                </div>
+                <!-- Rotating glow effect -->
+                <div class="absolute inset-0 rounded-full animate-rotate-glow pointer-events-none"></div>
             </div>
-          </div>
         </div>
 
         <!-- Main Title -->
-        <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-3" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-          <span class="bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent">
-            Iqbal Adiatma
-          </span>
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-4 tracking-tighter hero-title">
+            <span class="bg-gradient-to-r from-white via-cyan-300 to-purple-400 bg-clip-text text-transparent" style="text-shadow: 0 4px 20px rgba(192, 132, 252, 0.2);">
+                Iqbal Adiatma
+            </span>
         </h1>
 
         <!-- Subtitle with Typing Effect -->
-        <div class="mb-8" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
-          <p class="text-2xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-            <span id="typed-text"></span>
-            <span class="animate-pulse">|</span>
-          </p>
+        <div class="h-12 md:h-16 mb-6 hero-subtitle">
+            <p class="text-2xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                <span id="typed-text"></span><span class="blinking-cursor text-cyan-400">|</span>
+            </p>
         </div>
 
         <!-- Description -->
-        <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-5 leading-relaxed" data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000">
-          Passionate Full Stack Developer yang berfokus pada pembuatan aplikasi web modern, responsif, dan user-friendly. 
-          Menggunakan teknologi terdepan untuk menciptakan solusi digital yang inovatif.
+        <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed hero-description">
+            Seorang Full Stack Developer yang bersemangat dalam merancang aplikasi web modern, responsif, dan berpusat pada pengguna untuk memberikan solusi digital inovatif.
         </p>
 
         <!-- CTA Buttons -->
-        <div class="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center mb-10" 
-     data-aos="fade-up" data-aos-delay="800" data-aos-duration="1000">
-  <a href="#portfolio" class="group relative px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25 min-w-[160px] md:min-w-[180px]">
-    <span class="relative z-10 flex items-center justify-center gap-2">
-      <svg class="w-5 h-5 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0l-4-4m4 4l-4 4"></path>
-      </svg>
-      Lihat Portfolio
-    </span>
-    <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-  </a>
-  
-  <a href="#contact" class="group px-6 py-3 md:px-8 md:py-4 border-2 border-blue-400 text-blue-400 font-semibold rounded-full hover:bg-blue-400 hover:text-white transition-all duration-300 transform hover:scale-105 min-w-[160px] md:min-w-[180px]">
-    <span class="flex items-center justify-center gap-2">
-      <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-      </svg>
-      Hubungi Saya
-    </span>
-  </a>
-</div>
+        <div class="flex flex-col sm:flex-row gap-5 justify-center items-center hero-cta">
+            <a href="#portfolio" class="spotlight-btn group px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg shadow-blue-600/30 transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-purple-600/40 min-w-[200px]">
+                <span class="relative z-10 flex items-center justify-center gap-2 text-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    Lihat Portofolio
+                </span>
+            </a>
+            
+            <a href="#contact" class="group px-8 py-3 bg-slate-800/50 border border-purple-400/50 text-purple-300 font-semibold rounded-lg hover:bg-purple-900/40 hover:border-purple-300 hover:text-white transition-all duration-300 transform hover:scale-105 min-w-[200px]">
+                <span class="flex items-center justify-center gap-2 text-md">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:rotate-12 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>
+                    Hubungi Saya
+                </span>
+            </a>
+        </div>
       </div>
+    </section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Vanta.js Background Animation ---
+        VANTA.GLOBE({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x3b82f6, // Blue-500
+            color2: 0x2563eb, // Blue-600
+            backgroundColor: 0x1e40af, // Blue-800
+            points: 10.00,
+            maxDistance: 25.00,
+            spacing: 15.00,
+            size: 1.20 // Controls the size of the globe/network
+        });
+
+        // --- GSAP Entrance Animation ---
+        gsap.set(['.hero-profile', '.hero-title', '.hero-subtitle', '.hero-description', '.hero-cta > a'], { autoAlpha: 0 });
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.8 }, delay: 0.2 });
+        tl.to('.hero-profile', { autoAlpha: 1, scale: 1, y: 0, duration: 1, rotation: 0 })
+          .to('.hero-title', { autoAlpha: 1, y: 0 }, "-=0.7")
+          .to('.hero-subtitle', { autoAlpha: 1, y: 0 }, "-=0.7")
+          .to('.hero-description', { autoAlpha: 1, y: 0 }, "-=0.7")
+          .to('.hero-cta > a', { autoAlpha: 1, y: 0, stagger: 0.2 }, "-=0.6");
+        
+        // --- Typing Effect ---
+        const typedTextEl = document.getElementById('typed-text');
+        if (typedTextEl) {
+            const texts = ['Full Stack Developer', 'AI Enthusiast', 'Blockchain Explorer', 'Web3 Innovator'];
+            let textIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function type() {
+                const currentText = texts[textIndex];
+                let displayText = '';
+                if (isDeleting) { 
+                    displayText = currentText.substring(0, charIndex--); 
+                } else { 
+                    displayText = currentText.substring(0, charIndex++); 
+                }
+                typedTextEl.textContent = displayText;
+                const typeSpeed = isDeleting ? 75 : 150;
+                
+                if (!isDeleting && charIndex === currentText.length + 1) {
+                    isDeleting = true;
+                    setTimeout(type, 2000);
+                } else if (isDeleting && charIndex === -1) {
+                    isDeleting = false;
+                    textIndex = (textIndex + 1) % texts.length;
+                    setTimeout(type, 500);
+                } else {
+                    setTimeout(type, typeSpeed);
+                }
+            }
+            type();
+        }
+    });
+    </script>
+
+    <style>
+        /* Custom CSS for advanced animations and styling */
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Vanta.js Canvas Styling */
+        #vanta-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* Animated Gradient Background */
+        .animated-gradient-bg {
+            background-size: 200% 200%;
+            animation: gradient-flow 15s ease-in-out infinite;
+        }
+
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Slow Spin for Profile Image Ring */
+        @keyframes spin-slow {
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 25s linear infinite;
+        }
+
+        /* Shimmer/Glow effect for the Profile Image */
+        @keyframes rotate-glow {
+            0% { transform: rotate(0deg) scaleX(0); }
+            25% { transform: scaleX(1); }
+            50%, 100% { transform: rotate(360deg) scaleX(0); }
+        }
+        .animate-rotate-glow::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform-origin: center;
+            animation: rotate-glow 8s linear infinite;
+        }
+
+        /* Blinking Cursor for Typing Effect */
+        @keyframes blink-cursor {
+            50% { opacity: 0; }
+        }
+        .blinking-cursor {
+            animation: blink-cursor 1s step-end infinite;
+        }
+        
+        /* Button Hover Spotlight Effect */
+        .spotlight-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .spotlight-btn:hover::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            animation: pulse-light 1.5s infinite;
+        }
+
+        @keyframes pulse-light {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+        }
+    </style>
     </section>
     <script>
       // --- Script untuk Animasi Partikel ---
@@ -413,133 +619,136 @@
     </section>
     <!-- End About Me -->
 
-    <!-- Work Experiences -->
-    <section id="work-experience" class="work-experience-section py-20 bg-white relative overflow-hidden">
-      <!-- Background Elements -->
-      <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-indigo-50/50"></div>
-      <div class="absolute top-0 left-0 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
-      
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Header -->
-        <div class="text-center mb-16" data-aos="fade-up">
-          <h2 class="text-4xl md:text-5xl font-bold mb-4">
-            <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Work</span> Experience
-          </h2>
-          <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6 rounded-full"></div>
-          <p class="text-gray-600 max-w-2xl mx-auto text-lg">My professional journey and the companies I've had the privilege to work with</p>
-        </div>
+     <!-- Work Experiences -->
+  <!-- Work Experience Section -->
+  <section id="work-experience" class="py-20 bg-white relative overflow-hidden">
 
-        <!-- Horizontal Scroll Container -->
-        <div class="variants-sticky">
-          <div class="variants-track">
-            <!-- Experience 1 -->
-            <div class="variant-panel">
-              <div class="variant-content">
-                <div class="variant-visual">
-                  <img src="https://via.placeholder.com/800x1000/f8fafc/1e293b?text=Product+Architect" alt="Product Architect">
-                </div>
-                <div class="variant-info">
-                  <span class="variant-tag" style="border-color: #3b82f6; color: #60a5fa;">2022 - Present</span>
-                  <h2 class="variant-name display-font" style="color: #60a5fa;">Product Architect</h2>
-                  <div class="company-info">
-                    <span class="company-logo" style="background-color: #dbeafe; color: #2563eb;">IA</span>
-                    <div>
-                      <h3 class="company-name">Freelance</h3>
-                      <p class="company-location">Remote</p>
-                    </div>
-                  </div>
-                  <p class="variant-description">Leading product development initiatives and architectural decisions for various clients, ensuring scalable and maintainable solutions. Specializing in modern web technologies and cloud infrastructure.</p>
-                  <div class="skills-tags">
-                    <span class="skill-tag" style="background-color: #dbeafe; color: #1e40af;">React</span>
-                    <span class="skill-tag" style="background-color: #ede9fe; color: #5b21b6;">Node.js</span>
-                    <span class="skill-tag" style="background-color: #dcfce7; color: #166534;">AWS</span>
-                  </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header -->
+      <div class="text-center mb-16" data-aos="fade-down">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-800">
+          <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Work</span> Experience
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6 rounded-full"></div>
+        <p class="text-gray-600 max-w-2xl mx-auto text-lg">My professional journey and the companies I've had the privilege to work with.</p>
+      </div>
+
+      <!-- Horizontal Scroll Container -->
+      <div class="work-experience-container relative">
+        <div class="work-experience-track">
+          <!-- Experience 1 -->
+          <div class="work-card bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="h-48 overflow-hidden">
+              <img src="https://placehold.co/800x1000/f0f9ff/0284c7?text=Product+Architect" alt="Product Architect" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="p-6">
+              <span class="inline-block px-3 py-1 text-xs font-semibold text-blue-700 bg-blue-100 rounded-full mb-3">2022 - Present</span>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">Product Architect</h3>
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold mr-3">FL</div>
+                <div>
+                  <h4 class="font-medium text-gray-900">Freelance</h4>
+                  <p class="text-sm text-gray-500">Remote</p>
                 </div>
               </div>
-            </div>
-
-            <!-- Experience 2 -->
-            <div class="variant-panel">
-              <div class="variant-content">
-                <div class="variant-visual">
-                  <img src="https://via.placeholder.com/800x1000/f8fafc/1e293b?text=Frontend+Developer" alt="Frontend Developer">
-                </div>
-                <div class="variant-info">
-                  <span class="variant-tag" style="border-color: #22c55e; color: #4ade80;">2020 - 2022</span>
-                  <h2 class="variant-name display-font" style="color: #4ade80;">Frontend Developer</h2>
-                  <div class="company-info">
-                    <span class="company-logo" style="background-color: #e0e7ff; color: #4f46e5;">TC</span>
-                    <div>
-                      <h3 class="company-name">Tech Company</h3>
-                      <p class="company-location">Jakarta, Indonesia</p>
-                    </div>
-                  </div>
-                  <p class="variant-description">Developed responsive web applications using modern JavaScript frameworks and collaborated with cross-functional teams to deliver high-quality products with exceptional user experiences.</p>
-                  <div class="skills-tags">
-                    <span class="skill-tag" style="background-color: #dbeafe; color: #1e40af;">Vue.js</span>
-                    <span class="skill-tag" style="background-color: #fef9c3; color: #854d0e;">TypeScript</span>
-                    <span class="skill-tag" style="background-color: #fee2e2; color: #991b1b;">Firebase</span>
-                  </div>
-                </div>
+              <p class="text-gray-600 mb-4">Leading product development initiatives and architectural decisions for various clients, ensuring scalable and maintainable solutions.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 text-xs font-medium text-blue-800 bg-blue-50 rounded-full">React</span>
+                <span class="px-3 py-1 text-xs font-medium text-indigo-800 bg-indigo-50 rounded-full">Node.js</span>
+                <span class="px-3 py-1 text-xs font-medium text-green-800 bg-green-50 rounded-full">AWS</span>
               </div>
             </div>
+          </div>
 
-            <!-- Experience 3 -->
-            <div class="variant-panel">
-              <div class="variant-content">
-                <div class="variant-visual">
-                  <img src="https://via.placeholder.com/800x1000/f8fafc/1e293b?text=Web+Developer" alt="Web Developer">
-                </div>
-                <div class="variant-info">
-                  <span class="variant-tag" style="border-color: #ec4899; color: #f472b6;">2018 - 2020</span>
-                  <h2 class="variant-name display-font" style="color: #f472b6;">Web Developer</h2>
-                  <div class="company-info">
-                    <span class="company-logo" style="background-color: #f3e8ff; color: #7e22ce;">WD</span>
-                    <div>
-                      <h3 class="company-name">Web Agency</h3>
-                      <p class="company-location">Bandung, Indonesia</p>
-                    </div>
-                  </div>
-                  <p class="variant-description">Created responsive websites and web applications for various clients, focusing on performance, accessibility, and user experience. Worked closely with designers to bring creative visions to life.</p>
-                  <div class="skills-tags">
-                    <span class="skill-tag" style="background-color: #dbeafe; color: #1e40af;">HTML/CSS</span>
-                    <span class="skill-tag" style="background-color: #fef9c3; color: #854d0e;">JavaScript</span>
-                    <span class="skill-tag" style="background-color: #dcfce7; color: #166534;">WordPress</span>
-                  </div>
+          <!-- Experience 2 -->
+          <div class="work-card bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="h-48 overflow-hidden">
+              <img src="https://placehold.co/800x1000/f0fdf4/16a34a?text=Frontend+Developer" alt="Frontend Developer" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="p-6">
+              <span class="inline-block px-3 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full mb-3">2020 - 2022</span>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">Frontend Developer</h3>
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold mr-3">TC</div>
+                <div>
+                  <h4 class="font-medium text-gray-900">Tech Company</h4>
+                  <p class="text-sm text-gray-500">Jakarta, Indonesia</p>
                 </div>
               </div>
+              <p class="text-gray-600 mb-4">Developed responsive web applications using modern JavaScript frameworks to deliver high-quality products with exceptional user experiences.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 text-xs font-medium text-blue-800 bg-blue-50 rounded-full">Vue.js</span>
+                <span class="px-3 py-1 text-xs font-medium text-yellow-800 bg-yellow-50 rounded-full">TypeScript</span>
+                <span class="px-3 py-1 text-xs font-medium text-red-800 bg-red-50 rounded-full">Firebase</span>
+              </div>
             </div>
+          </div>
 
-            <!-- Experience 4 -->
-            <div class="variant-panel">
-              <div class="variant-content">
-                <div class="variant-visual">
-                  <img src="https://via.placeholder.com/800x1000/f8fafc/1e293b?text=UI+UX+Designer" alt="UI/UX Designer">
+          <!-- Experience 3 -->
+          <div class="work-card bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="h-48 overflow-hidden">
+              <img src="https://placehold.co/800x1000/fdf2f8/db2777?text=Web+Developer" alt="Web Developer" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="p-6">
+              <span class="inline-block px-3 py-1 text-xs font-semibold text-pink-700 bg-pink-100 rounded-full mb-3">2018 - 2020</span>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">Web Developer</h3>
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold mr-3">WA</div>
+                <div>
+                  <h4 class="font-medium text-gray-900">Web Agency</h4>
+                  <p class="text-sm text-gray-500">Bandung, Indonesia</p>
                 </div>
-                <div class="variant-info">
-                  <span class="variant-tag" style="border-color: #f59e0b; color: #fbbf24;">2016 - 2018</span>
-                  <h2 class="variant-name display-font" style="color: #fbbf24;">UI/UX Designer</h2>
-                  <div class="company-info">
-                    <span class="company-logo" style="background-color: #fce7f3; color: #be185d;">UX</span>
-                    <div>
-                      <h3 class="company-name">Design Studio</h3>
-                      <p class="company-location">Yogyakarta, Indonesia</p>
-                    </div>
-                  </div>
-                  <p class="variant-description">Designed intuitive user interfaces and experiences for web and mobile applications, focusing on usability and visual appeal. Conducted user research and testing to inform design decisions.</p>
-                  <div class="skills-tags">
-                    <span class="skill-tag" style="background-color: #fce7f3; color: #9d174d;">Figma</span>
-                    <span class="skill-tag" style="background-color: #ffedd5; color: #9a3412;">Sketch</span>
-                    <span class="skill-tag" style="background-color: #dbeafe; color: #1e40af;">Adobe XD</span>
-                  </div>
+              </div>
+              <p class="text-gray-600 mb-4">Created responsive websites and web applications for various clients, focusing on performance, accessibility, and user experience.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 text-xs font-medium text-blue-800 bg-blue-50 rounded-full">HTML/CSS</span>
+                <span class="px-3 py-1 text-xs font-medium text-yellow-800 bg-yellow-50 rounded-full">JavaScript</span>
+                <span class="px-3 py-1 text-xs font-medium text-green-800 bg-green-50 rounded-full">WordPress</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience 4 -->
+          <div class="work-card bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="h-48 overflow-hidden">
+              <img src="https://placehold.co/800x1000/fffbeb/f59e0b?text=UI/UX+Designer" alt="UI/UX Designer" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="p-6">
+              <span class="inline-block px-3 py-1 text-xs font-semibold text-yellow-700 bg-yellow-100 rounded-full mb-3">2016 - 2018</span>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">UI/UX Designer</h3>
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 font-bold mr-3">DS</div>
+                <div>
+                  <h4 class="font-medium text-gray-900">Design Studio</h4>
+                  <p class="text-sm text-gray-500">Yogyakarta, Indonesia</p>
                 </div>
+              </div>
+              <p class="text-gray-600 mb-4">Designed intuitive user interfaces for web and mobile applications, focusing on usability and visual appeal, from research to final prototype.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 text-xs font-medium text-pink-800 bg-pink-50 rounded-full">Figma</span>
+                <span class="px-3 py-1 text-xs font-medium text-amber-800 bg-amber-50 rounded-full">Sketch</span>
+                <span class="px-3 py-1 text-xs font-medium text-blue-800 bg-blue-50 rounded-full">Adobe XD</span>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Navigation Buttons -->
+        <button id="prevBtn" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white w-10 h-10 rounded-full shadow-lg flex items-center justify-center text-blue-600 hover:bg-blue-50 transition-colors z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        <button id="nextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white w-10 h-10 rounded-full shadow-lg flex items-center justify-center text-blue-600 hover:bg-blue-50 transition-colors z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+          </svg>
+        </button>
       </div>
-    </section>
+    </div>
+  </section>
+  <!-- End Work Experiences -->
+
 
     <!-- My Skills -->
     <section id="skills" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -677,11 +886,8 @@
     <!-- End My Skills -->
 
     <!-- Journey Section -->
-    <section id="journey" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-indigo-100">
-      <!-- Background Elements -->
-      <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-indigo-50/50"></div>
-      <div class="absolute top-0 left-0 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+    <section id="journey" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-black">
+
 
       <div class="relative max-w-7xl mx-auto">
         <!-- Header -->
@@ -857,7 +1063,7 @@
           <!-- Card 1 -->
           <div class="group bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
             <div class="relative overflow-hidden">
-              <img src="https://via.placeholder.com/1200x800/f8fafc/1e293b?text=Kuis+Literasi" alt="Kuis Literasi" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+              <img src="https://placehold.co/1200x800/f8fafc/1e293b?text=Kuis+Literasi" alt="Kuis Literasi" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <div class="p-6">
@@ -882,7 +1088,7 @@
           <!-- Card 2 -->
           <div class="group bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
             <div class="relative overflow-hidden">
-              <img src="https://via.placeholder.com/1200x800/f8fafc/1e293b?text=Perang+Sastra" alt="Perang Sastra" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+              <img src="https://picsum.photos/1200/800?blur" alt="Perang Sastra" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <div class="p-6">
@@ -907,7 +1113,7 @@
           <!-- Card 3 -->
           <div class="group bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-500" data-aos="fade-up" data-aos-delay="300">
             <div class="relative overflow-hidden">
-              <img src="https://via.placeholder.com/1200x800/f8fafc/1e293b?text=Fix+The+Code" alt="Fix The Code" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+              <img src="https://placehold.co/1200x800/f8fafc/1e293b?text=Fix+The+Code" alt="Fix The Code" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <div class="p-6">
@@ -1027,7 +1233,7 @@
           <div class="certificate-item group" data-aos="fade-up" data-aos-delay="300">
             <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full flex flex-col">
               <div class="relative overflow-hidden h-48">
-                <img src="https://via.placeholder.com/1470x980/f8fafc/1e293b?text=UI/UX+Design"
+                <img src="https://placehold.co/1470x980/f8fafc/1e293b?text=UI/UX+Design"
                      alt="Sertifikat UI/UX Design" 
                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -1077,7 +1283,7 @@
           <div class="certificate-item group" data-aos="fade-up" data-aos-delay="200">
             <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full flex flex-col">
               <div class="relative overflow-hidden h-48">
-                <img src="https://via.placeholder.com/1470x980/f8fafc/1e293b?text=Cloud+Computing"
+                <img src="https://placehold.co/1470x980/f8fafc/1e293b?text=Cloud+Computing"
                      alt="Sertifikat Cloud Computing" 
                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -1126,7 +1332,7 @@
           <div class="certificate-item group" data-aos="fade-up" data-aos-delay="100">
             <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full flex flex-col">
               <div class="relative overflow-hidden h-48">
-                <img src="https://via.placeholder.com/1470x980/f8fafc/1e293b?text=Digital+Marketing"
+                <img src="https://placehold.co/1470x980/f8fafc/1e293b?text=Digital+Marketing"
                      alt="Sertifikat Digital Marketing" 
                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -1176,7 +1382,7 @@
           <div class="certificate-item group" data-aos="fade-up" data-aos-delay="300">
             <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full flex flex-col">
               <div class="relative overflow-hidden h-48">
-                <img src="https://via.placeholder.com/1470x980/f8fafc/1e293b?text=Data+Analysis"
+                <img src="https://placehold.co/1470x980/f8fafc/1e293b?text=Data+Analysis"
                      alt="Sertifikat Data Analysis" 
                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -2045,6 +2251,8 @@
         // Add click event to each certificate item
         certificateItems.forEach((item, index) => {
             const button = item.querySelector('.view-detail-btn');
+            if (!button) return; // Skip if no button found
+            
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 
@@ -2090,16 +2298,20 @@
         });
         
         // Close modal when clicking the close button
-        closeModalBtn.addEventListener('click', () => {
-            closeModal();
-        });
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', () => {
+                closeModal();
+            });
+        }
         
         // Close modal when clicking outside the modal content
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        }
         
         // Close modal with Escape key
         document.addEventListener('keydown', (e) => {
@@ -2124,135 +2336,143 @@
     <!-- GSAP and ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
-    <script>
-    // Initialize GSAP and ScrollTrigger
-    gsap.registerPlugin(ScrollTrigger);
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 
-    // Work Experience Horizontal Scroll
-    document.addEventListener('DOMContentLoaded', function() {
-        // Select elements
-        const workSection = document.querySelector('.work-experience-section');
-        const variantsTrack = document.querySelector('.variants-track');
-        const variantPanels = document.querySelectorAll('.variant-panel');
+    <script>
+      // Initialize GSAP plugins
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+      document.addEventListener('DOMContentLoaded', function() {
+        // Work Experience Horizontal Scroll
+        const track = document.querySelector('.work-experience-track');
+        const cards = gsap.utils.toArray('.work-card');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
         
-        // Make sure elements exist
-        if (!workSection || !variantsTrack) return;
-        
-        // Calculate total width based on number of panels
-        const panelCount = variantPanels.length;
-        const viewportWidth = window.innerWidth;
-        const totalWidth = viewportWidth * panelCount;
+        if (!track || !cards.length) return;
+
+        // Calculate total width needed for all cards
+        const cardWidth = cards[0].offsetWidth + 32; // width + gap
+        const totalWidth = cardWidth * cards.length;
         
         // Set initial styles
-        gsap.set(variantsTrack, {
-            width: `${totalWidth}px`,
-            x: 0
+        gsap.set(track, { 
+          width: totalWidth,
+          x: 0
         });
+
+        // Function to update button states
+        function updateButtonStates() {
+          if (!prevBtn || !nextBtn) return;
+          
+          const maxScroll = track.scrollWidth - track.clientWidth;
+          const currentScroll = track.scrollLeft;
+          
+          // Show/hide prev button
+          if (currentScroll <= 10) {
+            prevBtn.classList.add('opacity-0', 'invisible');
+          } else {
+            prevBtn.classList.remove('opacity-0', 'invisible');
+          }
+          
+          // Show/hide next button
+          if (currentScroll >= maxScroll - 10) {
+            nextBtn.classList.add('opacity-0', 'invisible');
+          } else {
+            nextBtn.classList.remove('opacity-0', 'invisible');
+          }
+        }
         
-        // Create horizontal scroll animation
-        const scrollTween = gsap.to(variantsTrack, {
-            x: () => `-${totalWidth - viewportWidth}px`,
-            ease: 'none',
-            scrollTrigger: {
-                trigger: workSection,
-                start: 'top top',
-                end: 'bottom bottom',
-                scrub: 1,
-                pin: true,
-                pinSpacing: true,
-                invalidateOnRefresh: true,
-                onUpdate: (self) => {
-                    // Update active state based on scroll position
-                    const progress = self.progress;
-                    const activeIndex = Math.min(
-                        panelCount - 1,
-                        Math.floor(progress * panelCount)
-                    );
-                    
-                    variantPanels.forEach((panel, index) => {
-                        if (index === activeIndex) {
-                            panel.classList.add('active');
-                        } else {
-                            panel.classList.remove('active');
-                        }
-                    });
-                }
-            }
-        });
-        
-        // Animate each panel's content as it comes into view
-        variantPanels.forEach((panel, index) => {
-            // Set initial state
-            gsap.set(panel.querySelector('.variant-visual img'), { 
-                x: -50, 
-                opacity: 0,
-                scale: 1.1
+        // Navigation buttons
+        if (prevBtn && nextBtn) {
+          // Initial button state
+          updateButtonStates();
+          
+          // Previous button click
+          prevBtn.addEventListener('click', function() {
+            const currentScroll = track.scrollLeft;
+            const cardWidth = cards[0].offsetWidth + 32;
+            const newScroll = Math.max(0, currentScroll - cardWidth);
+            
+            gsap.to(track, {
+              scrollLeft: newScroll,
+              duration: 0.5,
+              ease: 'power2.out',
+              onUpdate: updateButtonStates
             });
+          });
+
+          // Next button click
+          nextBtn.addEventListener('click', function() {
+            const currentScroll = track.scrollLeft;
+            const cardWidth = cards[0].offsetWidth + 32;
+            const maxScroll = track.scrollWidth - track.clientWidth;
+            const newScroll = Math.min(maxScroll, currentScroll + cardWidth);
             
-            gsap.set(panel.querySelector('.variant-info'), { 
-                x: 50, 
-                opacity: 0 
+            gsap.to(track, {
+              scrollLeft: newScroll,
+              duration: 0.5,
+              ease: 'power2.out',
+              onUpdate: updateButtonStates
             });
-            
-            // Create scroll-triggered animation
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: panel,
-                    containerAnimation: scrollTween,
-                    start: 'left center',
-                    end: 'right center',
-                    toggleActions: 'play none none reverse'
-                }
-            });
-            
-            // Animate elements
-            tl.to(panel.querySelector('.variant-visual img'), {
-                x: 0,
-                opacity: 1,
-                scale: 1,
-                duration: 0.8,
-                ease: 'power2.out'
-            })
-            .to(panel.querySelector('.variant-info'), {
-                x: 0,
-                opacity: 1,
-                duration: 0.8,
-                ease: 'power2.out'
-            }, '-=0.4');
-            
-            // Animate skill tags with stagger
-            const skillTags = panel.querySelectorAll('.skill-tag');
-            if (skillTags.length > 0) {
-                gsap.set(skillTags, { opacity: 0, y: 20 });
-                
-                ScrollTrigger.create({
-                    trigger: panel,
-                    containerAnimation: scrollTween,
-                    start: 'left 60%',
-                    onEnter: () => {
-                        gsap.to(skillTags, {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.4,
-                            stagger: 0.1,
-                            ease: 'back.out(1.7)'
-                        });
-                    }
-                });
-            }
-        });
-        
+          });
+          
+          // Track scroll events
+          track.addEventListener('scroll', updateButtonStates);
+        }
+
         // Handle window resize
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                ScrollTrigger.refresh();
-            }, 250);
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function() {
+            // Recalculate total width
+            const newCardWidth = cards[0].offsetWidth + 32;
+            const newTotalWidth = newCardWidth * cards.length;
+            
+            // Update track width
+            gsap.set(track, { width: newTotalWidth });
+            
+            // Update button states
+            updateButtonStates();
+            
+            // Refresh ScrollTrigger
+            if (ScrollTrigger) {
+              ScrollTrigger.refresh();
+            }
+          }, 250);
         });
-    });
+      });
     </script>
+        });
+
+        const visualImg = panel.querySelector('.variant-visual img');
+        const variantInfo = panel.querySelector('.variant-info');
+        const skillTags = panel.querySelectorAll('.skill-tag');
+
+        if (visualImg) {
+            tl.from(visualImg, { x: -50, opacity: 0, scale: 1.05, duration: 0.8, ease: 'power2.out' });
+        }
+        
+        if (variantInfo) {
+            tl.from(variantInfo, { x: 50, opacity: 0, duration: 0.8, ease: 'power2.out' }, "-=0.6");
+        }
+
+        if (skillTags.length > 0) {
+            tl.from(skillTags, { opacity: 0, y: 20, duration: 0.4, stagger: 0.1, ease: 'back.out(1.7)' }, "-=0.5");
+        }
+    });
+
+    // 4. Menangani resize dengan debounce
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 250);
+    });
+}
+</script>
 
 </body>
 </html>
