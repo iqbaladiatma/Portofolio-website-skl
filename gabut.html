@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tipsngoding | Minuman Kekinian</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- GSAP Core & Plugins -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* Izinkan scroll vertikal untuk hero section */
+            overflow-y: auto; 
+            overflow-x: hidden;
+            background-color: #f0f0f0;
+        }
+
+        /* Container utama yang akan dipin, seukuran viewport */
+        main {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            /* Ditempatkan setelah hero section */
+        }
+
+        /* Container panel dibuat sangat lebar untuk scroll horizontal */
+        #panels-container {
+            width: 500%; /* 5 panel x 100% */
+            height: 100%;
+            display: flex;
+            flex-wrap: nowrap; /* Pastikan panel tidak pindah baris */
+        }
+
+        /* Setiap panel mengambil 1/5 dari lebar container (efektifnya 100vw) */
+        .panel {
+            width: 20%; /* 100% / 5 panels */
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        @keyframes bounce-vertical {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+        .scroll-indicator-vertical {
+            animation: bounce-vertical 2s infinite;
+        }
+
+        .text-shadow {
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    
+    <header id="main-header" class="fixed top-0 left-0 w-full p-4 z-50 transition-all duration-300">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-800">tipsngoding</a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#banana" data-index="0" class="nav-link text-gray-700 hover:text-black">Banana</a>
+                <a href="#milk" data-index="1" class="nav-link text-gray-700 hover:text-black">Milk</a>
+                <a href="#choco" data-index="2" class="nav-link text-gray-700 hover:text-black">Choco</a>
+                <a href="#latte" data-index="3" class="nav-link text-gray-700 hover:text-black">Latte</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="h-screen w-screen flex flex-col items-center justify-center bg-gray-200 text-center p-6 relative">
+        <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://images.pexels.com/photos/302896/pexels-photo-302896.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div>
+        <div class="relative z-10">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-gray-800 uppercase tracking-tighter text-shadow">Kesegaran dalam Setiap Rasa</h1>
+            <p class="text-lg md:text-2xl text-gray-700 mt-4 max-w-3xl mx-auto">Temukan minuman favoritmu yang dibuat dari bahan-bahan pilihan terbaik, diracik khusus untuk mencerahkan harimu.</p>
+        </div>
+        <div id="scroll-indicator-container" class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center">
+            <span class="text-gray-800 text-sm mb-2 font-semibold">Scroll Down</span>
+            <svg class="w-6 h-6 text-gray-800 scroll-indicator-vertical" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </section>
+
+    <!-- 'main' menjadi trigger dan area pin untuk ScrollTrigger -->
+    <main>
+        <div id="panels-container">
+            <!-- Panel 1: Banana -->
+            <section id="banana" class="panel bg-[#FDE68A]">
+                <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-content text-center md:text-left text-yellow-900 order-2 md:order-1">
+                        <h3 class="text-2xl md:text-3xl font-semibold">tipsngoding Drinks</h3>
+                        <h1 class="text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter my-2 text-shadow">Banana</h1>
+                        <p class="text-lg md:text-xl font-medium max-w-md mb-6">Rasa pisang asli yang lembut dan creamy, sempurna untuk memulai harimu dengan semangat.</p>
+                        <button class="cta-button bg-yellow-400 hover:bg-yellow-500 text-yellow-900 font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300">Pesan Sekarang</button>
+                    </div>
+                    <div class="image-content flex justify-center order-1 md:order-2">
+                        <img src="https://images.pexels.com/photos/2846337/pexels-photo-2846337.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Minuman Rasa Pisang" class="product-image max-h-[70vh] w-auto drop-shadow-2xl rounded-2xl object-cover">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Panel 2: Milk -->
+            <section id="milk" class="panel bg-[#F3F4F6]">
+                <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="image-content flex justify-center">
+                        <img src="https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Minuman Rasa Susu" class="product-image max-h-[70vh] w-auto drop-shadow-2xl rounded-2xl object-cover">
+                    </div>
+                    <div class="text-content text-center md:text-left text-gray-800">
+                        <h3 class="text-2xl md:text-3xl font-semibold">tipsngoding Drinks</h3>
+                        <h1 class="text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter my-2 text-shadow">Milk</h1>
+                        <p class="text-lg md:text-xl font-medium max-w-md mb-6">Kenikmatan susu segar berkualitas tinggi, memberikan energi dan nutrisi terbaik untukmu.</p>
+                        <button class="cta-button bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300">Pesan Sekarang</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Panel 3: Choco -->
+            <section id="choco" class="panel bg-[#A37E63]">
+                <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-content text-center md:text-left text-white order-2 md:order-1">
+                        <h3 class="text-2xl md:text-3xl font-semibold">tipsngoding Drinks</h3>
+                        <h1 class="text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter my-2 text-shadow">Choco</h1>
+                        <p class="text-lg md:text-xl font-medium max-w-md mb-6">Cokelat premium yang kaya rasa, memanjakan lidah dan membangkitkan mood-mu seketika.</p>
+                        <button class="cta-button bg-yellow-800 hover:bg-yellow-900 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300">Pesan Sekarang</button>
+                    </div>
+                    <div class="image-content flex justify-center order-1 md:order-2">
+                        <img src="https://images.pexels.com/photos/851555/pexels-photo-851555.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Minuman Rasa Cokelat" class="product-image max-h-[70vh] w-auto drop-shadow-2xl rounded-2xl object-cover">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Panel 4: Latte -->
+            <section id="latte" class="panel bg-[#D6C7BA]">
+                 <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="image-content flex justify-center">
+                        <img src="https://images.pexels.com/photos/2615329/pexels-photo-2615329.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Minuman Rasa Latte" class="product-image max-h-[70vh] w-auto drop-shadow-2xl rounded-2xl object-cover">
+                    </div>
+                    <div class="text-content text-center md:text-left text-[#5D4037]">
+                        <h3 class="text-2xl md:text-3xl font-semibold">tipsngoding Drinks</h3>
+                        <h1 class="text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter my-2 text-shadow">Latte</h1>
+                        <p class="text-lg md:text-xl font-medium max-w-md mb-6">Perpaduan kopi pilihan dan susu lembut, teman terbaik untuk fokus dan produktif.</p>
+                        <button class="cta-button bg-[#8D6E63] hover:bg-[#6D4C41] text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300">Pesan Sekarang</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Footer -->
+            <section id="footer" class="panel bg-gray-800 text-white">
+                 <div class="text-center p-8">
+                     <h2 class="text-5xl md:text-7xl font-black uppercase mb-4">Temukan Rasa Favoritmu</h2>
+                     <p class="text-xl max-w-2xl mx-auto mb-8">Setiap tegukan adalah cerita. tipsngoding dibuat dari bahan-bahan pilihan untuk memberikanmu pengalaman terbaik.</p>
+                     <button class="bg-white text-gray-800 font-bold py-4 px-10 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300 text-lg">Lihat Semua Produk</button>
+                 </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Contact Us Section -->
+    <section id="contact" class="h-screen w-screen flex flex-col items-center justify-center bg-gray-900 text-center p-6 text-white">
+        <div class="relative z-10">
+            <h2 class="text-6xl md:text-8xl font-black uppercase tracking-tighter text-shadow">Follow Us</h2>
+            <p class="text-3xl md:text-5xl text-gray-300 mt-4 font-light tracking-widest">@tipsngoding</p>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+            const panels = gsap.utils.toArray(".panel");
+            const navLinks = gsap.utils.toArray(".nav-link");
+            
+            // Animasi utama untuk scroll horizontal
+            const horizontalScroll = gsap.to("#panels-container", {
+                x: () => -(document.querySelector("#panels-container").scrollWidth - window.innerWidth),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "main",
+                    pin: true,
+                    scrub: 1,
+                    snap: {
+                        snapTo: 1 / (panels.length - 1),
+                        duration: { min: 0.2, max: 0.5 },
+                        ease: "power1.inOut"
+                    },
+                    end: () => "+=" + (document.querySelector("#panels-container").scrollWidth - window.innerWidth),
+                    onEnter: () => gsap.to("#scroll-indicator-container", { autoAlpha: 0 }),
+                    onLeaveBack: () => gsap.to("#scroll-indicator-container", { autoAlpha: 1 })
+                }
+            });
+
+            // Animasi untuk konten di dalam setiap panel
+            panels.forEach((panel) => {
+                const image = panel.querySelector('.product-image');
+                const content = panel.querySelectorAll('.text-content > *, .text-center > *');
+                const targets = [...(image ? [image] : []), ...content];
+
+                if (targets.length > 0) {
+                    gsap.set(targets, { autoAlpha: 0, y: 50, scale: image ? 0.9 : 1 });
+                    
+                    ScrollTrigger.create({
+                        trigger: panel,
+                        start: "left center",
+                        end: "right center",
+                        containerAnimation: horizontalScroll,
+                        onEnter: () => gsap.to(targets, { autoAlpha: 1, y: 0, scale: 1, stagger: 0.05, duration: 0.8, ease: "power2.out" }),
+                        onLeave: () => gsap.to(targets, { autoAlpha: 0, y: -50, duration: 0.5, ease: 'power2.in' }),
+                        onEnterBack: () => gsap.to(targets, { autoAlpha: 1, y: 0, scale: 1, stagger: 0.05, duration: 0.8, ease: "power2.out" }),
+                        onLeaveBack: () => gsap.to(targets, { autoAlpha: 0, y: 50, duration: 0.5, ease: 'power2.in' })
+                    });
+                }
+            });
+            
+            // Fungsionalitas klik navigasi untuk scroll
+            navLinks.forEach((link) => {
+                link.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const index = parseInt(e.target.dataset.index);
+                    const mainEl = document.querySelector('main');
+                    
+                    // Hitung posisi vertikal (awal dari <main>) + posisi horizontal yang diinginkan
+                    const targetScroll = mainEl.offsetTop + (index * window.innerWidth);
+                    
+                    gsap.to(window, {
+                        scrollTo: targetScroll,
+                        duration: 1.5,
+                        ease: "power2.inOut"
+                    });
+                });
+            });
+            
+            // Animasi header
+            gsap.to("#main-header", {
+                backgroundColor: "rgba(255, 255, 255, 0.7)",
+                backdropFilter: "blur(8px)",
+                scrollTrigger: {
+                    trigger: "#hero",
+                    start: "bottom top", 
+                    toggleActions: "play none none reverse",
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,2472 @@
+<!DOCTYPE html>
+<html class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="icon" href="./dist/img/logofull.jpg">
+    <title>Portofolio - Iqbal Muhammad Adiatma</title>
+    <link href="src/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <!-- ion icons link -->
+    <script type="module" src="https://unpkg.com/ionicons@7.2.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.2.2/dist/ionicons/ionicons.js"></script>
+
+  <!-- Tailwind CSS CDN Link -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5629966093634048" crossorigin="anonymous"></script>
+    
+    <!-- Google Fonts: Exo 2 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <!-- Three.js and Vanta.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.globe.min.js"></script>
+  <script>
+    // Ensure THREE is available globally
+    window.THREE = THREE;
+  </script>
+    
+    <!-- AOS (Animate On Scroll) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="Iqbal Muhammad Adiatma - Professional Portfolio">
+    <meta name="keywords" content="Iqbal, Iqbal Adiatma, Iqbal Muhammad Adiatma, frontend developer, web developer, portfolio, HTML, CSS, JavaScript">
+    <meta name="author" content="Iqbal Muhammad Adiatma">
+    <meta property="og:title" content="Iqbal Muhammad Adiatma - Portfolio">
+    <meta property="og:description" content="Product Architect Portfolio">
+    <meta property="og:image" content="./dist/img/logofull.jpg">
+  
+  </head>
+  <body class="bg-white">
+    <div id="loader" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
+        <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+    </div>
+    <!-- Navbar -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-500 backdrop-blur-md bg-white/10" id="navbar">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Mobile Navbar -->
+        <div class="md:hidden">
+          <div class="flex justify-between items-center py-4">
+            <!-- Logo Mobile -->
+            <div class="flex items-center">
+              <a href="#home" class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                  <span class="text-white font-bold text-lg">IA</span>
+                </div>
+                <span class="text-white font-bold text-xl">Iqbal</span>
+              </a>
+            </div>
+
+            <!-- Burger Menu -->
+            <div id="burger" class="cursor-pointer p-2 rounded-lg hover:bg-white/10 transition-colors">
+              <div class="w-6 h-6 flex flex-col justify-center items-center space-y-1">
+                <div id="line1" class="w-6 h-0.5 bg-white transform transition-all duration-300"></div>
+                <div id="line2" class="w-6 h-0.5 bg-white transform transition-all duration-300"></div>
+                <div id="line3" class="w-6 h-0.5 bg-white transform transition-all duration-300"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile Menu -->
+          <div class="nav-links fixed inset-x-0 top-full bg-white/95 backdrop-blur-lg border-t border-white/20 transform -translate-y-full opacity-0 transition-all duration-300 z-40">
+            <div class="px-4 py-6 space-y-4">
+              <a href="#home" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">🏠 Beranda</a>
+              <a href="#about" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">👤 Tentang</a>
+              <a href="#skills" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">⚡ Keahlian</a>
+              <a href="#journey" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">🚀 Perjalanan</a>
+              <a href="#portfolio" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">💼 Proyek</a>
+              <a href="games.html" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">🎮 Game</a>
+              <a href="jurnal.html" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">📝 Jurnal</a>
+              <a href="#contact" class="block py-3 px-4 text-gray-800 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 font-medium">📧 Kontak</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop Navbar -->
+        <div class="hidden md:flex justify-between items-center py-4">
+          <div class="flex items-center">
+            <a href="#home" class="flex items-center space-x-3 group">
+              <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <span class="text-white font-bold text-xl">IQ</span>
+              </div>
+              <div>
+                <span class="text-white font-bold text-xl">Iqbal Muhammad Adiatma</span>
+                <p class="text-blue-200 text-sm">Product Architect</p>
+              </div>
+            </a>
+          </div>
+          
+          <div class="flex items-center space-x-8">
+            <a href="#about" class="text-white hover:text-blue-300 transition-all duration-300 font-medium relative group">
+              Tentang
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#skills" class="text-white hover:text-blue-300 transition-all duration-300 font-medium relative group">
+              Keahlian
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="games.html" class="text-white hover:text-blue-300 transition-all duration-300 font-medium relative group">
+              Game
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#journey" class="text-white hover:text-blue-300 transition-all duration-300 font-medium relative group">
+              Perjalanan
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#portfolio" class="text-white hover:text-blue-300 transition-all duration-300 font-medium relative group">
+              Proyek
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="jurnal.html" class="text-white hover:text-blue-300 transition-all duration-300 font-medium relative group">
+              Jurnal
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#contact" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-lg">
+              Kontak
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+<!-- JavaScript for Hamburger Menu -->
+  <script>
+      // Simple hamburger menu functionality
+      document.addEventListener('DOMContentLoaded', function() {
+          console.log('DOM fully loaded');
+          
+          const burger = document.getElementById('burger');
+          const navLinks = document.querySelector('.nav-links');
+          
+          if (!burger || !navLinks) {
+              console.error('Burger menu elements not found!');
+              return;
+          }
+          
+          console.log('Menu elements found, adding event listeners');
+          
+          // Toggle menu function
+          function toggleMenu() {
+              console.log('Toggle menu called');
+              
+              // Toggle menu visibility
+              navLinks.classList.toggle('opacity-0');
+              navLinks.classList.toggle('opacity-100');
+              navLinks.classList.toggle('translate-y-0');
+              navLinks.classList.toggle('-translate-y-full');
+              
+              // Toggle burger animation
+              const line1 = document.getElementById('line1');
+              const line2 = document.getElementById('line2');
+              const line3 = document.getElementById('line3');
+              
+              if (line1 && line2 && line3) {
+                  line1.classList.toggle('rotate-45');
+                  line1.classList.toggle('translate-y-1.5');
+                  line2.classList.toggle('opacity-0');
+                  line3.classList.toggle('-rotate-45');
+                  line3.classList.toggle('-translate-y-1');
+              }
+              
+              // Toggle body scroll
+              document.body.classList.toggle('overflow-hidden');
+          }
+          
+          // Add click event to burger button
+          burger.addEventListener('click', function(e) {
+              console.log('Burger clicked');
+              e.preventDefault();
+              e.stopPropagation();
+              toggleMenu();
+          });
+          
+          // Close menu when clicking outside
+          document.addEventListener('click', function(e) {
+              if (!navLinks.contains(e.target) && !burger.contains(e.target)) {
+                  if (navLinks.classList.contains('opacity-100')) {
+                      toggleMenu();
+                  }
+              }
+          });
+          
+          // Close menu when clicking on a link
+          const menuLinks = navLinks.querySelectorAll('a');
+          menuLinks.forEach(link => {
+              link.addEventListener('click', function() {
+                  if (navLinks.classList.contains('opacity-100')) {
+                      toggleMenu();
+                  }
+              });
+          });
+      });
+  </script>    
+    <!-- End Navbar -->
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-900 pt-20">
+      <!-- Tech-themed Background (Vanta.js) -->
+      <div id="vanta-bg"></div>
+
+      <!-- Semi-transparent overlay to ensure text readability -->
+      <div class="absolute inset-0 bg-black/40 z-5"></div>
+
+      <!-- Content Container -->
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+        
+        <!-- Profile Logo with enhanced effects -->
+        <div class="mb-8 hero-profile">
+            <div class="w-36 h-36 md:w-44 md:h-44 mx-auto relative group">
+                <!-- Spinning gradient ring -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full animate-spin-slow"></div>
+                <!-- Inner shadow and glow -->
+                <div class="absolute inset-0 rounded-full shadow-2xl shadow-purple-500/40 group-hover:shadow-purple-400/50 transition-shadow duration-500"></div>
+                <!-- Main logo container -->
+                <div class="absolute inset-2 bg-slate-800/80 backdrop-blur-sm rounded-full flex items-center justify-center overflow-hidden">
+                    <img src="https://placehold.co/150x150/a855f7/ffffff?text=IA" 
+                         alt="Foto Profil Iqbal Adiatma" 
+                         class="w-full h-full object-cover">
+                </div>
+                <!-- Rotating glow effect -->
+                <div class="absolute inset-0 rounded-full animate-rotate-glow pointer-events-none"></div>
+            </div>
+        </div>
+
+        <!-- Main Title -->
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-4 tracking-tighter hero-title">
+            <span class="bg-gradient-to-r from-white via-cyan-300 to-purple-400 bg-clip-text text-transparent" style="text-shadow: 0 4px 20px rgba(192, 132, 252, 0.2);">
+                Iqbal Adiatma
+            </span>
+        </h1>
+
+        <!-- Subtitle with Typing Effect -->
+        <div class="h-12 md:h-16 mb-6 hero-subtitle">
+            <p class="text-2xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                <span id="typed-text"></span><span class="blinking-cursor text-cyan-400">|</span>
+            </p>
+        </div>
+
+        <!-- Description -->
+        <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed hero-description">
+            Seorang Full Stack Developer yang bersemangat dalam merancang aplikasi web modern, responsif, dan berpusat pada pengguna untuk memberikan solusi digital inovatif.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-5 justify-center items-center hero-cta">
+            <a href="#portfolio" class="spotlight-btn group px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg shadow-blue-600/30 transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-purple-600/40 min-w-[200px]">
+                <span class="relative z-10 flex items-center justify-center gap-2 text-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    Lihat Portofolio
+                </span>
+            </a>
+            
+            <a href="#contact" class="group px-8 py-3 bg-slate-800/50 border border-purple-400/50 text-purple-300 font-semibold rounded-lg hover:bg-purple-900/40 hover:border-purple-300 hover:text-white transition-all duration-300 transform hover:scale-105 min-w-[200px]">
+                <span class="flex items-center justify-center gap-2 text-md">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:rotate-12 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>
+                    Hubungi Saya
+                </span>
+            </a>
+        </div>
+      </div>
+    </section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Vanta.js Background Animation ---
+        VANTA.GLOBE({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x3b82f6, // Blue-500
+            color2: 0x2563eb, // Blue-600
+            backgroundColor: 0x1e40af, // Blue-800
+            points: 10.00,
+            maxDistance: 25.00,
+            spacing: 15.00,
+            size: 1.20 // Controls the size of the globe/network
+        });
+
+        // --- GSAP Entrance Animation ---
+        gsap.set(['.hero-profile', '.hero-title', '.hero-subtitle', '.hero-description', '.hero-cta > a'], { autoAlpha: 0 });
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.8 }, delay: 0.2 });
+        tl.to('.hero-profile', { autoAlpha: 1, scale: 1, y: 0, duration: 1, rotation: 0 })
+          .to('.hero-title', { autoAlpha: 1, y: 0 }, "-=0.7")
+          .to('.hero-subtitle', { autoAlpha: 1, y: 0 }, "-=0.7")
+          .to('.hero-description', { autoAlpha: 1, y: 0 }, "-=0.7")
+          .to('.hero-cta > a', { autoAlpha: 1, y: 0, stagger: 0.2 }, "-=0.6");
+        
+        // --- Typing Effect ---
+        const typedTextEl = document.getElementById('typed-text');
+        if (typedTextEl) {
+            const texts = ['Full Stack Developer', 'AI Enthusiast', 'Blockchain Explorer', 'Web3 Innovator'];
+            let textIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function type() {
+                const currentText = texts[textIndex];
+                let displayText = '';
+                if (isDeleting) { 
+                    displayText = currentText.substring(0, charIndex--); 
+                } else { 
+                    displayText = currentText.substring(0, charIndex++); 
+                }
+                typedTextEl.textContent = displayText;
+                const typeSpeed = isDeleting ? 75 : 150;
+                
+                if (!isDeleting && charIndex === currentText.length + 1) {
+                    isDeleting = true;
+                    setTimeout(type, 2000);
+                } else if (isDeleting && charIndex === -1) {
+                    isDeleting = false;
+                    textIndex = (textIndex + 1) % texts.length;
+                    setTimeout(type, 500);
+                } else {
+                    setTimeout(type, typeSpeed);
+                }
+            }
+            type();
+        }
+    });
+    </script>
+
+    <style>
+        /* Custom CSS for advanced animations and styling */
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Vanta.js Canvas Styling */
+        #vanta-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* Animated Gradient Background */
+        .animated-gradient-bg {
+            background-size: 200% 200%;
+            animation: gradient-flow 15s ease-in-out infinite;
+        }
+
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Slow Spin for Profile Image Ring */
+        @keyframes spin-slow {
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 25s linear infinite;
+        }
+
+        /* Shimmer/Glow effect for the Profile Image */
+        @keyframes rotate-glow {
+            0% { transform: rotate(0deg) scaleX(0); }
+            25% { transform: scaleX(1); }
+            50%, 100% { transform: rotate(360deg) scaleX(0); }
+        }
+        .animate-rotate-glow::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform-origin: center;
+            animation: rotate-glow 8s linear infinite;
+        }
+
+        /* Blinking Cursor for Typing Effect */
+        @keyframes blink-cursor {
+            50% { opacity: 0; }
+        }
+        .blinking-cursor {
+            animation: blink-cursor 1s step-end infinite;
+        }
+        
+        /* Button Hover Spotlight Effect */
+        .spotlight-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .spotlight-btn:hover::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            animation: pulse-light 1.5s infinite;
+        }
+
+        @keyframes pulse-light {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+        }
+    </style>
+    </section>
+    <script>
+      // --- Script untuk Animasi Partikel ---
+      const canvas = document.getElementById('particle-canvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resizeCanvas() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+        class Particle {
+          constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 1.5 + 1;
+            this.speedX = Math.random() * 2 - 1;
+            this.speedY = Math.random() * 2 - 1;
+            this.color = '#3b82f6';
+          }
+          update() {
+            if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+            if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+            this.x += this.speedX;
+            this.y += this.speedY;
+          }
+          draw() {
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+        function initParticles() {
+          const particleCount = Math.floor(canvas.width * canvas.height / 15000);
+          particles = [];
+          for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+          }
+        }
+        function connectParticles() {
+          let opacityValue = 1;
+          for (let a = 0; a < particles.length; a++) {
+            for (let b = a; b < particles.length; b++) {
+              let distance = Math.sqrt(
+                Math.pow(particles[a].x - particles[b].x, 2) +
+                Math.pow(particles[a].y - particles[b].y, 2)
+              );
+              if (distance < 120) {
+                opacityValue = 1 - (distance / 120);
+                ctx.strokeStyle = `rgba(59, 130, 246, ${opacityValue})`;
+                ctx.lineWidth = 0.5;
+                ctx.beginPath();
+                ctx.moveTo(particles[a].x, particles[a].y);
+                ctx.lineTo(particles[b].x, particles[b].y);
+                ctx.stroke();
+              }
+            }
+          }
+        }
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+          }
+          connectParticles();
+          requestAnimationFrame(animate);
+        }
+        window.addEventListener('resize', () => {
+          resizeCanvas();
+          initParticles();
+        });
+        resizeCanvas();
+        initParticles();
+        animate();
+      }
+    </script>
+    <!-- End Hero -->
+    <!-- About Me -->
+    <section id="about" class="py-20 md:py-32 bg-white relative overflow-hidden">
+      <!-- Background Elements -->
+      <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50"></div>
+      <div class="absolute top-0 left-0 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center mb-16" data-aos="fade-up" data-aos-duration="1000">
+          <h2 class="text-4xl md:text-6xl font-bold mb-6">
+            <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Tentang</span>
+            <span class="text-gray-900"> Saya</span>
+          </h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-8 rounded-full"></div>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Passionate Full Stack Developer dengan dedikasi tinggi dalam menciptakan solusi digital yang inovatif dan berdampak positif
+          </p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="grid lg:grid-cols-2 gap-16 items-center mb-20">
+          <!-- Left: Personal Info -->
+          <div data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200">
+            <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20">
+              <h3 class="text-2xl font-bold text-gray-900 mb-6">Kreativitas & Inovasi</h3>
+              <p class="text-gray-600 leading-relaxed mb-6">
+                Halo! Saya <strong>Iqbal Muhammad Adiatma</strong>, seorang siswa dari IDN Boarding School jurusan Rekayasa Perangkat Lunak (RPL) yang berasal dari Blora, Jawa Tengah. 
+                Saya memiliki minat yang kuat dalam dunia teknologi, khususnya dalam pengembangan web dan pemrograman backend dan Blockchain.
+              </p>
+              <p class="text-gray-600 leading-relaxed mb-6">
+                Di sekolah, saya dibentuk untuk menjadi pribadi yang mandiri, bertanggung jawab, dan terampil di bidang teknologi. 
+                Saya aktif mengerjakan berbagai proyek IT, mulai dari pembuatan website, CRUD aplikasi berbasis Laravel, hingga desain antarmuka pengguna (UI/UX).
+              </p>
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <span class="text-gray-700 font-medium">Berpengalaman 2+ tahun dalam web development dan Blockchain</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Skills Cards -->
+          <div data-aos="fade-left" data-aos-duration="1000" data-aos-delay="400">
+            <div class="grid grid-cols-2 gap-6">
+              <div class="group bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white transform hover:scale-105 transition-all duration-300 hover:shadow-2xl">
+                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                  </svg>
+                </div>
+                <h4 class="font-bold text-lg mb-2">Student</h4>
+                <p class="text-blue-100 text-sm">IDN Boarding School - Software Engineering</p>
+              </div>
+
+              <div class="group bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-6 text-white transform hover:scale-105 transition-all duration-300 hover:shadow-2xl">
+                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                  </svg>
+                </div>
+                <h4 class="font-bold text-lg mb-2">Developer</h4>
+                <p class="text-purple-100 text-sm">Full Stack Web Development</p>
+              </div>
+
+              <div class="group bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-6 text-white transform hover:scale-105 transition-all duration-300 hover:shadow-2xl">
+                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+                  </svg>
+                </div>
+                <h4 class="font-bold text-lg mb-2">Designer</h4>
+                <p class="text-green-100 text-sm">UI/UX & Graphic Design</p>
+              </div>
+
+              <div class="group bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl p-6 text-white transform hover:scale-105 transition-all duration-300 hover:shadow-2xl">
+                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                </div>
+                <h4 class="font-bold text-lg mb-2">Innovator</h4>
+                <p class="text-orange-100 text-sm">Creative Problem Solver</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-bold text-blue-600 mb-2">10+</div>
+            <div class="text-gray-600 font-medium">Projects Completed</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-bold text-purple-600 mb-2">2+</div>
+            <div class="text-gray-600 font-medium">Years Experience</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-bold text-green-600 mb-2">20+</div>
+            <div class="text-gray-600 font-medium">Technologies</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-bold text-orange-600 mb-2">100%</div>
+            <div class="text-gray-600 font-medium">Client Satisfaction</div>
+          </div>
+      </div>
+    </section>
+    <!-- End About Me -->
+
+     <!-- Work Experiences -->
+  <!-- Work Experience Section -->
+  <section id="work-experience" class="py-20 bg-white relative overflow-hidden">
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header -->
+      <div class="text-center mb-16" data-aos="fade-down">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-800">
+          <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Work</span> Experience
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6 rounded-full"></div>
+        <p class="text-gray-600 max-w-2xl mx-auto text-lg">My professional journey and the companies I've had the privilege to work with.</p>
+      </div>
+
+      <!-- Horizontal Scroll Container -->
+      <div class="work-experience-container relative">
+        <div class="work-experience-track">
+          <!-- Experience 1 -->
+          <div class="work-card bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="h-48 overflow-hidden">
+              <img src="https://placehold.co/800x1000/f0f9ff/0284c7?text=Product+Architect" alt="Product Architect" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="p-6">
+              <span class="inline-block px-3 py-1 text-xs font-semibold text-blue-700 bg-blue-100 rounded-full mb-3">2022 - Present</span>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">Product Architect</h3>
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold mr-3">FL</div>
+                <div>
+                  <h4 class="font-medium text-gray-900">Freelance</h4>
+                  <p class="text-sm text-gray-500">Remote</p>
+                </div>
+              </div>
+              <p class="text-gray-600 mb-4">Leading product development initiatives and architectural decisions for various clients, ensuring scalable and maintainable solutions.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 text-xs font-medium text-blue-800 bg-blue-50 rounded-full">React</span>
+                <span class="px-3 py-1 text-xs font-medium text-indigo-800 bg-indigo-50 rounded-full">Node.js</span>
+                <span class="px-3 py-1 text-xs font-medium text-green-800 bg-green-50 rounded-full">AWS</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience 2 -->
+          <div class="work-card bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="h-48 overflow-hidden">
+              <img src="https://placehold.co/800x1000/f0fdf4/16a34a?text=Frontend+Developer" alt="Frontend Developer" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="p-6">
+              <span class="inline-block px-3 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full mb-3">2020 - 2022</span>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">Frontend Developer</h3>
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold mr-3">TC</div>
+                <div>
+                  <h4 class="font-medium text-gray-900">Tech Company</h4>
+                  <p class="text-sm text-gray-500">Jakarta, Indonesia</p>
+                </div>
+              </div>
+              <p class="text-gray-600 mb-4">Developed responsive web applications using modern JavaScript frameworks to deliver high-quality products with exceptional user experiences.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 text-xs font-medium text-blue-800 bg-blue-50 rounded-full">Vue.js</span>
+                <span class="px-3 py-1 text-xs font-medium text-yellow-800 bg-yellow-50 rounded-full">TypeScript</span>
+                <span class="px-3 py-1 text-xs font-medium text-red-800 bg-red-50 rounded-full">Firebase</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience 3 -->
+          <div class="work-card bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="h-48 overflow-hidden">
+              <img src="https://placehold.co/800x1000/fdf2f8/db2777?text=Web+Developer" alt="Web Developer" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="p-6">
+              <span class="inline-block px-3 py-1 text-xs font-semibold text-pink-700 bg-pink-100 rounded-full mb-3">2018 - 2020</span>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">Web Developer</h3>
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold mr-3">WA</div>
+                <div>
+                  <h4 class="font-medium text-gray-900">Web Agency</h4>
+                  <p class="text-sm text-gray-500">Bandung, Indonesia</p>
+                </div>
+              </div>
+              <p class="text-gray-600 mb-4">Created responsive websites and web applications for various clients, focusing on performance, accessibility, and user experience.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 text-xs font-medium text-blue-800 bg-blue-50 rounded-full">HTML/CSS</span>
+                <span class="px-3 py-1 text-xs font-medium text-yellow-800 bg-yellow-50 rounded-full">JavaScript</span>
+                <span class="px-3 py-1 text-xs font-medium text-green-800 bg-green-50 rounded-full">WordPress</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience 4 -->
+          <div class="work-card bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="h-48 overflow-hidden">
+              <img src="https://placehold.co/800x1000/fffbeb/f59e0b?text=UI/UX+Designer" alt="UI/UX Designer" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="p-6">
+              <span class="inline-block px-3 py-1 text-xs font-semibold text-yellow-700 bg-yellow-100 rounded-full mb-3">2016 - 2018</span>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">UI/UX Designer</h3>
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 font-bold mr-3">DS</div>
+                <div>
+                  <h4 class="font-medium text-gray-900">Design Studio</h4>
+                  <p class="text-sm text-gray-500">Yogyakarta, Indonesia</p>
+                </div>
+              </div>
+              <p class="text-gray-600 mb-4">Designed intuitive user interfaces for web and mobile applications, focusing on usability and visual appeal, from research to final prototype.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 text-xs font-medium text-pink-800 bg-pink-50 rounded-full">Figma</span>
+                <span class="px-3 py-1 text-xs font-medium text-amber-800 bg-amber-50 rounded-full">Sketch</span>
+                <span class="px-3 py-1 text-xs font-medium text-blue-800 bg-blue-50 rounded-full">Adobe XD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <button id="prevBtn" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white w-10 h-10 rounded-full shadow-lg flex items-center justify-center text-blue-600 hover:bg-blue-50 transition-colors z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        <button id="nextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white w-10 h-10 rounded-full shadow-lg flex items-center justify-center text-blue-600 hover:bg-blue-50 transition-colors z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+  <!-- End Work Experiences -->
+
+
+    <!-- My Skills -->
+    <section id="skills" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="text-center mb-16" data-aos="fade-down">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 text-blue-700">Keahlian <span class="text-gray-900">Saya</span></h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-300 mx-auto mb-6 rounded-full"></div>
+        <p class="text-gray-600 max-w-2xl mx-auto text-lg">Berikut adalah beberapa keahlian teknis dan profesional yang saya miliki dalam pengembangan web dan teknologi.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <!-- Technical Skills -->
+        <div data-aos="fade-right">
+          <h3 class="text-xl font-bold mb-6">Technical Skills</h3>
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">HTML/CSS</span>
+                <span class="text-gray-500">100%</span>
+      </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-blue-600 to-blue-300 rounded-full transition-all duration-1000" style="width:100%"></div>
+      </div>
+      </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">JavaScript</span>
+                <span class="text-gray-500">90%</span>
+      </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full transition-all duration-1000" style="width:90%"></div>
+      </div>
+      </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Tailwind CSS</span>
+                <span class="text-gray-500">100%</span>
+    </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full transition-all duration-1000" style="width:100%"></div>
+  </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">React</span>
+                <span class="text-gray-500">80%</span>
+                </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-blue-400 to-blue-700 rounded-full transition-all duration-1000" style="width:80%"></div>
+                </div>
+                </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Git</span>
+                <span class="text-gray-500">100%</span>
+                </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-orange-400 to-orange-600 rounded-full transition-all duration-1000" style="width:100%"></div>
+                </div>
+                </div>
+                </div>
+                </div>
+        <!-- Professional Skills -->
+        <div data-aos="fade-left">
+          <h3 class="text-xl font-bold mb-6">Professional Skills</h3>
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Communication</span>
+                <span class="text-gray-500">100%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-blue-400 to-blue-600 rounded-full transition-all duration-1000" style="width:100%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Team Work</span>
+                <span class="text-gray-500">95%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-all duration-1000" style="width:95%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Project Management</span>
+                <span class="text-gray-500">100%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-purple-400 to-purple-600 rounded-full transition-all duration-1000" style="width:100%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Creativity</span>
+                <span class="text-gray-500">95%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-pink-400 to-pink-600 rounded-full transition-all duration-1000" style="width:95%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Tools & Technologies -->
+      <div class="mt-16" data-aos="zoom-in-up">
+        <h3 class="text-xl font-bold mb-6 text-center">Tools & Technologies</h3>
+        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 justify-items-center">
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/icons8-html-5-96.svg" alt="HTML5" class="w-12 h-12 mb-2">
+            <span class="text-sm">HTML5</span>
+          </div>
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/icons8-css3-96.svg" alt="CSS3" class="w-12 h-12 mb-2">
+            <span class="text-sm">CSS3</span>
+          </div>
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/tailwind-css.svg" alt="Tailwind CSS" class="w-12 h-12 mb-2">
+            <span class="text-sm">Tailwind</span>
+          </div>
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/icons8-javascript-96.svg" alt="JavaScript" class="w-12 h-12 mb-2">
+            <span class="text-sm">JavaScript</span>
+          </div>
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/icons8-react-80.svg" alt="React" class="w-12 h-12 mb-2">
+            <span class="text-sm">React</span>
+          </div>
+          <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <img src="./dist/img/icons8-git-96.svg" alt="Git" class="w-12 h-12 mb-2">
+            <span class="text-sm">Git</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End My Skills -->
+
+    <!-- Journey Section -->
+    <section id="journey" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-indigo-100">
+
+
+      <div class="relative max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-16" data-aos="fade-down">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4 text-blue-600">Perjalanan <span class="text-gray-900">Saya</span></h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-300 mx-auto mb-6 rounded-full"></div>
+          <p class="text-gray-600 max-w-2xl mx-auto text-lg">Timeline perjalanan pengembangan diri dan karir saya dalam dunia teknologi</p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="relative">
+          <!-- Timeline Line -->
+          <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-400 to-blue-600 rounded-full"></div>
+          
+          <!-- Timeline Items -->
+          <div class="space-y-12">
+            <!-- Item 1 -->
+            <div class="relative flex items-center" data-aos="fade-right">
+              <div class="flex-1 pr-8 text-right">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-blue-500">
+                  <h3 class="text-xl font-bold text-blue-600 mb-2">Mulai di IDN Boarding School</h3>
+                  <p class="text-gray-600">Memulai perjalanan pendidikan di IDN Boarding School dengan jurusan RPL, fokus pada teknologi dan pengembangan diri.</p>
+                  <span class="text-sm text-blue-500 font-semibold">2022</span>
+                </div>
+              </div>
+              <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-500 rounded-full border-4 border-white shadow-lg"></div>
+              <div class="flex-1 pl-8"></div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="relative flex items-center" data-aos="fade-left">
+              <div class="flex-1 pr-8"></div>
+              <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-500 rounded-full border-4 border-white shadow-lg"></div>
+              <div class="flex-1 pl-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-r-4 border-green-500">
+                  <h3 class="text-xl font-bold text-green-600 mb-2">Proyek Laravel Pertama</h3>
+                  <p class="text-gray-600">Menyelesaikan aplikasi CRUD pertama dengan Laravel, memahami konsep MVC dan backend development.</p>
+                  <span class="text-sm text-green-500 font-semibold">2023</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="relative flex items-center" data-aos="fade-right">
+              <div class="flex-1 pr-8 text-right">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-purple-500">
+                  <h3 class="text-xl font-bold text-purple-600 mb-2">IDN Tangguh Program</h3>
+                  <p class="text-gray-600">Mengikuti program IDN Tangguh untuk mengasah kepemimpinan dan ketahanan mental dalam tim.</p>
+                  <span class="text-sm text-purple-500 font-semibold">2023</span>
+                </div>
+              </div>
+              <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-purple-500 rounded-full border-4 border-white shadow-lg"></div>
+              <div class="flex-1 pl-8"></div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="relative flex items-center" data-aos="fade-left">
+              <div class="flex-1 pr-8"></div>
+              <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-orange-500 rounded-full border-4 border-white shadow-lg"></div>
+              <div class="flex-1 pl-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-r-4 border-orange-500">
+                  <h3 class="text-xl font-bold text-orange-600 mb-2">Desain UI/UX Pertama</h3>
+                  <p class="text-gray-600">Membuat desain UI/UX pertama menggunakan Figma, fokus pada prototyping dan pengalaman pengguna.</p>
+                  <span class="text-sm text-orange-500 font-semibold">2023</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="relative flex items-center" data-aos="fade-right">
+              <div class="flex-1 pr-8 text-right">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-red-500">
+                  <h3 class="text-xl font-bold text-red-600 mb-2">IDN Goes To Society</h3>
+                  <p class="text-gray-600">Berpartisipasi dalam IDN Goes To Society, mengembangkan aplikasi untuk dampak sosial positif.</p>
+                  <span class="text-sm text-red-500 font-semibold">2024</span>
+                </div>
+              </div>
+              <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-red-500 rounded-full border-4 border-white shadow-lg"></div>
+              <div class="flex-1 pl-8"></div>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="relative flex items-center" data-aos="fade-left">
+              <div class="flex-1 pr-8"></div>
+              <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-cyan-500 rounded-full border-4 border-white shadow-lg"></div>
+              <div class="flex-1 pl-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-r-4 border-cyan-500">
+                  <h3 class="text-xl font-bold text-cyan-600 mb-2">Full Stack Development</h3>
+                  <p class="text-gray-600">Mengembangkan berbagai proyek web full-stack dengan teknologi modern dan best practices.</p>
+                  <span class="text-sm text-cyan-500 font-semibold">2024 - Sekarang</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Journey -->
+
+    <!-- Journal Showcase -->
+    <section id="journal" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16" data-aos="fade-down">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-800">Jurnal <span class="text-blue-600">Pribadi</span></h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6 rounded-full"></div>
+          <p class="text-gray-600 max-w-2xl mx-auto text-lg">Catatan perjalanan, pemikiran, dan refleksi kehidupan dalam dunia teknologi</p>
+        </div>
+
+        <!-- Journal Categories -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12" data-aos="fade-up">
+          <div class="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl hover:shadow-lg transition-all duration-300">
+            <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">💭</span>
+            </div>
+            <h3 class="font-bold text-gray-800 mb-2">Pemikiran</h3>
+            <p class="text-sm text-gray-600">Refleksi & kontemplasi</p>
+          </div>
+          
+          <div class="text-center p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-2xl hover:shadow-lg transition-all duration-300">
+            <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">✈️</span>
+            </div>
+            <h3 class="font-bold text-gray-800 mb-2">Perjalanan</h3>
+            <p class="text-sm text-gray-600">Cerita dari berbagai tempat</p>
+          </div>
+          
+          <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl hover:shadow-lg transition-all duration-300">
+            <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">💻</span>
+            </div>
+            <h3 class="font-bold text-gray-800 mb-2">Teknologi</h3>
+            <p class="text-sm text-gray-600">Dunia coding & development</p>
+          </div>
+          
+          <div class="text-center p-6 bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl hover:shadow-lg transition-all duration-300">
+            <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">🌱</span>
+            </div>
+            <h3 class="font-bold text-gray-800 mb-2">Kehidupan</h3>
+            <p class="text-sm text-gray-600">Pelajaran hidup sehari-hari</p>
+          </div>
+        </div>
+
+        <!-- Featured Articles -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12" id="featured-articles">
+          <!-- Articles will be loaded here by JavaScript -->
+        </div>
+
+        <!-- CTA Button -->
+        <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+          <a href="blog.html" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+            </svg>
+            Baca Semua Jurnal
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- End Journal Showcase -->
+
+    <!-- EduGame Showcase -->
+    <section id="edugame" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-indigo-50">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-14" data-aos="fade-down">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4 text-indigo-700">EduGame <span class="text-gray-900">AI</span></h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-blue-400 mx-auto mb-6 rounded-full"></div>
+          <p class="text-gray-600 max-w-2xl mx-auto text-lg">Pusat mini-game edukasi: kuis literasi, kuis sosial, perang sastra lawan AI, berkarya, dan tantangan "Fix The Code". Terintegrasi leaderboard dan profil pemain.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12">
+          <!-- Card 1 -->
+          <div class="group bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
+            <div class="relative overflow-hidden">
+              <img src="https://placehold.co/1200x800/f8fafc/1e293b?text=Kuis+Literasi" alt="Kuis Literasi" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-indigo-700 transition-colors">Kuis Literasi & Sosial</h3>
+              <p class="text-gray-600 mb-4 leading-relaxed">Pertanyaan dibangkitkan AI (Gemini) dengan beberapa tingkat kesulitan. Kumpulkan poin untuk naik peringkat.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gradient-to-r from-orange-100 to-orange-200 text-orange-700 text-xs rounded-full font-medium">HTML</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 text-xs rounded-full font-medium">CSS</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-purple-100 to-purple-200 text-purple-700 text-xs rounded-full font-medium">JavaScript</span>
+              </div>
+              <div class="flex gap-3">
+                <a href="game/quiz.html" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-300 text-center">
+                  <ion-icon name="eye-outline" class="mr-2"></ion-icon>Live Demo
+                </a>
+                <a href="https://github.com/iqbaladiatma/" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-xl font-medium hover:from-gray-900 hover:to-black transition-all duration-300 text-center">
+                  <ion-icon name="logo-github" class="mr-2"></ion-icon>Code
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="group bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
+            <div class="relative overflow-hidden">
+              <img src="https://picsum.photos/1200/800?blur" alt="Perang Sastra" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-indigo-700 transition-colors">Perang Sastra & Berkarya</h3>
+              <p class="text-gray-600 mb-4 leading-relaxed">Ekspresikan ide lewat tulisan, lawan AI, dan dapatkan feedback instan. Cocok untuk melatih kreativitas.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gradient-to-r from-orange-100 to-orange-200 text-orange-700 text-xs rounded-full font-medium">HTML</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 text-xs rounded-full font-medium">CSS</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-purple-100 to-purple-200 text-purple-700 text-xs rounded-full font-medium">JavaScript</span>
+              </div>
+              <div class="flex gap-3">
+                <a href="games.html" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-300 text-center">
+                  <ion-icon name="eye-outline" class="mr-2"></ion-icon>Live Demo
+                </a>
+                <a href="https://github.com/iqbaladiatma/" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-xl font-medium hover:from-gray-900 hover:to-black transition-all duration-300 text-center">
+                  <ion-icon name="logo-github" class="mr-2"></ion-icon>Code
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="group bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-500" data-aos="fade-up" data-aos-delay="300">
+            <div class="relative overflow-hidden">
+              <img src="https://placehold.co/1200x800/f8fafc/1e293b?text=Fix+The+Code" alt="Fix The Code" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-indigo-700 transition-colors">Fix The Code</h3>
+              <p class="text-gray-600 mb-4 leading-relaxed">Tantangan debugging lintas bahasa (JS, Python, Java, C++). Selesaikan task dan raih poin.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gradient-to-r from-orange-100 to-orange-200 text-orange-700 text-xs rounded-full font-medium">HTML</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 text-xs rounded-full font-medium">CSS</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-purple-100 to-purple-200 text-purple-700 text-xs rounded-full font-medium">JavaScript</span>
+              </div>
+              <div class="flex gap-3">
+                <a href="game/cybercode.html" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-300 text-center">
+                  <ion-icon name="eye-outline" class="mr-2"></ion-icon>Live Demo
+                </a>
+                <a href="https://github.com/iqbaladiatma/" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-xl font-medium hover:from-gray-900 hover:to-black transition-all duration-300 text-center">
+                  <ion-icon name="logo-github" class="mr-2"></ion-icon>Code
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End EduGame Showcase -->
+
+    <!-- My Resume -->
+    <section id="resume" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12" data-aos="fade-down">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4 text-blue-700">Resume <span class="text-gray-900">Saya</span></h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-300 mx-auto mb-6 rounded-full"></div>
+          <p class="text-gray-600 max-w-2xl mx-auto text-lg">Lihat resume lengkap saya untuk mengetahui lebih lanjut tentang latar belakang dan kualifikasi saya.</p>
+        </div>
+        
+        <div class="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 p-8 max-w-4xl mx-auto" data-aos="fade-up">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="text-center md:text-left">
+              <h3 class="text-2xl font-bold text-gray-800 mb-2">Iqbal Muhammad Adiatma</h3>
+              <p class="text-blue-600 mb-4">Product Architect</p>
+              <p class="text-gray-600 mb-6">Resume profesional yang berisi pengalaman kerja, pendidikan, dan keterampilan saya.</p>
+              <a href="./src/Iqbal%20M.A%20-%20Resume.pdf" target="_blank" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-full font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-300">
+                <span>Lihat Resume</span>
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+              </a>
+            </div>
+            <div class="bg-blue-50 p-6 rounded-2xl border-2 border-blue-100">
+              <img src="./src/image.png" alt="Resume Preview" class="w-48 h-64 object-cover rounded-lg shadow-md transform rotate-2 hover:rotate-0 transition-transform duration-300">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16" data-aos="fade-down">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4 text-blue-700">Sertifikat <span class="text-gray-900">Saya</span></h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-300 mx-auto mb-6 rounded-full"></div>
+          <p class="text-gray-600 max-w-2xl mx-auto text-lg">Koleksi sertifikat dan penghargaan yang telah saya dapatkan selama perjalanan karir saya.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-12">
+          <!-- Certificate Item 1 -->
+          <div class="certificate-item group" data-aos="fade-up" data-aos-delay="100">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full flex flex-col">
+              <div class="relative overflow-hidden h-48">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                     alt="Sertifikat Web Development" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <button class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+              <div class="p-6 flex-grow">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Web Development Masterclass</h3>
+                <p class="text-gray-600 mb-4">Dicoding Indonesia - 2023</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">HTML</span>
+                  <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">CSS</span>
+                  <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">JavaScript</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Certificate Item 2 -->
+          <div class="certificate-item group" data-aos="fade-up" data-aos-delay="200">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full flex flex-col">
+              <div class="relative overflow-hidden h-48">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                     alt="Sertifikat Data Science" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <button class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+              <div class="p-6 flex-grow">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Data Science Fundamentals</h3>
+                <p class="text-gray-600 mb-4">Coursera - 2023</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Python</span>
+                  <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Pandas</span>
+                  <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Machine Learning</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Certificate Item 3 -->
+          <div class="certificate-item group" data-aos="fade-up" data-aos-delay="300">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full flex flex-col">
+              <div class="relative overflow-hidden h-48">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                     alt="Sertifikat UI/UX Design" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <button class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+              <div class="p-6 flex-grow">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">UI/UX Design Specialization</h3>
+                <p class="text-gray-600 mb-4">Udemy - 2023</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">Figma</span>
+                  <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">User Research</span>
+                  <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">Prototyping</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add 7 more certificate items following the same pattern -->
+          <!-- Certificate Item 4 -->
+          <div class="certificate-item group" data-aos="fade-up" data-aos-delay="100">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full flex flex-col">
+              <div class="relative overflow-hidden h-48">
+                <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" 
+                     alt="Sertifikat Mobile App Development" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <button class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+              <div class="p-6 flex-grow">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Mobile App Development</h3>
+                <p class="text-gray-600 mb-4">Udacity - 2023</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">React Native</span>
+                  <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">Firebase</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Certificate Item 5 -->
+          <div class="certificate-item group" data-aos="fade-up" data-aos-delay="200">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full flex flex-col">
+              <div class="relative overflow-hidden h-48">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                     alt="Sertifikat Cloud Computing" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <button class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+              <div class="p-6 flex-grow">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Cloud Computing with AWS</h3>
+                <p class="text-gray-600 mb-4">AWS Training - 2023</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-orange-100 text-orange-800 text-xs font-medium rounded-full">AWS</span>
+                  <span class="px-3 py-1 bg-orange-100 text-orange-800 text-xs font-medium rounded-full">Cloud</span>
+                  <span class="px-3 py-1 bg-orange-100 text-orange-800 text-xs font-medium rounded-full">DevOps</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Certificate Item 6 -->
+          <div class="certificate-item group" data-aos="fade-up" data-aos-delay="300">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full flex flex-col">
+              <div class="relative overflow-hidden h-48">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                     alt="Sertifikat Cybersecurity" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <button class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+              <div class="p-6 flex-grow">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Cybersecurity Essentials</h3>
+                <p class="text-gray-600 mb-4">Cisco Networking Academy - 2023</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-red-100 text-red-800 text-xs font-medium rounded-full">Security</span>
+                  <span class="px-3 py-1 bg-red-100 text-red-800 text-xs font-medium rounded-full">Ethical Hacking</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Certificate Item 7 -->
+          <div class="certificate-item group" data-aos="fade-up" data-aos-delay="100">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full flex flex-col">
+              <div class="relative overflow-hidden h-48">
+                <img src="https://images.unsplash.com/photo 1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                     alt="Sertifikat Digital Marketing" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <button class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+              <div class="p-6 flex-grow">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Digital Marketing Strategy</h3>
+                <p class="text-gray-600 mb-4">Google Digital Garage - 2023</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-pink-100 text-pink-800 text-xs font-medium rounded-full">SEO</span>
+                  <span class="px-3 py-1 bg-pink-100 text-pink-800 text-xs font-medium rounded-full">Social Media</span>
+                  <span class="px-3 py-1 bg-pink-100 text-pink-800 text-xs font-medium rounded-full">Content Marketing</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Certificate Item 8 -->
+          <div class="certificate-item group" data-aos="fade-up" data-aos-delay="200">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full flex flex-col">
+              <div class="relative overflow-hidden h-48">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                     alt="Sertifikat Project Management" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <button class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+              <div class="p-6 flex-grow">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Agile Project Management</h3>
+                <p class="text-gray-600 mb-4">Coursera - 2023</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">Agile</span>
+                  <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">Scrum</span>
+                  <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">Kanban</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Certificate Item 9 -->
+          <div class="certificate-item group" data-aos="fade-up" data-aos-delay="300">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full flex flex-col">
+              <div class="relative overflow-hidden h-48">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                     alt="Sertifikat Data Analysis" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <button class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+              <div class="p-6 flex-grow">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Data Analysis with Python</h3>
+                <p class="text-gray-600 mb-4">IBM - 2023</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs font-medium rounded-full">Python</span>
+                  <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs font-medium rounded-full">Pandas</span>
+                  <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs font-medium rounded-full">Data Visualization</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Certificate Item 10 -->
+          <div class="certificate-item group" data-aos="fade-up" data-aos-delay="400">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full flex flex-col">
+              <div class="relative overflow-hidden h-48">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                     alt="Sertifikat Artificial Intelligence" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <button class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+              <div class="p-6 flex-grow">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">AI & Machine Learning</h3>
+                <p class="text-gray-600 mb-4">Stanford University - 2023</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-medium rounded-full">AI</span>
+                  <span class="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-medium rounded-full">Machine Learning</span>
+                  <span class="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-medium rounded-full">Deep Learning</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certificate Modal -->
+      <div id="certificateModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <!-- Background overlay -->
+          <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+            <div class="absolute inset-0 bg-gray-900 opacity-90"></div>
+          </div>
+
+          <!-- Modal content -->
+          <div class="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <!-- Close button -->
+              <div class="absolute top-0 right-0 pt-4 pr-4">
+                <button type="button" id="closeModal" class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none">
+                  <span class="sr-only">Close</span>
+                  <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              
+              <!-- Modal content will be dynamically inserted here -->
+              <div id="modalContent" class="mt-6">
+                <!-- Content will be loaded here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Certificates Section -->
+
+    <!-- My Projects -->
+    <section id="portfolio" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-blue-50">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16" data-aos="fade-down">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4 text-blue-700">Proyek <span class="text-gray-900">Unggulan</span></h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-300 mx-auto mb-6 rounded-full"></div>
+          <p class="text-gray-600 max-w-2xl mx-auto text-lg">Beberapa project yang telah saya kerjakan, mulai dari web sederhana hingga aplikasi modern.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12">
+          <!-- Project 1 -->
+          <div class="group bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
+            <div class="relative overflow-hidden">
+              <img src="./dist/img/project6.png" alt="e-library-web" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors">E-Library System</h3>
+              <p class="text-gray-600 mb-4 leading-relaxed">Sistem perpustakaan digital modern dengan interface yang user-friendly, dibangun menggunakan HTML5 dan CSS3 dengan desain responsive.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gradient-to-r from-orange-100 to-orange-200 text-orange-700 text-xs rounded-full font-medium">HTML</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 text-xs rounded-full font-medium">CSS</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-purple-100 to-purple-200 text-purple-700 text-xs rounded-full font-medium">Responsive</span>
+              </div>
+              <div class="flex gap-3">
+                <a href="https://e-library-gilt.vercel.app/" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-300 text-center">
+                  <ion-icon name="eye-outline" class="mr-2"></ion-icon>Live Demo
+                </a>
+                <a href="https://github.com/iqbaladiatma/" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-xl font-medium hover:from-gray-900 hover:to-black transition-all duration-300 text-center">
+                  <ion-icon name="logo-github" class="mr-2"></ion-icon>Code
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project 2 -->
+          <div class="group bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
+            <div class="relative overflow-hidden">
+              <img src="./dist/img/project7.png" alt="developer-landing-page" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors">E-Commerce Platform</h3>
+              <p class="text-gray-600 mb-4 leading-relaxed">Platform e-commerce modern dengan desain yang clean dan user-friendly, menggunakan TailwindCSS untuk styling yang optimal.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gradient-to-r from-orange-100 to-orange-200 text-orange-700 text-xs rounded-full font-medium">HTML</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 text-xs rounded-full font-medium">CSS</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-cyan-100 to-cyan-200 text-cyan-700 text-xs rounded-full font-medium">TailwindCSS</span>
+              </div>
+              <div class="flex gap-3">
+                <a href="https://food-delivery-orcin.vercel.app/" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-300 text-center">
+                  <ion-icon name="eye-outline" class="mr-2"></ion-icon>Live Demo
+                </a>
+                <a href="https://github.com/iqbaladiatma/" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-xl font-medium hover:from-gray-900 hover:to-black transition-all duration-300 text-center">
+                  <ion-icon name="logo-github" class="mr-2"></ion-icon>Code
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project 3 -->
+          <div class="group bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-500" data-aos="fade-up" data-aos-delay="300">
+            <div class="relative overflow-hidden">
+              <img src="./dist/img/project1.png" alt="web-hosting-landing-page" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors">Modern Portfolio</h3>
+              <p class="text-gray-600 mb-4 leading-relaxed">Website portfolio personal dengan desain modern dan responsive, menampilkan karya dan kemampuan dengan interface yang menarik.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gradient-to-r from-orange-100 to-orange-200 text-orange-700 text-xs rounded-full font-medium">HTML</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 text-xs rounded-full font-medium">CSS</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-cyan-100 to-cyan-200 text-cyan-700 text-xs rounded-full font-medium">TailwindCSS</span>
+              </div>
+              <div class="flex gap-3">
+                <a href="https://web-hosting-five-zeta.vercel.app/" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-300 text-center">
+                  <ion-icon name="eye-outline" class="mr-2"></ion-icon>Live Demo
+                </a>
+                <a href="https://github.com/iqbaladiatma/" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-xl font-medium hover:from-gray-900 hover:to-black transition-all duration-300 text-center">
+                  <ion-icon name="logo-github" class="mr-2"></ion-icon>Code
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project 4 -->
+          <div class="group bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
+            <div class="relative overflow-hidden">
+              <img src="./dist/img/project2.png" alt="product-designer-landing-page" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors">Bootstrap Portfolio</h3>
+              <p class="text-gray-600 mb-4 leading-relaxed">Website portfolio dengan framework Bootstrap, menampilkan desain yang responsive dan komponen yang terstruktur dengan baik.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gradient-to-r from-orange-100 to-orange-200 text-orange-700 text-xs rounded-full font-medium">HTML</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 text-xs rounded-full font-medium">CSS</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-purple-100 to-purple-200 text-purple-700 text-xs rounded-full font-medium">Bootstrap</span>
+              </div>
+              <div class="flex gap-3">
+                <a href="https://product-designer-portofolio.vercel.app/" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-300 text-center">
+                  <ion-icon name="eye-outline" class="mr-2"></ion-icon>Live Demo
+                </a>
+                <a href="https://github.com/iqbaladiatma/" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-xl font-medium hover:from-gray-900 hover:to-black transition-all duration-300 text-center">
+                  <ion-icon name="logo-github" class="mr-2"></ion-icon>Code
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project 5 -->
+          <div class="group bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
+            <div class="relative overflow-hidden">
+              <img src="./dist/img/project2.png" alt="dance-home-landing-page" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors">Creative Portfolio</h3>
+              <p class="text-gray-600 mb-4 leading-relaxed">Portfolio kreatif dengan desain yang unik dan menarik, menggunakan Bootstrap untuk menciptakan layout yang profesional dan modern.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gradient-to-r from-orange-100 to-orange-200 text-orange-700 text-xs rounded-full font-medium">HTML</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 text-xs rounded-full font-medium">CSS</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-purple-100 to-purple-200 text-purple-700 text-xs rounded-full font-medium">Bootstrap</span>
+              </div>
+              <div class="flex gap-3">
+                <a href="https://dance-home-page-beryl.vercel.app/" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-300 text-center">
+                  <ion-icon name="eye-outline" class="mr-2"></ion-icon>Live Demo
+                </a>
+                <a href="https://github.com/iqbaladiatma/" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-xl font-medium hover:from-gray-900 hover:to-black transition-all duration-300 text-center">
+                  <ion-icon name="logo-github" class="mr-2"></ion-icon>Code
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project 6 -->
+          <div class="group bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-500" data-aos="fade-up" data-aos-delay="300">
+            <div class="relative overflow-hidden">
+              <img src="./dist/img/project3.png" alt="Portofolio" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors">Professional Portfolio</h3>
+              <p class="text-gray-600 mb-4 leading-relaxed">Website portfolio profesional dengan Bootstrap framework, menampilkan karya dan pencapaian dengan layout yang terorganisir dengan baik.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gradient-to-r from-orange-100 to-orange-200 text-orange-700 text-xs rounded-full font-medium">HTML</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 text-xs rounded-full font-medium">CSS</span>
+                <span class="px-3 py-1 bg-gradient-to-r from-purple-100 to-purple-200 text-purple-700 text-xs rounded-full font-medium">Bootstrap</span>
+              </div>
+              <div class="flex gap-3">
+                <a href="https://portofolio-iqbal-one.vercel.app/" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-300 text-center">
+                  <ion-icon name="eye-outline" class="mr-2"></ion-icon>Live Demo
+                </a>
+                <a href="https://github.com/iqbaladiatma/" target="_blank" class="flex-1 px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-xl font-medium hover:from-gray-900 hover:to-black transition-all duration-300 text-center">
+                  <ion-icon name="logo-github" class="mr-2"></ion-icon>Code
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- View All Projects Button -->
+        <div class="text-center mt-12" data-aos="fade-up">
+          <a href="https://github.com/iqbaladiatma/" target="_blank" class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-full font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+            <ion-icon name="logo-github" class="mr-2"></ion-icon>
+            View All Projects
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- End My Projects -->
+
+
+    <!-- Contact Me Section -->
+    <div class="mx-auto max-w-lg text-center mt-8">
+        <h1 class="text-blue-600 font-bold text-3xl sm:text-4xl" id="contactme" data-aos="zoom-in-up">Contact Me</h1>
+    </div>
+
+    <section id="contact" class="py-8">
+      <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5" data-aos="zoom-in-up">
+          <div class="lg:col-span-2 lg:py-8">
+            <p class="max-w-xl text-lg">
+              Saya siap membantu Anda dalam pengembangan website. Jika Anda tertarik untuk berkolaborasi atau memiliki pertanyaan, jangan ragu untuk menghubungi saya.
+            </p>
+
+            <div class="mt-4">
+              <address class="mt-4 not-italic text-gray-700">
+                <div class="flex items-center gap-2">
+                  <ion-icon name="location" class="text-blue-600 w-5 h-5"></ion-icon>
+                  Indonesia, Central Java
+                </div>
+                <div class="mt-2"> Jawa Tengah, Indonesia</div>
+              </address>
+
+              <div class="mt-6 flex gap-4">
+                <a href="https://wa.me/+62895403003558" 
+                   class="flex items-center gap-2 text-green-600 hover:text-green-700 transition-colors">
+                  <ion-icon name="logo-whatsapp" class="w-5 h-5"></ion-icon>
+                  WhatsApp
+                </a>
+                <a href="mailto:computeritindonesia@gmail.com" 
+                   class="flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors">
+                  <ion-icon name="mail" class="w-5 h-5"></ion-icon>
+                  Email
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
+            <form id="contactForm" onsubmit="handleSubmit(event)" class="space-y-8" autocomplete="off">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <input type="text" name="name" required placeholder="Name" class="w-full px-6 py-4 rounded-full border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none">
+                    <input type="email" name="email" required placeholder="Email" class="w-full px-6 py-4 rounded-full border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none">
+                </div>
+                <textarea name="message" required rows="6" placeholder="Message" class="w-full px-6 py-4 rounded-3xl border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none"></textarea>
+                <button type="submit" class="w-full px-8 py-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">Send Message</button>
+            </form>
+        </div>
+    
+        <script>
+            function handleSubmit(event) {
+                event.preventDefault(); // Mencegah form submit default
+                const form = document.getElementById('contactForm');
+                const formData = new FormData(form);
+                const name = formData.get('name');
+                const email = formData.get('email');
+                const message = formData.get('message');
+    
+                // Membuat pesan WhatsApp dengan data form
+                const waMessage = `Halo, saya ${name}. Email: ${email}. Pesan: ${message}`;
+                const encodedMessage = encodeURIComponent(waMessage);
+                const phoneNumber = '6281234567890'; // Ganti dengan nomor WhatsApp Anda
+                const waLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+    
+                // Mengarahkan ke WhatsApp
+                window.open(waLink, '_blank');
+    
+                // Opsional: Reset form setelah submit
+                form.reset();
+            }
+        </script>
+        </div>
+      </div>
+    </section>
+    <!-- End Contact Me Section -->
+     
+     <!-- AOS -->
+      <!-- AOS -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        // Tambahkan konfigurasi
+        duration: 600, // nilai dalam ms - dipercepat dari 1000 ke 600
+        once: true, // animasi hanya sekali untuk performa lebih baik
+        offset: 50, // offset (dalam px) dari titik trigger original - dikurangi untuk trigger lebih cepat
+        delay: 0, // nilai delay dalam ms
+        easing: 'ease-out-quart', // fungsi easing yang lebih snappy
+      });
+    </script>
+    <!-- END AOS -->
+    <script src="main.js"></script>
+    <script>
+    let lastScroll = 0;
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        // Scroll ke bawah
+        if (currentScroll > lastScroll && currentScroll > 100) {
+            navbar.style.transform = 'translateY(-100%)';
+            navbar.classList.remove('bg-gradient-to-r', 'from-blue-600', 'to-blue-800');
+        } 
+        // Scroll ke atas
+        else {
+            navbar.style.transform = 'translateY(0)';
+            if (currentScroll > 50) {
+                navbar.classList.add('bg-gradient-to-r', 'from-blue-600', 'to-blue-800');
+            } else {
+                navbar.classList.remove('bg-gradient-to-r', 'from-blue-600', 'to-blue-800');
+            }
+        }
+        
+        lastScroll = currentScroll;
+    });
+    </script>
+    <!-- Modals -->
+    <div id="student-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('student-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">Student Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Saya adalah siswa di IDN Boarding School - Solo yang berfokus pada pengembangan software. Beberapa pencapaian saya:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Juara 1 Kompetisi Web Development tingkat sekolah</li>
+                        <li>Aktif dalam klub programming sekolah</li>
+                        <li>Mengembangkan berbagai projek website</li>
+                        <li>Memiliki IPK 3.8</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('student-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6 mr-3"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="programmer-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('programmer-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">Programming Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Sebagai programmer, saya telah mencapai beberapa milestone:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Menguasai HTML5, CSS3, dan JavaScript</li>
+                        <li>Mengembangkan berbagai projek website responsif</li>
+                        <li>Berpartisipasi dalam hackathon dan coding challenge</li>
+                        <li>Berkontribusi dalam projek open source</li>
+                        <li>Mengikuti bootcamp dan pelatihan programming intensif</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('programmer-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6 mr-3"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="software-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('software-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">Software Engineering Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Pengalaman saya sebagai Software Engineer meliputi:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Mengembangkan dan memelihara aplikasi web skala besar</li>
+                        <li>Mengoptimasi performa dan keamanan website</li>
+                        <li>Menerapkan best practices dalam pengembangan software</li>
+                        <li>Kolaborasi dalam tim menggunakan metodologi Agile</li>
+                        <li>Mengelola version control dan deployment pipeline</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('software-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6 mr-3"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="quran-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('quran-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">Qur'an Memorisation Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Perjalanan saya dalam menghafal Al-Qur'an:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Menghafal Al-Qur'an sejak usia dini</li>
+                        <li>Memahami dan menerapkan ilmu tajwid dengan baik</li>
+                        <li>Berpartisipasi dalam berbagai kompetisi tahfidz</li>
+                        <li>Mengajar dan membimbing santri dalam menghafal</li>
+                        <li>Rutin melakukan muroja'ah dan tadabbur Al-Qur'an</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('quran-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6 mr-3"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="computer-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('computer-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">Computer Engineering Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Pengalaman saya dalam bidang Computer Engineering:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Mendiagnosis dan memperbaiki masalah hardware komputer</li>
+                        <li>Mengoptimalkan kinerja sistem dan perangkat</li>
+                        <li>Melakukan upgrade dan maintenance berkala</li>
+                        <li>Menangani recovery data dan backup sistem</li>
+                        <li>Memberikan solusi untuk masalah teknis kompleks</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('computer-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6 mr-3"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="it-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('it-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-8 mx-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">IT Specialist Journey</h2>
+                <p class="text-gray-700 mb-6">
+                    Pencapaian saya sebagai IT Specialist:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Mengelola infrastruktur IT dan jaringan</li>
+                        <li>Mengimplementasi solusi keamanan sistem</li>
+                        <li>Memberikan training dan support teknis</li>
+                        <li>Mengoptimalkan proses bisnis dengan teknologi</li>
+                        <li>Menangani proyek IT dari planning hingga deployment</li>
+                    </ul>
+                </p>
+                <button onclick="closeModal('it-modal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-6 h-6 mr-3"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this JavaScript before closing body tag -->
+    <script>
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        const overlay = modal.querySelector(':scope > div:first-child');
+        const container = modal.querySelector(':scope > div:nth-child(2)');
+        
+        // Show modal
+        modal.classList.remove('hidden');
+        
+        // Trigger animation in next frame
+        requestAnimationFrame(() => {
+            overlay.classList.add('opacity-100');
+            container.classList.add('opacity-100', 'scale-100');
+            container.classList.remove('scale-95');
+        });
+        
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        const overlay = modal.querySelector(':scope > div:first-child');
+        const container = modal.querySelector(':scope > div:nth-child(2)');
+        
+        // Start closing animation
+        overlay.classList.remove('opacity-100');
+        container.classList.remove('opacity-100', 'scale-100');
+        container.classList.add('scale-95');
+        
+        // Hide modal after animation
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }, 300);
+    }
+
+    // Close modal when clicking escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            const modals = document.querySelectorAll('[id$="-modal"]');
+            modals.forEach(modal => {
+                if (!modal.classList.contains('hidden')) {
+                    closeModal(modal.id);
+                }
+            });
+        }
+    });
+    </script>
+
+    <style>
+    /* Smooth transition for all transform and opacity changes */
+    .transform {
+        transition-property: transform, opacity;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 300ms;
+    }
+    </style>
+
+    <!-- Add this before closing body tag -->
+    <div id="project1-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300" onclick="closeModal('project1-modal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl mx-auto opacity-0 transform scale-95 transition-all duration-300">
+            <div class="bg-white rounded-xl p-12 mx-4">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-3/5">
+                        <img src="./dist/img/project6.png" alt="E-Library Project" class="w-full h-auto rounded-lg shadow-lg">
+                    </div>
+                    <div class="md:w-2/5">
+                        <h2 class="text-3xl font-bold text-blue-600 mb-6">E-Library Project</h2>
+                        <p class="text-gray-700 mb-6 text-lg">
+                            Sebuah platform perpustakaan digital yang memungkinkan pengguna untuk:
+                            <ul class="list-disc ml-6 mt-4 space-y-2">
+                                <li>Mencari dan meminjam buku secara online</li>
+                                <li>Membaca preview buku</li>
+                                <li>Mengelola peminjaman</li>
+                                <li>Melihat riwayat peminjaman</li>
+                                <li>Fitur bookmark dan rating buku</li>
+                                <li>Sistem rekomendasi berdasarkan minat</li>
+                            </ul>
+                        </p>
+                        <div class="flex gap-6 mt-8">
+                            <a href="https://github.com/iqbaladiatma" target="_blank" 
+                               class="flex items-center gap-2 text-gray-700 hover:text-blue-600 transition-colors text-lg">
+                                <ion-icon name="logo-github" class="w-8 h-8"></ion-icon>
+                                GitHub
+                            </a>
+                            <a href="https://www.instagram.com/iq_html/" target="_blank" 
+                               class="flex items-center gap-2 text-gray-700 hover:text-blue-600 transition-colors text-lg">
+                                <ion-icon name="logo-instagram" class="w-8 h-8"></ion-icon>
+                                Instagram
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="closeModal('project1-modal')" class="absolute top-6 right-6 text-gray-500 hover:text-gray-700">
+                    <ion-icon name="close" class="w-8 h-8 mr-3"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modern Footer -->
+    <footer class="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white overflow-hidden">
+      <!-- Background Elements -->
+      <div class="absolute inset-0">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+      </div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <!-- Main Footer Content -->
+        <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-8 mb-12">
+          <!-- Brand Section -->
+          <div class="lg:col-span-2" data-aos="fade-up" data-aos-duration="1000">
+            <div class="flex items-center space-x-3 mb-6">
+              <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+                <span class="text-white font-bold text-xl">IA</span>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold">Iqbal M. Adiatma</h3>
+                <p class="text-blue-200">Full Stack Developer</p>
+              </div>
+            </div>
+            <p class="text-gray-300 leading-relaxed mb-6 max-w-md">
+              Passionate developer yang berfokus pada pembuatan solusi digital inovatif. 
+              Selalu siap untuk berkolaborasi dalam proyek-proyek menarik.
+            </p>
+            <div class="flex space-x-4">
+              <a href="https://github.com/iqbaladiatma" target="_blank" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/iq_html/" target="_blank" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+              <a href="mailto:iqbaladiatma@example.com" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+              </a>
+              <a href="https://linkedin.com/in/iqbaladiatma" target="_blank" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+            <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+            <ul class="space-y-3">
+              <li><a href="#home" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
+                <span class="w-1 h-1 bg-blue-400 rounded-full mr-3 group-hover:w-2 transition-all duration-300"></span>
+                Beranda
+              </a></li>
+              <li><a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
+                <span class="w-1 h-1 bg-blue-400 rounded-full mr-3 group-hover:w-2 transition-all duration-300"></span>
+                Tentang
+              </a></li>
+              <li><a href="#skills" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
+                <span class="w-1 h-1 bg-blue-400 rounded-full mr-3 group-hover:w-2 transition-all duration-300"></span>
+                Keahlian
+              </a></li>
+              <li><a href="#portfolio" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
+                <span class="w-1 h-1 bg-blue-400 rounded-full mr-3 group-hover:w-2 transition-all duration-300"></span>
+                Proyek
+              </a></li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+            <h4 class="text-lg font-semibold mb-6">Contact Info</h4>
+            <ul class="space-y-3">
+              <li class="flex items-center text-gray-300">
+                <svg class="w-5 h-5 mr-3 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                Blora, Jawa Tengah
+              </li>
+              <li class="flex items-center text-gray-300">
+                <svg class="w-5 h-5 mr-3 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                iqbalmuhammadadiatma@gmail.com
+              </li>
+              <li class="flex items-center text-gray-300">
+                <svg class="w-5 h-5 mr-3 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Available for projects
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+          <p class="text-gray-400 text-sm mb-4 md:mb-0">
+            © 2024 Iqbal Adiatma. All rights reserved. Made with ❤️ using modern web technologies.
+          </p>
+          <div class="flex items-center space-x-6 text-sm text-gray-400">
+            <span>Built with</span>
+            <div class="flex items-center space-x-2">
+              <span class="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
+              <span>HTML5</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+              <span>CSS3</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
+              <span>JavaScript</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-110 z-50 flex items-center justify-center group" data-aos="zoom-in" data-aos-delay="1000">
+      <svg class="w-6 h-6 group-hover:-translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+      </svg>
+    </button>
+
+    <script src="main.js"></script>
+    
+    <!-- Journal Showcase Script -->
+    <script>
+    // Load featured articles from localStorage (same data as blog.js)
+    function loadFeaturedArticles() {
+        // Sample journal entries (same as in blog.js)
+        const featuredEntries = [
+            {
+                id: 1,
+                title: "Memulai Perjalanan Sebagai Developer",
+                category: "teknologi",
+                excerpt: "Perjalanan seribu mil dimulai dari langkah pertama...",
+                date: "2024-01-15",
+                image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 2,
+                title: "Refleksi Kehidupan di Usia 25",
+                category: "pemikiran",
+                excerpt: "Hidup adalah tentang perjalanan, bukan tujuan...",
+                date: "2024-02-10",
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 3,
+                title: "Petualangan ke Yogyakarta",
+                category: "perjalanan",
+                excerpt: "Setiap perjalanan adalah kesempatan untuk tumbuh...",
+                date: "2024-03-05",
+                image: "https://images.unsplash.com/photo-1539650116574-75c0c6d73c6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            }
+        ];
+
+        const categoryColors = {
+            pemikiran: 'bg-blue-100 text-blue-800',
+            perjalanan: 'bg-green-100 text-green-800',
+            teknologi: 'bg-orange-100 text-orange-800',
+            kehidupan: 'bg-pink-100 text-pink-800'
+        };
+
+        const categoryIcons = {
+            pemikiran: '💭',
+            perjalanan: '✈️',
+            teknologi: '💻',
+            kehidupan: '🌱'
+        };
+
+        const container = document.getElementById('featured-articles');
+        if (!container) return;
+
+        container.innerHTML = featuredEntries.map((entry, index) => `
+            <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 group cursor-pointer" 
+                 data-aos="fade-up" data-aos-delay="${index * 100}" onclick="window.location.href='blog-detail.html?id=${entry.id}'">
+                <!-- Article Image -->
+                <div class="relative h-48 overflow-hidden">
+                    <img src="${entry.image}" 
+                         alt="${entry.title}" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                         onerror="this.src='https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'">
+                    
+                    <!-- Category Badge -->
+                    <div class="absolute top-4 left-4">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${categoryColors[entry.category]} backdrop-blur-sm bg-white/90">
+                            ${categoryIcons[entry.category]} ${entry.category.charAt(0).toUpperCase() + entry.category.slice(1)}
+                        </span>
+                    </div>
+                    
+                    <!-- Date Badge -->
+                    <div class="absolute top-4 right-4">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-black/50 text-white backdrop-blur-sm">
+                            ${formatDate(entry.date)}
+                        </span>
+                    </div>
+                    
+                    <!-- Gradient Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                
+                <!-- Article Content -->
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-blue-600 transition-colors duration-300 line-clamp-2">
+                        ${entry.title}
+                    </h3>
+                    
+                    <p class="text-gray-600 leading-relaxed mb-4 line-clamp-3">
+                        ${entry.excerpt}
+                    </p>
+                    
+                    <!-- Read More Button -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2 text-sm text-gray-500">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span>2 min baca</span>
+                        </div>
+                        
+                        <div class="text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-300 flex items-center space-x-1 group-hover:translate-x-1">
+                            <span>Baca</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function formatDate(dateString) {
+        const options = { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            timeZone: 'Asia/Jakarta'
+        };
+        return new Date(dateString).toLocaleDateString('id-ID', options);
+    }
+
+    // Load articles when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        loadFeaturedArticles();
+        
+        // Initialize certificate modal functionality
+        const modal = document.getElementById('certificateModal');
+        const modalImg = document.getElementById('modalCertificateImg');
+        const modalTitle = document.getElementById('modalCertificateTitle');
+        const modalIssuer = document.getElementById('modalCertificateIssuer');
+        const modalDate = document.getElementById('modalCertificateDate');
+        const modalDescription = document.getElementById('modalCertificateDescription');
+        const modalSkills = document.getElementById('modalCertificateSkills');
+        const modalCredentialId = document.getElementById('modalCredentialId');
+        const modalCredentialUrl = document.getElementById('modalCredentialUrl');
+        const closeModalBtn = document.querySelector('.modal-close');
+        
+        // Get all certificate items
+        const certificateItems = document.querySelectorAll('.certificate-item');
+        
+        // Add click event to each certificate item
+        certificateItems.forEach((item, index) => {
+            const button = item.querySelector('.view-detail-btn');
+            if (!button) return; // Skip if no button found
+            
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Get certificate data from data attributes
+                const imgSrc = item.querySelector('img').src;
+                const title = item.querySelector('h3').textContent;
+                const issuer = item.querySelector('.text-gray-500').textContent;
+                const date = item.querySelector('.text-sm').textContent;
+                const description = item.getAttribute('data-description') || 'Tidak ada deskripsi tersedia.';
+                const skills = JSON.parse(item.getAttribute('data-skills') || '[]');
+                const credentialId = item.getAttribute('data-credential-id') || 'N/A';
+                const credentialUrl = item.getAttribute('data-credential-url') || '#';
+                
+                // Populate modal with certificate data
+                modalImg.src = imgSrc;
+                modalImg.alt = title;
+                modalTitle.textContent = title;
+                modalIssuer.textContent = issuer;
+                modalDate.textContent = date;
+                modalDescription.textContent = description;
+                modalCredentialId.textContent = credentialId;
+                modalCredentialUrl.href = credentialUrl;
+                
+                // Clear and repopulate skills
+                modalSkills.innerHTML = '';
+                skills.forEach(skill => {
+                    const skillTag = document.createElement('span');
+                    skillTag.className = 'inline-block bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full mr-2 mb-2';
+                    skillTag.textContent = skill;
+                    modalSkills.appendChild(skillTag);
+                });
+                
+                // Show modal with animation
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.querySelector('.modal-content').classList.remove('opacity-0', 'scale-95');
+                    modal.querySelector('.modal-content').classList.add('opacity-100', 'scale-100');
+                }, 10);
+                
+                // Prevent body scroll when modal is open
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Close modal when clicking the close button
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', () => {
+                closeModal();
+            });
+        }
+        
+        // Close modal when clicking outside the modal content
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+        
+        // Function to close the modal
+        function closeModal() {
+            modal.querySelector('.modal-content').classList.remove('opacity-100', 'scale-100');
+            modal.querySelector('.modal-content').classList.add('opacity-0', 'scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 200);
+        }
+    });
+    </script>
+
+    <!-- GSAP and ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+
+    <script>
+      // Initialize GSAP plugins
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+      document.addEventListener('DOMContentLoaded', function() {
+        // Work Experience Horizontal Scroll
+        const track = document.querySelector('.work-experience-track');
+        const cards = gsap.utils.toArray('.work-card');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        if (!track || !cards.length) return;
+
+        // Calculate total width needed for all cards
+        const cardWidth = cards[0].offsetWidth + 32; // width + gap
+        const totalWidth = cardWidth * cards.length;
+        
+        // Set initial styles
+        gsap.set(track, { 
+          width: totalWidth,
+          x: 0
+        });
+
+        // Function to update button states
+        function updateButtonStates() {
+          if (!prevBtn || !nextBtn) return;
+          
+          const maxScroll = track.scrollWidth - track.clientWidth;
+          const currentScroll = track.scrollLeft;
+          
+          // Show/hide prev button
+          if (currentScroll <= 10) {
+            prevBtn.classList.add('opacity-0', 'invisible');
+          } else {
+            prevBtn.classList.remove('opacity-0', 'invisible');
+          }
+          
+          // Show/hide next button
+          if (currentScroll >= maxScroll - 10) {
+            nextBtn.classList.add('opacity-0', 'invisible');
+          } else {
+            nextBtn.classList.remove('opacity-0', 'invisible');
+          }
+        }
+        
+        // Navigation buttons
+        if (prevBtn && nextBtn) {
+          // Initial button state
+          updateButtonStates();
+          
+          // Previous button click
+          prevBtn.addEventListener('click', function() {
+            const currentScroll = track.scrollLeft;
+            const cardWidth = cards[0].offsetWidth + 32;
+            const newScroll = Math.max(0, currentScroll - cardWidth);
+            
+            gsap.to(track, {
+              scrollLeft: newScroll,
+              duration: 0.5,
+              ease: 'power2.out',
+              onUpdate: updateButtonStates
+            });
+          });
+
+          // Next button click
+          nextBtn.addEventListener('click', function() {
+            const currentScroll = track.scrollLeft;
+            const cardWidth = cards[0].offsetWidth + 32;
+            const maxScroll = track.scrollWidth - track.clientWidth;
+            const newScroll = Math.min(maxScroll, currentScroll + cardWidth);
+            
+            gsap.to(track, {
+              scrollLeft: newScroll,
+              duration: 0.5,
+              ease: 'power2.out',
+              onUpdate: updateButtonStates
+            });
+          });
+          
+          // Track scroll events
+          track.addEventListener('scroll', updateButtonStates);
+        }
+
+        // Handle window resize
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function() {
+            // Recalculate total width
+            const newCardWidth = cards[0].offsetWidth + 32;
+            const newTotalWidth = newCardWidth * cards.length;
+            
+            // Update track width
+            gsap.set(track, { width: newTotalWidth });
+            
+            // Update button states
+            updateButtonStates();
+            
+            // Refresh ScrollTrigger
+            if (ScrollTrigger) {
+              ScrollTrigger.refresh();
+            }
+          }, 250);
+        });
+      });
+        const visualImg = panel.querySelector('.variant-visual img');
+        const variantInfo = panel.querySelector('.variant-info');
+        const skillTags = panel.querySelectorAll('.skill-tag');
+
+        if (visualImg) {
+            tl.from(visualImg, { x: -50, opacity: 0, scale: 1.05, duration: 0.8, ease: 'power2.out' });
+        }
+        
+        if (variantInfo) {
+            tl.from(variantInfo, { x: 50, opacity: 0, duration: 0.8, ease: 'power2.out' }, "-=0.6");
+        }
+
+        if (skillTags.length > 0) {
+            tl.from(skillTags, { opacity: 0, y: 20, duration: 0.4, stagger: 0.1, ease: 'back.out(1.7)' }, "-=0.5");
+        }
+    // 4. Menangani resize dengan debounce
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 250);
+    });
+</script>
+
+</body>
+</html>
