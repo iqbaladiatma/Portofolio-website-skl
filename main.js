@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const burger = document.getElementById('burger');
     const mobileNav = document.querySelector('.nav-links');
     const line1 = document.getElementById('line1');
@@ -25,17 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const scrollPosition = window.scrollY;
         const heroSectionBottom = heroSectionHeight - 100; // 100px before the end of hero
 
-        // Navbar background effect
-        if (scrollPosition > 50) {
-            navbar.style.background = 'rgba(37, 99, 235, 0.95)';
-            navbar.style.backdropFilter = 'blur(10px)';
-            navbar.style.boxShadow = '0 2px 20px rgba(37, 99, 235, 0.3)';
-        } else {
-            navbar.style.background = 'linear-gradient(to right, #2563eb, #1d4ed8)';
-            navbar.style.backdropFilter = 'none';
-            navbar.style.boxShadow = 'none';
-        }
-
         // Show/hide back-to-top button
         if (backToTopBtn) {
             if (scrollPosition > heroSectionBottom) {
@@ -57,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (burger && mobileNav) {
         burger.addEventListener('click', () => {
             isOpen = !isOpen;
-            
+
             if (!isOpen) {
                 // Menu Close
                 mobileNav.style.transform = 'translateY(-100%)';
@@ -113,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typedTextElement) {
         const texts = [
             'Full Stack Developer',
-            'UI/UX Designer', 
+            'UI/UX Designer',
             'Problem Solver',
             'Tech Enthusiast'
         ];
@@ -123,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function typeWriter() {
             const currentText = texts[textIndex];
-            
+
             if (isDeleting) {
                 typedTextElement.textContent = currentText.substring(0, charIndex - 1);
                 charIndex--;
@@ -165,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
         function createParticles() {
             particles = [];
             const numberOfParticles = Math.floor((canvas.width * canvas.height) / 15000);
-            
+
             for (let i = 0; i < numberOfParticles; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
@@ -192,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const dx = mouse.x - particle.x;
                     const dy = mouse.y - particle.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-                    
+
                     if (distance < mouse.radius) {
                         const force = (mouse.radius - distance) / mouse.radius;
                         particle.vx += dx * force * 0.01;
@@ -204,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function drawParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
+
             particles.forEach(particle => {
                 ctx.beginPath();
                 ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
@@ -218,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const dx = particle.x - otherParticle.x;
                     const dy = particle.y - otherParticle.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-                    
+
                     if (distance < 100) {
                         ctx.beginPath();
                         ctx.moveTo(particle.x, particle.y);
@@ -265,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
         const parallaxElements = document.querySelectorAll('.floating-element');
-        
+
         parallaxElements.forEach((element, index) => {
             const speed = 0.5 + (index * 0.1);
             element.style.transform = `translateY(${scrolled * speed}px)`;

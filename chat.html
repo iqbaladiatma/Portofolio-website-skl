@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMD :: Private Chat</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Fira Code', monospace;
+      background-color: #000;
+      color: #00ff41;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #111;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #008f11;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00ff41;
+    }
+
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.4) 50%);
+      background-size: 100% 4px;
+      animation: scan 0.2s linear infinite;
+    }
+
+    @keyframes scan {
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: 0 -4px;
+      }
+    }
+
+    .crt-glow {
+      text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41;
+    }
+
+    .border-matrix {
+      border: 1px solid #008f11;
+    }
+
+    .bg-matrix-dark {
+      background-color: #0a0a0a;
+    }
+
+    .bg-matrix-black {
+      background-color: #000;
+    }
+
+    .text-matrix {
+      color: #00ff41;
+    }
+
+    .text-matrix-dim {
+      color: #008f11;
+    }
+
+    .placeholder-matrix::placeholder {
+      color: #005f0b;
+    }
+
+    input,
+    button {
+      border-radius: 0 !important;
+    }
+
+    .admin-icon {
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .group:hover .admin-icon,
+    .admin-icon:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body class="bg-matrix-black text-matrix">
+  <div class="scanlines"></div>
+
+  <!-- Auth Screen -->
+  <div id="auth-screen" class="min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md bg-matrix-dark border-matrix p-8">
+      <h2 id="auth-title" class="text-3xl font-bold text-center crt-glow mb-2">[ ACCESS TERMINAL ]</h2>
+      <p class="text-center text-matrix-dim mb-8">> Authentication required</p>
+      <form id="auth-form">
+        <div id="register-fields" class="hidden">
+          <div class="mb-4">
+            <label for="reg-username" class="block text-sm font-medium mb-2">> USERNAME</label>
+            <input type="text" id="reg-username"
+              class="w-full bg-matrix-black border-matrix px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 placeholder-matrix"
+              placeholder="C:\\Users\\NewUser">
+          </div>
+        </div>
+        <div class="mb-4">
+          <label for="email" class="block text-sm font-medium mb-2">> EMAIL</label>
+          <input type="email" id="email"
+            class="w-full bg-matrix-black border-matrix px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 placeholder-matrix"
+            value="user@example.com">
+        </div>
+        <div class="mb-6">
+          <label for="password" class="block text-sm font-medium mb-2">> PASSPHRASE</label>
+          <input type="password" id="password"
+            class="w-full bg-matrix-black border-matrix px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 placeholder-matrix"
+            value="password123">
+        </div>
+        <button type="submit" id="submit-button"
+          class="w-full bg-green-600/20 hover:bg-green-600 hover:text-black text-green-400 font-bold py-3 px-4 border-matrix transition-all duration-300">
+          _EXECUTE
+        </button>
+      </form>
+      <p class="text-center text-sm text-matrix-dim mt-6">
+        <span id="auth-switch-text">New user?</span>
+        <button id="auth-switch-button" class="font-semibold text-green-400 hover:text-white">init_register.bat</button>
+      </p>
+    </div>
+  </div>
+
+  <!-- Main App -->
+  <div id="main-app" class="h-screen w-screen flex hidden">
+    <!-- Sidebar -->
+    <aside class="w-full md:w-[360px] bg-matrix-dark border-r border-matrix flex flex-col">
+      <!-- Sidebar Header -->
+      <header class="p-4 border-b border-matrix flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3">
+          <img id="currentUserAvatar" src="" class="w-10 h-10 object-cover border-2 border-green-500 p-1">
+          <div>
+            <h2 id="currentUserName" class="font-semibold text-lg crt-glow"></h2>
+            <p class="text-xs text-green-400">> STATUS: ONLINE</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2">
+          <label for="admin-toggle" class="text-xs cursor-pointer">> ROOT</label>
+          <input type="checkbox" id="admin-toggle"
+            class="h-4 w-4 bg-black border-matrix text-green-500 focus:ring-green-500">
+        </div>
+      </header>
+
+      <!-- Search & Action Bar -->
+      <div class="p-4 flex-shrink-0 space-y-3 border-b border-matrix">
+        <div class="relative">
+          <input type="text" placeholder="grep conversations..."
+            class="w-full bg-matrix-black border-matrix py-2 pl-10 pr-4 focus:outline-none focus:ring-1 focus:ring-green-500 placeholder-matrix">
+          <i class="fa fa-search absolute left-3 top-1/2 -translate-y-1/2 text-matrix-dim"></i>
+        </div>
+        <button id="use-token-button"
+          class="w-full bg-matrix-dark hover:bg-black text-green-400 font-semibold py-2 px-4 border-matrix transition-all duration-200 text-sm">
+          <i class="fas fa-ticket-alt mr-2"></i>connect --token
+        </button>
+      </div>
+
+      <!-- Chat List -->
+      <div id="chat-list" class="overflow-y-auto flex-grow">
+        <!-- Chat items will be injected here -->
+      </div>
+    </aside>
+
+    <!-- Chat Area -->
+    <main id="chat-area" class="flex-1 flex flex-col bg-matrix-black">
+      <!-- Welcome Screen -->
+      <div id="welcome-screen" class="m-auto text-center p-4">
+        <div class="bg-matrix-dark p-10 border-matrix">
+          <h2 class="text-3xl font-bold crt-glow mb-2">PRIVATE_MSG_CLIENT v1.0</h2>
+          <p class="text-matrix-dim">> select a channel or connect via token to begin transmission</p>
+        </div>
+      </div>
+
+      <!-- Chat Window (hidden by default) -->
+      <div id="chat-window" class="flex flex-col h-full hidden">
+        <!-- Chat Header -->
+        <header class="flex items-center p-4 bg-matrix-dark border-b border-matrix flex-shrink-0">
+          <img id="chat-avatar" src="" class="w-10 h-10 mr-4 object-cover border-2 border-green-500 p-1">
+          <div class="flex-grow">
+            <h3 id="chat-name" class="font-semibold text-lg crt-glow"></h3>
+            <p id="chat-status" class="text-xs text-matrix-dim">> status: online</p>
+          </div>
+          <button id="share-token-button"
+            class="bg-green-600/20 hover:bg-green-600 hover:text-black text-green-400 font-bold py-2 px-4 border-matrix transition-all duration-300 text-sm">
+            <i class="fas fa-key mr-2"></i>share_token.sh
+          </button>
+        </header>
+
+        <!-- Messages -->
+        <div id="messages-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+          <!-- Messages will be injected here -->
+        </div>
+
+        <!-- Message Input -->
+        <footer class="p-4 bg-matrix-dark border-t border-matrix flex-shrink-0">
+          <form id="message-form" class="flex items-center space-x-4">
+            <span class="text-green-400 text-xl font-bold">&gt;</span>
+            <input type="text" id="message-input" placeholder="Enter command or message..."
+              class="flex-1 bg-transparent border-none text-white focus:outline-none placeholder-matrix"
+              autocomplete="off">
+            <button type="submit"
+              class="bg-green-600 hover:bg-green-500 text-black border-matrix w-12 h-12 flex items-center justify-center transition-all duration-300 flex-shrink-0">
+              <i class="fas fa-arrow-right text-xl"></i>
+            </button>
+          </form>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modals -->
+  <div id="modal-backdrop"
+    class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <!-- Share Token Modal -->
+    <div id="share-token-modal" class="bg-matrix-dark border-matrix p-8 max-w-sm w-full hidden">
+      <h3 class="text-2xl font-bold mb-4 text-center crt-glow">[ SESSION TOKEN ]</h3>
+      <p class="text-matrix-dim mb-6 text-center">> Share this one-time token to initiate a secure channel.</p>
+      <div class="bg-matrix-black p-4 mb-6 border-matrix">
+        <p id="token-text" class="text-2xl font-mono tracking-widest text-green-400"></p>
+      </div>
+      <div class="flex space-x-4">
+        <button id="copy-token-button"
+          class="flex-1 bg-green-600/20 hover:bg-green-600 hover:text-black text-green-400 font-bold py-2 px-4 border-matrix">copy_to_clipboard</button>
+        <button data-close-modal="share-token-modal"
+          class="flex-1 bg-gray-600/20 hover:bg-gray-500 hover:text-black text-gray-300 font-bold py-2 px-4 border-matrix">close</button>
+      </div>
+    </div>
+
+    <!-- Enter Token Modal -->
+    <form id="enter-token-form" class="bg-matrix-dark border-matrix p-8 max-w-sm w-full hidden">
+      <h3 class="text-2xl font-bold mb-4 text-center crt-glow">[ ESTABLISH CONNECTION ]</h3>
+      <p class="text-matrix-dim mb-6 text-center">> Enter target user's session token.</p>
+      <div class="mb-4">
+        <label for="token-input" class="block text-sm font-medium mb-2">> TOKEN</label>
+        <input type="text" id="token-input"
+          class="w-full bg-matrix-black border-matrix px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 placeholder-matrix"
+          placeholder="TKN-XXXXXX">
+      </div>
+      <div class="flex space-x-4 mt-6">
+        <button type="button" data-close-modal="enter-token-form"
+          class="flex-1 bg-gray-600/20 hover:bg-gray-500 hover:text-black text-gray-300 font-bold py-2 px-4 border-matrix">abort</button>
+        <button type="submit"
+          class="flex-1 bg-green-600/20 hover:bg-green-600 hover:text-black text-green-400 font-bold py-2 px-4 border-matrix">connect</button>
+      </div>
+    </form>
+  </div>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- MOCK DATA ---
+      const users = {
+        'user-1': { id: 'user-1', name: 'user_01', avatar: 'https://placehold.co/100x100/00ff41/000000?text=U1' },
+        'user-2': { id: 'user-2', name: 'sentinel', avatar: 'https://placehold.co/100x100/00ff41/000000?text=S' },
+        'user-3': { id: 'user-3', name: 'glitch', avatar: 'https://placehold.co/100x100/00ff41/000000?text=G' },
+        'user-4': { id: 'user-4', name: 'cypher', avatar: 'https://placehold.co/100x100/00ff41/000000?text=C' },
+      };
+
+      let userTokens = {
+        'TKN-BUNGA': 'user-2',
+        'TKN-CHARLIE': 'user-3',
+        'TKN-DIANA': 'user-4'
+      };
+
+      const chats = {
+        'user-1_user-2': [
+          { id: 1, sender: 'user-2', text: 'Connection established. Are you there?', time: '10:00' },
+          { id: 2, sender: 'user-1', text: 'Affirmative. Signal clear.', time: '10:01' },
+          { id: 3, sender: 'user-2', text: 'What is your status?', time: '10:01' },
+          { id: 4, sender: 'user-1', text: 'Executing primary directive. Stand by.', time: '10:02' },
+        ],
+        'user-1_user-4': [
+          { id: 5, sender: 'user-4', text: 'Package delivered?', time: '08:30' },
+          { id: 6, sender: 'user-1', text: 'Confirmed. Check the encrypted drop.', time: '08:31' },
+        ],
+        'user-3_user-4': [
+          { id: 7, sender: 'user-3', text: 'System breach detected at 1400 hours.', time: '11:20' },
+          { id: 8, sender: 'user-4', text: 'Acknowledged. Deploying countermeasures.', time: '11:21' },
+        ]
+      };
+
+      // --- STATE MANAGEMENT ---
+      let currentUser = null;
+      let activeChatUserId = null;
+      let isAdminMode = false;
+
+      // --- DOM ELEMENTS ---
+      const authScreen = document.getElementById('auth-screen');
+      const mainApp = document.getElementById('main-app');
+      const authForm = document.getElementById('auth-form');
+      const authSwitchButton = document.getElementById('auth-switch-button');
+      const chatList = document.getElementById('chat-list');
+      const welcomeScreen = document.getElementById('welcome-screen');
+      const chatWindow = document.getElementById('chat-window');
+      const messagesContainer = document.getElementById('messages-container');
+      const messageForm = document.getElementById('message-form');
+      const messageInput = document.getElementById('message-input');
+      const adminToggle = document.getElementById('admin-toggle');
+
+      // Modals
+      const modalBackdrop = document.getElementById('modal-backdrop');
+      const shareTokenButton = document.getElementById('share-token-button');
+      const shareTokenModal = document.getElementById('share-token-modal');
+      const tokenText = document.getElementById('token-text');
+      const copyTokenButton = document.getElementById('copy-token-button');
+      const useTokenButton = document.getElementById('use-token-button');
+      const enterTokenModal = document.getElementById('enter-token-form');
+      const enterTokenForm = document.getElementById('enter-token-form');
+      const tokenInput = document.getElementById('token-input');
+
+      // --- AUTH LOGIC ---
+      authForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        currentUser = users['user-1'];
+        authScreen.classList.add('hidden');
+        mainApp.classList.remove('hidden');
+        initializeApp();
+      });
+
+      // --- APP LOGIC ---
+      function initializeApp() {
+        document.getElementById('currentUserName').textContent = currentUser.name;
+        document.getElementById('currentUserAvatar').src = currentUser.avatar;
+        renderChatList();
+      }
+
+      function getChatKey(userId1, userId2) {
+        return [userId1, userId2].sort().join('_');
+      }
+
+      function renderChatList() {
+        chatList.innerHTML = '';
+        let allChats = {};
+
+        Object.keys(chats).forEach(key => {
+          const [u1, u2] = key.split('_');
+          if (isAdminMode || u1 === currentUser.id || u2 === currentUser.id) {
+            allChats[key] = { u1, u2 };
+          }
+        });
+
+        Object.keys(allChats).forEach(key => {
+          const { u1, u2 } = allChats[key];
+          const otherUserId = u1 === currentUser.id ? u2 : u1;
+          const user = users[otherUserId];
+          if (!user) return;
+
+          const lastMessage = chats[key] && chats[key].length > 0 ? chats[key][chats[key].length - 1] : { text: '// no transmissions...', time: '' };
+          const partnerName = isAdminMode ? `[${users[u1].name}]<=>[${users[u2].name}]` : user.name;
+          const partnerAvatar = isAdminMode ? 'https://placehold.co/100x100/00ff41/000000?text=R' : user.avatar;
+
+          const chatItem = document.createElement('div');
+          chatItem.className = `flex items-center p-4 cursor-pointer hover:bg-green-500/10 transition-colors duration-200 group ${activeChatUserId === otherUserId && !isAdminMode ? 'bg-green-500/20' : ''}`;
+          chatItem.dataset.userId = otherUserId;
+          chatItem.dataset.chatKey = key;
+
+          let adminDeleteButton = '';
+          if (isAdminMode) {
+            adminDeleteButton = `<button data-chat-key="${key}" class="delete-chat-btn text-red-500 hover:text-red-400 ml-4 admin-icon"><i class="fas fa-times-circle"></i></button>`;
+          }
+
+          chatItem.innerHTML = `
+                    <img src="${partnerAvatar}" class="w-10 h-10 mr-4 object-cover border-2 border-green-900 p-1">
+                    <div class="flex-1 overflow-hidden">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-semibold truncate">${partnerName}</h4>
+                            <span class="text-xs text-matrix-dim">${lastMessage.time}</span>
+                        </div>
+                        <p class="text-sm text-matrix-dim truncate">${lastMessage.sender ? (users[lastMessage.sender]?.name + ': ') : ''}${lastMessage.text}</p>
+                    </div>
+                    ${adminDeleteButton}
+                `;
+
+          chatItem.addEventListener('click', (e) => {
+            if (e.target.closest('.delete-chat-btn')) return;
+            switchChat(otherUserId);
+          });
+          chatList.appendChild(chatItem);
+        });
+
+        document.querySelectorAll('.delete-chat-btn').forEach(btn => btn.addEventListener('click', (e) => {
+          const key = e.currentTarget.dataset.chatKey;
+          delete chats[key];
+          if (getChatKey(currentUser.id, activeChatUserId) === key) {
+            chatWindow.classList.add('hidden');
+            welcomeScreen.classList.remove('hidden');
+            activeChatUserId = null;
+          }
+          renderChatList();
+        }));
+      }
+
+      function switchChat(userId) {
+        activeChatUserId = userId;
+        const user = users[userId];
+        if (!user) return;
+
+        document.getElementById('chat-avatar').src = user.avatar;
+        document.getElementById('chat-name').textContent = user.name;
+        welcomeScreen.classList.add('hidden');
+        chatWindow.classList.remove('hidden');
+        renderMessages();
+        renderChatList();
+      }
+
+      function renderMessages() {
+        messagesContainer.innerHTML = '';
+        if (!activeChatUserId) return;
+        const chatKey = getChatKey(currentUser.id, activeChatUserId);
+        const currentChat = chats[chatKey] || [];
+
+        currentChat.forEach((message, index) => {
+          const messageEl = document.createElement('div');
+          const senderUser = users[message.sender];
+          if (!senderUser) return;
+          const isSentByCurrentUser = message.sender === currentUser.id;
+          messageEl.className = `flex items-end gap-3 group ${isSentByCurrentUser ? 'justify-end' : 'justify-start'}`;
+
+          let adminControls = isAdminMode ? `
+                    <div class="flex items-center gap-2 text-matrix-dim self-center">
+                        <button class="edit-msg-btn admin-icon hover:text-yellow-400" data-chat-key="${chatKey}" data-msg-index="${index}"><i class="fas fa-pencil-alt fa-xs"></i></button>
+                        <button class="delete-msg-btn admin-icon hover:text-red-400" data-chat-key="${chatKey}" data-msg-index="${index}"><i class="fas fa-trash-alt fa-xs"></i></button>
+                    </div>` : '';
+
+          const messageBubble = `<div class="max-w-xs md:max-w-md lg:max-w-xl">
+                        <div class="border-matrix p-3 ${isSentByCurrentUser ? 'bg-green-900/40' : 'bg-gray-800/20'}"><p>${message.text}</p></div>
+                        <span class="text-xs text-matrix-dim mt-1 block ${isSentByCurrentUser ? 'text-right' : ''}">${message.time}</span></div>`;
+
+          messageEl.innerHTML = isSentByCurrentUser ? `${adminControls}${messageBubble}` : `${messageBubble}${adminControls}`;
+          messagesContainer.appendChild(messageEl);
+        });
+
+        document.querySelectorAll('.delete-msg-btn').forEach(btn => btn.addEventListener('click', (e) => {
+          const { chatKey, msgIndex } = e.currentTarget.dataset;
+          chats[chatKey].splice(msgIndex, 1);
+          renderMessages(); renderChatList();
+        }));
+
+        document.querySelectorAll('.edit-msg-btn').forEach(btn => btn.addEventListener('click', (e) => {
+          const { chatKey, msgIndex } = e.currentTarget.dataset;
+          const newText = prompt('// EDIT PAYLOAD:', chats[chatKey][msgIndex].text);
+          if (newText) {
+            chats[chatKey][msgIndex].text = newText;
+            chats[chatKey][msgIndex].time += ' (edited)';
+            renderMessages(); renderChatList();
+          }
+        }));
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+
+      messageForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const text = messageInput.value.trim();
+        if (text && activeChatUserId) {
+          const chatKey = getChatKey(currentUser.id, activeChatUserId);
+          if (!chats[chatKey]) chats[chatKey] = [];
+          const now = new Date();
+          const time = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+          chats[chatKey].push({ id: Date.now(), sender: currentUser.id, text, time });
+          messageInput.value = '';
+          renderMessages(); renderChatList();
+        }
+      });
+
+      adminToggle.addEventListener('change', () => {
+        isAdminMode = adminToggle.checked;
+        renderChatList();
+        if (activeChatUserId) renderMessages();
+      });
+
+      // --- TOKEN & MODAL LOGIC ---
+      function generateNewTokenForUser(userId) {
+        const oldToken = Object.keys(userTokens).find(key => userTokens[key] === userId);
+        if (oldToken) delete userTokens[oldToken];
+
+        const newToken = `TKN-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+        userTokens[newToken] = userId;
+        console.log('New token map:', userTokens); // For debugging
+        return newToken;
+      }
+
+      function showModal(modalElement) {
+        modalBackdrop.classList.remove('hidden');
+        modalElement.classList.remove('hidden');
+      }
+
+      function hideAllModals() {
+        modalBackdrop.classList.add('hidden');
+        shareTokenModal.classList.add('hidden');
+        enterTokenModal.classList.add('hidden');
+      }
+
+      shareTokenButton.addEventListener('click', () => {
+        const newToken = generateNewTokenForUser(currentUser.id);
+        tokenText.textContent = newToken;
+        showModal(shareTokenModal);
+      });
+
+      useTokenButton.addEventListener('click', () => {
+        showModal(enterTokenModal);
+      });
+
+      document.querySelectorAll('[data-close-modal]').forEach(el => {
+        el.addEventListener('click', hideAllModals);
+      });
+
+      copyTokenButton.addEventListener('click', () => {
+        const textToCopy = tokenText.textContent;
+        // Use `document.execCommand` as a fallback for restricted environments
+        const textArea = document.createElement("textarea");
+        textArea.value = textToCopy;
+        textArea.style.position = "absolute";
+        textArea.style.left = "-9999px";
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          copyTokenButton.textContent = 'copied!';
+          setTimeout(() => { copyTokenButton.textContent = 'copy_to_clipboard'; }, 2000);
+        } catch (err) {
+          console.error('Gagal menyalin token', err);
+        }
+        document.body.removeChild(textArea);
+      });
+
+      enterTokenForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const token = tokenInput.value.trim().toUpperCase();
+        const targetUserId = userTokens[token];
+
+        if (targetUserId && targetUserId !== currentUser.id) {
+          const chatKey = getChatKey(currentUser.id, targetUserId);
+          if (!chats[chatKey]) chats[chatKey] = [];
+          switchChat(targetUserId);
+          hideAllModals();
+          tokenInput.value = '';
+        } else {
+          tokenInput.style.border = '1px solid red';
+          tokenInput.value = '';
+          tokenInput.placeholder = "INVALID OR OWN TOKEN";
+          setTimeout(() => {
+            tokenInput.style.border = '';
+            tokenInput.placeholder = "TKN-XXXXXX";
+          }, 2000);
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
