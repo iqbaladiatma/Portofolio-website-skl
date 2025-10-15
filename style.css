@@ -1002,13 +1002,22 @@ html {
 }
 
 /* Work Experience Section - GSAP Horizontal Scroll */
+#work-experience {
+  position: relative;
+  width: 100%;
+}
+
 #work-experience-main {
   position: relative;
-  overflow: hidden;
   height: 100vh;
-  width: 100vw;
-  max-width: 100vw;
-  contain: layout style paint;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Prevent vertical scroll during horizontal scroll */
+body.horizontal-scrolling {
+  overflow-y: hidden !important;
+  overflow-x: hidden !important;
 }
 
 #panels-container {
@@ -1030,6 +1039,10 @@ html {
   box-sizing: border-box;
   position: relative;
   flex-shrink: 0;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .panel .container {
@@ -1050,8 +1063,11 @@ html {
 
 .panel .text-content,
 .panel .image-content {
-  opacity: 0;
-  transform: translateY(50px);
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+  position: relative;
+  z-index: 2;
 }
 
 .panel .image-content img {
@@ -1059,6 +1075,19 @@ html {
   height: auto;
   border-radius: 1rem;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure all panel content is fully visible */
+.panel * {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.panel .text-content > *,
+.panel .image-content > * {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
 }
 
 /* Responsive adjustments for panels */
@@ -1131,6 +1160,20 @@ html {
 /* Ensure proper overflow handling */
 body {
   overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+/* Prevent horizontal scrolling issues */
+* {
+  box-sizing: border-box;
+}
+
+.page-container {
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* Work Experience Section - Milk Variants Style (Legacy) */
