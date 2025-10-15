@@ -1020,6 +1020,15 @@ body.horizontal-scrolling {
   overflow-x: hidden !important;
 }
 
+/* Ensure mobile menu works properly */
+#mobileMenu {
+  z-index: 9999;
+}
+
+#mobileMenu .w-80 {
+  transition: transform 0.3s ease-in-out;
+}
+
 #panels-container {
   display: flex;
   width: 400vw; /* 4 panels x 100vw */

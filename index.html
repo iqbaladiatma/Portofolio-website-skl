@@ -247,6 +247,7 @@
         });
       });
 
+
       // Toggle mobile menu
       if (mobileMenuBtn && mobileMenu) {
         function openMobileMenu() {
@@ -353,6 +354,9 @@
         });
       });
     };
+
+    // Initialize navbar when DOM is loaded
+    document.addEventListener('DOMContentLoaded', initNavbar);
   </script>
   <!-- End Navbar -->
 
@@ -1142,78 +1146,31 @@
 
           // Calculate scroll distance properly
           const getScrollAmount = () => {
-            // More explicit calculation
-            const panelWidth = window.innerWidth;
-            const totalPanels = panels.length;
-            const totalWidth = panelWidth * totalPanels;
-            const scrollAmount = -(totalWidth - panelWidth);
-
-            console.log('Panel width:', panelWidth);
-            console.log('Total panels:', totalPanels);
-            console.log('Total width:', totalWidth);
-            console.log('Scroll amount needed:', scrollAmount);
-
+            // Calculate based on actual panel positions
+            const vw = window.innerWidth;
+            const scrollAmount = -(vw * 3); // Need to move 3 viewport widths
             return scrollAmount;
           };
 
-          // Test simple horizontal scroll first
-          console.log('Setting up horizontal scroll...');
-          console.log('Panels found:', panels.length);
-          console.log('Container width:', panelsContainer.scrollWidth);
-          console.log('Window width:', window.innerWidth);
-          console.log('Scroll amount:', getScrollAmount());
+    
 
           // Full horizontal scroll implementation
           const scrollDistance = getScrollAmount();
-          console.log('Full scroll distance needed:', scrollDistance);
 
-          // Main horizontal scroll animation
+          // Test with different approach - use explicit end value
           gsap.to(panelsContainer, {
             x: scrollDistance,
             ease: "none",
             scrollTrigger: {
               trigger: workExperienceMain,
               start: "top top",
-              end: () => {
-                const endValue = "+=" + Math.abs(scrollDistance);
-                console.log('ScrollTrigger end value:', endValue);
-                return endValue;
-              },
+              end: "bottom+=200% top", // Much longer scroll distance
               pin: true,
               scrub: 1,
-              // Temporarily disable snap to test full scroll
-              // snap: {
-              //   snapTo: 1 / (panels.length - 1),
-              //   duration: 0.5,
-              //   ease: "power2.inOut"
-              // },
-              onEnter: () => {
-                console.log('✅ Entered full horizontal scroll');
-                document.body.style.overflowX = 'hidden';
-              },
-              onLeave: () => {
-                console.log('✅ Left full horizontal scroll');
-              },
-              onEnterBack: () => {
-                console.log('✅ Re-entered horizontal scroll');
-              },
-              onLeaveBack: () => {
-                console.log('✅ Left horizontal scroll (going back)');
-              },
-              onUpdate: (self) => {
-                const currentPanel = Math.round(self.progress * (panels.length - 1));
-                console.log(`Panel ${currentPanel + 1} of ${panels.length} - Progress: ${(self.progress * 100).toFixed(1)}%`);
-
-                // Debug scroll position
-                if (self.progress > 0.9) {
-                  console.log('🔥 Near end of scroll - Current X:', panelsContainer.style.transform);
-                }
-              }
             }
           });
 
           // Remove aggressive scroll prevention - let GSAP handle it
-          console.log('✅ Horizontal scroll setup complete');
 
           // Refresh on resize
           window.addEventListener('resize', () => {
